@@ -8654,14 +8654,243 @@ int main()
 //输入n, 打印出s的所有可能的值出现的概率。
 #if 1
 #include <iostream>
-
+#include <memory>
+#include <iomanip>
+#include <algorithm>
 using namespace std;
+
+//规定一个骰子能得到的最大值
+const int g_maxValue = 6;
+
+void PrintProbability(int number);
+void Probability(int num, unique_ptr< int[] >&);
+void Probability(int original, int current, int sum, unique_ptr< int[] >& pProbabilities);
+
+void PrintProbability_Solution2(int number);
+void PrintProbability_Solution3(int number);
 
 int main()
 {
+    //n个骰子，求能得到的所有可能的值的概率
+    int  n= 3;
 
+    PrintProbability(n);
+    cout << endl;
+    PrintProbability_Solution2(n);
+    cout << endl;
+    PrintProbability_Solution3(n);
 
     return 0;
+}
+void PrintProbability(int number)
+{
+    if (number < 1)
+        return;
+
+    //创建maxSum存投掷 number 次骰子可能获得的最大总和
+    int maxSum = number * g_maxValue;
+
+    //用智能指针管理动态分配的内存，
+    //存储可能出现的不同总和的计数。
+    unique_ptr< int[] > pProbabilities(new int [maxSum - number + 1] {0});
+    //假设n为2，那么数值范围为2~12，需要11个存储位置
+
+    //***注***
+    //使用了C++11的一致性初始化(Uniform Initialization)
+
+    Probability(number,pProbabilities);
+
+    auto total = pow((double)g_maxValue, number);
+    for (int i = number; i <= maxSum; ++i)
+    {
+        double ratio = (double)pProbabilities[i - number] / total;
+
+        //printf("%d: %e\n", i, ratio);
+        cout << i<<": ";
+        cout << scientific;
+        cout << ratio<<endl;
+    }
+}
+
+void Probability(int num, unique_ptr< int[] >& pPro)
+{
+    //把n个骰子分为两堆，第一堆只有一个，另一堆有n-1个
+    //对于第一堆：
+    //遍历每个可能的骰子面的值，从 1 到 g_maxValue。
+    for (int i = 1; i <= g_maxValue; ++i)
+        Probability(num, num, i, pPro);
+}
+
+//对于剩下的另一堆即n-1个骰子
+//仍然分成两堆，第一堆只有一个；第二堆有n-2个。我们把上一轮那个单独骰子的
+//点数和这一轮单独骰子的点数相加，再和剩下的n - 2个骰子来计算点数和。
+void Probability(int original, int current, int sum, unique_ptr< int[] >& pProbabilities)
+{
+    //***理解***
+    // original 表示最初的投掷次数，current 表示当前剩余的投掷次数，sum 表示当前累积的总和。
+    // 如果当前剩余的投掷次数 current 等于 1，则将当前累积的总和 sum - original 作为索引，
+    // 在 pProbabilities 数组中相应位置的次数加 1。
+	// 如果当前的投掷次数 current 大于 1，则使用循环递归调用自身，
+    // 每次递归将当前的投掷次数减 1，累积的总和增加当前骰子面的值 i
+    if (current == 1)
+    {
+        pProbabilities[sum - original]++;
+    }
+    else
+    {
+        for (int i = 1; i <= g_maxValue; ++i)
+        {
+            Probability(original, current - 1, i + sum, pProbabilities);
+        }
+    }
+}
+
+//法二：
+#if 1
+void PrintProbability_Solution2(int number)
+{
+    if (number < 1)
+        return;
+
+    //使用一个二维数组 pProbabilities ,
+    //其中的一维数组存储骰子投掷后每个和值出现的次数
+    //另一个一维数组用于辅助存储值
+    //而且两个一维数组交替成为辅助数组
+    int* pProbabilities[2];
+    pProbabilities[0] = new int[g_maxValue * number + 1];
+    pProbabilities[1] = new int[g_maxValue * number + 1];
+
+    for (int i = 0; i < g_maxValue * number + 1; ++i)
+    {
+        pProbabilities[0][i] = 0;
+        pProbabilities[1][i] = 0;
+    }
+
+    //使用 flag 变量进行交替的标记，用于标识当前正在更新的数组行。
+    //一开始是pProbabilities[0]数组用作辅助数组
+    int flag = 0;
+    for (int i = 1; i <= g_maxValue; ++i)
+        pProbabilities[flag][i] = 1;
+
+    //使用动态规划的思想，通过循环计算每个投掷次数下各个和值出现的次数。
+    //外层循环 k 表示当前投掷的次数，内层循环用于计算出现的次数。
+    for (int k = 2; k <= number; ++k)
+    {
+        //在计算当前投掷次数下各个和值出现的次数时，
+        //首先将新的数组行中小于次数 k 的位置的次数置为 0。
+        //这些位置的元素要进行更新
+        for (int i = 0; i < k; ++i)
+            pProbabilities[1 - flag][i] = 0;
+        //***注***
+        //1-flag用于交替将某个一维数组内容置为0
+
+        // 每次投掷的骰子面的值都在 1 到 g_maxValue 之间，
+        // 所以 i 表示可能的总和值的范围是从 k（最小可能的和值，即每次都投掷到 1 的情况下的和值）
+        // 到 g_maxValue * k（每次都投掷到 g_maxValue 的情况下的最大和值）。
+        
+        // 在范围为 k 到 g_maxValue * k 之间的位置上，
+        // 计算每个和值出现的次数。
+        // 这是通过遍历前一个数组行中的和值，
+        // 在当前和值的位置上累加可能的骰子面的值所得到的次数来实现的
+        for (int i = k; i <= g_maxValue * k; ++i)
+        {
+            pProbabilities[1 - flag][i] = 0;
+
+            // 新的数组行中
+            // j 表示当前投掷的骰子的点数，
+            // 从 1 开始递增，直到当前和值 i 或骰子的面数 g_maxValue 较小的那个值。
+            // 这是因为当投掷的骰子面的值大于当前的和值 i 或者超过了骰子的面数 g_maxValue 时，
+            // 就不需要考虑这个值，因为它不会对当前和值产生影响。
+            for (int j = 1;  j <= i && j <= g_maxValue;  ++j)
+                pProbabilities[1 - flag][i] += pProbabilities[flag][i - j];
+        }
+
+        flag = 1 - flag;
+    }
+
+    double total = pow((double)g_maxValue, number);
+    for (int i = number; i <= g_maxValue * number; ++i)
+    {
+        double ratio = (double)pProbabilities[flag][i] / total;
+        printf("%d: %e\n", i, ratio);
+    }
+
+    delete[] pProbabilities[0];
+    delete[] pProbabilities[1];
+
+    return;
+}
+#endif
+
+//法三：
+//参考https://cloud.tencent.com/developer/article/1947235
+void PrintProbability_Solution3(int number)
+{
+    //因为最后的结果只与前一个动态转移数组有关，所以这里只需要设置一个一维的动态转移数组
+    //原本dp[i][j]表示的是前i个骰子的点数之和为j的概率，现在只需要最后的状态的数组，
+    //所以就只用一个一维数组dp[j]表示n个骰子下每个结果的概率。
+    
+    //初始是1个骰子情况下的点数之和情况，就只有6个结果，所以用dp的初始化的size是6个
+    double* dp = new double[6];
+
+    //只有一个数组
+    fill(dp, dp + 6,1/6.0);
+
+    int length = 6;
+
+    //从第2个骰子开始，这里number表示number个骰子，
+    //先从第二个的情况算起，然后再逐步求3个、4个···n个的情况
+    // i 表示当总共i个骰子时的结果
+    for (int i = 2; i <= number; i++) 
+    {
+        //每次的点数之和范围会有点变化，点数之和的值最大是i*6，最小是i*1，i之前的结果值是不会出现的；
+        //比如i=3个骰子时，最小就是3了，不可能是2和1，而最大值是18，需要的存储空间是18-3+1=16
+        //所以点数之和的值的个数是6*i-(i-1)，化简：5*i+1
+        //当有i个骰子时的点数之和的值数组先假定是temp
+        double* temp = new double[5 * i + 1] {0};
+        //***注***
+        //i为2时，temp[0]代表和值为2的概率，i为3时，temp[0]代表和值为3的概率
+
+        //从i-1个骰子的点数之和的值数组入手，计算i个骰子的点数之和数组的值
+        //***注***
+        //i-1个骰子的点数之和的各个和值的概率即dp数组的第j个值，
+        //它所影响的是i个骰子时的temp[j+k]的值
+
+        //***注***
+        //错误写法：
+        //for (int j = 0; j < sizeof(dp)/sizeof(dp[0]); j++)
+        //【这样只能求静态数组的长度，而不能求动态数组的长度】
+
+        for (int j = 0; j < length; j++)
+        {
+            //比如只有1个骰子时，dp[1]是代表当骰子点数之和为2时的概率，
+            //它会对当有2个骰子时的点数之和为3、4、5、6、7、8产生影响，
+            //因为当有一个骰子的值为2时，另一个骰子的值可以为1~6，
+            //产生的点数之和相应的就是3~8；
+            //如dp[2]代表点数之和为3时的概率，
+            //它会对有2个骰子时的点数之和为4、5、6、7、8、9产生影响；
+            //所以k在这里就是对应着第i个骰子出现时可能出现六种情况     
+            for (int k = 0; k < 6; k++) 
+            {
+                //这里记得是加上dp数组值与1/6的乘积，1/6是第i个骰子投出某个值的概率
+                temp[j + k] += dp[j] * (1.0 / 6.0);
+            }
+        }
+
+        //i个骰子的点数之和全都算出来后，要将temp数组移交给dp数组，
+        // dp数组就会代表i个骰子时的可能出现的点数之和的概率；
+        // 用于计算i+1个骰子时的点数之和的概率
+
+        delete[]dp;
+
+        dp = temp;
+        length = 5 * i + 1;
+    }
+
+    for (int i = number; i <= g_maxValue * number; ++i)
+    {
+        printf("%d: %e\n", i, dp[i-number]);
+    }
 }
 #endif
 
