@@ -8900,6 +8900,10 @@ void PrintProbability_Solution3(int number)
 //首先把数组排序；其次统计数组中0的个数(即大小王个数)
 //最后统计排序之后的数组中相邻数字之间的空缺总数。如果空缺的总数
 //小于或者等于0的个数，那么这个数组就是连续的；反之则不连续。
+//或者
+//首先把数组排序；其次统计数组中0的个数(即大小王个数)
+//然后用两个指针来比较相邻数字的差值，
+//对差值的情况进行分类处理
 #if 0
 #include <iostream>
 #include <algorithm>
@@ -8978,11 +8982,14 @@ bool isContinuous(int* numbers,int length)
 
     return true;
 }
+//***注***
+//要进一步提升速度，可以不用sort()，而改用长度为14的哈希表，这样在O(n)
+//的时间内可完成排序
 #endif
 
 
 //面试题62：圆圈中最后剩下的数字
-#if 1
+#if 0
 #include <iostream>
 #include <list>
 #include <algorithm>
@@ -9061,5 +9068,45 @@ int LastRemaining(int n, int m)
     }
 
     return *(circle.begin());
+}
+#endif
+
+
+//面试题63：股票的最大利润
+//思路：在扫描到第i个元素值时，能够记住之前的i-1个数字中的最小值
+#if 1
+#include <iostream>
+
+using namespace std;
+
+int MaxProfit(int* stk,int length);
+
+int main()
+{
+    int stock[] = {9,11,8,5,7,12,16,14};
+
+    cout << MaxProfit(stock,sizeof(stock)/sizeof(int));
+
+    return 0;
+}
+int MaxProfit(int* stk, int length)
+{
+    if (stk == nullptr || length < 2)
+        return -1;
+
+    int TmpMinValue = stk[0];
+    int TmpMaxValue = stk[1];
+
+    if (length == 2)
+        return TmpMaxValue - TmpMinValue;
+
+    //从第三个元素开始遍历
+    for (int i = 2; i < length; ++i)
+    {
+        TmpMinValue = TmpMinValue < stk[i] ? TmpMinValue : stk[i];
+        TmpMaxValue = TmpMaxValue > stk[i] ? TmpMaxValue : stk[i];
+    }
+
+    return TmpMaxValue - TmpMinValue;
 }
 #endif
