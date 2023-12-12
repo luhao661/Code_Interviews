@@ -9074,7 +9074,7 @@ int LastRemaining(int n, int m)
 
 //面试题63：股票的最大利润
 //思路：在扫描到第i个元素值时，能够记住之前的i-1个数字中的最小值
-#if 1
+#if 0
 #include <iostream>
 
 using namespace std;
@@ -9109,4 +9109,381 @@ int MaxProfit(int* stk, int length)
 
     return TmpMaxValue - TmpMinValue;
 }
+#endif
+
+
+//面试题64：求1+2+3+...+n
+#if 0
+#include <iostream>
+
+using namespace std;
+
+//解法一：利用构造函数和static成员变量代替直接使用循环
+class Tmp
+{
+private:
+    //***注***
+    //利用了静态成员变量仅在初始化时执行一次初始化语句，之后不会再重复执行
+    //的特点，来记录每次要累加的值N，和总和Sum
+    static int N;
+    static int Sum;
+
+public:
+    Tmp()
+    {
+        ++N;
+        Sum += N;
+    }
+
+    static void Reset()
+    {
+        N = Sum = 0;
+    }
+
+    int GetSum()
+    {
+        return Sum;
+    }
+};
+
+int Tmp::N = 0;
+int Tmp::Sum = 0;
+
+//***注***
+//在类内声明方法为static的作用：
+//无需实例化对象就可以调用，
+//普通的成员函数需要通过类的实例化对象才能调用，
+//而静态成员函数可以直接通过类名来调用，无需创建类的对象实例。
+
+//在类内声明变量为static的作用：
+//在执行时不依赖于任何特定的对象，
+//因此对于全局操作非常有用。
+
+int Sum_solution_1(int n)
+{
+    //创建一个Tmp类数组，包含n个Tmp类对象，
+    //那么这些类对象都会由构造函数来生成
+    //构造函数会调用n次
+    unique_ptr<Tmp[]> t(new Tmp[n]{});
+    
+    //***注***
+    //错误写法：
+    //return t->GetSum();
+
+    //理解：
+    //t 是一个指向 Tmp 类型数组的 unique_ptr 对象，它管理这个数组的内存
+    //但【它本身并不是 Tmp 类的对象】，因此不能直接访问类中的方法。
+    //要访问类的方法，你需要通过 unique_ptr 持有的指针间接地访问数组元素，
+    //并在该元素上调用相应的方法
+    return t[0].GetSum();
+}
+
+//解法二：利用虚函数代替直接使用递归（其中递归中一定会有用到if的地方来判断何时递归终止）
+class A;
+A* Array[2];
+
+class A
+{
+public:
+    virtual int Sum(int n) 
+    {
+        return 0;
+    }
+};
+
+class B :public A
+{
+public:
+    virtual int Sum(int n) override
+    {
+        //两次取反运算
+        //n为100  !n为0  !!n为1
+        //n为0      !n为1  !!n为0
+        return Array[!!n]->Sum(n-1) + n;
+    }
+};
+
+int Sum_solution_2(int n)
+{
+    A a;
+    B b;
+    Array[0] = &a;
+    Array[1] = &b;
+
+    return Array[1]->Sum(n);
+}
+
+//解法三：使用函数指针来代替直接使用递归
+typedef int (*pFun)(int);
+
+int Sum_solution_3_terminate(int n)
+{
+    return 0;
+}
+
+int Sum_solution_3(int n)
+{
+    pFun funArray[2] = { Sum_solution_3_terminate ,Sum_solution_3 };
+
+    //错误写法：
+    //return funArray[!!n](--n) + n;
+    return funArray[!!n](n-1) + n;
+}
+
+//解法四：模板元编程，在编译期确定值
+template<int n>
+class Sum_solution_4
+{
+public:
+    enum Value {N=Sum_solution_4<n-1>::N+n};
+
+    Sum_solution_4()
+    {}
+
+};
+
+//模板具体化
+template<>class Sum_solution_4<1>
+{
+public:
+    enum {N=1};
+};
+
+int main()
+{
+    int n = 100;
+
+    cout<<Sum_solution_1(n)<<endl;
+    cout<<Sum_solution_2(n)<<endl;
+    cout<<Sum_solution_3(n)<<endl;
+
+    //错误写法：
+    //Sum_solution_4<n> s4;    //原因：非模板类型参数必须为常量值
+    Sum_solution_4<100> s4;    
+    cout<< s4.N <<endl;
+
+    return 0;
+}
+#endif
+
+
+//面试题65：不用加减乘除做加法
+//思路：“三步走”对于二进制也适用
+//第一步：各位相加但不进行进位
+//第二步：记下进位数
+//第三步：将前面两个步骤的结果相加
+#if 0
+#include <iostream>
+
+using namespace std;
+
+int Add(int num1,int num2);
+
+int main()
+{
+    int num1 = 5;
+    int num2 = 17;
+
+    cout << Add(num1,num2);
+
+    return 0;
+}
+//  5+17=22
+// 0000 0101
+// 0001 0001
+// 0001 0110
+//第一次循环：
+//XOR_res                  =0001 0100
+//OperationAfterAnd =0000 0010
+//第二次循环：
+//XOR_res                  =0001 0110
+//OperationAfterAnd =0000 0000
+
+// 17+17=34
+// 0001 0001
+// 0001 0001
+// 0010 0010
+
+// -1+2=1
+//1111 1111 1111 1111 1111 1111 1111 1111 
+//0000 0000 0000 0000 0000 0000 0000 0010
+//0000 0000 0000 0000 0000 0000 0000 0001
+//第一次循环：
+//XOR_res                  =1111 1111 1111 1111 1111 1111 1111 1101 
+//OperationAfterAnd =0000 0000 0000 0000 0000 0000 0000 0100
+//第二次循环：
+//XOR_res                  =1111 1111 1111 1111 1111 1111 1111 1001 
+//OperationAfterAnd =0000 0000 0000 0000 0000 0000 0000 1000
+//直到某次循环
+//XOR_res                  =0000 0000 0000 0000 0000 0000 0000 0001 
+//OperationAfterAnd =0000 0000 0000 0000 0000 0000 0000 0000
+
+//不够完整的方法：(不能解决相加的数字有负数的情况)
+#if 0
+int Add(int num1, int num2)
+{
+    int XOR_res = num1 ^ num2;
+
+    //记下进位的位置并进行移位
+    int OperationAfterAnd = (num1 & num2) << 1;
+
+    return XOR_res | OperationAfterAnd;
+}
+#endif
+
+#if 1
+int Add(int num1, int num2)
+{
+    int XOR_res, OperationAfterAnd;
+
+    while (num2)
+    {
+        //第一步也是第三步
+        //存储非进位和
+        XOR_res = num1 ^ num2;
+        //第二步
+        //对于两个数的某位要进位的处理
+        OperationAfterAnd = (num1 & num2) << 1;
+
+        num1 = XOR_res;
+        num2 = OperationAfterAnd;
+    }  
+
+    return num1;
+}
+#endif
+#endif
+
+
+//面试题66：构建乘积数组
+//给定一个数组A[0,1,…n-1],请构建一个数组B[0,1,…n-1],其中B中的元素
+//B[i] =  A[0]×A[1]×…×A[ i - 1]×A[i + 1]×…×A[n - 1]。不能使用除法。
+//解法：
+//B[i] = A[0]×A[1]×…×A[i-1]×A[i+1]×…×A[n-1]
+//看成A[0]×A[1]×…×A[i - 1] 和 A[i + 1]×…×A[n - 2]×A[n - 1]两部分的乘积。
+//这两部分分别用数组C和数组D表示
+//其中数组C[i]的计算自上而下
+//其中数组D[i]的计算自下而上
+//【数组B看成由一个矩阵来创建】
+#if 1
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void Multiply(const vector<int>& va,vector<int>& vb);
+
+int main()
+{
+    vector<int> A{ 1,2,3,4,5,6 };
+    vector<int>B(6,0);
+
+    try
+    {
+		Multiply(A, B);
+    }
+    catch(exception& e)
+    {
+        cout<<e.what();
+    }
+
+    for (auto const& x : B)
+        cout << x << " ";
+
+    return 0;
+}
+
+#if 0
+void Multiply(const vector<int>& va, vector<int>& vb)
+{
+    if (va.size() == 0)
+        throw exception("Error!");
+
+    vector<int>C(va.size(),1);
+
+    auto ic = C.begin()+1;
+    int tmp = 1;
+    for (auto const& x : va)
+    {
+        tmp *= x;
+        *ic++ = tmp;
+
+        if (ic == C.end())
+            break;
+    }
+
+#ifdef _DEBUG
+    for (auto x : C)
+        cout << x << " ";
+    cout << endl;
+#endif
+
+    vector<int>D(va.size(), 1);
+
+    auto id = D.end() - 2;
+    tmp = 1;
+    for (auto i = va.cend()-1; i >= va.cbegin(); --i)
+    {
+        tmp *= *i;
+
+        //错误写法：
+        //*id-- = tmp;
+        //Expression: can't decrement vector iterator before begin
+
+        *id = tmp;
+
+        if (id == D.begin())
+            break;
+        else
+            --id;
+    }
+
+#ifdef _DEBUG
+    for (auto x : D)
+        cout << x << " ";
+    cout << endl;
+#endif
+
+    int index = 0;
+    for (auto& x : vb)
+    {
+        x = C[index] * D[index];
+        ++index;
+    }
+
+    return;
+}
+#endif
+#if 1
+void Multiply(const vector<int>& input, vector<int>& output)
+{
+    int length1 = input.size();
+    int length2 = output.size();
+
+    if (length1 == length2 && length2 > 1)
+    {
+        //将矩阵C[i]计算好，不创建矩阵C，而是直接在输出矩阵B上操作
+        output[0] = 1;
+        for (int i = 1; i < length1; ++i)
+        {
+            output[i] = output[i - 1] * input[i - 1];
+        }
+
+        for (auto x : output)
+            cout << x << " ";
+        cout << endl;
+
+        //将矩阵D[i]计算好，对输出矩阵的操作是从B[4]开始，到B[0]结束
+        double temp = 1;
+        for (int i = length1 - 2; i >= 0; --i)
+        {
+            temp *= input[i + 1];
+            output[i] *= temp;
+        }
+
+        for (auto x : output)
+            cout << x << " ";
+        cout << endl;
+    }
+}
+#endif
 #endif
