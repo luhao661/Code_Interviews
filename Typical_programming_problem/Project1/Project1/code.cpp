@@ -9365,7 +9365,7 @@ int Add(int num1, int num2)
 //其中数组C[i]的计算自上而下
 //其中数组D[i]的计算自下而上
 //【数组B看成由一个矩阵来创建】
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -9486,4 +9486,105 @@ void Multiply(const vector<int>& input, vector<int>& output)
     }
 }
 #endif
+#endif
+
+
+//自己写一个atoi()功能的函数
+#if 1
+#include <iostream>
+
+using namespace std;
+
+enum Flag{VALID,INVALID,USER_OVERFLOW};
+Flag flag = VALID;
+
+int StrToInt(const char* str);
+
+int main()
+{
+    const char str [] = "-123 4";
+
+    cout << StrToInt(str) << endl;
+    cout << StrToInt("-123junk-  123") << endl;
+    cout << StrToInt("   -123") << endl;
+    cout << StrToInt("1-1") << endl;
+    cout << StrToInt("  +1+1") << endl;
+    cout << StrToInt("  +1 1") << endl;
+    cout << StrToInt("junk") << endl;
+    cout << StrToInt("-") << endl;
+    cout << StrToInt("") << endl;
+    cout << StrToInt("123456789123456789") << endl;
+
+    return 0;
+}
+int StrToInt(const char* str)
+{
+    //要考虑到的基本的输入用例：
+    //nullptr   、 ""  、 +  、 -  、溢出
+    if (str == nullptr||str=="")
+    {
+        flag = INVALID;
+
+        return 0;
+    }
+
+    const char* traverse = str;
+
+    while (isspace(*traverse))
+        ++traverse;
+
+    if (!isdigit(*traverse) && !(*traverse == '+') && !(*traverse == '-'))
+    {
+        flag = INVALID;
+
+        return 0;
+    }
+
+    bool Positive = 1;
+    bool RunOnlyOnce = 1;
+    //***注***
+    //声明为long long来判断对于int类型是否溢出
+    long long res = 0;
+    while (*traverse != '\0')
+    {
+        if (RunOnlyOnce)
+        {    if (*traverse == '+')
+                ++traverse;
+            else if (*traverse == '-')
+            {
+                ++traverse;
+                Positive = 0;
+            }
+
+            RunOnlyOnce = 0;
+		}
+
+        //***注***
+        //第二种处理方法：
+        //可以不用写RunOnlyOnce，而是将上面的代码块从循环中摘出，然后
+        //循环以及后面的代码块移到 int StrToIntCore(const char* str, bool Positive)中
+
+        //为"-123junk-  123"  做代码完整性的补充
+        if (!isdigit(*traverse) && !isspace(*traverse))
+            break;
+
+        if (isdigit(*traverse))
+        {
+            res = res * 10 + (*traverse) - '0';
+        }
+
+        ++traverse;
+    }
+
+    //***注***
+    //numeric_limits<int>::min()式子被声明为 constexpr ，表达式核定于编译期。
+    if(res<numeric_limits<int>::min()||res>numeric_limits<int>::max())
+    {
+        flag= USER_OVERFLOW;
+
+        return 0;
+    }
+
+    return Positive ? res : -res;
+}
 #endif
