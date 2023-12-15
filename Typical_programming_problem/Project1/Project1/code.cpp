@@ -9489,8 +9489,8 @@ void Multiply(const vector<int>& input, vector<int>& output)
 #endif
 
 
-//自己写一个atoi()功能的函数
-#if 1
+//面试题67：自己写一个atoi()功能的函数
+#if 0
 #include <iostream>
 
 using namespace std;
@@ -9586,5 +9586,215 @@ int StrToInt(const char* str)
     }
 
     return Positive ? res : -res;
+}
+#endif
+
+
+//面试题68：树中两个节点的最低公共祖先
+//注意不是二叉树
+#if 1
+#include <iostream>
+#include <list>
+#include <vector>
+
+struct TreeNode
+{
+    int                                      m_nValue;
+    std::vector<TreeNode*>    m_vChildren;
+};
+
+ TreeNode* CreateTreeNode(int value);
+ void ConnectTreeNodes(TreeNode* pParent, TreeNode* pChild);
+ void PrintTreeNode(const TreeNode* pNode);
+ void PrintTree(const TreeNode* pRoot);
+ void DestroyTree(TreeNode* pRoot);
+
+using namespace std;
+
+const TreeNode* GetLastCommonParent(const TreeNode* pRoot, const TreeNode* pNode1, const TreeNode* pNode2);
+bool GetNodePath(const TreeNode* pRoot, const TreeNode* pNode, list<const TreeNode*>& path);
+const TreeNode* GetLastCommonNode
+(
+    const list<const TreeNode*>& path1,
+    const list<const TreeNode*>& path2
+);
+
+int main()
+{
+    TreeNode* pNode1 = CreateTreeNode(1);
+    TreeNode* pNode2 = CreateTreeNode(2);
+    TreeNode* pNode3 = CreateTreeNode(3);
+    TreeNode* pNode4 = CreateTreeNode(4);
+    TreeNode* pNode5 = CreateTreeNode(5);
+    TreeNode* pNode6 = CreateTreeNode(6);
+    TreeNode* pNode7 = CreateTreeNode(7);
+    TreeNode* pNode8 = CreateTreeNode(8);
+    TreeNode* pNode9 = CreateTreeNode(9);
+    TreeNode* pNode10 = CreateTreeNode(10);
+
+    ConnectTreeNodes(pNode1, pNode2);
+    ConnectTreeNodes(pNode1, pNode3);
+
+    ConnectTreeNodes(pNode2, pNode4);
+    ConnectTreeNodes(pNode2, pNode5);
+
+    ConnectTreeNodes(pNode4, pNode6);
+    ConnectTreeNodes(pNode4, pNode7);
+
+    ConnectTreeNodes(pNode5, pNode8);
+    ConnectTreeNodes(pNode5, pNode9);
+    ConnectTreeNodes(pNode5, pNode10);
+
+// 形状普通的树
+//              1
+//            /   \
+//           2     3
+//       /       \
+//      4          5
+//     / \        / |  \
+//    6   7    8  9  10
+
+    PrintTree(pNode1);
+    cout << endl;
+
+    const TreeNode* pResult = GetLastCommonParent(pNode1, pNode6, pNode8);
+    cout << pResult->m_nValue<<endl;
+
+    DestroyTree(pNode1);
+
+    return 0;
+}
+
+const TreeNode* GetLastCommonParent(const TreeNode* pRoot, 
+    const TreeNode* pNode1, const TreeNode* pNode2)
+{
+    if (pRoot == nullptr || pNode1 == nullptr || pNode2 == nullptr)
+        return nullptr;
+
+    list<const TreeNode*> path1;
+    GetNodePath(pRoot, pNode1, path1);
+
+    list<const TreeNode*> path2;
+    GetNodePath(pRoot, pNode2, path2);
+
+    return GetLastCommonNode(path1, path2);
+}
+
+
+bool GetNodePath(const TreeNode* pRoot, const TreeNode* pNode, 
+    list<const TreeNode*>& path)
+{
+    if (pRoot == pNode)
+        return true;
+
+    path.push_back(pRoot);
+
+    bool found = false;
+
+    vector<TreeNode*>::const_iterator i = pRoot->m_vChildren.begin();
+    while (!found && i < pRoot->m_vChildren.end())
+    {
+        found = GetNodePath(*i, pNode, path);
+        ++i;
+    }
+
+    if (!found)
+        path.pop_back();
+
+    return found;
+}
+
+const TreeNode* GetLastCommonNode(const list<const TreeNode*>& path1,
+    const list<const TreeNode*>& path2)
+{
+    list<const TreeNode*>::const_iterator iterator1 = path1.begin();
+    list<const TreeNode*>::const_iterator iterator2 = path2.begin();
+
+    const TreeNode* pLast = nullptr;
+
+    //***注***
+    //理解从头开始找的意义
+    //第一次iterator1和iterator2不同时，那上一次就是最后一个公共节点
+    //与面试题52对比
+    while (iterator1 != path1.end() && iterator2 != path2.end())
+    {
+        if (*iterator1 == *iterator2)
+            pLast = *iterator1;
+
+        iterator1++;
+        iterator2++;
+    }
+
+    return pLast;
+}
+
+// 创建树节点
+TreeNode* CreateTreeNode(int value) 
+{
+    TreeNode* pNode = new TreeNode();
+    pNode->m_nValue = value;
+    return pNode;
+}
+
+// 连接树节点，将 pChild 添加为 pParent 的子节点
+void ConnectTreeNodes(TreeNode* pParent, TreeNode* pChild) 
+{
+    if (pParent != nullptr) 
+    {
+        pParent->m_vChildren.push_back(pChild);
+    }
+}
+
+// 打印单个节点
+void PrintTreeNode(const TreeNode* pNode) 
+{
+    if (pNode != nullptr) 
+    {
+        std::cout << "Node value: " << pNode->m_nValue << std::endl;
+        std::cout << "Children: ";
+        for (const auto& child : pNode->m_vChildren) 
+        {
+            std::cout << child->m_nValue << " ";
+        }
+        std::cout << std::endl;
+    }
+    else 
+    {
+        std::cout << "Null node" << std::endl;
+    }
+}
+
+// 打印整个树
+void PrintTree(const TreeNode* pRoot) 
+{
+    if (pRoot == nullptr) 
+    {
+        std::cout << "Empty tree" << std::endl;
+        return;
+    }
+
+    std::cout << "Tree structure:" << std::endl;
+    PrintTreeNode(pRoot);
+
+    for (const auto& child : pRoot->m_vChildren) 
+    {
+        PrintTree(child);
+    }
+}
+
+// 销毁整个树
+void DestroyTree(TreeNode* pRoot) 
+{
+    if (pRoot == nullptr) 
+    {
+        return;
+    }
+
+    for (auto& child : pRoot->m_vChildren) 
+    {
+        DestroyTree(child);
+    }
+
+    delete pRoot;
 }
 #endif
