@@ -7968,7 +7968,7 @@ void FindCorrespondingNums(int* data, int length)
     for (int i = 0; i < 32; ++i)
     {
         result = result << 1;
-        result += bitSum[i] % 3;
+        result += bitArray[i] % 3;
     }
 
 #endif
@@ -9592,7 +9592,7 @@ int StrToInt(const char* str)
 
 //面试题68：树中两个节点的最低公共祖先
 //注意不是二叉树
-#if 1
+#if 0
 #include <iostream>
 #include <list>
 #include <vector>
@@ -9680,7 +9680,7 @@ const TreeNode* GetLastCommonParent(const TreeNode* pRoot,
     return GetLastCommonNode(path1, path2);
 }
 
-
+//用递归找出到某节点的唯一路径
 bool GetNodePath(const TreeNode* pRoot, const TreeNode* pNode, 
     list<const TreeNode*>& path)
 {
@@ -9691,6 +9691,7 @@ bool GetNodePath(const TreeNode* pRoot, const TreeNode* pNode,
 
     bool found = false;
 
+    //不是二叉树的处理方法
     vector<TreeNode*>::const_iterator i = pRoot->m_vChildren.begin();
     while (!found && i < pRoot->m_vChildren.end())
     {
@@ -9797,4 +9798,93 @@ void DestroyTree(TreeNode* pRoot)
 
     delete pRoot;
 }
+#endif
+
+/***************************************End************************************************/
+
+//《剑指Offer 数据结构与算法》
+
+
+//面试题3：前n个数字二进制形式中1的个数
+#if 1
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void CountBits(int num,vector<int>& );
+
+int main()
+{
+    unsigned int num;
+    cin >> num;
+
+    //数字0到数字num
+    vector<int> vec(num+1);
+
+    try
+    {
+        CountBits(num, vec);
+    }
+    catch (exception& e)
+    {
+        cout << e.what() << endl;
+    }
+
+    for (const auto& x : vec)
+        cout << x << " ";
+
+    return 0;
+}
+//解法一：
+//根据i&(i-1)+1 
+//将i的二进制形式中最右边的1变成0，也就是说，
+//整数i的二进制形式中1的个数比“i & （i - 1）”的二进制形式中1的个数多1
+//用O(1)的时间计算出数字i的二进制有多少位的值为1
+#if 0
+void CountBits(int num, vector<int>& vec)
+{
+    if (num < 0)
+        throw exception("Invalid number");
+
+	vec[0] = 0;
+
+    if (num == 0)
+    {
+        return;
+    }
+
+    for (int i = 1; i <= num; ++i)
+    {
+        vec[i] = vec[i & (i - 1)] + 1;
+    }
+
+    //错误理解：
+    //vec[i] = vec[i & (i - 1)] + 1;等价于vec[i] = vec[i - 1] + 1;
+    //反例：
+    //i为4时，i & (i - 1)为0
+
+    return;
+}
+#endif
+
+//解法二：
+//如果正整数i是一个偶数，那么i相当于将“i / 2”左移一位的结果，因此偶数i和“i / 2”
+//的二进制形式中1的个数是相同的。如果i是奇数，那么i相当于将“i / 2”左移一位之后
+//再将最右边一位设为1的结果，因此奇数i的二进制形式中1的个数比“i / 2”的1的个数多1。
+#if 1
+void CountBits(int num, vector<int>& vec)
+{
+    if (num < 0)
+        throw exception("Invalid number");
+
+    vec[0] = 0;
+
+    for (int i = 1; i <= num; ++i)
+    {
+        vec[i] = vec[ i >>1 ] + (i&1);//***注***小括号必须加
+    }
+
+    return;
+}
+#endif
 #endif
