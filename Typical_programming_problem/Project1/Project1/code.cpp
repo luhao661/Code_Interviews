@@ -9806,7 +9806,7 @@ void DestroyTree(TreeNode* pRoot)
 
 
 //面试题3：前n个数字二进制形式中1的个数
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -9887,4 +9887,133 @@ void CountBits(int num, vector<int>& vec)
     return;
 }
 #endif
+#endif
+
+
+//面试题5：单词长度的最大乘积
+#if 0
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    vector<string> vec_str;
+
+    string tmp;
+    while (cin >> tmp)
+    {
+        vec_str.push_back(tmp);
+    }
+
+    //创建一个长度为26的数组来模拟哈希表
+    int hash[26] = {};
+
+    //某两个单词没有相同的字母
+    bool flag = 0;
+
+    int MaxMultiply = 0;
+
+    for (auto it_1 = vec_str.begin(); it_1 != vec_str.end(); ++it_1)
+    {
+        int len_1 = (*it_1).length();
+        for (int i = 0; i < len_1; ++i)
+        {
+            ++hash[(*it_1)[i] - 'a'];
+        }
+
+        for (auto it = it_1+1; it != vec_str.end(); ++it)
+        {
+            int len = (*it).length();
+            for (int i = 0; i < len; ++i)
+            {
+                if (hash[(*it)[i] - 'a'] != 0)
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+
+            if (flag == 0)
+            {
+                int Max = len_1 * len;
+
+                //MaxMultiply = Max > MaxMultiply ? Max : MaxMultiply;
+                MaxMultiply = max(MaxMultiply,Max);
+            }
+            else
+            {
+                flag = 0;
+                continue;
+            }
+        }
+
+        fill(hash,hash+26,0);
+    }
+
+    cout << MaxMultiply;
+
+    return 0;
+}
+//测试：
+#if 0
+abcw
+foo
+bar 
+fxyz
+abcdef
+#endif
+#endif
+//***注***
+//在判断两个单词的各个字母时，纵使字母的查找时间复杂度降到O(1)
+//但比较整个单词的字母还需要线性复杂度
+//可以用整数的二进制数位记录字符串中出现的字符，
+//这样判断两个单词是否有相同字母，就可以用flags[i]&flags[j]==0来判断
+#if 1
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    vector<string> vec_str;
+    
+    string tmp;
+    while (cin >> tmp)
+    {
+        vec_str.push_back(tmp);
+    }
+
+    //某两个单词没有相同的字母
+    bool flag = 0;
+
+    int MaxMultiply = 0;
+
+    int TheNumberOfWords = vec_str.size();
+    //***注***
+    //用shared_ptr管理动态分配的数组的写法
+    shared_ptr<int> flags(new int[TheNumberOfWords] {}, default_delete<int[]>());
+
+    for (int i = 0; i < TheNumberOfWords; ++i)
+        for (int j = 0; j < vec_str[i].length(); ++j)
+            flags.get()[i] |= 1 << (vec_str[i][j] - 'a');//***注*** 用get()方法
+
+    for (int i = 0; i < TheNumberOfWords; ++i)
+    {
+        for(int j=i+1;j< TheNumberOfWords;++j)
+            if((flags.get()[i] & flags.get()[j])==0)
+            {
+                int strLenMultiply = vec_str[i].length() * vec_str[j].length();
+                MaxMultiply = max(MaxMultiply, strLenMultiply);
+            }
+    }
+
+    cout << MaxMultiply;
+
+    return 0;
+}
 #endif
