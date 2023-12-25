@@ -9969,9 +9969,9 @@ abcdef
 //***注***
 //在判断两个单词的各个字母时，纵使字母的查找时间复杂度降到O(1)
 //但比较整个单词的字母还需要线性复杂度
-//可以用整数的二进制数位记录字符串中出现的字符，
+//可以用整数的二进制数位记录字符串中出现的字符，（用二进制数位来模拟哈希表）
 //这样判断两个单词是否有相同字母，就可以用flags[i]&flags[j]==0来判断
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 #include <string>
@@ -10017,3 +10017,111 @@ int main()
     return 0;
 }
 #endif
+
+
+//面试题6：排序数组中的两个数字之和
+#if 1
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+void FindPairOfNumbers(const vector<int>& vec,int k);
+
+int main()
+{
+    vector<int> vec;
+
+    copy(istream_iterator<int>(cin), istream_iterator<int>(),back_inserter(vec));
+
+    int k = 8;
+
+    FindPairOfNumbers(vec,k);
+
+    return 0;
+}
+#if 1
+void FindPairOfNumbers(const vector<int>& vec,int k)
+{
+    //copy(vec.begin(),vec.end(),ostream_iterator<int>(cout));
+
+    if (vec.size() <= 1)
+        return;
+
+    vector<int>:: const_iterator ptr1,ptr2;//***注***此处不能写成 vector<int>:: iterator
+	ptr1 = vec.begin();
+    ptr2 = vec.begin() + 1;
+
+    while (*ptr1 + *ptr2 != k&&ptr2!=vec.end())
+    {
+        if (*ptr1 + *ptr2 < k)
+            ++ptr2;
+        else
+        {
+            --ptr2;
+            ++ptr1;
+        }
+    }
+    //或者
+#if 0
+    ptr1 = vec.begin();
+    ptr2 = vec.end() - 1;
+
+    while (*ptr1 + *ptr2 != k && ptr1 < ptr2)
+    {
+        if (*ptr1 + *ptr2 < k)
+            ++ptr1;
+        else
+		    --ptr2;
+    }
+
+#endif
+
+    cout << distance(vec.begin(),ptr1) << " " << distance(vec.begin(),ptr2) << endl;
+}
+#endif
+#if 0
+#include <unordered_set>
+//还可以利用哈希表的查找时间为O(1)
+void FindPairOfNumbers(const vector<int>& vec, int k)
+{
+    if (vec.size() <= 1)
+        return;
+
+    unordered_multiset<int> ums(vec.cbegin(), vec.cend());
+
+    vector<int>:: const_iterator i ;
+
+#if 0
+    //错误
+    //若输入1 2 4 6 10 则会出现 输出为1 3   2 2   3 1 的情况
+    for (auto it = vec.cbegin(); it != vec.cend(); ++it)
+    {
+        if (ums.find(k - *it) != ums.end())
+        {
+            i = find(vec.begin(), vec.end(), k - *it);
+
+            cout << distance(vec.begin(), it) << " " << distance(vec.begin(), i) << endl;
+        }
+    }
+#endif
+	
+    int tmp1=-1, tmp2=-1;
+    for (auto it = vec.cbegin(); it != vec.cend(); ++it)
+    {
+        if (ums.find(k - *it) != ums.end())
+        {
+            i = find(vec.begin(), vec.end(), k - *it);
+
+            if (i != it && *it != tmp2 && *i != tmp1)
+            {
+                tmp1 = *it, tmp2 = *i;
+                cout << distance(vec.begin(), it) << " " << distance(vec.begin(), i) << endl;
+            }
+        }
+    }
+}
+#endif
+#endif
+
+
