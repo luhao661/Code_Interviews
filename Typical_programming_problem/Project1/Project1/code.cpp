@@ -10020,7 +10020,7 @@ int main()
 
 
 //面试题6：排序数组中的两个数字之和
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -10125,3 +10125,116 @@ void FindPairOfNumbers(const vector<int>& vec, int k)
 #endif
 
 
+//面试题7：数组中和为0的3个数字
+#if 0
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+void FindThreeNumbers(vector<int>& ,int fixedNum,vector<int>::iterator);
+
+int main()
+{
+    vector<int> vec;
+
+    copy(istream_iterator<int>(cin),istream_iterator<int>(),back_inserter(vec));
+
+    sort(vec.begin(),vec.end());
+
+    for (auto it = vec.begin(); it != vec.end()-2; ++it)
+    {
+        FindThreeNumbers(vec,*it,it);
+    }
+
+    return 0;
+}
+void FindThreeNumbers(vector<int>& vec, int fixedNum, vector<int>::iterator theIterator)
+{
+    if (vec.size() < 3)
+        return;
+
+    int SumOfPairOfTargetNums = -fixedNum;
+
+    auto ptr1 = theIterator + 1;
+    auto ptr2 = vec.end() - 1;
+
+    while (ptr1 < ptr2 &&*ptr1 + *ptr2 != SumOfPairOfTargetNums)
+    {
+        if (*ptr1 + *ptr2 > SumOfPairOfTargetNums)
+            --ptr2;
+        else
+            ++ptr1;
+    }
+
+    if(*ptr1 + *ptr2 == SumOfPairOfTargetNums&& ptr1 < ptr2)
+    cout << fixedNum << " " << *ptr1<< " " <<*ptr2<< " " << endl;
+}
+#if 0
+- 1 0 1 2 - 1 - 4
+#endif
+#endif
+//错误：没考虑去重
+#if 1
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+vector<vector<int>> FindThreeNumbers(vector<int>& nums);
+
+int main()
+{
+    vector<int> vec;
+
+    copy(istream_iterator<int>(cin), istream_iterator<int>(), back_inserter(vec));
+
+    sort(vec.begin(), vec.end());
+
+    vector<vector<int>>res=FindThreeNumbers(vec);
+    
+
+    return 0;
+}
+
+vector<vector<int>> FindThreeNumbers(vector<int>& nums)
+{
+    vector<vector<int>> ans;
+
+    sort(nums.begin(), nums.end());
+
+    int n = nums.size();
+
+    for (int i = 0; i < n - 2; i++)
+    {
+        if (i > 0 && nums[i] == nums[i - 1]) 
+            continue; //当前数字和前一个数字相等，跳过
+
+        int j = i + 1, k = n - 1;
+
+        while (j < k) 
+        {
+            int sum = nums[j] + nums[k];
+
+            if (sum == -nums[i]) 
+            {
+                ans.push_back({ nums[i], nums[j], nums[k] });
+                while (j < k && nums[j] == nums[j + 1])
+                    j++;//左指针跳过其右侧所有相等的数
+
+                j++;
+
+                while (j < k && nums[k] == nums[k - 1]) 
+                    k--;//右指针跳过其左侧所有相等的数
+
+                k--;
+            }
+            else if (sum > -nums[i]) 
+                k--;
+            else 
+                j++;
+        }
+    }
+    return ans;
+}
+#endif
