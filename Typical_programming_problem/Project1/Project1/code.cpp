@@ -3884,6 +3884,8 @@ int main()
 
 
 //面试题31：栈的压入、弹出序列
+//输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为
+//该栈的弹出顺序
 #if 0
 #include <iostream>
 #include <stack>
@@ -10175,7 +10177,7 @@ void FindThreeNumbers(vector<int>& vec, int fixedNum, vector<int>::iterator theI
 #endif
 #endif
 //错误：没考虑去重
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -10237,4 +10239,103 @@ vector<vector<int>> FindThreeNumbers(vector<int>& nums)
     }
     return ans;
 }
+#endif
+
+
+//面试题8：和大于或等于k的最短子数组
+#if 1
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int FindTheShortestSubArray(const vector<int>& vec,int k);
+
+int main()
+{
+    //vector<int> vec(istream_iterator<int>(cin),istream_iterator<int>());
+
+    vector<int>vec1({5,1,4,3});
+    vector<int>vec2({5,1,4,2});
+    vector<int>vec3({1,1,1,1});
+    vector<int>vec4({1});
+    vector<int>vec5({});
+    int k = 7;
+
+    cout << FindTheShortestSubArray(vec1,k)<<endl;
+    cout << FindTheShortestSubArray(vec2,k)<<endl;
+    cout << FindTheShortestSubArray(vec3,k)<<endl;
+    cout << FindTheShortestSubArray(vec4,k)<<endl;
+    cout << FindTheShortestSubArray(vec5,k)<<endl;
+
+    return 0;
+}
+#if 0
+int FindTheShortestSubArray(const vector<int>& vec, int k)
+{
+    if (vec.size() == 0)
+        return 0;
+
+    if (vec.size() == 1)
+        return *vec.begin() >= k;
+
+    auto ptr1 = vec.begin();
+    vector<int>::const_iterator ptr2;
+
+    int Sum = 0;
+    int MinLen = numeric_limits<int>::max();
+
+    for (        ; ptr1 != vec.end(); ++ptr1)
+    {
+        Sum = *ptr1;
+
+        if (Sum >= k)
+            return 1;
+
+        for (ptr2 = ptr1 + 1; ptr2 != vec.end(); ++ptr2)
+        {
+            Sum += *ptr2;
+
+            if (Sum >= k)
+            {
+                MinLen = min(MinLen, (int)distance(ptr1, ptr2)+1);
+                break;
+            }
+        }
+    }
+
+    return MinLen< numeric_limits<int>::max()?MinLen:0;
+}
+#endif
+#if 1
+//滑动窗口
+int FindTheShortestSubArray(const vector<int>& vec, int k)
+{
+    //设置初始最小值
+    int MinLen = numeric_limits<int>::max();
+    //初始化数组和
+    int sum = 0;
+    //定义两个变量i、j(类似于滑动窗口的感觉)
+    for (int i = 0, j = 0; j < vec.size(); j++) 
+    {
+        //扩大窗口
+        sum += vec[j];
+
+        while (i <= j && sum >= k)
+        {
+            //更新最小值
+            MinLen = min(MinLen, j - i + 1);
+            //缩小窗口
+            sum -= vec[i++];
+        }
+    }
+
+    //若所有子数组和都小于k,则返回0，否则返回更新值
+    return MinLen == numeric_limits<int>::max() ? 0 : MinLen;
+}
+//***注***
+//该解法的时间复杂度仍然是O(n)。这是因为在这两个循环中，
+// 变量j和i都是只增加不减少，变量j从0增加到n - 1，变量i从0最多增加到n - 1，
+// 因此总的执行次数是O(n)
+#endif
 #endif
