@@ -10051,6 +10051,7 @@ void FindPairOfNumbers(const vector<int>& vec,int k)
         return;
 
     vector<int>:: const_iterator ptr1,ptr2;//***注***此处不能写成 vector<int>:: iterator
+#if 0
 	ptr1 = vec.begin();
     ptr2 = vec.begin() + 1;
 
@@ -10064,8 +10065,9 @@ void FindPairOfNumbers(const vector<int>& vec,int k)
             ++ptr1;
         }
     }
+#endif
     //或者
-#if 0
+#if 1
     ptr1 = vec.begin();
     ptr2 = vec.end() - 1;
 
@@ -10076,7 +10078,6 @@ void FindPairOfNumbers(const vector<int>& vec,int k)
         else
 		    --ptr2;
     }
-
 #endif
 
     cout << distance(vec.begin(),ptr1) << " " << distance(vec.begin(),ptr2) << endl;
@@ -10243,7 +10244,7 @@ vector<vector<int>> FindThreeNumbers(vector<int>& nums)
 
 
 //面试题8：和大于或等于k的最短子数组
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -10338,4 +10339,137 @@ int FindTheShortestSubArray(const vector<int>& vec, int k)
 // 变量j和i都是只增加不减少，变量j从0增加到n - 1，变量i从0最多增加到n - 1，
 // 因此总的执行次数是O(n)
 #endif
+#endif
+
+
+//面试题9：乘积小于k的子数组
+#if 1
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<vector<int>> FindSubArray(const vector<int>& vec,int k);
+
+int main()
+{
+    int k = 100;
+	vector<int> vec({ 10,5,2,6 });
+
+    vector<vector<int>>res=FindSubArray(vec,k);
+    //try
+    //{
+    //}
+    //catch (exception& e)
+    //{
+    //    cout<<e.what();
+    //}
+
+    for (auto i = res.begin(); i != res.end(); ++i)
+    {
+        for (const auto& x : *i)
+            cout << x << " ";
+
+        cout << endl;
+    }
+
+    return 0;
+}
+vector<vector<int>> FindSubArray(const vector<int>& vec, int k)
+{
+    if (vec.size() == 0)
+        throw exception("Error!");
+
+    vector<vector<int>>res;
+
+    int ptr1, ptr2,MultiplyRes=1;
+  
+#if 0
+    for (ptr2 = ptr1 = 0; ptr1 < vec.size(); ++ptr1)
+    {
+        MultiplyRes *= vec[ptr1];
+
+        //错误写法：
+        /*
+        while (MultiplyRes < k)
+        {
+            res.emplace_back(vec.begin()+ptr2, vec.begin() + ptr1);
+
+            if (ptr2 < ptr1)
+                MultiplyRes /= ptr2++;
+            else
+                break;
+        }
+        */
+
+        if (MultiplyRes >= k||ptr1==vec.size()-1)
+        {
+            if(MultiplyRes>=k)
+            {
+                MultiplyRes /= vec[ptr1];
+                --ptr1;
+            }
+
+            while (MultiplyRes < k)
+            {
+                res.emplace_back(vec.begin() + ptr2, vec.begin() + ptr1+1);
+
+                if (ptr2 < ptr1)
+                {
+                    MultiplyRes /= vec[ptr2];
+                    ++ptr2;
+                }
+                else
+                    break;
+            }
+        }
+    }
+    //***注***
+    //结果为
+#if 0
+10 5
+ 5
+ 5 2 6
+ 2 6
+ 6
+#endif
+#endif
+
+#if 1
+    for (ptr2 = ptr1 = 0; ptr1 < vec.size(); ++ptr1)
+    {
+        MultiplyRes *= vec[ptr1];
+
+        //为了得到以ptr2为起点的比要求的子数组长度长1的子数组
+        if (MultiplyRes >= k || ptr1 == vec.size() - 1)
+        {
+            //ptr1回退1步得到以当前ptr2为起点的最长满足要求的子数组
+            if (MultiplyRes >= k)
+            {
+                MultiplyRes /= vec[ptr1];
+                --ptr1;
+            }
+            
+            while (MultiplyRes < k)
+            {
+                //存【长度逐渐减少】的子数组
+                res.emplace_back(vec.begin() + ptr2, vec.begin() + ptr1 + 1);
+
+                //ptr2 < ptr1则缩小滑动窗口
+                if (ptr2 < ptr1)
+                {
+                    MultiplyRes /= vec[ptr2];
+                    //将滑动窗口【最左侧的值】存入
+					res.emplace_back(vec.begin() + ptr2, vec.begin() + ptr2 + 1);
+                    //ptr2向右推进以缩小窗口
+                    ++ptr2;
+                }
+                else//若ptr2 == ptr1
+                    break;
+            }
+            //退出while循环后，MultiplyRes的值为当前滑动窗口最右侧的值
+        }
+    }
+#endif
+    return res;
+}
 #endif
