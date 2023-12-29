@@ -10343,7 +10343,7 @@ int FindTheShortestSubArray(const vector<int>& vec, int k)
 
 
 //面试题9：乘积小于k的子数组
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -10451,7 +10451,7 @@ vector<vector<int>> FindSubArray(const vector<int>& vec, int k)
             
             while (MultiplyRes < k)
             {
-                //存【长度逐渐减少】的子数组
+                //存【长度逐渐减少到1】的子数组
                 res.emplace_back(vec.begin() + ptr2, vec.begin() + ptr1 + 1);
 
                 //ptr2 < ptr1则缩小滑动窗口
@@ -10472,4 +10472,184 @@ vector<vector<int>> FindSubArray(const vector<int>& vec, int k)
 #endif
     return res;
 }
+#endif
+//乘积小于k的子数组(不要求打印所有子数组)
+#if 0
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int FindSubArray(const vector<int>& vec, int k);
+
+int main()
+{
+    int k = 100;
+    vector<int> vec({ 10,5,2,6 });
+
+    int res = FindSubArray(vec, k);
+
+    cout << res;
+
+    return 0;
+}
+int FindSubArray(const vector<int>& vec, int k)
+{
+    if (k == 0 || k == 1) 
+        return 0;
+
+    int l = 0;
+    int curProduct = 1; //存储nums[l]~nums[r]的累积
+    int res = 0;
+
+    for (int r = 0; r < vec.size(); r++) 
+    {
+        curProduct *= vec[r];
+
+        while (curProduct >= k) 
+        {
+            curProduct /= vec[l++];
+        }
+
+        res += r - l + 1;
+    }
+
+    //***注***
+#if 0
+res += r - l +1;是怎么得来的？
+对于有n个元素的集合：
+    包含 1 个元素的子集有 n 个
+    包含 2 个连续元素的子集有 n - 1 个
+    ...
+    包含 n 个连续元素的子集有 1 个
+    总共有 1 + 2 + 3 + ... + n = （n + 1） * n / 2个连续元素的子集    (数学归纳法)
+
+那么对于n - 1个元素的集合：共有(n) * (n - 1) / 2个连续元素的子集。
+
+(n + 1)n / 2 - n(n - 1) / 2 = n / 2 * (2) = n 对于n - 1个元素的集合，增加第n个元素，则增加的连续元素子集数为n个。
+
+对于a[l] ... a[r - 1] 的集合，增加第r个元素a[r]，则增加的连续元素子集数为 a[l] ... a[r] 范围内的元素总数即 r - l + 1个。
+#endif
+    return res;
+}
+#endif
+//***注***
+//使用【双指针】（类似于【滑动窗口】）解决子数组之和的面试题有一个前提条件——
+//数组中的所有数字都是正数。如果数组中的数字有正数、负数和零，
+//那么双指针的思路并不适用，这是因为当数组中有负数时在子数组中
+//添加数字不一定能增加子数组之和，从子数组中删除数字也
+//不一定能减少子数组之和。
+
+
+//面试题10：和为k的子数组
+//题目中没说数组是由正整数构成的
+//换一种思路求子数组之和。【累加数组数字求子数组之和】
+// 假设整个数组的长度为n，它的某
+//个子数组的第1个数字的下标是i，最后一个数字的下标是j。为了计算
+//子数组之和，需要先做预处理，计算从数组下标为0的数字开始到以每
+//个数字为结尾的子数组之和。预处理只需要从头到尾扫描一次，就能
+//求出从下标0开始到下标0结束的子数组之和S0，从下标0开始到下标1结
+//束的子数组之和S(1)，以此类推，直到求出从下标0开始到最后一个数字
+//的子数组之和S(n - 1)。因此，
+//从下标为i开始到下标为j结束的子数组的和就是S(j) - S(i - 1)
+//该方法也称为【前缀和】
+#if 1
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+int FindSubArray(const vector<int>& vec, int k);
+
+int main()
+{
+    vector<int> vec = {1,1,1};
+    int k = 2;
+
+    cout << FindSubArray(vec,k);
+
+    return 0;
+}
+int FindSubArray(const vector<int>& vec, int k)
+{
+    int vecLen = vec.size();
+
+    if (vecLen == 0)
+        return 0;
+
+    //创建前缀和数组               ***注***第一个元素为0
+    vector<int> PreSumArray(vecLen + 1,0);
+
+    for (int i = 0; i < vecLen; ++i)
+    {
+        //PreSumArray的索引最大为vec.size()
+        PreSumArray[i + 1] = vec[i] + PreSumArray[i];
+    }
+
+    //例：
+    //输入数组         [1, 1, 1]
+    //PreSumArray=[0, 1, 2, 3]
+    //***理解***
+    //PreSumArray[2] - PreSumArray[0] 
+    //索引值为2的前缀和减去索引值为0的前缀和
+    //为索引值为0到索引值为1的子数组元素之和
+
+    //原问题转化为
+    //[i...j-1] 这个子数组和为 k 这个条件我们可以转为 
+    // PreSumArray[j] - PreSumArray[i] = k，
+    //简单移项可得符合条件的下标 j 需要满足 PreSumArray[i] == PreSumArray[j] - k 。
+    //所以我们考虑以 j-1 结尾的和为 k 的连续子数组个数时只要统计
+    //有多少个前缀和为 PreSumArray[ j ] - k 的 PreSumArray[i] 即可。
+
+    //要找出所有符合条件的 PreSumArray[i]，需要遍历索引值 j-1 前的所有 i
+    //会增加时间复杂度
+
+    //因此，可以用哈希表，以前缀和PreSumArray[j]为键，以出现次数为值
+    //从左往右          边更新哈希表，边计算
+    //以索引值 j-1 为结尾的 um[ PreSumArray[j]-k ] 的值可以在O(1)时间内得到
+    //从左往右更新哈希表时，i 一直处于 0 到 j-1 之间，所以不会出现重复
+
+    unordered_map<int, int>um;
+    int res = 0;
+    for (int j = 0; j <= vecLen; ++j)//***注***这里是小于等于
+    {
+        //若找到前缀和为PreSumArray[j] - k的PreSumArray[i]
+        //即数组[ i ... j-1]的和为k
+        if (um.find(PreSumArray[j] - k) != um.end())
+        {
+            res += um[PreSumArray[j] - k];
+        }
+
+        //以下步骤是向容器安插前缀和数据，这些数据充当
+        //下一次循环时的PreSumArray[i]
+        //若当前遍历到的 j 的前缀和在无序关联容器中已经存在
+        if (um.find(PreSumArray[j]) != um.end())
+            ++um[PreSumArray[j]];
+        else//若当前遍历到的 j 的前缀和在无序关联容器中不存在
+            um[PreSumArray[j]] = 1;
+    }
+
+    return res;
+}
+//下面是暴力方法：
+#if 0
+int subarraySum(vector<int>& nums, int k) 
+{
+    int count = 0;
+    for (int start = 0; start < nums.size(); ++start) 
+    {
+        int sum = 0;
+        for (int end = start; end >= 0; --end) 
+        {
+            sum += nums[end];
+            if (sum == k) 
+            {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+//作者：力扣官方题解
+//链接：https ://leetcode.cn/problems/subarray-sum-equals-k/solutions/238572/he-wei-kde-zi-shu-zu-by-leetcode-solution/
+#endif
 #endif
