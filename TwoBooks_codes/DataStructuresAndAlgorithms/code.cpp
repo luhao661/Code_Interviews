@@ -805,13 +805,6 @@ int FindSubArray(const vector<int>& vec, int k)
     int res = 0;
     for (int j = 0; j <= vecLen; ++j)//***注***这里是小于等于
     {
-        //若找到前缀和为PreSumArray[j] - k的PreSumArray[i]
-        //即数组[ i ... j-1]的和为k
-        if (um.find(PreSumArray[j] - k) != um.end())
-        {
-            res += um[PreSumArray[j] - k];
-        }
-
         //以下步骤是向容器安插前缀和数据，这些数据充当
         //下一次循环时的PreSumArray[i]
         //若当前遍历到的 j 的前缀和在无序关联容器中已经存在
@@ -819,6 +812,13 @@ int FindSubArray(const vector<int>& vec, int k)
             ++um[PreSumArray[j]];
         else//若当前遍历到的 j 的前缀和在无序关联容器中不存在
             um[PreSumArray[j]] = 1;
+
+        //若找到前缀和为PreSumArray[j] - k的PreSumArray[i]
+        //即数组[ i ... j-1]的和为k
+        if (um.find(PreSumArray[j] - k) != um.end())
+        {
+            res += um[PreSumArray[j] - k];
+        }
     }
 
     return res;
@@ -849,7 +849,7 @@ int subarraySum(vector<int>& nums, int k)
 
 
 //面试题11：0和1个数相同的子数组
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 #include <unordered_map>
@@ -891,9 +891,9 @@ int FindTheLengthOfCorrespondingSubArray(const vector<int>& vec)
     copy(PreSumArray.begin(), PreSumArray.end(), ostream_iterator<int>(cout," "));
     cout << endl;
     //例：
-    //输入数组为   0,1,0
+    //输入数组为   0, 1, 0   相当于输入 -1  1  -1
     //前缀和数组为0 -1 0 -1
-    //输入数组为    0,0,0,0,1,1,1,0
+    //输入数组为   0,  0, 0,  0,  1,  1, 1, 0
     //前缀和数组为0 -1 -2 -3 -4 -3 -2 -1 -2
 
     unordered_map<int, int>um;
@@ -908,8 +908,170 @@ int FindTheLengthOfCorrespondingSubArray(const vector<int>& vec)
             um[PreSumArray[index]] = index;
         else
             MaxLen = max(MaxLen,index-um[PreSumArray[index]]);
+        //***理解***
+        //若index为5，代表【当前】遍历到前缀和数组的索引值为5处
+        //PreSumArray[index]表示vec数组从索引0到索引4对应的值之和
+        //和为-3，之前遍历时出现过-3，【之前】那次的-3有记录索引值为3
+        //那么【之前】的PreSumArray[index]表示vec数组从索引0到索引2
+        //对应的值之和为-3
+        //因此索引值3、4对应的子数组的0、1个数一定相同
+        //长度正好为当前index减去之前的index
     }
 
     return MaxLen;
+}
+#endif
+
+
+//面试题12：左右两边子数组的和相等
+#if 0
+#include <iostream>
+#include <vector>
+#include <numeric>
+using namespace std;
+
+int CorrespondingIndex(const vector<int>& vec);
+
+int main()
+{
+    vector<int> vec1{1,7,3,6,2,9};
+    vector<int> vec2{1,7,3,5,2,9};
+    vector<int> vec3{1,7,3,5,3,9};
+
+    cout << CorrespondingIndex(vec1)<<endl;
+    cout << CorrespondingIndex(vec2)<<endl;
+    cout << CorrespondingIndex(vec3)<<endl;
+
+    return 0;
+}
+int CorrespondingIndex(const vector<int>& vec)
+{
+    if (vec.size() <= 2)
+        return -1;
+
+    //创建前缀和数组
+    int vecLen = vec.size();
+    vector<int> PreSumArray(vecLen + 1);//默认元素值为0
+
+    for (int i = 0; i < vecLen; ++i)
+        PreSumArray[i + 1] = PreSumArray[i] + vec[i];
+
+    int Sum = accumulate(vec.begin(),vec.end(),0);
+
+    //若输入为0  1  0
+    //前缀和为0  0  1  1
+    
+    //遍历的是PreSumArray数组的索引值，对应的是vec数组
+    //首元素到索引值index-1对应的元素的值之和
+    
+    //从vec数组的索引值为1开始做为左右分割点
+    //到vec数组的索引值为vecLen-2结束
+    //那么就对应
+    //PreSumArray数组索引值为2开始
+    //到PreSumArray数组的索引值为vecLen-1结束
+    for (int index = 2; index <= vecLen-1; ++index)
+    {
+        //比较的是分割点之前的元素值之和，所以为index-1
+        //与分割点之后的元素值之和
+        if (PreSumArray[index-1] == Sum - PreSumArray[index-1]-vec[index-1])
+            return index-1;
+    }
+
+    return -1;
+}
+//完全可以不使用前缀和数组
+#if 0
+int sum = 0; 
+for (int i = 0; i < nums, length; ++i)
+{
+    sum += nums[i];
+    if (sum - nums[i] == total - sum)
+        return i;
+}
+#endif
+#endif
+
+
+//面试题13：二维子矩阵的数字之和
+//思路：
+//左上角坐标为（r1，c1）、右下角坐标为（r2，c2）的子矩阵。
+//该子矩阵的数字之和等于左上角坐标为（0，0）、右下角坐标为（r2，
+//c2）的子矩阵的数字之和减去左上角坐标为（0，0）、右下角坐标为
+//（r1 - 1，c2）的子矩阵的数字之和，再减去左上角坐标为（0，0）、右
+//下角坐标为（r2，c1 - 1）的子矩阵的数字之和，最后加上左上角坐标为
+//（0，0）、右下角坐标为（r1 - 1，c1 - 1）的子矩阵的数字之和
+//而这三个子数组的共同点是都从左上角开始计算
+//那么若要通过不重复地计算得到这三个子数组的数字之和
+//就需要借助【前缀和二维数组】
+#if 1
+#include <iostream>
+#include <vector>
+#include <iomanip>
+using namespace std;
+
+int SumOfTwoDemensionSubArray(const vector<vector<int>>&vec,
+    int subRow1, int subCol1, int subRow2, int subCol2);
+
+int main()
+{
+    int row, col;
+    row = col = 5;
+    //vector<vector<int>>vec(row, vector<int>(col));
+
+    vector<vector<int>>vec{
+        {3,0,1,4,2},
+        {5,6,3,2,1},
+        {1,2,0,1,5},
+        {4,1,0,1,7},
+        {1,0,3,0,5}
+    };
+
+
+    int subRow1, subCol1,subRow2,subCol2;
+    subRow1 = 2, subCol1 = 1;
+    subRow2 = 4, subCol2 = 3;
+
+    cout << SumOfTwoDemensionSubArray(vec, 
+        subRow1, subCol1, subRow2, subCol2);
+
+    return 0;
+}
+int SumOfTwoDemensionSubArray(const vector<vector<int>>& vec,
+    int subRow1, int subCol1, int subRow2, int subCol2)
+{
+    if (vec.size() == 0 || vec[0].size() == 0)
+        return numeric_limits<int>::min();
+
+    int vecRowLen = vec.size();
+    int vecColLen = vec[0].size();
+
+    vector<vector<int>>PreSum(vecRowLen + 1, vector<int>(vecColLen+1));
+
+    for(int i=0;i<vecRowLen;++i)
+    {
+        int rowSum = 0;
+
+        for (int j = 0; j < vecColLen; ++j)
+        {
+            rowSum += vec[i][j];
+
+            PreSum[i + 1][j + 1] = PreSum[i][j + 1] + rowSum;
+            //***理解***
+            //某行某列的前缀和等于上一行某列的值加上当前行
+            //遍历到某列的和
+        }
+    }
+
+    for (auto x : PreSum)
+    {
+        for (auto y : x)
+            cout << left<<setw(5)<<y;
+
+        cout << endl;
+    }
+
+    return PreSum[subRow2+1][subCol2+1]
+        -PreSum[subRow1][subCol2+1]-PreSum[subRow2+1][subCol1]
+        +PreSum[subRow1][subCol1];
 }
 #endif
