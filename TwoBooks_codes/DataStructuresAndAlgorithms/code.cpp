@@ -1003,7 +1003,7 @@ for (int i = 0; i < nums, length; ++i)
 //而这三个子数组的共同点是都从左上角开始计算
 //那么若要通过不重复地计算得到这三个子数组的数字之和
 //就需要借助【前缀和二维数组】
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 #include <iomanip>
@@ -1057,7 +1057,7 @@ int SumOfTwoDemensionSubArray(const vector<vector<int>>& vec,
 
             PreSum[i + 1][j + 1] = PreSum[i][j + 1] + rowSum;
             //***理解***
-            //某行某列的前缀和等于上一行某列的值加上当前行
+            //某行某列的二维前缀和等于上一行某列的值加上当前行
             //遍历到某列的和
         }
     }
@@ -1073,5 +1073,130 @@ int SumOfTwoDemensionSubArray(const vector<vector<int>>& vec,
     return PreSum[subRow2+1][subCol2+1]
         -PreSum[subRow1][subCol2+1]-PreSum[subRow2+1][subCol1]
         +PreSum[subRow1][subCol1];
+}
+#endif
+
+
+//面试题14：字符串中的变位词（组成各个单词的字母
+//及每个字母出现的次数完全相同，只是字母排列的顺序不同）
+#if 1
+#include <iostream>
+#include <string>
+using namespace std;
+
+bool Judge(shared_ptr<int>& sp);
+
+int main()
+{
+    string str1("acf");
+    string str2("dgcaf");
+
+#if 0
+    //维护一个数位形式的哈希表
+    int flag = 0;
+
+    //在哈希表中标记变位词的字母
+    //for (auto i = str1.begin(); i != str1.end(); ++i)
+    //{
+    //    //++hash[*i - 'a'];
+    //    ++(hash.get()[*i - 'a']);
+    //}
+
+    for (auto i = str1.begin(); i != str1.end(); ++i)
+    {
+        flag |= 1 << (*i - 'a');
+    }
+
+    //要实现仅遍历一次str2就能判断str2是否包含str1的某个变位词
+    //就需要实现在str2中框出str1长度范围内的子字符串，判断这些子字符串
+    //是否满足变位词
+    //框出的范围每移动一个单位，就伴随增加一个字符和减少一个字符
+    //框出的字符也要体现在哈希表中
+    //所以可以用【双指针】来实现
+    int left, right;
+    left = right = 0;
+
+    //右指针先走
+    while (right != str1.size())
+    {
+        //--hash.get()[str2[right]-'a'];
+
+        flag &= 0 << str2[right] - 'a';
+        ++right;
+    }
+
+    right = str1.size() - 1;
+
+    //为什么要创建数位形式的哈希表？
+    //因为便于用flag值直接判断是否找到了变位词
+    while (flag/***注**/ && right != str2.size())
+    {                                              //数位形式缺点：
+        flag |= 1 << str2[left] - 'a';//某一位没法设置为-1
+        flag &= 0 << str2[right] - 'a';
+
+        ++left, ++right;
+    }
+    //***注***
+    //遍历完成后再判断flag也可以
+    //那么即使是数组形式的哈希表，若遍历完成后
+    //再判断数组中各元素的值，时间复杂度也可以接受
+
+    if (flag)
+        cout << false;
+    else
+        cout<<true;
+#endif
+
+    //维护一个哈希表
+    shared_ptr<int>hash(new int[26] {}, default_delete<int[]>());
+
+    //在哈希表中标记变位词的字母
+	for (auto i = str1.begin(); i != str1.end(); ++i)
+	{
+		//++hash[*i - 'a'];
+		++(hash.get()[*i - 'a']);
+	}
+
+    int left, right;
+    left = right = 0;
+
+    //右指针先走
+    while (right != str1.size())
+    {
+        --hash.get()[str2[right]-'a'];
+        ++right;
+    }
+
+    right = str1.size() - 1;
+
+    do
+    {                      
+        ++right;
+        --hash.get()[str2[right] - 'a'];
+
+        ++hash.get()[str2[left] - 'a'];
+        ++left;
+
+        if(Judge(hash))
+        {
+            cout << "true";
+            return 0;
+        }
+
+    } while (right != str2.size()-1);
+
+    cout << "false";
+
+    return 0;
+}
+bool Judge(shared_ptr<int>& sp)
+{
+    for (int i = 0; i < 26; ++i)
+    {
+        if (sp.get()[i] != 0)
+            return false;
+    }
+
+    return true;
 }
 #endif
