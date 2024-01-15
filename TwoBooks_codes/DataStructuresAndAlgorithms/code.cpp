@@ -1078,8 +1078,8 @@ int SumOfTwoDemensionSubArray(const vector<vector<int>>& vec,
 
 
 //面试题14：字符串中的变位词（组成各个单词的字母
-//及每个字母出现的次数完全相同，只是字母排列的顺序不同）
-#if 1
+//及每个字母出现的次数完全相同，只是字母排列的顺序可能不同）
+#if 0
 #include <iostream>
 #include <string>
 using namespace std;
@@ -1153,14 +1153,14 @@ int main()
     //在哈希表中标记变位词的字母
 	for (auto i = str1.begin(); i != str1.end(); ++i)
 	{
-		//++hash[*i - 'a'];
+		//++hash[*i - 'a'];//没有operator[]方法
 		++(hash.get()[*i - 'a']);
 	}
 
     int left, right;
     left = right = 0;
 
-    //右指针先走
+    //右指针先走 str1.size()-1的长度
     while (right != str1.size())
     {
         --hash.get()[str2[right]-'a'];
@@ -1169,8 +1169,16 @@ int main()
 
     right = str1.size() - 1;
 
+    if (Judge(hash))
+    {
+        cout << "true";
+        return 0;
+    }
+
     do
     {                      
+        //类似滑动窗口
+        //元素加入则对应的hash表位置处的值-1，退出则+1
         ++right;
         --hash.get()[str2[right] - 'a'];
 
@@ -1194,6 +1202,150 @@ bool Judge(shared_ptr<int>& sp)
     for (int i = 0; i < 26; ++i)
     {
         if (sp.get()[i] != 0)
+            return false;
+    }
+
+    return true;
+}
+#endif
+
+
+//面试题15：字符串中的所有变位词
+#if 0
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+bool Judge(shared_ptr<int>& sp);
+vector<int> res;
+
+int main()
+{
+    string str1("abc");
+    string str2("cbadabacg");
+
+    //维护一个哈希表
+    shared_ptr<int>hash(new int[26] {}, default_delete<int[]>());
+
+    //在哈希表中标记变位词的字母
+    for (auto i = str1.begin(); i != str1.end(); ++i)
+    {
+        //++hash[*i - 'a'];//没有operator[]方法
+        ++(hash.get()[*i - 'a']);
+    }
+
+    int left, right;
+    left = right = 0;
+
+    //右指针先走 str1.size()-1的长度
+    while (right != str1.size())
+    {
+        --hash.get()[str2[right] - 'a'];
+        ++right;
+    }
+
+    right = str1.size() - 1;
+
+    if (Judge(hash))
+    {
+        res.push_back(0);
+    }
+
+    do
+    {
+        //类似滑动窗口
+        //元素加入则对应的hash表位置处的值-1，退出则+1
+        ++right;
+        --hash.get()[str2[right] - 'a'];
+
+        ++hash.get()[str2[left] - 'a'];
+        ++left;
+
+        if (Judge(hash))
+        {
+            res.push_back(left);
+        }
+
+    } while (right != str2.size() - 1);
+
+    for (auto x : res)
+        cout << x << endl;
+
+    return 0;
+}
+bool Judge(shared_ptr<int>& sp)//若含有其他字符则可以考虑使用unordered_map
+{
+    for (int i = 0; i < 26; ++i)
+    {
+        if (sp.get()[i] != 0)
+            return false;
+    }
+
+    return true;
+}
+#endif
+
+
+//面试题16：不含重复字符的最长子字符串
+//（对照//面试题48：最长不含重复字符的子字符串）
+#if 1
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <unordered_map>
+using namespace std;
+
+int LongestSubString(const string& str);
+bool Judge(const unordered_map<char, int>& hash);
+
+int main()
+{
+    string str1{"babcca"};
+    string str2{"ccccccccccca"};
+    string str3{"ccccccabbccccc"};
+
+    cout << LongestSubString(str1)<<endl;
+    cout << LongestSubString(str2)<<endl;
+    cout << LongestSubString(str3)<<endl;
+
+    return 0;
+}
+int LongestSubString(const string& str)
+{
+    if (str.empty())
+        return 0;
+
+    unordered_map<char, int> hash;
+
+    int left, right;
+    left = right = 0;
+
+    int MaxLen = 0;
+
+    for (  ; right < str.size(); ++right)
+    {
+        if (hash.find(str[right]) == hash.end())
+            hash[str[right]] = 1;
+        else
+            ++hash[str[right]];
+
+        if (Judge(hash))
+            MaxLen = max(MaxLen,right-left+1);
+        else
+        {
+            --hash[str[left]];
+            ++left;
+        }//找到 不含重复字符的最长子字符串的 长度之后，窗口长度不会再变小，只可能变大
+    }
+
+    return MaxLen;
+}
+bool Judge(const unordered_map<char, int>& hash)
+{
+    for (auto x : hash)
+    {
+        if (x.second > 1)
             return false;
     }
 
