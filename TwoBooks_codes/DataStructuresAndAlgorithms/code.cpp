@@ -2,7 +2,7 @@
 
 
 //面试题3：前n个数字二进制形式中1的个数
-#if 0 
+#if 0
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -1289,7 +1289,8 @@ bool Judge(shared_ptr<int>& sp)//若含有其他字符则可以考虑使用unord
 
 //面试题16：不含重复字符的最长子字符串
 //（对照//面试题48：最长不含重复字符的子字符串）
-#if 1
+//此处用双指针来解
+#if 0
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -1311,6 +1312,7 @@ int main()
 
     return 0;
 }
+#if 0
 int LongestSubString(const string& str)
 {
     if (str.empty())
@@ -1341,6 +1343,74 @@ int LongestSubString(const string& str)
 
     return MaxLen;
 }
+#endif
+
+#if 1
+int LongestSubString(const string& str)
+{
+    if (str.empty())
+        return 0;
+
+    int cnt[256] = {};
+
+    int left, right;
+    left = right = 1;
+    int MaxLen = 0;
+
+    auto fun = [](int* pcnt) {
+        for (int index = 0; index < 256; ++index)
+        {
+            if (pcnt[index] > 1)
+                return true;
+        }
+
+        return false;
+        };
+
+//此方法还是要多次重复扫描数组cnt
+#if 0
+    for (; right < str.size(); ++right)
+    {
+        ++cnt[str[right] - 'a'];
+
+        while (fun(cnt))
+        {
+            --cnt[str[left]-'a'];
+            ++left;
+        }
+
+        MaxLen = max(MaxLen,right-left+1);
+    }
+#endif
+    
+#if 1
+    int duplication = 0;
+
+    for (; right < str.size(); ++right)
+    {
+        ++cnt[str[right] - 'a'];
+
+        if (cnt[str[right] - 'a'] == 2)
+            ++duplication;
+
+        while (duplication>0)
+        {
+            --cnt[str[left] - 'a'];
+
+            if (cnt[str[left] - 'a'] == 1)
+                duplication--;
+
+            ++left;
+        }
+
+        MaxLen = max(MaxLen, right - left + 1);
+    }
+#endif
+
+    return MaxLen;
+}
+#endif
+
 bool Judge(const unordered_map<char, int>& hash)
 {
     for (auto x : hash)
@@ -1350,5 +1420,80 @@ bool Judge(const unordered_map<char, int>& hash)
     }
 
     return true;
+}
+#endif
+
+
+//面试题17：包含所有字符的最短字符串
+//***注***
+//要和变位词做区分
+#if 1
+#include <iostream>
+#include <string>
+#include <unordered_map>
+using namespace std;
+
+string FindShortestSubString(const string& source,const string& target);
+
+int main()
+{
+    string s("ADDBANCADAAAAAABC");
+    string t("ABC");
+
+    cout << FindShortestSubString(s,t);
+
+    return 0;
+}
+
+bool Judge(unordered_map<char, int> unmap)
+{
+    for (auto x : unmap)
+        if (x.second >= 1)
+            return false;
+
+    return true;
+}
+
+string FindShortestSubString(const string& source, const string& target)
+{
+    if (source.empty() || target.empty())
+        return "";
+
+    //用哈希表统计每个字符出现的次数，配合双指针
+    //避免暴力枚举s中的子字符串
+
+    unordered_map<char, int> unmap;
+
+    for (int i = 0; i < target.size(); ++i)
+        unmap[target[i]]=1;
+
+    int left, right /*ShortestLen=numeric_limits<int>::max()*/;
+    left = right = 0;
+
+    string ShortestStr(source.size()+1,' ');
+
+    for (; right < source.size(); ++right)
+    {
+        if (unmap.find(source[right]) != unmap.end())
+        {
+            --unmap[source[right]];
+
+            while (Judge(unmap))
+            {
+                if (ShortestStr.size() > right - left + 1)
+                {
+                    ShortestStr.clear();
+                    ShortestStr.append(source.begin()+left, source.begin()+right+1);
+                }
+
+                if (unmap.find(source[left]) != unmap.end())
+                    ++unmap[source[left]];
+
+                ++left;
+            }
+        }
+    }
+
+    return ShortestStr.size()== source.size() + 1?"": ShortestStr;
 }
 #endif
