@@ -5,7 +5,7 @@
 #if 0
 #include <iostream>
 #include <vector>
-using namespace std;
+using namespace std; 
 
 void CountBits(int num, vector<int>&);
 
