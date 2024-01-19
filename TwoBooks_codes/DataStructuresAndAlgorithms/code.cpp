@@ -68,7 +68,7 @@ void CountBits(int num, vector<int>& vec)
 //的二进制形式中1的个数是相同的。如果i是奇数，那么i相当于将“i / 2”左移一位之后
 //再将最右边一位设为1的结果，因此奇数i的二进制形式中1的个数比“i / 2”的1的个数多1。
 #if 1
-void CountBits(int num, vector<int>& vec)
+void CountBits(int num, vector<int>& vec) 
 {
     if (num < 0)
         throw exception("Invalid number");
