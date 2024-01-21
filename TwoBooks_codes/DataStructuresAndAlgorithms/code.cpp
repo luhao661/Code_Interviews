@@ -5,7 +5,7 @@
 #if 0
 #include <iostream>
 #include <vector>
-using namespace std; 
+using namespace std;
 
 void CountBits(int num, vector<int>&);
 
@@ -14,7 +14,7 @@ int main()
     unsigned int num;
     cin >> num;
 
-    //数字0到数字num 
+    //数字0到数字num
     vector<int> vec(num + 1);
 
     try
@@ -68,7 +68,7 @@ void CountBits(int num, vector<int>& vec)
 //的二进制形式中1的个数是相同的。如果i是奇数，那么i相当于将“i / 2”左移一位之后
 //再将最右边一位设为1的结果，因此奇数i的二进制形式中1的个数比“i / 2”的1的个数多1。
 #if 1
-void CountBits(int num, vector<int>& vec) 
+void CountBits(int num, vector<int>& vec)
 {
     if (num < 0)
         throw exception("Invalid number");
@@ -1427,7 +1427,7 @@ bool Judge(const unordered_map<char, int>& hash)
 //面试题17：包含所有字符的最短字符串
 //***注***
 //要和变位词做区分
-#if 1
+#if 0
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -1454,6 +1454,12 @@ bool Judge(unordered_map<char, int> unmap)
     return true;
 }
 
+//首先扫描字符串t，每扫描到一个字符，就把该字符
+//在哈希表中对应的值加1。然后扫描字符串s，每扫描一个字符，
+//就检查哈希表中是否包含该字符。如果哈希表中没有该字符，则说明
+//该字符不是字符串t中的字符，可以忽略不计。如果哈希表中存在该字符，
+//则把该字符在哈希表中的对应值减1。如果字符串s中包含字符串t的
+//所有字符，那么哈希表中最终所有的值都应该小于或等于0。
 string FindShortestSubString(const string& source, const string& target)
 {
     if (source.empty() || target.empty())
@@ -1495,5 +1501,287 @@ string FindShortestSubString(const string& source, const string& target)
     }
 
     return ShortestStr.size()== source.size() + 1?"": ShortestStr;
+}
+#endif
+
+
+//面试题18：有效的回文
+//双指针思想
+#if 0
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+bool JudgePalindrome(const string& str);
+
+int main()
+{
+    string str1("Was it a cat I saw?");
+    string str2("Was it a cau I saw?");
+    string str3("??????????????????");
+
+    //cout << JudgePalindrome(str1)<<endl;
+    //cout << JudgePalindrome(str2) << endl;
+    cout << JudgePalindrome(str3)<<endl;
+
+    return 0;
+}
+bool JudgePalindrome(const string& str)
+{
+    if (str.empty())
+        return false;
+
+    string StrBackup = str;
+
+    //***注***
+    //错误写法：
+#if 0
+    for (int i = 0; i < StrBackup.size(); ++i)
+    {
+        if (isalpha(StrBackup[i]) || isdigit(StrBackup[i]))
+            continue;
+        else
+            StrBackup.erase(i,1);
+    }
+#endif
+    //错误原因：
+    //若是要进行erase()操作，那么StrBackup.size()的值会改变，
+    //导致遍历不到字符串末尾
+
+    //正确写法：
+    for (auto it = StrBackup.begin(); it != StrBackup.end(); )
+    {
+        if (isalpha(*it) || isdigit(*it))
+            ++it;
+        else
+            //StrBackup.erase(distance(StrBackup.begin(),it),1);
+            it=StrBackup.erase(it,it+1);
+    }
+
+    //copy(StrBackup.begin(), StrBackup.end(), ostream_iterator<char>(cout));
+    //cout << endl;
+
+    transform(StrBackup.begin(),StrBackup.end(),StrBackup.begin(),
+        [](char ch)
+        {
+            if (isalpha(ch) && isupper(ch))
+                return (char)tolower(ch);
+            else
+                return ch;
+        });
+
+    //copy(StrBackup.begin(),StrBackup.end(),ostream_iterator<char>(cout));
+
+    if (StrBackup =="")
+        return false;
+
+    int left , right;
+    left = 0; right = StrBackup.size() - 1;
+
+    while (left < right)
+    {
+        if (StrBackup[left] == StrBackup[right])
+        {
+            ++left, --right;
+        }
+        else
+            return false;
+    }
+
+    return true;
+}
+#endif
+
+
+//面试题19：最多删除一个字符得到回文
+#if 0
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+bool MaybeDeleteOneChar(const string& str);
+
+int main()
+{
+    string str1("abc");
+    string str2("abca");
+    string str3("accb");
+    string str4("abcbbcbba");
+    string str5("abbcbbcba");
+
+    cout<<MaybeDeleteOneChar(str1) << endl;
+    cout<<MaybeDeleteOneChar(str2) << endl;
+    cout<<MaybeDeleteOneChar(str3) << endl;
+    cout<<MaybeDeleteOneChar(str4) << endl;
+    cout<<MaybeDeleteOneChar(str5) << endl;
+
+    return 0;
+}
+#if 0
+bool MaybeDeleteOneChar(const string& str)
+{
+    if (str.empty())
+        return false;
+
+    string strBackup(str);
+
+    int left, right;
+    left = 0; right = strBackup.size()-1;
+
+    bool onlyOnce = true;
+
+    while (left < right)
+    {
+        if (strBackup[left] == strBackup[right])
+        {
+            ++left, --right;
+            continue;
+        }
+        else if (onlyOnce && strBackup[left + 1] == strBackup[right])
+        {
+            ++left;
+            onlyOnce = false;
+        }
+        else if (onlyOnce && strBackup[right - 1] == strBackup[left])
+        {
+            --right;
+            onlyOnce = false;
+        }
+        else
+            return false;
+    }
+    //***注***
+    //str4进行测试时输出错误，原因是
+    //两个else if 语句块的先后次序其实并不一定，要看字符串的情况才能确定
+    //哪个块在前，哪个块在后
+    //这样就需要改变编程形式
+
+    return true;
+}
+#endif
+
+#if 1
+bool tryFun1(string& strBackup)
+{
+    int left, right;
+    left = 0; right = strBackup.size() - 1;
+
+    bool onlyOnce = true;
+
+    while (left < right)
+    {
+        if (strBackup[left] == strBackup[right])
+        {
+            ++left, --right;
+            continue;
+        }
+        else if (onlyOnce && strBackup[left + 1] == strBackup[right])
+        {
+            ++left;
+            onlyOnce = false;
+        }
+        else
+            return false;
+    }
+    return true;
+
+}
+bool tryFun2(string& strBackup)
+{
+    int left, right;
+    left = 0; right = strBackup.size() - 1;
+
+    bool onlyOnce = true;
+
+    while (left < right)
+    {
+        if (strBackup[left] == strBackup[right])
+        {
+            ++left, --right;
+            continue;
+        }
+        else if (onlyOnce && strBackup[right - 1] == strBackup[left])
+        {
+            --right;
+            onlyOnce = false;
+        }
+        else
+            return false;
+    }
+    return true;
+}
+
+bool MaybeDeleteOneChar(const string& str)
+{
+    if (str.empty())
+        return false;
+
+    string strBackup(str);
+
+    return tryFun1(strBackup) || tryFun2(strBackup);
+}
+#endif
+#endif
+
+
+//面试题20：回文字符串的个数
+//解法：
+//双指针+中心扩展法
+//枚举每一个可能的回文中心，然后用两个指针分别向左右两边拓展，
+//当两个指针指向的元素相同的时候就拓展，否则停止拓展
+#if 1
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int PalindromeCnt(const string& str);
+
+int main()
+{
+    string str1("abc");
+    string str2("abcba");
+    string str3("abccba");
+    string str4("aaa");
+
+    cout << PalindromeCnt(str1) << endl;
+    cout << PalindromeCnt(str2) << endl;
+    cout << PalindromeCnt(str3) << endl;
+    cout << PalindromeCnt(str4) << endl;
+
+    return 0;
+}
+int PalindromeCnt(const string& str)
+{
+    if (str.empty())
+        return 0;
+
+    //保底有str长度个的回文字符串
+    int n = str.length();
+
+    int ans = n;
+
+    for (int k = 0; k < n; k++) 
+    {
+		// 以str[k]为中心向两边扩
+        int i = k - 1, j = k + 1;
+        while (i >= 0 && j < n && str[i--] == str[j++])
+        {
+            ans++;
+        }
+
+        //***注***
+        // 以str[k]右侧的空白位置(这是个假想位置)为中心向两边扩
+        i = k;
+        j = k + 1;
+        while (i >= 0 && j < n && str[i--] == str[j++]) 
+        {
+            ans++;
+        }
+    }
+
+    return ans;
 }
 #endif
