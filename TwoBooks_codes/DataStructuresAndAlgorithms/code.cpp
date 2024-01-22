@@ -1731,7 +1731,7 @@ bool MaybeDeleteOneChar(const string& str)
 //双指针+中心扩展法
 //枚举每一个可能的回文中心，然后用两个指针分别向左右两边拓展，
 //当两个指针指向的元素相同的时候就拓展，否则停止拓展
-#if 1
+#if 0
 #include <iostream>
 #include <string>
 
@@ -1785,3 +1785,17 @@ int PalindromeCnt(const string& str)
     return ans;
 }
 #endif
+
+
+//面试题21：删除倒数第k个节点
+#if 1
+//见//面试题22：链表中倒数第k个节点
+#endif
+
+
+//面试题22：链表中环的入口节点
+#if 1
+//见//面试题23：链表中环的入口节点
+#endif
+
+
