@@ -1799,3 +1799,7 @@ int PalindromeCnt(const string& str)
 #endif
 
 
+//
+#if 1
+
+#endif
