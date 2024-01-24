@@ -1799,7 +1799,9 @@ int PalindromeCnt(const string& str)
 #endif
 
 
-//
+//面试题23：两个链表的第1个重合节点
 #if 1
-
+//见//面试题52：两个链表的第一个公共节点
 #endif
+
+
