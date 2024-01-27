@@ -1812,7 +1812,7 @@ int PalindromeCnt(const string& str)
 
 
 //面试题25：链表中的数字相加
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -1968,5 +1968,191 @@ ListNode* ReverseList(ListNode* pHead)
     }
 
     return pReversedHead;
+}
+#endif
+
+
+//面试题26：重排链表
+#if 1
+#include <iostream>
+#include "List.h"
+using namespace std;
+
+ListNode* Rearrangement(ListNode* pNode);
+ListNode* ReverseList(ListNode* pHead);
+ListNode* MergeTwoLists(ListNode* p1, ListNode* p2);
+
+int main()
+{
+    ListNode* pNode1 = CreateListNode(1);
+    ListNode* pNode2 = CreateListNode(2);
+    ListNode* pNode3 = CreateListNode(3);
+    ListNode* pNode4 = CreateListNode(4);
+    ListNode* pNode5 = CreateListNode(5);
+    //ListNode* pNode6 = CreateListNode(6);
+
+    ConnectListNodes(pNode1, pNode2);
+    ConnectListNodes(pNode2, pNode3);
+    ConnectListNodes(pNode3, pNode4);
+    ConnectListNodes(pNode4, pNode5);
+   // ConnectListNodes(pNode5, pNode6);
+
+    PrintList(pNode1);
+
+    PrintList(Rearrangement(pNode1));
+
+    return 0;
+}
+ListNode* Rearrangement(ListNode* pNode)
+{
+    if (pNode == nullptr)
+        return nullptr;
+
+    //将原链表分成两段
+    //长度为偶数，分得前半段和后半段长度一样   (情况1)
+    //长度为奇数，分得前半段比后半段长度多1     (情况2)
+    ListNode* pFast, *pSlow;
+
+    for (pFast = pSlow = pNode; pFast != nullptr; )
+    {
+        pFast = pFast->m_pNext;
+
+        if (pFast != nullptr)
+        {
+            pFast = pFast->m_pNext;
+
+            if (pFast == nullptr)
+                break;
+
+            pSlow = pSlow->m_pNext;
+        }
+        else
+            break;
+    }
+
+    ListNode L1{0};//哨兵
+    ListNode* pL1 = &L1;
+    ListNode* traverse = pNode;
+    do
+    {
+        pL1->m_pNext = new ListNode{traverse->m_nValue,traverse->m_pNext};
+        pL1 = pL1->m_pNext;
+
+        traverse = traverse->m_pNext;
+
+    } while (traverse != pSlow->m_pNext);
+
+    //前半段尾部节点的m_pNext成员设为nullptr，截取前半段
+    pL1->m_pNext = nullptr;
+
+
+    //截取后半段
+    ListNode L2{ 0 };//哨兵
+    ListNode* pL2 = &L2;
+    do
+    {
+        pL2->m_pNext = new ListNode{ traverse->m_nValue,traverse->m_pNext };
+        pL2 = pL2->m_pNext;
+
+        traverse = traverse->m_pNext;
+
+    } while (traverse != nullptr);
+
+    //PrintList(L2.m_pNext);
+
+    //后半段链表反转
+    ListNode* prL2 = ReverseList(L2.m_pNext);
+
+    //合并两个链表
+    return MergeTwoLists(L1.m_pNext,prL2);
+}
+
+ListNode* ReverseList(ListNode* pHead)
+{
+    if (pHead == nullptr)
+        return nullptr;
+
+    ListNode* pReversedHead = nullptr;
+    ListNode* pNode = pHead;
+    ListNode* pPrev = nullptr;
+
+    while (pNode != nullptr)
+    {
+        ListNode* pNext = pNode->m_pNext;
+
+        //若到达链表末尾的节点
+        if (pNext == nullptr)
+            pReversedHead = pNode;
+
+        //指针指向改变
+        pNode->m_pNext = pPrev;
+
+        pPrev = pNode;
+        pNode = pNext;
+    }
+
+    return pReversedHead;
+}
+
+ListNode* MergeTwoLists(ListNode* p1, ListNode* p2)
+{
+    PrintList(p1);
+    PrintList(p2);
+
+    //哨兵
+    ListNode resGuard{0};   
+    ListNode* pGuard = &resGuard;
+
+#if 0
+	while (1)
+	{
+		pGuard->m_pNext = p1;
+
+        if (p2 != nullptr)
+        {
+            pGuard->m_pNext->m_pNext = p2;
+            pGuard = p2;
+        }
+        else//仅p2为nullptr   那就是(情况2)
+        {
+            pGuard = p1;
+            pGuard->m_pNext = nullptr;
+            break;
+        }
+
+		p1 = p1->m_pNext;
+		p2 = p2->m_pNext;
+
+        //p1、p2都为nullptr    (情况1)
+        if (p1 == nullptr && p2 == nullptr)
+            break;
+	}
+#endif
+
+    while (1)
+    {
+        pGuard->m_pNext = new ListNode{ p1->m_nValue,nullptr };
+
+        if (p2 != nullptr)
+        {
+            pGuard->m_pNext->m_pNext = new ListNode{ p2->m_nValue,nullptr };
+            pGuard = pGuard->m_pNext->m_pNext;
+        }
+        else//仅p2为nullptr   那就是(情况2)
+        {
+            pGuard = pGuard->m_pNext;
+            pGuard->m_pNext = nullptr;
+            break;
+        }
+
+        p1 = p1->m_pNext;
+        p2 = p2->m_pNext;
+
+        //p1、p2都为nullptr    (情况1)
+        if (p1 == nullptr && p2 == nullptr)
+            break;
+    }
+
+    return resGuard.m_pNext;
 }
 #endif
