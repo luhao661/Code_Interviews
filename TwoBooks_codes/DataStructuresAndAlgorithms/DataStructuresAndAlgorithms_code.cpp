@@ -1973,7 +1973,7 @@ ListNode* ReverseList(ListNode* pHead)
 
 
 //面试题26：重排链表
-#if 1
+#if 0
 #include <iostream>
 #include "List.h"
 using namespace std;
@@ -2103,6 +2103,13 @@ ListNode* MergeTwoLists(ListNode* p1, ListNode* p2)
     ListNode resGuard{0};   
     ListNode* pGuard = &resGuard;
 
+    //错误写法：
+    //原因：
+    //pGuard->m_pNext = p1;
+    //pGuard->m_pNext->m_pNext = p2;
+    //相当于与语句：p1->m_pNext = p2;
+    //后面会把p1 = p1->m_pNext; 相当于p1存的地址和p2一样了
+    //所以不能在两个原链表上进行操作
 #if 0
 	while (1)
 	{
@@ -2128,7 +2135,11 @@ ListNode* MergeTwoLists(ListNode* p1, ListNode* p2)
             break;
 	}
 #endif
+    //修改：
+    //可以创建变量暂存p1->m_pNext的值
+    //后再赋给p1
 
+    //或者改为：
     while (1)
     {
         pGuard->m_pNext = new ListNode{ p1->m_nValue,nullptr };
@@ -2154,5 +2165,202 @@ ListNode* MergeTwoLists(ListNode* p1, ListNode* p2)
     }
 
     return resGuard.m_pNext;
+}
+#endif
+
+
+//面试题27：回文链表
+//要求时间复杂度O(1), 空间复杂度O(1)
+//***注***
+//与字符串的回文判断方法做区分，字符串判断回文只需双指针
+#if 0
+#include<iostream>
+#include "List.h"
+
+using namespace std;
+
+bool JudgePalindrome(ListNode* pNode);
+ListNode* ReverseList(ListNode* pHead);
+
+int main()
+{
+    ListNode* pNode1 = CreateListNode(1);
+    ListNode* pNode2 = CreateListNode(2);
+    ListNode* pNode3 = CreateListNode(3);
+    ListNode* pNode4 = CreateListNode(3);
+    ListNode* pNode5 = CreateListNode(2);
+    ListNode* pNode6 = CreateListNode(1);
+
+    ConnectListNodes(pNode1, pNode2);
+    ConnectListNodes(pNode2, pNode3);
+    ConnectListNodes(pNode3, pNode4);
+    ConnectListNodes(pNode4, pNode5);
+    ConnectListNodes(pNode5, pNode6);
+
+    PrintList(pNode1);
+
+    cout<<JudgePalindrome(pNode1)<<endl;
+
+    ListNode* b1 = CreateListNode(1);
+    ListNode* b2 = CreateListNode(2);
+    ListNode* b3 = CreateListNode(3);
+    ListNode* b4 = CreateListNode(2);
+    ListNode* b5 = CreateListNode(1);
+
+    ConnectListNodes(b1, b2);
+    ConnectListNodes(b2, b3);
+    ConnectListNodes(b3, b4);
+    ConnectListNodes(b4, b5);
+
+    PrintList(b1);
+
+    cout << JudgePalindrome(b1)<<endl;
+
+    return 0;
+}
+bool JudgePalindrome(ListNode* pNode)
+{
+    if (pNode == nullptr)
+        return false;
+
+    //将原链表分成两段
+    //长度为偶数，分得前半段和后半段长度一样   (情况1)
+    //长度为奇数，分得前半段比后半段长度多1     (情况2)
+    ListNode* pFast, * pSlow;
+    int Len = 1;
+
+    for (pFast = pSlow = pNode; pFast != nullptr; )
+    {
+        pFast = pFast->m_pNext;
+
+        if (pFast != nullptr)
+        {
+            ++Len;
+
+            pFast = pFast->m_pNext;
+
+            if (pFast == nullptr)
+                break;
+
+            ++Len;
+
+            pSlow = pSlow->m_pNext;
+        }
+        else
+            break;
+    }
+
+    ListNode* rpNode = nullptr;
+
+    //若长度为奇数，那就比较奇数长度的两段，中间的节点被两段公用
+    if (Len % 2)
+    {
+        rpNode = ReverseList(pSlow);//***注***ReverseList()后 pSlow->m_pNext=nullptr
+    }
+    else//若长度为偶数，那就比较偶数长度的两段
+    {
+        rpNode = ReverseList(pSlow->m_pNext);
+        //***注***
+        pSlow->m_pNext = nullptr;
+    }
+
+    do
+    {
+        if (pNode->m_nValue == rpNode->m_nValue)
+        {
+            pNode = pNode->m_pNext;
+            rpNode = rpNode->m_pNext;
+        }
+        else
+            return false;
+
+    } while (pNode != nullptr);
+
+    return true;
+}
+ListNode* ReverseList(ListNode* pHead)
+{
+    if (pHead == nullptr)
+        return nullptr;
+
+    ListNode* pReversedHead = nullptr;
+    ListNode* pNode = pHead;
+    ListNode* pPrev = nullptr;
+
+    while (pNode != nullptr)
+    {
+        ListNode* pNext = pNode->m_pNext;
+
+        //若到达链表末尾的节点
+        if (pNext == nullptr)
+            pReversedHead = pNode;
+
+        //指针指向改变
+        pNode->m_pNext = pPrev;
+
+        pPrev = pNode;
+        pNode = pNext;
+    }
+
+    return pReversedHead;
+}
+#endif
+
+
+//面试题28：展平多级双向链表
+//回溯法:遇到有子节点的就暂存到栈里,等遍历完子节点在从栈中取出回溯
+#if 1
+#include <iostream>
+#include <stack>
+using namespace std;
+
+class Node 
+{
+public:
+    int val;
+    Node* prev;
+    Node* next;
+    Node* child;
+};
+
+int main()
+{
+
+
+    return 0;
+}
+
+Node* flatten(Node* head)
+{
+    Node* pnode = head;
+    Node* prev = nullptr;
+    stack<Node*> stk;
+
+    while (pnode != nullptr || !stk.empty()) 
+    {
+        if (pnode == nullptr)
+        {
+            pnode = stk.top(),stk.pop();
+            pnode->prev= prev;
+            prev->next = pnode;
+        }
+
+        if (pnode->child != nullptr)
+        {
+            //遇到有子节点的就暂存到栈里,等遍历完子节点，再从栈中取出回溯
+            if (pnode->next != nullptr)
+                stk.push(pnode->next);
+                
+            pnode->child->prev = pnode;
+            pnode->next = pnode->child;
+            pnode->child = nullptr;
+        }
+
+        prev = pnode;
+        pnode = pnode->next;
+    }
+
+    return head;
+}
 }
 #endif
