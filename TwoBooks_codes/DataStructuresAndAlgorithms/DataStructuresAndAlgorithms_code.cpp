@@ -2309,7 +2309,7 @@ ListNode* ReverseList(ListNode* pHead)
 
 //面试题28：展平多级双向链表
 //回溯法:遇到有子节点的就暂存到栈里,等遍历完子节点在从栈中取出回溯
-#if 1
+#if 0
 #include <iostream>
 #include <stack>
 using namespace std;
@@ -2347,7 +2347,8 @@ Node* flatten(Node* head)
 
         if (pnode->child != nullptr)
         {
-            //遇到有子节点的就暂存到栈里,等遍历完子节点，再从栈中取出回溯
+            //遇到有子节点的就暂存到栈里,等遍历完子节点，
+            // 再从栈中取出回溯
             if (pnode->next != nullptr)
                 stk.push(pnode->next);
                 
@@ -2362,5 +2363,123 @@ Node* flatten(Node* head)
 
     return head;
 }
+}
+#endif
+
+
+//面试题29：排序的循环链表
+#if 1
+#include <iostream>
+#include "list.h"
+
+ListNode* insertNode(ListNode* pHead,int insertValue);
+void insertNodeCore(ListNode* pHead, int Value);
+
+using namespace std;
+
+int main()
+{
+    ListNode Guide{0,nullptr};
+    ListNode* pGuide = &Guide;
+
+    for (int i = 1; i <= 7; ++i)
+    {
+        //错误写法：
+        //insertNode(pGuide->m_pNext, i);
+        //***注***
+        //每一次的循环结束pGuide->m_pNext的值都是nullptr
+        //理解：
+        //正常情况下是传某个节点的地址给形参pHead
+        //然后insertNode()函数内对pHead的值进行修改
+        //是不可以影响pGuide->m_pNext的值的
+        //因为pHead是和pGuide->m_pNext一样都指向同一个节点的
+        //insertNode()函数内对pHead的值进行修改
+        //相当于pHead指针指向了别的节点  
+        //不影响pGuide->m_pNext，pGuide->m_pNext会仍存nullptr
+        //现在传nullptr给形参pHead的情况也可以按照上述来理解
+
+        //可以修改为
+        pGuide->m_pNext= insertNode(pGuide->m_pNext, i);
+        //或者函数改为
+        // ListNode* insertNode(ListNode* &pHead, int insertValue)
+        //这样就直接操作的是pGuide->m_pNext指针了
+        //然后在此处写：insertNode(pGuide->m_pNext, i);
+    }
+
+    ListNode* pNode = Guide.m_pNext;
+    int cnt = 1;
+    while (1)
+    {
+        printf("%d\t", pNode->m_nValue);
+        pNode = pNode->m_pNext;
+
+        if (cnt == 7)
+            break;
+
+        ++cnt;
+    }
+
+    return 0;
+}
+ListNode* insertNode(ListNode* pHead, int insertValue)
+{
+    //若循环链表中本来没有节点
+    if (pHead == nullptr)
+    {
+        pHead = new ListNode;
+        pHead->m_nValue = insertValue;
+        pHead->m_pNext = pHead;
+    }
+    else if (pHead->m_pNext == pHead)
+    {
+        /*if (pHead->m_nValue < insertValue)
+        {
+            pHead->m_pNext = new ListNode{insertValue,pHead};
+        }
+        else
+        {
+
+        }*/
+        pHead->m_pNext = new ListNode{ insertValue,pHead };
+    }
+    else
+        insertNodeCore(pHead, insertValue);
+
+    return pHead;
+}
+void insertNodeCore(ListNode* pHead, int Val)
+{
+    ListNode* pNode, * pNext;
+
+    pNode = pHead;
+    pNext = pHead->m_pNext;
+
+    while (1)
+    {
+        if (pNode->m_nValue<Val && pNext->m_nValue>Val)
+        {
+            pNode->m_pNext = new ListNode{ Val,pNext };
+            break;
+        }
+        else if (pNode->m_nValue<Val && pNext->m_nValue<Val)
+        {
+            if(pNext->m_nValue < pNode->m_nValue) 
+            {
+                pNode->m_pNext = new ListNode{ Val,pNext };
+                break;
+            }
+        }
+        else if (pNode->m_nValue > Val && pNext->m_nValue > Val)
+        {
+            if (pNext->m_nValue < pNode->m_nValue)
+            {
+                pNode->m_pNext = new ListNode{ Val,pNext };
+                break;
+            }
+        }
+
+		pNode = pNext;
+        pNext = pNext->m_pNext;
+    }
 }
 #endif
