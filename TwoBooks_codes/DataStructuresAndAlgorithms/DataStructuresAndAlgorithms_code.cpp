@@ -2368,7 +2368,7 @@ Node* flatten(Node* head)
 
 
 //面试题29：排序的循环链表
-#if 1
+#if 0
 #include <iostream>
 #include "list.h"
 
@@ -2397,6 +2397,9 @@ int main()
         //相当于pHead指针指向了别的节点  
         //不影响pGuide->m_pNext，pGuide->m_pNext会仍存nullptr
         //现在传nullptr给形参pHead的情况也可以按照上述来理解
+
+        //当然也可以理解为函数的形参的值是个原来值的副本来理解。
+
 
         //可以修改为
         pGuide->m_pNext= insertNode(pGuide->m_pNext, i);
@@ -2481,5 +2484,127 @@ void insertNodeCore(ListNode* pHead, int Val)
 		pNode = pNext;
         pNext = pNext->m_pNext;
     }
+}
+#endif
+
+
+//面试题30：插入、删除和随机访问都是O(1)的容器
+//思路：就是实现一个自定义的哈希表
+//插入、删除前需要在O(1)时间内查找到该元素 -> 无序关联容器
+//随机访问性能为O(1)  -> vector容器
+
+//哈希表key存放元素值 ， value存放元素值在数组中的下标
+//等概率的返回某个元素→vector容器
+//随机生成数组下标范围内一个随机下标值，返回该数组内的数值即可
+#if 1
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+
+using namespace std;
+
+class RandomizedSet 
+{
+private:
+    //哈希表key存放值，value存放下标
+    unordered_map<int, int>IndexOfNum;
+    //数组
+    vector<int>nums;
+public:
+    /** Initialize your data structure here. */
+    RandomizedSet() 
+    {}
+
+    /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
+    bool insert(int val)
+    {
+        //如果在哈希表中存在该元素，返回false
+        if (IndexOfNum.find(val) != IndexOfNum.end())
+        {
+            return false;
+        }
+
+        //将该数值添加到数组尾部并将该数值和下标映射存入哈希表
+
+        //哈希表中加入pair数据，内容为加入的值和该值对应的下标，
+        // 因为数组中插入是在最后一个下标的下一个下标，
+        // 所以对应的下标为nums.size()
+        IndexOfNum[val] = nums.size();
+
+        //数组末尾加val
+        nums.push_back(val);
+
+        return true;
+    }
+
+    /** Removes a value from the set. Returns true if the set contained the specified element. */
+    bool remove(int val) 
+    {
+        //如果哈希表中不存在该元素，则返回false
+        if (IndexOfNum.find(val) == IndexOfNum.end())
+        {
+            return false;
+        }
+
+        //如果在数组中直接删除，为了保证数组内存连续性
+        // 需要将该数值后面的数组均前移一位，
+        // 时间复杂度为O(n)，不符题意。
+
+        //数组删除时的处理方法：
+        //用数组的最后一个数值去填充将删除的数值的内存，
+        // 并更新哈希表中的下标，其他数值在位置保持不变，
+        // 删除数组最后一个数值，时间复杂度为O(1)
+
+        //在哈希表中根据待删除元素找到待删除元素在数组中的下标
+        int index = IndexOfNum[val];
+
+        //在哈希表中修改记录
+        //把数组中最后一个元素的下标记录为index
+        IndexOfNum[nums.back()] = index;
+        //在哈希表中删除val
+        IndexOfNum.erase(val);
+
+        //在数组中待删除元素用数组中最后一个元素替换
+        nums[index] = nums.back();
+        //删除最后一个元素
+        nums.pop_back();
+
+        return true;
+    }
+
+    /** Get a random element from the set. */
+    int getRandom() 
+    {
+        return nums[rand() % nums.size()];
+    }
+};
+
+/**
+ * Your RandomizedSet object will be instantiated and called as such:
+ * RandomizedSet* obj = new RandomizedSet();
+ * bool param_1 = obj->insert(val);
+ * bool param_2 = obj->remove(val);
+ * int param_3 = obj->getRandom();
+ */
+
+int main()
+{
+    RandomizedSet RS;
+
+    RS.insert(0);
+
+    for (int i = 1; i <= 9; ++i)
+        RS.insert(i);
+
+    for (int i = 1; i <= 9; ++i)
+        cout << RS.getRandom()<<' ';
+    cout << endl;
+
+    RS.remove(8);
+
+    for (int i = 1; i <= 9; ++i)
+        cout << RS.getRandom() << ' ';
+
+    return 0;
 }
 #endif
