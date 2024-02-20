@@ -2402,7 +2402,7 @@ int main()
 
 
         //可以修改为
-        pGuide->m_pNext= insertNode(pGuide->m_pNext, i);
+        pGuide->m_pNext = insertNode(pGuide->m_pNext, i);
         //或者函数改为
         // ListNode* insertNode(ListNode* &pHead, int insertValue)
         //这样就直接操作的是pGuide->m_pNext指针了
@@ -2496,7 +2496,7 @@ void insertNodeCore(ListNode* pHead, int Val)
 //哈希表key存放元素值 ， value存放元素值在数组中的下标
 //等概率的返回某个元素→vector容器
 //随机生成数组下标范围内一个随机下标值，返回该数组内的数值即可
-#if 1
+#if 0
 #include <iostream>
 #include <unordered_map>
 #include <vector>
