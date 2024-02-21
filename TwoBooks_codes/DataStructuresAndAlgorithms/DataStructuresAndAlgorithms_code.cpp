@@ -896,7 +896,7 @@ int FindTheLengthOfCorrespondingSubArray(const vector<int>& vec)
     //输入数组为   0,  0, 0,  0,  1,  1, 1, 0
     //前缀和数组为0 -1 -2 -3 -4 -3 -2 -1 -2
 
-    unordered_map<int, int>um;
+    unordered_map<int, int>PreSum_Index_Pair;
 
     int MaxLen = 0;
 
@@ -904,10 +904,10 @@ int FindTheLengthOfCorrespondingSubArray(const vector<int>& vec)
     {
         //哈希表中没有该键，那么存该键和键对应的值
         //键为前缀和数组的某元素值，值为前缀和数组的某元素值的索引值
-        if (um.find(PreSumArray[index]) == um.end())
-            um[PreSumArray[index]] = index;
+        if (PreSum_Index_Pair.find(PreSumArray[index]) == PreSum_Index_Pair.end())
+            PreSum_Index_Pair[PreSumArray[index]] = index;
         else
-            MaxLen = max(MaxLen,index-um[PreSumArray[index]]);
+            MaxLen = max(MaxLen,index- PreSum_Index_Pair[PreSumArray[index]]);
         //***理解***
         //若index为5，代表【当前】遍历到前缀和数组的索引值为5处
         //PreSumArray[index]表示vec数组从索引0到索引4对应的值之和
@@ -2607,4 +2607,10 @@ int main()
 
     return 0;
 }
+#endif
+
+
+//
+#if 1
+
 #endif
