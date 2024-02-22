@@ -2610,7 +2610,245 @@ int main()
 #endif
 
 
-//
-#if 1
+//面试题31：最近最少使用缓存 (Least Recently Used, LRU)
+//要求如下两个操作的时间复杂度都是O(1)：
+// get（key）：如果缓存中存在键key，则返回它对应的值；否则返回 - 1。
+// put（key，value）：如果缓存中之前包含键key，则它的值设为value；
+// 否则添加键key及对应的值value。在添加一个键时，如果缓存容量已经满了，
+// 则在添加新键之前删除最近最少使用的键（缓存中最长时间没有被使用过的元素）。
 
+//分析：
+//需要能随机访问
+//需要把该数据插入到头部或者尾部
+
+//哈希表能在O(1)内找到键，如果键和值的pair存了键在链表中的位置的值，
+//那么就可以在O(1)时间内访问链表
+//由于链表记录了数据输入的时间顺序，链表中的元素必须储存键，这样才能通过键
+//找到哈希表项目，实现删除要求
+#if 0
+#include <unordered_map>
+
+using namespace std;
+
+struct DLinkedNode
+{
+    int m_key;
+    int m_value;
+    DLinkedNode* prev;
+    DLinkedNode* next;
+    DLinkedNode() : m_key(0), m_value(0), prev(nullptr), next(nullptr) 
+    {}
+    DLinkedNode(int key, int value) : m_key(key), m_value(value), prev(nullptr), next(nullptr)
+    {}
+};
+
+class LRUCache 
+{
+private:
+    unordered_map<int, DLinkedNode*> m_key2Node;
+    int m_capacity;
+    DLinkedNode* head;
+    DLinkedNode* tail;
+
+public:
+    LRUCache(int capacity)
+    {
+        // 初始化的时候, 让系统分配头尾两个节点
+        head = new DLinkedNode();
+        tail = new DLinkedNode();
+        head->next = tail;
+        tail->prev = head;
+        // 控制缓存的容量
+        m_capacity = capacity;
+    }
+
+    int get(int key)
+    {
+        // 如果容器里有这个key，就直接返回，并把这个移动到链表的头部
+        if (m_key2Node.find(key) != m_key2Node.end()) 
+        {
+            removeNode(m_key2Node[key]);
+            addNode2Head(m_key2Node[key]);
+            return m_key2Node[key]->m_value;
+        }
+        else 
+        { 
+            // 如果没有这个节点，就返回-1
+            return -1;
+        }
+    }
+
+    void put(int key, int value) 
+    {
+        // 如果有这个节点，就覆盖这个key对应的值，并把这个节点放在链表的头部
+        if (m_key2Node.find(key) != m_key2Node.end())
+        {
+            m_key2Node[key]->m_value = value;
+            removeNode(m_key2Node[key]);
+            addNode2Head(m_key2Node[key]);
+        }
+        else
+        { 
+            // 如果没有这个节点，就添加这个节点，并把这个节点放在链表头部，
+            // 如果节点数量超过容器大小，就删除尾部节点的元素
+            DLinkedNode* node = new DLinkedNode(key, value);
+            m_key2Node[key] = node;
+            addNode2Head(node);
+            while (m_key2Node.size() > m_capacity) 
+            {
+                removeTail();
+            }
+        }
+    }
+
+    // 移动一个节点到链表的头部，是要先删除节点，再在链表的头部添加这个节点
+    // 删除一个节点的函数
+    void removeNode(DLinkedNode* node) 
+    {
+        node->prev->next = node->next;
+        node->next->prev = node->prev;
+    }
+
+    // 添加一个节点到链表的头部的函数
+    void addNode2Head(DLinkedNode* node)
+    {
+        node->next = head->next;
+        head->next->prev = node;
+        head->next = node;
+        node->prev = head;
+    }
+
+    // 从尾部移除一个节点的函数
+    void removeTail()
+    {
+        m_key2Node.erase(tail->prev->m_key);
+
+        DLinkedNode* node = tail->prev;
+
+        tail->prev->prev->next = tail;
+        tail->prev = tail->prev->prev;
+
+        // 防止内存泄漏
+        delete node;
+    }
+    //使用双向链表而不是单向链表的原因是：
+    // 在缓存满了需要删除的时候，双向链表可以通过tail快速找到最后一个节点。
+    // 如果使用单向链表想要找到最后一个节点，需要从头节点遍历过去
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
+#endif
+
+
+ //面试题32：有效的变位词
+#if 0
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+bool WhetherAAnagram(const string &s,const string &t);
+
+int main()
+{
+    string s("anagram");
+    string t("nagaram");
+
+    cout << WhetherAAnagram(s,t);
+
+    return 0;
+}
+bool WhetherAAnagram(const string& s, const string& t)
+{
+    if (s.empty() || t.empty())
+        return false;
+
+    shared_ptr<int> hash(new int[26] {},default_delete<int[]>());
+
+    if (s.size() != t.size())
+        return false;
+
+    for (int i = 0; i < s.size(); ++i)
+        hash.get()[s[i] - 'a']++;
+
+    for (int i = 0; i < t.size(); ++i)
+        hash.get()[s[i] - 'a']--;
+
+    if (all_of(hash.get(), hash.get() + 26, [](int num) {return num == 0; }))
+        return true;
+
+    return false;
+}
+#endif
+
+
+//面试题33：变位词组
+#if 1
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+#include <sstream>
+#include <algorithm>
+using namespace std;
+
+map<string,vector<string>> Classification(const string& str);
+
+int main()
+{
+    string inputStr ("eat tea tan ate nat bat");
+
+    Classification(inputStr);
+
+    return 0;
+}
+map<string, vector<string>> Classification(const string& str)
+{
+    if (str.empty())
+        exit(-1);
+
+    map<string, vector<string>> str_vector_pairs;
+
+    istringstream is(str);
+
+    string word;
+
+    is >> word;
+    while (is)
+    {
+        string sortedWord = word;
+        sort(sortedWord.begin(), sortedWord.end());
+
+        if (str_vector_pairs.find(sortedWord) == str_vector_pairs.end())
+        {
+            vector<string> tmp;
+            tmp.push_back(word);
+            str_vector_pairs[sortedWord] = move(tmp);
+        }
+        else
+        {
+            str_vector_pairs[sortedWord].push_back(word);
+        }
+
+        is >> word;
+    }
+
+    for (auto Pair : str_vector_pairs)
+    {
+        for (auto elem : Pair.second)
+            cout << elem << ' ';
+
+        cout << endl;
+    }
+
+    //法二：
+    //is_permutation()
+
+    return str_vector_pairs;
+}
 #endif
