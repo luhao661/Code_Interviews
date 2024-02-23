@@ -2788,7 +2788,7 @@ bool WhetherAAnagram(const string& s, const string& t)
 
 
 //面试题33：变位词组
-#if 1
+#if 0
 #include <iostream>
 #include <string>
 #include <vector>
@@ -2850,5 +2850,199 @@ map<string, vector<string>> Classification(const string& str)
     //is_permutation()
 
     return str_vector_pairs;
+}
+#endif
+
+
+//面试题34：外星语言是否排序
+#if 0
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+bool WhetherIsOrderedCore(
+    const string& s1, const string& s2,
+    const vector<int>& order_hash);
+bool WhetherIsOrdered(const vector<string> &str_vec,const string& order);
+
+int main()
+{
+    vector<string> str_vec{ "offer","is","coming"};
+    string order("zyxwvutsrqponmlkjihgfedcba");
+
+    cout << WhetherIsOrdered(str_vec,order);
+
+    return 0;
+}
+bool WhetherIsOrdered(const vector<string>& str_vec, const string& order)
+{
+    if (str_vec.size() == 0)
+        return false;
+
+    vector<int>order_hash(order.size());
+    int order_value=1;
+    for (int i = 0; i < order.size(); ++i)
+    {
+        //索引代表第几个字母，值代表字母的顺序值
+        order_hash[order[i] - 'a'] = order_value++;
+    }
+
+    for (int idx = 0; idx < str_vec.size()-1; ++idx)
+    {
+        if (WhetherIsOrderedCore(str_vec[idx], str_vec[idx + 1], order_hash))
+            continue;
+        else
+            return false;
+    }
+
+    return true;
+}
+
+bool WhetherIsOrderedCore(
+    const string& s1, const string& s2,
+    const vector<int>& order_hash)
+{
+    int idx = 0;
+
+    while (idx < s1.size() && idx < s2.size())
+    {
+        if (order_hash[s1[idx] - 'a'] == order_hash[s2[idx] - 'a'])
+        {
+            ++idx;
+            continue;
+        }
+        else if (order_hash[s1[idx] - 'a'] < order_hash[s2[idx] - 'a'])
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    return true;
+}
+#endif
+
+
+//面试题35：最小时间差
+#if 1
+#if 0
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+    int getMinutes(string& t) {
+        return (int(t[0] - '0') * 10 + int(t[1] - '0')) * 60 + int(t[3] - '0') * 10 + int(t[4] - '0');
+    }
+
+public:
+    int findMinDifference(vector<string>& timePoints) 
+    {
+        int n = timePoints.size();
+        if (n > 1440)
+        {
+            return 0;
+        }
+        sort(timePoints.begin(), timePoints.end());
+
+        int ans = INT_MAX;
+        int t0Minutes = getMinutes(timePoints[0]);
+        int preMinutes = t0Minutes;
+
+        for (int i = 1; i < n; ++i) 
+        {
+            int minutes = getMinutes(timePoints[i]);
+            ans = min(ans, minutes - preMinutes); // 相邻时间的时间差
+
+            preMinutes = minutes;
+        }
+
+        ans = min(ans, t0Minutes + 1440 - preMinutes); // 首尾时间的时间差
+        //因为是经过sort的，所以假如首时间为00：00，而尾时间为23：59，那么如果不加1440，
+        // 则（t0Minutes - preMinutes）= 0 -1439 = -1439，
+        // 那么和经过min(ans, t0Minutes + 1440 - preMinutes) 之后答案肯定是-1439，
+        // 那不是离谱的嘛对吧，而真实情况就是首尾时间相差1，那么加上1440之后，
+        // （ t0Minutes + 1440 - preMinutes）就是0+1440-1439 = 1，这就对了哈。
+        return ans;
+    }
+};
+//作者：力扣官方题解
+#endif
+//补充：
+//还可以进行优化：
+//开一个1440长度的数组，将每个时间处理为分钟数，每个时间在数组上对应位置值为true
+//这样时间输入完后就自动排好了序。
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int CalMin(const vector<string> &str_vec);
+int CalMinCore(shared_ptr<bool> &hash);
+
+int main()
+{
+    vector<string> str_vec{"23:50","23:59","00:00"};
+
+    cout << CalMin(str_vec);
+
+    return 0;
+}
+
+int CalMin(const vector<string>& str_vec)
+{
+    if (str_vec.empty())
+        return -1;
+
+    shared_ptr<bool> hash(new bool [1440] {false}, default_delete<bool[]>());
+
+    string strhours, strminutes;
+    for (int i = 0; i < str_vec.size(); ++i)
+    {
+        strhours = str_vec[i].substr(0,2);
+        strminutes = str_vec[i].substr(3, 2);
+
+        int idx = stoi(strhours) * 60 + stoi(strminutes);
+
+        if (hash.get()[idx])
+            return 0;
+        else
+            hash.get()[idx] = true;
+    }
+
+    return CalMinCore(hash);
+}
+int CalMinCore(shared_ptr<bool>& hash)
+{
+    int nowIdx, preIdx;
+    nowIdx = preIdx = -1;
+
+    int MinValue = numeric_limits<int>::max();
+    int theFirstTime;
+
+    for (int i = 0; i < 1440; ++i)
+    {
+        if (hash.get()[i])
+        {
+            if (preIdx == -1)
+            {
+                theFirstTime=preIdx = i;
+                continue;
+            }
+
+            nowIdx = i;
+
+            MinValue = min(MinValue,nowIdx-preIdx);
+
+            preIdx = nowIdx;
+        }
+    }
+
+    return min(MinValue, theFirstTime + 1440 - nowIdx);
 }
 #endif
