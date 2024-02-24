@@ -2926,7 +2926,7 @@ bool WhetherIsOrderedCore(
 
 
 //面试题35：最小时间差
-#if 1
+#if 0
 #if 0
 #include <iostream>
 #include <string>
@@ -3044,5 +3044,124 @@ int CalMinCore(shared_ptr<bool>& hash)
     }
 
     return min(MinValue, theFirstTime + 1440 - nowIdx);
+}
+#endif
+
+
+//面试题36：后缀表达式
+#if 1
+#include <iostream>
+#include <stack>
+#include <string>
+#include <sstream>
+#include <algorithm>
+using namespace std;
+
+int Calculate(const string &input);
+int CalculateCore(stack<int> &stk,string op);
+
+int main()
+{
+    string inputStr{"2,1,3,*,+"};
+
+    cout << Calculate(inputStr)<<endl;
+
+    cout << Calculate(string("200,1,3,*,+")) << endl;
+
+    return 0;
+}
+int Calculate(const string& input)
+{
+    if (input.empty())
+        return 0;
+
+    stack<int>stk;
+
+    istringstream is(input);
+
+    //错误写法：
+    //进行计算的数字只支持一位数字
+#if 0
+    char ch;
+    while (is)
+    {
+        is >> ch;
+
+        if (isdigit(ch))
+            stk.push(ch);
+        else
+            CalculateCore(stk,ch);
+
+        is.ignore();//跳过一个字符
+    }
+#endif
+
+    string str="";
+
+    while (is)
+    {
+        //***注***
+        //Input string stream的截止判断条件不再是通常cin情况输入下的EOF
+        //而是string::npos
+        while(is.peek()!=','&& is.peek() != string::npos)
+        {
+            str+=is.get();
+        }
+
+        if (all_of(str.begin(), str.end(), [](char ch) {return isdigit(ch);}))
+            stk.push(stoi(str));
+        else
+            CalculateCore(stk, str);
+
+        if (is.peek() != string::npos)
+            is.ignore();//跳过一个字符
+        else
+            break;
+
+        str.clear();
+    }
+
+    return stk.top();
+}
+int CalculateCore(stack<int>& stk, string str)
+{
+    if (stk.size() < 2)
+        exit(-1);
+
+    int a, b;
+    char op = str[0];
+
+    b = stk.top();
+    stk.pop();
+    a = stk.top();
+    stk.pop();
+
+    switch (op)
+    {
+    case '+':
+    {
+        stk.push(a+b);
+    }
+    break;
+    case '-':
+    {
+        stk.push(a - b);
+    }
+    break;
+    case '*':
+    {
+        stk.push(a * b);
+    }
+    break;
+    case '/':
+    {
+        stk.push(a / b);
+    }
+    break;
+    default:
+        cout << "Error!\n";
+    }
+
+    return stk.top();
 }
 #endif
