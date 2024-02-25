@@ -3092,7 +3092,7 @@ int Calculate(const string& input)
         else
             CalculateCore(stk,ch);
 
-        is.ignore();//跳过一个字符
+        is.ignore();//跳过一个字符 
     }
 #endif
 
@@ -3103,7 +3103,7 @@ int Calculate(const string& input)
         //***注***
         //Input string stream的截止判断条件不再是通常cin情况输入下的EOF
         //而是string::npos
-        while(is.peek()!=','&& is.peek() != string::npos)
+        while(is.peek()!=','&& is.peek() != string::npos) 
         {
             str+=is.get();
         }
