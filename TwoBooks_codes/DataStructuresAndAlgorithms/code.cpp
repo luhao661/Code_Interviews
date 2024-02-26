@@ -51,7 +51,7 @@ void CountBits(int num, vector<int>& vec)
 
     for (int i = 1; i <= num; ++i)
     {
-        vec[i] = vec[i & (i - 1)] + 1;
+        vec[i] = vec[i & (i - 1)] + 1; 
     }
 
     //错误理解：
