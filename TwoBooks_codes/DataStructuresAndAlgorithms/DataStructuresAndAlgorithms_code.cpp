@@ -3049,7 +3049,7 @@ int CalMinCore(shared_ptr<bool>& hash)
 
 
 //面试题36：后缀表达式
-#if 1
+#if 0
 #include <iostream>
 #include <stack>
 #include <string>
@@ -3092,7 +3092,7 @@ int Calculate(const string& input)
         else
             CalculateCore(stk,ch);
 
-        is.ignore();//跳过一个字符 
+        is.ignore();//跳过一个字符
     }
 #endif
 
@@ -3103,7 +3103,7 @@ int Calculate(const string& input)
         //***注***
         //Input string stream的截止判断条件不再是通常cin情况输入下的EOF
         //而是string::npos
-        while(is.peek()!=','&& is.peek() != string::npos) 
+        while(is.peek()!=','&& is.peek() != string::npos)
         {
             str+=is.get();
         }
@@ -3163,5 +3163,117 @@ int CalculateCore(stack<int>& stk, string str)
     }
 
     return stk.top();
+}
+#endif
+
+
+//面试题37：小行星碰撞
+#if 1
+#include <iostream>
+#include <stack>
+#include <vector>
+
+using namespace std;
+
+vector<int> WhatRemain(const vector<int>& input);
+int WhatRemainCore(stack<pair<int, int>>& Rstk,  stack<pair<int, int>>& Lstk);
+
+int main()
+{
+    vector<int>DataInput{ 4, 5, -6, 4, 8, -5 };
+
+    vector<int> res = WhatRemain(DataInput);
+
+    for (auto x : res)
+        cout << x << ' ';
+
+    return 0;
+}
+#if 0
+vector<int> WhatRemain(const vector<int>& input)
+{
+    if (input.empty())
+        exit(-1);
+
+    stack<pair<int, int>> GoRight_stack_elem_idx_pairs;
+    stack<pair<int, int>> GoLeft_stack_elem_idx_pairs;
+
+    for (int index = 0; index < input.size(); ++index)
+    {
+        int elem = input[index];
+
+        //若向右飞行
+        if (elem > 0)
+            GoRight_stack_elem_idx_pairs.emplace(elem, index);
+        else//若向左飞行
+            GoLeft_stack_elem_idx_pairs.emplace(elem,index);
+    }
+
+    WhatRemainCore(GoRight_stack_elem_idx_pairs, GoLeft_stack_elem_idx_pairs);
+
+
+}
+int WhatRemainCore(stack<pair<int, int>>& Rstk, stack<pair<int, int>>& Lstk)
+{
+    return 1;
+}
+//错误处理：
+//根据数据的正负，放入两个stack中，这样增加处理数据的难度
+#endif
+
+vector<int> WhatRemain(const vector<int>& input)
+{
+    if (input.empty())
+        exit(-1);
+
+    vector<int> res;
+
+    for (int i = 0; i < input.size(); ++i)
+    {
+        int elem = input[i];
+
+        if (res.empty())
+            res.push_back(elem);
+        else
+        {
+            //情况1：同向       
+            int PreValue = input[i - 1];
+            bool PreRightOrLeft = PreValue > 0 ? true : false;
+            bool RightOrLeft = elem > 0 ? true : false;
+
+            if (PreRightOrLeft == RightOrLeft)
+                res.push_back(elem);
+            else//情况2：反向       
+            {
+                //特殊情况：反向但不相撞
+                if (PreRightOrLeft == false && RightOrLeft==true)
+                {
+                    res.push_back(elem);
+                    continue;
+                }
+
+                //情况2.1：res中的末尾的值的绝对值等于现在处理的元素值
+                if (abs(res.back()) == abs(elem))
+                    res.pop_back();
+                //情况2.2：res中的末尾的值的绝对值大于现在处理的元素值
+                else if (abs(res.back()) > abs(elem))
+                    continue;
+                //情况2.3：res中的末尾的值的绝对值小于现在处理的元素值
+				else
+                {
+                    //先把末尾的元素弹出
+                    res.pop_back();
+                    //因为现在处理的元素又会遭遇之前压入的元素，又会遭遇上述情况
+                    //所以此处处理为
+                    if (res.empty())
+                        res.push_back(elem);
+                    else
+						--i;//***理解***
+                }
+            }
+        }
+    }
+
+    return res;
 }
 #endif
