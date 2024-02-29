@@ -3168,7 +3168,7 @@ int CalculateCore(stack<int>& stk, string str)
 
 
 //面试题37：小行星碰撞
-#if 1
+#if 0
 #include <iostream>
 #include <stack>
 #include <vector>
@@ -3176,7 +3176,7 @@ int CalculateCore(stack<int>& stk, string str)
 using namespace std;
 
 vector<int> WhatRemain(const vector<int>& input);
-int WhatRemainCore(stack<pair<int, int>>& Rstk,  stack<pair<int, int>>& Lstk);
+//int WhatRemainCore(stack<pair<int, int>>& Rstk,  stack<pair<int, int>>& Lstk);
 
 int main()
 {
@@ -3221,6 +3221,7 @@ int WhatRemainCore(stack<pair<int, int>>& Rstk, stack<pair<int, int>>& Lstk)
 //根据数据的正负，放入两个stack中，这样增加处理数据的难度
 #endif
 
+#if 0
 vector<int> WhatRemain(const vector<int>& input)
 {
     if (input.empty())
@@ -3275,5 +3276,180 @@ vector<int> WhatRemain(const vector<int>& input)
     }
 
     return res;
+}
+#endif
+
+//更简洁的代码
+#if 1
+vector<int> WhatRemain(const vector<int>& asteroids)
+{
+	vector<int> st;
+
+	for (auto aster : asteroids)
+    {
+		bool alive = true;
+
+        //分析得到两个小行星要相撞，必须st容器末尾元素代表的
+        // 小行星向右飞行，当前遍历到的小行星向左飞行
+        
+        //aster仍存在且向左飞行且st容器非空且st容器末尾元素代表的小行星向右飞行
+		while (alive && aster < 0 && !st.empty() && st.back() > 0) 
+        {
+            //两个小行星相撞，会只剩一个或者啥也不剩
+
+			alive = st.back() < -aster; // aster 是否存在
+            //情况1：alive为true：相撞但st容器末尾元素代表的小行星体积更小
+            //情况2：alive为false：相撞但st容器末尾元素代表的小行星体积更大或体积相等
+
+            //会造成st容器的末尾元素弹出的情况：
+            //相撞但st容器末尾元素代表的小行星体积更小或体积相等
+			if (st.back() <= -aster)
+            {  
+                // 栈顶行星爆炸
+				st.pop_back();
+			}
+		}
+
+		if (alive)
+        {
+			st.push_back(aster);
+		}
+	}
+	return st;
+}
+/*
+当行星 aster 存在且 aster<0, 栈顶元素非空且大于 0 时，
+说明两个行星相互向对方移动：如果栈顶元素大于等于 −aster，则行星 aster 发生爆炸，
+将 alive 置为 false；如果栈顶元素小于等于 −aster，则栈顶元素表示的行星发生爆炸，
+执行出栈操作。
+重复以上判断直到不满足条件，如果最后 alive 为真，说明行星 aster 不会爆炸，
+则将 aster 入栈。
+链接：https://leetcode.cn/problems/asteroid-collision/solutions/1663442/xing-xing-peng-zhuang-by-leetcode-soluti-u3k0/
+*/
+#endif
+#endif
+
+
+//面试题38：每日温度
+#if 0
+#include <iostream>
+#include <vector>
+#include <stack>
+using namespace std;
+
+vector<int> WaitDays(const vector<int>& input);
+
+int main()
+{
+    vector<int> temper_vec{35,31,33,36,34};
+
+    vector<int>res = WaitDays(temper_vec);
+
+    for (auto x : res)
+        cout << x << ' ';
+
+    return 0;
+}
+vector<int> WaitDays(const vector<int>& input)
+{
+    if (input.empty())
+        throw exception("Error data");
+
+    //创建栈来存储元素的索引值
+    stack<int> stk;
+    //***理解***
+    //栈中存的是待比较的温度对应的天数(从第0天开始)
+
+    //创建vector容器来存储结果值
+    vector<int>ans(input.size(), 0);
+    //***注***
+    //0代表后面无更高的温度
+
+    for (int i = 0; i < input.size(); ++i) 
+    {
+        if (stk.empty())
+        {
+            stk.push(i);
+        }
+        else 
+        {
+            //若栈非空，且栈顶索引值对应的元素值小于当前遍历的元素值
+            //即后面出现了更高的温度
+            while ( !stk.empty()&& input[stk.top()] < input[i])
+            {
+                //***理解***
+                //ans中栈顶索引值对应的元素值设置为当前轮到的索引值减去栈顶索引值
+                ans[stk.top()] = i - stk.top();
+
+                //和当前轮到的索引值代表的天数【最接近的天数】(即栈顶值对应的天数)
+                //在ans中对应的值已经计算完毕，该天数从栈中弹出
+                stk.pop();
+            }
+
+            stk.push(i);
+        }
+    }
+    return ans;
+}
+#endif
+
+
+//
+#if 1
+
+#endif
+
+
+//面试题41：滑动窗口的平均值
+#if 0
+#include <iostream>
+#include <deque>
+using namespace std;
+
+class MovingAverage
+{
+private:
+    double sum = 0;
+    deque<int> deq;
+    int eleCnt = 0;
+    int m_size;
+
+public:
+    MovingAverage(int size);
+    double next(int val);
+};
+
+MovingAverage::MovingAverage(int size)
+{
+    m_size = size;
+    //deq.resize(size);
+    //fill(deq.begin(),deq.end(),0);
+}
+
+double MovingAverage::next(int val)
+{
+    if (deq.size() == m_size)
+    {
+        sum -= deq.front();
+        deq.pop_front();
+    }
+
+    sum += val;
+    deq.push_back(val);
+
+    return sum / deq.size();
+}
+
+int main()
+{
+    MovingAverage MA(3);
+
+    cout<<MA.next(1)<<endl;
+    cout<<MA.next(2) << endl;
+    cout<<MA.next(3) << endl;
+    cout << MA.next(4) << endl;
+    cout << MA.next(5) << endl;
+
+    return 0;
 }
 #endif
