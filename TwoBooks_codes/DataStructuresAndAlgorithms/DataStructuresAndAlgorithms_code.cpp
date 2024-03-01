@@ -3453,3 +3453,114 @@ int main()
     return 0;
 }
 #endif
+
+
+//
+#if 1
+
+#endif
+
+
+//面试题59：数据流的第k大的数字
+//分析：
+//如果数据存储在排序的数组中，那么只需要O(1)的时间就能找出第k大的数字。
+// 但这个直观的方法有两个缺点。首先，需要把从数据流中读取的所有数据
+// 都存到排序数组中，如果从数据流中读出n个数字，那么动态数组的大小为O(n)。
+// 随着不断地从数据流中读出新的数据，O(n)的空间复杂度可能会耗尽所有的内存。
+// 其次，在排序数组中添加新的数字的时间复杂度也是O(n)
+#if 1
+//思路：
+//1.为了保证数据流的所有数据都能得到处理，但没有这么多空间来存放这些数据，
+//考虑用合适的容器，【只存储最大的k个数字】，在每次从数据流中读取到数据后，
+//都判断并进行可能的容器内元素的更改
+//2.要减少添加新的数字的时间复杂度，同时要处理可能发生的元素变动
+//可以使用优先队列(priority_queue)
+//空间复杂度O(k)，插入与弹出的复杂度O(logk)
+
+#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+class KthLargest
+{
+private:
+    //***注***
+    //写法：int,vector<int>,greater<int>
+    priority_queue<int,vector<int>,greater<int>> prq;//模拟最小堆
+    size_t m_size = 0;
+
+public:
+    KthLargest(int k, const vector<int>& vec)
+    {
+        m_size = k;
+
+        for (auto x : vec)
+        {
+            if (prq.size() < m_size)
+            {
+                prq.push(x);
+            }
+            else
+            {                
+                prq.push(x);
+                prq.pop();
+            }
+        }
+    }
+
+    int add(int num)
+    {
+        if (prq.size() < m_size)
+        {
+            prq.push(num);
+        }
+        else
+        {            
+#if 1
+            if (prq.top() > num)
+            {}//因为最小堆中的最小元素比num大，代表最小堆中其他元素也比num大，
+              //不用再推入队列进行处理
+            else
+            {
+                prq.push(num);
+                prq.pop();
+            }
+
+#endif
+
+#if 0
+            //如下写法不可行：
+            if(prq.top()<num)
+            { }
+            else
+            {
+                prq.push(num);
+                prq.pop();
+            }
+			//***注***
+            //不用该if (prq.top() < num)判断式   
+            //因为最小堆中的最小元素比num小，代表num可能为第x个大的数字，prq.top()会改变
+            //因此还是要将num压入队列，进行处理。
+#endif
+        }
+
+        //prq.top()就是k个元素中最小的元素，就是第k大的数字
+        return (prq.size() < m_size) ? (numeric_limits<int>::min()) : (prq.top());
+    }
+};
+
+int main()
+{
+    vector<int> vec{4,5,8,2};
+
+    //第k大的数字，数组
+    KthLargest KL(3, vec);
+
+    cout << KL.add(3) << endl;
+    cout << KL.add(5) << endl;
+
+    return 0;
+}
+#endif
