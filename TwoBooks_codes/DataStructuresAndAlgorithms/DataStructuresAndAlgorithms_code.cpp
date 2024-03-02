@@ -15,7 +15,7 @@ int main()
     cin >> num;
 
     //数字0到数字num
-    vector<int> vec(num + 1);
+    vector<int> vec(num + 1); 
 
     try
     {
