@@ -3468,7 +3468,7 @@ int main()
 // 都存到排序数组中，如果从数据流中读出n个数字，那么动态数组的大小为O(n)。
 // 随着不断地从数据流中读出新的数据，O(n)的空间复杂度可能会耗尽所有的内存。
 // 其次，在排序数组中添加新的数字的时间复杂度也是O(n)
-#if 1
+#if 0
 //思路：
 //1.为了保证数据流的所有数据都能得到处理，但没有这么多空间来存放这些数据，
 //考虑用合适的容器，【只存储最大的k个数字】，在每次从数据流中读取到数据后，
@@ -3573,5 +3573,170 @@ int main()
     //求第k小的数字，可以用快速排序算法
 
     return 0;
+}
+#endif
+
+
+//面试题60：出现频率最高的k个数字
+#if 1
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <queue>
+using namespace std;
+
+vector<int> FindNumbers(const vector<int>& input,int k);
+
+int main()
+{
+    vector<int>input{1,2,2,1,3,1};
+
+    int k = 2;
+
+    vector<int>res=FindNumbers(input,k);
+
+    for (auto x : res)
+        cout << x << ' ';
+
+    return 0;
+}
+
+#if 0
+class SortCriterion
+{
+public:
+    //bool operator()(const pair<int, int>&pa1, const pair<int, int>&pa2) const
+    //{
+    //    return pa1.second >= pa2.second;
+    //} 
+
+    //错误：
+    //map的键值对只能根据键来排序
+
+    bool operator()(int a, int b) const
+    {
+        return a>b;
+    }
+};
+
+vector<int> FindNumbers(const vector<int>& input, int k)
+{
+    if (input.empty())
+        throw exception("Error!");
+
+    vector<int> ans;
+
+    //用unordered_map的话，每个数字对应出现的数字的次数的查询速度是O(1)
+    //但出现的次数的一系列值仍然是乱序
+
+    //***注***
+    //错误思路：
+    //因此要实现【键值对按值来排序】【按从大小的顺序】
+
+    SortCriterion SC;
+
+    map<int, int,SortCriterion> Num_Appear_pair(SC);
+
+    for (int i = 0; i < input.size(); ++i)
+    {
+        if (Num_Appear_pair.find(input[i]) == Num_Appear_pair.end())
+        {
+            Num_Appear_pair.emplace(input[i], 1);
+        }
+        else
+            Num_Appear_pair[input[i]]++;
+    }
+
+    int cnt = 1;
+    for (auto it=Num_Appear_pair.begin();it!=Num_Appear_pair.end()&&cnt<=k;++it)
+    {
+        ans.push_back((*it).first);
+        cnt++;
+    }
+
+    return ans;
+}
+#endif
+
+//思路：
+//既然map容器不能根据值来排序，那就利用最小堆
+//最小堆的元素是键值对，根据值的大小来决定是否压入队列进行处理
+
+class SortCriterion
+{
+public:
+    //***注***最后一个const必须加，否则出现错误C3848
+    bool operator()(const pair<int, int>&pa1, const pair<int, int>&pa2) const
+    {
+        return pa1.second <= pa2.second;
+    } 
+};
+
+class MinHeap
+{
+private:
+    priority_queue<pair<int, int>, vector<pair<int, int>>, SortCriterion> Num_Appear_pair_pq;
+    int m_k = 0;
+
+public:
+    MinHeap(int k)
+    {        
+        m_k = k;
+    }
+
+    void Add(pair<int, int>pa)
+    {
+        if (Num_Appear_pair_pq.size() < m_k)
+        {
+            Num_Appear_pair_pq.push(pa);
+        }
+        else if (pa.second > Num_Appear_pair_pq.top().second)
+        {
+            Num_Appear_pair_pq.push(pa);
+            Num_Appear_pair_pq.pop();
+        }
+    }
+
+    int Get_num_oneByone()
+    {
+        int num=Num_Appear_pair_pq.top().first;
+        Num_Appear_pair_pq.pop();
+
+        return num;
+    }
+};
+
+vector<int> FindNumbers(const vector<int>& input, int k)
+{
+    if (input.empty())
+        throw exception("Error!");
+
+    vector<int> ans;
+
+    MinHeap minheap(k);
+    unordered_map<int, int>Num_Appear_pair;
+
+    //1.将每个数字出现的次数和该数字绑定，生成pair对，用unordered_map管理
+    for (int i = 0; i < input.size(); ++i)
+    {
+        if (Num_Appear_pair.find(input[i]) == Num_Appear_pair.end())
+        {
+            Num_Appear_pair.emplace(input[i], 1);
+        }
+        else
+            Num_Appear_pair[input[i]]++;
+    }
+
+    //2.将每个pair对使用最小堆进行数据处理，堆中保留出现次数最多的k个数字对应的数字-次数pair对
+    for (auto it = Num_Appear_pair.begin(); it != Num_Appear_pair.end(); ++it)
+    {
+        minheap.Add(*it);
+    }
+
+    //3.将结果保存到vector中
+    for (int i = 0; i < k; ++i)
+        ans.push_back(minheap.Get_num_oneByone());
+
+    return ans;
 }
 #endif
