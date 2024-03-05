@@ -3570,7 +3570,7 @@ int main()
     //处理后top()返回的值就是第2大的元素的值
 
     //扩展：
-    //求第k小的数字，可以用快速排序算法
+    //求第k小的数字，可以用最大堆
 
     return 0;
 }
@@ -3578,7 +3578,7 @@ int main()
 
 
 //面试题60：出现频率最高的k个数字
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 #include <unordered_map>
@@ -3662,15 +3662,16 @@ vector<int> FindNumbers(const vector<int>& input, int k)
 //既然map容器不能根据值来排序，那就利用最小堆
 //最小堆的元素是键值对，根据值的大小来决定是否压入队列进行处理
 
+//创建SortCriterion类作为【函数对象】，来作为最小堆比较元素的规则
 class SortCriterion
 {
 public:
     //***注***最后一个const必须加，否则出现错误C3848
-    bool operator()(const pair<int, int>&pa1, const pair<int, int>&pa2) const
+    bool operator()(const pair<int, int>&New_pa, const pair<int, int>&Old_pa) const
     {
-        return pa1.second <= pa2.second;
-    } 
-};
+        return New_pa.second >= Old_pa.second;//***理解***
+    } //想象一个从左侧安插元素从右侧弹出元素的队列，若bool值为真，则新值排在旧值之左侧
+};     //队列中元素呈现递减排列，那么弹出的值也就由小到大了。
 
 class MinHeap
 {
@@ -3739,4 +3740,187 @@ vector<int> FindNumbers(const vector<int>& input, int k)
 
     return ans;
 }
+#endif
+
+
+//面试题61：和最小的k个数对
+#if 0
+#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+vector<vector<int>> FindKSmallestNumPairs(vector<int>& nums1, vector<int>& nums2, int k);
+
+int main()
+{
+    vector<int>nums1{1,5,13,21};
+    vector<int>nums2{2,4,9,15};
+
+    int k = 3;
+    vector<vector<int>> res = FindKSmallestNumPairs(nums1,nums2,k);
+        
+    for (auto x : res)
+    {
+        for (auto y : x)
+            cout << y << ' ';
+
+        cout << endl;
+    }
+
+    return 0;
+}
+
+class SortCriterion
+{
+public:
+    bool operator()(const pair<int, int>& np, const pair<int, int>& op)const
+    {
+        return np.first + np.second < op.first + op.second;//生成最大堆
+    }
+};
+
+vector<vector<int>> FindKSmallestNumPairs(vector<int>& nums1, vector<int>& nums2, int k)
+{
+    if (nums1.empty() || nums2.empty())
+        throw exception("Invalid data");
+
+    priority_queue<pair<int, int>, vector<pair<int, int>>, SortCriterion> pq;
+
+    for(int i=0;i<nums1.size();++i)
+        for (int j = 0; j < nums2.size(); ++j)
+        {
+            if (pq.size() < k)
+            {
+                pq.emplace(nums1[i],nums2[j]);
+            }
+            else
+            {
+                if (nums1[i] + nums2[j] < pq.top().first + pq.top().second)
+                {
+                    pq.emplace(nums1[i], nums2[j]);
+                    pq.pop();
+                }
+            }
+        }
+
+    vector<vector<int>>res;
+
+    while (pq.size())
+    {
+        res.push_back(vector<int>{pq.top().first,pq.top().second});
+        pq.pop();
+    }
+
+    return res;
+}
+#endif
+
+
+//小结：
+//在最大堆中最大值总是位于堆顶，在最小堆中最小值总是位于堆顶。
+// 因此，在堆中只需要O(1)的时间就能得到堆中的最大值或最小值
+
+//堆经常用来解决在数据集合中找出k个最大值或最小值相关的问题。
+// 通常用最大堆找出数据集合中的k个最小值，用最小堆找出数据集合中的k个最大值。
+
+
+//面试题62：实现前缀树
+#if 1
+//实现原理：
+//一个单词的每个字母都由一个指向PreTree的指针去表示，而指针所在的指针数组的索引值
+//就代表了这是哪个字母
+#include <string>
+
+using namespace std;
+
+class PreTree
+{
+private:
+    //标记是否为一个单词
+    bool isWord;
+    //创建next数组，有26个元素，每个元素都是指向PreTree的指针，初始化为nullptr
+    PreTree* next[26]{nullptr};
+
+public:
+    PreTree()
+    {}      
+
+    void insert(string& str)
+    {        
+        //在前缀树中添加单词时，首先到达前缀树的根节点        
+        PreTree* pNode = this;
+
+        for (int i = 0; i < str.size(); ++i)
+        {
+            //一个字母一个字母地提取
+            char ch = str[i];
+
+            // 确定根节点是否有一个子节点和单词的第1个字符对应。
+            // 如果该子节点不存在，则创建一个与第1个字符对应的子节点，然后前往该子节点
+            if (pNode->next[ch - 'a'] == nullptr)
+                pNode->next[ch - 'a'] = new PreTree();
+
+            //如果已经有对应的子节点，则前往该子节点。
+            pNode = pNode->next[ch-'a'];
+
+            // 接着判断该子节点中是否存在与单词的第2个字符相对应的子节点，并以此类推，
+            // 将单词其他的字符添加到前缀树中
+        }
+
+		//当单词的所有字符都添加到前缀树中之后，所在的节点对应单词的最后一个字符。
+        // 为了标识路径到达该节点时已经对应一个完整的单词，
+        // 需要将该节点的isWord设为true
+        pNode->isWord = true;
+    }
+
+    bool search(string str)
+    {
+        //从前缀树的根节点开始查找
+        PreTree* pNode = this;
+
+        for (int i = 0; i < str.size(); ++i)
+        {
+            char ch = str[i];
+
+            //如果根节点没有一个子节点和字符串的第1个节点相对应，
+            // 那么前缀树中自然不存在查找的单词，直接返回false。
+            if (pNode->next[ch - 'a'] == nullptr)
+                return false;
+
+            pNode = pNode->next[ch - 'a'];
+        }
+
+        //直到到达和字符串最后一个字符对应的节点。
+        // 如果该节点的isWord的值为true，
+        // 那么路径到达该节点时正好对应输入的单词，
+        // 因此前缀树中存在该输入的单词，可以返回true；否则返回false。
+        return pNode->isWord;
+        //***理解***search()方法讲究的是【完全匹配】
+    }
+
+    bool starsWith(string str)
+    {
+        PreTree* pNode = this;
+
+        for (int i = 0; i < str.size(); ++i)
+        {
+            char ch = str[i];
+
+            //如果根节点没有一个子节点和字符串的第1个节点相对应，
+            // 那么前缀树中自然不存在查找的单词，直接返回false。
+            if (pNode->next[ch - 'a'] == nullptr)
+                return false;
+
+            pNode = pNode->next[ch - 'a'];
+        }
+
+        // 如果一直到前缀的最后一个字符在前缀树中都有节点与之对应，
+        // 那么说明前缀树中一定存在以该前缀开头的单词。
+        // 此时无论当前节点的isWord的值是什么，都应该返回true。
+        return true;
+        //***理解***startsWith()方法相当于标准库中的search()，讲究的是【是否包含】
+    }
+};
 #endif
