@@ -3820,14 +3820,14 @@ vector<vector<int>> FindKSmallestNumPairs(vector<int>& nums1, vector<int>& nums2
 
 //小结：
 //在最大堆中最大值总是位于堆顶，在最小堆中最小值总是位于堆顶。
-// 因此，在堆中只需要O(1)的时间就能得到堆中的最大值或最小值
+// 因此，在堆中只需要O(1)的时间就能得到堆中的最大值或最小值。
 
 //堆经常用来解决在数据集合中找出k个最大值或最小值相关的问题。
 // 通常用最大堆找出数据集合中的k个最小值，用最小堆找出数据集合中的k个最大值。
 
 
 //面试题62：实现前缀树
-#if 1
+#if 0
 //实现原理：
 //一个单词的每个字母都由一个指向PreTree的指针去表示，而指针所在的指针数组的索引值
 //就代表了这是哪个字母
@@ -3839,7 +3839,9 @@ class PreTree
 {
 private:
     //标记是否为一个单词
-    bool isWord;
+    //***注***必须类内初始化为false，
+    // 否则以后动态分配的PreTree对象的isWord值为true
+    bool isWord=false;
     //创建next数组，有26个元素，每个元素都是指向PreTree的指针，初始化为nullptr
     PreTree* next[26]{nullptr};
 
@@ -3923,4 +3925,167 @@ public:
         //***理解***startsWith()方法相当于标准库中的search()，讲究的是【是否包含】
     }
 };
+#endif
+
+
+//前缀树主要用来解决与字符串查找相关的问题。
+//如果字符串的长度为k，由于在前缀树中查找一个字符串
+// 相当于顺着前缀树的路径查找字符串的每个字符，因此时间复杂度是O(k)
+
+//比较哈希表与前缀树对于查找字符串的使用上的区别
+//在哈希表中，只有输入完整的字符串才能进行查找操作，
+// 在前缀树中就没有这个限制。例如，可以只输入字符串的前面若干字符，
+// 即前缀，查找以这个前缀开头的所有字符串。
+// 如果要求根据字符串的前缀进行查找，那么合理应用前缀树可能是解决这个问题的关键。
+
+
+//面试题63：替换单词
+#if 1
+#include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <algorithm>
+using namespace std;
+
+class PreTree
+{
+private:
+    bool isWord=false;
+    //创建next数组，有26个元素，每个元素都是指向PreTree的指针，初始化为nullptr
+    PreTree* next[26]{ nullptr };
+
+public:
+    PreTree()
+    {}
+
+    void insert(string& str)
+    {
+        PreTree* pNode = this;
+
+        for (int i = 0; i < str.size(); ++i)
+        {
+            char ch = str[i];
+
+            if (pNode->next[ch - 'a'] == nullptr)
+                pNode->next[ch - 'a'] = new PreTree();
+
+            pNode = pNode->next[ch - 'a'];
+        }
+
+        pNode->isWord = true;
+    }
+
+    bool starsWith(string str)
+    {
+        PreTree* pNode = this;
+
+        for (int i = 0; i < str.size(); ++i)
+        {
+            char ch = str[i];
+
+            //***
+            //树中为cat    输入的str为cattle       
+            if (pNode->next[ch - 'a'] == nullptr)
+                return false;
+            else
+                pNode = pNode->next[ch - 'a'];
+             
+            if (pNode->isWord)
+                return true;
+        }
+    }
+
+    string GetWordRoot(string str)
+    {
+        string WordRoot;
+
+        PreTree* pNode = this;
+
+        for (int i = 0; i < str.size(); ++i)
+        {
+            char ch = str[i];
+            pNode = pNode->next[ch - 'a'];
+
+            WordRoot += ch;
+
+			if (pNode->isWord)
+                return WordRoot;                
+        }
+    }
+};
+
+string ReplaceCertainWords(vector<string> &WordRoot,string sentence);
+
+int main()
+{
+    vector<string> WordRoot{ {"cat","bat","rat"}};
+
+    string sentence{"the cattle was rattled by the battery"};
+
+    string res = ReplaceCertainWords(WordRoot, sentence);
+
+    cout << res;
+
+    return 0;
+}
+string ReplaceCertainWords(vector<string>& WordRoot, string sentence)
+{
+    if (WordRoot.empty() || sentence.empty())
+        throw exception("Error!");
+
+    //将词根都存入前缀树
+    PreTree PT;
+
+    for (auto x : WordRoot)
+        PT.insert(x);
+
+    //解析格式化的输入
+    istringstream is(sentence);
+
+    string handleStr,res;
+
+    //错误：
+    //这样会忽略掉空白字符
+    //is >> handleStr;
+
+    string kongbai(" \t,.;");
+
+    while (is)
+    {
+        //如果待输入的单个字符不是空白字符
+        while (find(kongbai.begin(), kongbai.end(), is.peek()) == kongbai.end())
+        {
+            //***必写***
+            if (is.peek() == string::npos)
+                break;
+
+            handleStr += is.get();
+        }
+
+        //这个待处理的单词包含前缀树中的词根
+        if (PT.starsWith(handleStr))
+            res += PT.GetWordRoot(handleStr);//返回这个待处理的单词的词根
+        else
+            res += handleStr;
+
+        //如果待输入的单个字符是空白字符
+        while (find(kongbai.begin(), kongbai.end(), is.peek()) != kongbai.end())
+        {
+            if (is.peek() == string::npos)
+                break;
+
+            res += is.get();
+        }
+
+        handleStr.clear();
+
+        if (is.peek() == string::npos)
+            break;   
+    }
+
+    return res;
+}
+//string类的find_first_of()才有从指定位置开始搜索的功能，
+// 标准库提供的find_first_of()没有该功能
 #endif
