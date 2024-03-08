@@ -3940,7 +3940,7 @@ public:
 
 
 //面试题63：替换单词
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 #include <string>
@@ -3952,7 +3952,6 @@ class PreTree
 {
 private:
     bool isWord=false;
-    //创建next数组，有26个元素，每个元素都是指向PreTree的指针，初始化为nullptr
     PreTree* next[26]{ nullptr };
 
 public:
@@ -4088,4 +4087,340 @@ string ReplaceCertainWords(vector<string>& WordRoot, string sentence)
 }
 //string类的find_first_of()才有从指定位置开始搜索的功能，
 // 标准库提供的find_first_of()没有该功能
+#endif
+
+
+//
+#if 1
+
+#endif
+
+
+//面试题81：允许重复选择元素的组合
+//给定一个没有重复数字的正整数集合，请列举出所有元素之和
+// 等于某个给定值的所有组合。同一个数字可以在组合中出现任意次。
+//回溯法解决
+#if 0
+//能够用回溯法解决的问题都能够分成若干步来解决，每一步都面临若干选择。
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<vector<int>>FindCombinations(vector<int>& input, int k);
+void FindCombinationsCore(vector<int>& input,int k,vector<int>& current,
+    vector<vector<int>>& res,int start);
+
+int main()
+{
+    vector<int> dataInput{2,3,5};
+    int k = 8;
+
+    vector<vector<int>>res=FindCombinations(dataInput, k);
+
+    for (auto x : res)
+    {
+        for (auto y : x)
+            cout << y << ' ';
+
+        cout << endl;
+    }
+
+    return 0;
+}
+
+vector<vector<int>>FindCombinations(vector<int>& input, int k)
+{
+    if (input.empty() || k <= 0)
+        throw exception("Error!");
+
+    //创建存储其中一组数字的容器
+    vector<int> current;
+    //创建存储满足要求的所有组合的容器
+    vector<vector<int>> res;
+
+    FindCombinationsCore(input,k,current,res,0);
+
+    return res;
+}
+// 对于从集合中选取数字组成组合的问题而言，集合中有多少个数字，
+// 解决这个问题就需要多少步。每一步都从集合中取出一个下标为i的数字，
+// 此时面临两个选择：
+// 一个选择是跳过这个数字不将该数字添加到组合中，
+// 那么这一步实际上什么都不做，接下来处理下标为i + 1的数字。
+// 另一个选择是将数字添加到组合中，由于一个数字可以重复在组合中出现，
+// 也就是说，下一步可能再次选择同一个数字，因此下一步仍然处理下标为i的数字
+#if 0
+void FindCombinationsCore(vector<int>& input, int k, vector<int>& current,
+    vector<vector<int>>& res)
+{
+    //回溯的终止条件
+    //k是组合中元素之和的目标值。每当在组合中添加一个数字时，
+    // 就从target中减去这个数字。当k等于0时，组合中的所有元素之和正好等于k，
+    // 因此也就找到了一个符合条件的组合
+    if (k == 0)
+    {
+        res.push_back(current);
+        return;
+    }
+    else if (k < 0)
+        return;
+
+    for (int i = 0; i < input.size(); ++i)
+    {
+        current.push_back(input[i]);
+
+        FindCombinationsCore(input, k - input[i], current, res);
+
+        current.pop_back();
+    }
+
+    return;
+}
+#endif
+//结果：
+/*
+2 2 2 2
+2 3 3
+3 2 3
+3 3 2
+3 5
+5 3
+*/
+//结果分析：出现重复的组合，原因是在循环中每次调用FindCombinationsCore
+//for循环的起始值都是0
+
+//解决：
+//在每次进入回溯后，用变量标记当前遍历到了input数组的哪个元素处
+//这样在每次进入循环时，只会从当前遍历到的元素处开始向后尝试，避免了元素的重复
+void FindCombinationsCore(vector<int>& input, int k, vector<int>& current,
+    vector<vector<int>>& res, int start)
+{
+    if (k == 0)
+    {
+        res.push_back(current);
+        return;
+    }
+    else if (k < 0)
+        return;
+
+    for (int i = start; i < input.size(); ++i)
+    {
+        current.push_back(input[i]);
+
+        FindCombinationsCore(input, k - input[i], current, res,i);
+
+        current.pop_back();
+    }
+
+    return;
+}
+#endif
+//补充：
+//要判断两个数组是否是重复数组，
+// 即数组元素的顺序可以不同，但元素的出现次数需要一致
+#if 1
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+
+bool isDuplicateArray(const std::vector<int>& arr1, const std::vector<int>& arr2) {
+    if (arr1.size() != arr2.size())
+    {
+        return false;
+    }
+
+    std::unordered_map<int, int> frequencyMap;//数值-出现次数pair
+
+    for (int num : arr1)
+    {
+        frequencyMap[num]++;
+    }
+
+    for (int num : arr2)
+    {
+        if (frequencyMap.find(num) == frequencyMap.end() || frequencyMap[num] == 0)
+        {
+            return false;
+        }
+
+        frequencyMap[num]--;
+    }
+
+    return true;
+}
+
+int main() 
+{
+    std::vector<int> arr1 = { 2, 3, 3 };
+    std::vector<int> arr2 = { 3, 2, 3 };
+
+    if (isDuplicateArray(arr1, arr2)) 
+    {
+        std::cout << "Arrays are duplicate arrays." << std::endl;
+    }
+    else 
+    {
+        std::cout << "Arrays are not duplicate arrays." << std::endl;
+    }
+
+    return 0;
+}
+#endif
+
+
+//运用动态规划解决问题的第1步是识别哪些问题适合运用动态规划。
+// 和适合运用回溯法的问题类似，适用动态规划的问题都存在若干步骤，
+// 并且每个步骤都面临若干选择。
+// 如果题目要求列举出所有的解，那么很有可能需要用回溯法解决。
+// 如果题目是求一个问题的最优解（通常是求最大值或最小值），
+// 或者求问题的解的数目（或判断问题是否存在解），
+// 那么这个题目有可能适合运用动态规划
+
+//比如//面试题81：允许重复选择元素的组合  适用回溯法
+//但题目改为：
+//给定一个没有重复数字的正整数集合，
+// 请找出所有元素之和等于某个给定值的所有组合的数目
+//就适用于动态规划
+#if 1
+//每一步都从集合中取出一个下标为i的数字，
+// 此时面临两个选择：
+// 一个选择是跳过这个数字不将该数字添加到组合中，
+// 那么这一步实际上什么都不做，接下来处理下标为i + 1的数字。
+// 另一个选择是将数字添加到组合中，由于一个数字可以重复在组合中出现，
+// 也就是说，下一步可能再次选择同一个数字，因此下一步仍然处理下标为i的数字
+
+//有数组2,3,5 
+//定义：
+//D[i][j]为数组前i个元素，和为j的组合数
+//求D[3][8]=?
+
+
+
+#endif
+
+
+//动态规划解决单序列问题
+#if 1
+
+#endif
+
+
+//动态规划解决双序列问题
+//面试题96：最长公共子序列(两个子序列在序列中可以不连续)
+#if 0
+//有S1：ABCBDAB   S2：BDCABC  
+//定义：
+//D[i][j] 为 S1的前i个字符与S2的前j个字符的最长公共子序列
+//求的是D[7][6]=?
+
+//动态规划就是考虑在当前状态下做什么决策
+
+//分解：
+//情况1：末尾字符相同  S1[i]==S2[j]
+//比如说，在S1的第i个字符为x，在S2的第j个字符也为x，那么
+//S1的前i个字符和S2的前j个字符【至少】找到了1个子序列
+//那么得到S1的前i个字符，和S2的前j个字符的最长公共子序列可以写作
+// D[i][j]=D[i-1][j-1]+1;//即前面的结果的基础上加1
+
+//情况2：末尾字符不相同  S1[i]!=S2[j]
+//比如说，在S1的第i个字符为x，在S2的第j个字符为y，那么
+//可以不考虑S1的第i个字符，或可以不考虑S2的第j个字符
+//那么得到S1的前i个字符，和S2的前j个字符的最长公共子序列可以写作
+// D[i][j]=max(D[i-1][j], D[i][j-1]);
+
+//可以又不考虑S1的第i个字符，也不考虑S2的第j个字符吗？
+//这种行为完全可以替换为情况2的
+// 先不考虑第(S1的)i或(S2的)j个字符再不考虑第(S2的)j或(S1的)i个字符
+//所以以上两种情况已经囊括了所有情况
+
+//设置值：
+//D[0][0]=0   D[i][0]=0    D[0][j]=0   
+//理解：
+//前0个字符与前0/i/j个字符的最长公共子序列为0
+
+//画表：
+/*
+
+i/j           0  1  2   3  4  5  6  
+              0  B  D  C  A  B  C
+0        0  0  0  0  0   0  0  0    D[0][j]=0
+1        A  0
+2        B  0
+3        C  0
+4        B  0
+5        D  0
+6        A  0
+7        B  0
+           D[i][0]=0
+
+
+i/j           0  1  2   3  4  5  6
+              0  B  D  C  A  B  C
+0        0  0  0  0   0   0  0  0    
+1        A  0  0  0   0   1  1  1
+2        B  0  1  1   1   1  2  2
+3        C  0  1  1   2   2  2  3
+4        B  0  1  1   2   2  3  3 
+5        D  0  1  2   2   2  3  3
+6        A  0  1  2   2   3  3  3
+7        B  0  1  2   2   3  4  4
+
+最长公共子序列可能有多组：对于该例子，从D[7][5]的4开始回推
+有子序列BDAB、BCAB
+*/
+
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int FindLCS(const string& S1,const string& S2);
+
+int main()
+{
+    string S1{"ABCBDAB"};
+    string S2{"BDCABC"};
+
+    try
+    {
+        cout << FindLCS(S1,S2);
+    }
+    catch (exception& e)
+    {
+        e.what();
+    }
+
+    return 0;
+}
+
+int FindLCS(const string& S1, const string& S2)
+{
+    if (S1.empty() || S2.empty())
+        throw exception("Invalid Data!");
+
+    vector<vector<int>> dp(S1.size()+1, vector<int>(S2.size()+1, 0));
+    //***理解***
+    //+1是为了处理边界条件
+
+    for (int i = 1; i <= S1.size(); ++i)
+    {
+        for (int j = 1; j <= S2.size(); ++j)
+        {
+            if (S1[i - 1] == S2[j - 1])
+                dp[i][j] = dp[i - 1][j - 1] + 1;
+            else
+                dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+        }
+    }
+
+    return dp[S1.size()][S2.size()];
+}
+#endif
+//扩展：
+//求最长公共子串(两个子序列在序列中要连续
+#if 1
+
 #endif
