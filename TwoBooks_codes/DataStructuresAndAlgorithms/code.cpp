@@ -11,7 +11,7 @@ void CountBits(int num, vector<int>&);
 
 int main()
 {
-    unsigned int num;
+    unsigned int num; 
     cin >> num;
 
     //数字0到数字num
