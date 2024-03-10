@@ -4219,7 +4219,7 @@ void FindCombinationsCore(vector<int>& input, int k, vector<int>& current,
 //补充：
 //要判断两个数组是否是重复数组，
 // 即数组元素的顺序可以不同，但元素的出现次数需要一致
-#if 1
+#if 0
 #include <iostream>
 #include <unordered_map>
 #include <vector>
@@ -4272,17 +4272,19 @@ int main()
 //运用动态规划解决问题的第1步是识别哪些问题适合运用动态规划。
 // 和适合运用回溯法的问题类似，适用动态规划的问题都存在若干步骤，
 // 并且每个步骤都面临若干选择。
-// 如果题目要求列举出所有的解，那么很有可能需要用回溯法解决。
-// 如果题目是求一个问题的最优解（通常是求最大值或最小值），
+ 
+//【如果题目要求列举出所有的解，那么很有可能需要用回溯法解决】
+//【如果题目是求一个问题的最优解（通常是求最大值或最小值）】
+
 // 或者求问题的解的数目（或判断问题是否存在解），
 // 那么这个题目有可能适合运用动态规划
-
 //比如//面试题81：允许重复选择元素的组合  适用回溯法
 //但题目改为：
+
 //给定一个没有重复数字的正整数集合，
-// 请找出所有元素之和等于某个给定值的所有组合的数目
+//请找出所有元素之和等于某个给定值的所有组合的数目
 //就适用于动态规划
-#if 1
+#if 0
 //每一步都从集合中取出一个下标为i的数字，
 // 此时面临两个选择：
 // 一个选择是跳过这个数字不将该数字添加到组合中，
@@ -4295,9 +4297,189 @@ int main()
 //D[i][j]为数组前i个元素，和为j的组合数
 //求D[3][8]=?
 
+//***错误的分解想法****
+//分解：
+//情况1：选择当前数字
+//D[i][j]=D[i-1][j]+array[i];
 
+//情况2：不选择当前数字
+//D[i][j]=D[i-1][j];
+//***不妨填个表先看看，分析一下值出现的原理***
 
+//设置值：
+//D[0][0]=0   D[i][0]=0   D[0][j]=0
+
+//画表：
+/*
+
+i/j          0  1  2  3  4  5  6  7  8        
+           
+0    0     0   0  0  0  0  0  0  0  0
+1    2     0   0  1  0  1  0  1  0  1
+2    3     0   0  1  1  1  1  2  1  2
+3    5     0   0  1  1  1  2  2  2  3
+
+//分解：
+//情况1：当和值j小于当前数字array[i]
+//D[i][j]=max(0,D[i-1][j])
+
+//情况3：当和值j对当前数字array[i]取余后能得到0
+//D[i][j]=D[i-1][j]+1;
+
+//情况2：当和值j 减去若干个当前数字array[i]后得到的数字
+   在前一个数字array[i-1]对应的状态中的值
+//D[i][j]+=...;
+
+情况1与2,3是else关系，情况2,3是并行关系
+*/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iomanip>
+using namespace std;
+
+int CalCombinations(vector<int> input,int k);
+
+int main()
+{
+    vector<int> dataInput{2,3,5};
+    int k = 8;
+
+    cout << CalCombinations(dataInput,k);
+
+    return 0;
+}
+int CalCombinations(vector<int> input, int k)
+{
+    if (input.empty() || k <= 0)
+        return 0;
+
+    //先进行排序
+    sort(input.begin(), input.end());
+
+    vector<vector<int>> dp(input.size()+1,vector<int>(k+1,0));
+
+    for (int i = 1; i <= input.size(); ++i)
+    {
+        for (int j = 1; j <= k; ++j)
+        {
+            if (input[i - 1] > j)
+            {
+                dp[i][j] = dp[i - 1][j];
+                continue;
+            } 
+
+            //继承上一个状态
+            dp[i][j] = dp[i - 1][j];
+
+            //这段代码块写错，不好写
+            /*
+            for (int k = 1; k * input[i - 1] <= j; ++k)
+            {
+                if (find(input.begin(), input.begin()+i-1, j - k * input[i - 1]) != input.end())
+                {
+                    dp[i][j] += dp[i - 1][j - k*input[i - 1]];
+                    break;
+                }
+            }
+            */
+            //想复杂了
+            //若和值为8，遍历到数字3，如何让dp[2][8]=2
+            // 3，3，2的组合，应该找dp[1][2]
+
+            for (int k = 1; k * input[i - 1] <= j; ++k)
+            {
+               if(dp[i-1][j-k*input[i-1]]!=0)
+               {
+                   dp[i][j] += dp[i - 1][j - k * input[i - 1]];
+               }
+            }
+
+            if ( j % input[i - 1] == 0)
+            {
+                dp[i][j] += 1;
+            }
+        }
+    }
+
+    for (auto x : dp)
+    {
+        for (auto y : x)
+        {
+            cout << right << setw(3) << y;
+        }
+
+        cout << endl;
+    }
+
+    return dp[input.size()][k];
+}
 #endif
+//改进的点：
+//由于某个元素是可以重复取用的，所以应该可以优化为（对比一下完全背包）
+//在【当前状态下】，取该元素，然后加上和值k减去该元素的值对应的状态的值
+#if 1
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iomanip>
+using namespace std;
+
+int CalCombinations(vector<int> input, int k);
+
+int main()
+{
+    vector<int> dataInput{ 2, 3, 5 };
+    int k = 8;
+
+    cout << CalCombinations(dataInput, k);
+
+    return 0;
+}
+
+int CalCombinations(vector<int> input, int k)
+{
+    if (input.empty() || k <= 0)
+        return 0;
+
+    sort(input.begin(), input.end());
+
+    vector<vector<int>> dp(input.size() + 1, vector<int>(k + 1, 0));
+
+    // Base case: there is exactly one way to make the sum 0, which is using no elements.
+    for (int i = 0; i <= input.size(); ++i)
+        dp[i][0] = 1;
+
+    for (int i = 1; i <= input.size(); ++i)
+    {
+        for (int j = 1; j <= k; ++j)
+        {
+            dp[i][j] = dp[i - 1][j]; // Case 1: exclude current element
+
+            if (j >= input[i - 1])
+            {
+                dp[i][j] += dp[i][j - input[i - 1]]; // Case 2: include current element
+            }
+        }
+    }
+
+    // Uncomment the following block to print the dp array for debugging
+    /*
+    for (auto x : dp)
+    {
+        for (auto y : x)
+        {
+            cout << right << setw(3) << y;
+        }
+        cout << endl;
+    }
+    */
+
+    return dp[input.size()][k];
+}
+#endif
+
 
 
 //动态规划解决单序列问题
