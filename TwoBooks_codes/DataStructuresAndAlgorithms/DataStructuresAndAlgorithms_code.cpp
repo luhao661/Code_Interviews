@@ -4096,6 +4096,149 @@ string ReplaceCertainWords(vector<string>& WordRoot, string sentence)
 #endif
 
 
+//面试题67:最大的异或
+#if 1
+//一般方法：
+//找出数组中所有的两个数字组成的数对，计算异或值后比较得到最大异或值
+//时间复杂度O(n的平方)
+
+//利用前缀树的方法：
+//首先思考：异或是同为0，异为1
+//如果想找到某个整数k和其他整数的最大异或值，
+// 那么尽量找和k的数位不同的整数
+
+//这个问题可以转化为查找的问题，而且还是按照整数的二进制数位进行查找的问题。
+// 需要将整数的每个数位都保存下来。前缀树可以实现这种思路，
+// 前缀树的每个节点对应整数的一个数位，路径对应一个整数
+
+//数字以从高位到低位的顺序存储在前缀树中
+//前缀树用于快速查找和某个数位相异的数位
+
+//前缀树类的next数组怎么定义？
+//定义为next[2]
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class PreTree
+{
+private:
+    PreTree* next[2]{nullptr};
+
+    //由于整数都是32位，它们在前缀树中对应的路径的长度都是一样的，
+    // 因此没有必要用一个布尔值字段标记最后一个数位
+
+public:
+    PreTree()
+    {}
+
+    void BuildPreTree(const vector<int>& input)
+    {
+        for (int i = 0; i < input.size(); ++i)
+        {
+            PreTree* pNode = this;
+            int mask = 1;
+
+            for (int idx = 31; idx >= 0; --idx)
+            {
+                //错误写法：
+                //int tmp = input[i] & (mask << idx);
+                //正确写法1：
+                int tmp = (input[i] & (mask << idx)) ? 1 : 0;
+                //写法2：
+                //int tmp = (input[i] & (mask << idx))>>idx;
+
+                //从某个数字的高位开始构造某个数字前缀树表示
+                if (pNode->next[tmp] == nullptr)
+                {
+                    pNode->next[tmp] = new PreTree();
+                }
+
+                pNode = pNode->next[tmp];
+            }
+        }
+    }
+    //问题：
+    //当几个数字都输入进了前缀数，那就分不清前缀树的哪条支路是对应某个数字了
+    //到某个支路点后有两个分支点，一个是1，一个是0
+    //那一定对应两个数字，遍历到该支路点前的支路都是两个数字具有的相同的位的值
+    //后面选择一条支路，也就选择走某个数对应的数位
+    //那后面如果再出现分支，就可能出现走到别的数字对应的数位了
+    //就是说可能混合走了2个或3个数字的支路。
+
+    //理解：
+    //“那后面如果再出现分支，就可能出现走到别的数字对应的数位了”
+    //但那个“别的数字”对应的数位，你之前走的路都属于该数字所构造的支路
+    //所以从始至终还是”别的数字“这一个数字
+
+    int findMaxXOR(const vector<int>& input) 
+    {
+        int maxXOR = 0;
+
+        for (int i = 0; i < input.size(); ++i)
+        {
+            PreTree* pNode = this;
+            int currXOR = 0;
+
+            for (int idx = 31; idx >= 0; --idx)
+            {
+                int bit = (input[i] >> idx) & 1;
+
+                //为了找和当前数位的值相反的位值
+                int opposite_bit = 1 - bit;
+
+                if (pNode->next[opposite_bit] != nullptr)
+                {
+                    //记录到当前数位的异或值
+                    currXOR |= (1 << idx);
+
+                    pNode = pNode->next[opposite_bit];
+                }
+                else
+                {
+                    pNode = pNode->next[bit];
+                }
+            }
+
+            maxXOR = max(maxXOR, currXOR);
+        }
+
+        return maxXOR;
+    }
+
+};
+
+//int FindMaxXor(const vector<int>& input);
+
+int main()
+{
+    vector<int> dataInput{1,3,4,7};
+
+    //int res = FindMaxXor(dataInput);
+    PreTree PT;
+    PT.BuildPreTree(dataInput);
+    cout << PT.findMaxXOR(dataInput);
+
+    return 0;
+}
+/*
+int FindMaxXor(const vector<int>& input)
+{
+    if (input.empty())
+        return 0;
+
+    PreTree PT;
+
+    PT.BuildPreTree(input);
+
+    int maxXor = 0;
+}
+*/
+#endif
+
+
 //面试题81：允许重复选择元素的组合
 //给定一个没有重复数字的正整数集合，请列举出所有元素之和
 // 等于某个给定值的所有组合。同一个数字可以在组合中出现任意次。
@@ -4418,8 +4561,8 @@ int CalCombinations(vector<int> input, int k)
 #endif
 //改进的点：
 //由于某个元素是可以重复取用的，所以应该可以优化为（对比一下完全背包）
-//在【当前状态下】，取该元素，然后加上和值k减去该元素的值对应的状态的值
-#if 1
+//在【当前状态下】，取该元素，然后加上和值k减去该元素的值后对应的状态的值
+#if 0
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -4465,7 +4608,7 @@ int CalCombinations(vector<int> input, int k)
     }
 
     // Uncomment the following block to print the dp array for debugging
-    /*
+    
     for (auto x : dp)
     {
         for (auto y : x)
@@ -4474,7 +4617,7 @@ int CalCombinations(vector<int> input, int k)
         }
         cout << endl;
     }
-    */
+    
 
     return dp[input.size()][k];
 }
