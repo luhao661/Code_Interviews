@@ -163,6 +163,7 @@ abcdef
 #endif
 #endif
 //***注***
+//经验：
 //在判断两个单词的各个字母时，纵使字母的查找时间复杂度降到O(1)
 //但比较整个单词的字母还需要线性复杂度
 //可以用【整数的二进制数位】记录字符串中出现的字符，（用【二进制数位来模拟哈希表】）
@@ -726,6 +727,7 @@ int FindSubArray(const vector<int>& vec, int k)
 }
 #endif
 //***注***
+//经验：
 //使用【双指针】（类似于【滑动窗口】）解决子数组之和的面试题有一个前提条件——
 //数组中的所有数字都是正数。如果数组中的数字有正数、负数和零，
 //那么双指针的思路并不适用，这是因为当数组中有负数时在子数组中
@@ -733,7 +735,7 @@ int FindSubArray(const vector<int>& vec, int k)
 //不一定能减少子数组之和。
 
 
-//面试题10：和为k的子数组
+//经验：
 //题目中没说数组是由正整数构成的
 //换一种思路求子数组之和。【累加数组数字求子数组之和】
 // 假设整个数组的长度为n，它的某
@@ -745,6 +747,7 @@ int FindSubArray(const vector<int>& vec, int k)
 //的子数组之和S(n - 1)。因此，
 //从下标为i开始到下标为j结束的子数组的和就是S(j) - S(i - 1)
 //该方法也称为【前缀和】
+//面试题10：和为k的子数组
 #if 0
 #include <iostream>
 #include <vector>
@@ -1107,6 +1110,7 @@ int main()
         flag |= 1 << (*i - 'a');
     }
 
+    //经验：
     //要实现仅遍历一次str2就能判断str2是否包含str1的某个变位词
     //就需要实现在str2中框出str1长度范围内的子字符串，判断这些子字符串
     //是否满足变位词
@@ -1289,6 +1293,7 @@ bool Judge(shared_ptr<int>& sp)//若含有其他字符则可以考虑使用unord
 
 //面试题16：不含重复字符的最长子字符串
 //（对照//面试题48：最长不含重复字符的子字符串）
+//经验：
 //此处用双指针来解
 #if 0
 #include <iostream>
@@ -3049,6 +3054,8 @@ int CalMinCore(shared_ptr<bool>& hash)
 
 
 //面试题36：后缀表达式
+//经验：
+//使用栈
 #if 0
 #include <iostream>
 #include <stack>
@@ -3818,7 +3825,7 @@ vector<vector<int>> FindKSmallestNumPairs(vector<int>& nums1, vector<int>& nums2
 #endif
 
 
-//小结：
+//小结(经验)：
 //在最大堆中最大值总是位于堆顶，在最小堆中最小值总是位于堆顶。
 // 因此，在堆中只需要O(1)的时间就能得到堆中的最大值或最小值。
 
@@ -3928,6 +3935,7 @@ public:
 #endif
 
 
+//经验：
 //前缀树主要用来解决与字符串查找相关的问题。
 //如果字符串的长度为k，由于在前缀树中查找一个字符串
 // 相当于顺着前缀树的路径查找字符串的每个字符，因此时间复杂度是O(k)
@@ -4097,7 +4105,7 @@ string ReplaceCertainWords(vector<string>& WordRoot, string sentence)
 
 
 //面试题67:最大的异或
-#if 1
+#if 0
 //一般方法：
 //找出数组中所有的两个数字组成的数对，计算异或值后比较得到最大异或值
 //时间复杂度O(n的平方)
@@ -4191,7 +4199,7 @@ public:
 
                 if (pNode->next[opposite_bit] != nullptr)
                 {
-                    //记录到当前数位的异或值
+                    //记录计算到当前数位的异或值，即该位为1
                     currXOR |= (1 << idx);
 
                     pNode = pNode->next[opposite_bit];
@@ -4236,6 +4244,85 @@ int FindMaxXor(const vector<int>& input)
     int maxXor = 0;
 }
 */
+#endif
+
+
+//二分查找法
+//***注***
+//一般的循环入口条件：
+//当left等于right时，查找范围是长度为1的子数组。
+// 长度为1的子数组仍然是一个有效的查找范围，但当left大于right时
+// 这两个下标就不能形成一个有效的查找返回，
+// 因此while循环的条件是left小于或等于right。
+
+//经验：
+//如果问题是关于在【排序数组】中的查找操作，
+//那么可以考虑采用二分查找算法。
+
+
+//面试题68：查找插入位置
+#if 1
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int FindInsertIndex(const vector<int>& input,int t);
+
+int main()
+{
+    vector<int> input{1,3,6,8};
+
+    int t;
+
+    t = 3;
+    cout << FindInsertIndex(input,t)<<endl;
+
+    t = 5;
+    cout << FindInsertIndex(input, t)<<endl;
+
+    t = 0;
+    cout << FindInsertIndex(input, t)<<endl;
+
+    t = 10;
+    cout << FindInsertIndex(input, t)<<endl;
+
+    return 0;
+}
+int FindInsertIndex(const vector<int>& input, int t)
+{
+    if (input.empty())
+        throw exception("Error!");
+
+    int begidx, endidx,mididx;
+    begidx = 0, endidx = input.size() - 1;
+
+    while (begidx <= endidx)
+    {
+        //注意运算符优先级
+        mididx = begidx+((endidx - begidx) >> 1);
+
+        if (input[mididx] == t)
+            return mididx;
+        else if (input[mididx] < t)
+        {
+            begidx = mididx + 1;
+
+            //考虑边界情况2：mididx为数组索引最大值，begidx为数组索引最大值+1
+            if (begidx > endidx || input[begidx] > t)//注意两个关系表达式先后次序
+                return begidx;
+        }
+        else
+        {
+            endidx = mididx - 1;
+
+            //考虑边界情况1：mididx为0，endidx为-1
+            if (endidx<0 || input[endidx] < t)
+                return mididx;
+        }
+    }
+
+    return -1;
+}
 #endif
 
 
@@ -4416,6 +4503,7 @@ int main()
 // 和适合运用回溯法的问题类似，适用动态规划的问题都存在若干步骤，
 // 并且每个步骤都面临若干选择。
  
+//经验：
 //【如果题目要求列举出所有的解，那么很有可能需要用回溯法解决】
 //【如果题目是求一个问题的最优解（通常是求最大值或最小值）】
 
