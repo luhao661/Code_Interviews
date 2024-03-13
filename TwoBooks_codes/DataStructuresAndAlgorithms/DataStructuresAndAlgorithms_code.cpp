@@ -4258,10 +4258,12 @@ int FindMaxXor(const vector<int>& input)
 //经验：
 //如果问题是关于在【排序数组】中的查找操作，
 //那么可以考虑采用二分查找算法。
+//扩展：
+//在【分段排序的数组】中也可以尝试二分查找法
 
 
 //面试题68：查找插入位置
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -4322,6 +4324,164 @@ int FindInsertIndex(const vector<int>& input, int t)
     }
 
     return -1;
+}
+#endif
+
+
+//面试题69：山峰数组的顶部
+#if 0
+#include <iostream>
+#include <vector>
+using namespace std;
+
+pair<int, int> FindClimax(const vector<int>& vec);
+
+int main()
+{
+    vector<int> DataInput{1,3,5,4,2};
+
+    pair<int, int>res = FindClimax(DataInput);
+    cout << res.first << ' ' << res.second<<endl;
+
+    DataInput = vector<int>{1,5,4,3,2};
+    res = FindClimax(DataInput);
+    cout << res.first << ' ' << res.second<<endl;
+
+    DataInput = vector<int>{ 5,4,3,2,1 };
+    res = FindClimax(DataInput);
+    cout << res.first << ' ' << res.second;
+
+    return 0;
+}
+pair<int, int> FindClimax(const vector<int>& vec)
+{
+    if (vec.empty()||vec.size()<3)
+        throw exception("Error input!");
+
+    int begidx, endidx, mididx;
+
+    begidx = 0, endidx = vec.size() - 1;
+
+#if 0
+    while (begidx <= endidx)
+    {
+        mididx = begidx + ((endidx - begidx) >> 1);
+
+        if (mididx == begidx || mididx == endidx)
+            return make_pair(vec[mididx], mididx);
+        else if (vec[mididx] > vec[mididx - 1] && vec[mididx] > vec[mididx + 1])
+            return make_pair(vec[mididx], mididx);
+        else if (vec[mididx] < vec[mididx - 1])
+            endidx = mididx;
+        else if (vec[mididx] < vec[mididx + 1])
+            begidx = mididx;
+    }
+#endif
+    //mididx到两个顶点，直接返回，这样的操作的前提是
+    //endidx = mididx;而不是endidx = mididx-1;   begidx同理
+
+    //换一种：
+    while (begidx <= endidx)
+    {
+        mididx = begidx + ((endidx - begidx) >> 1);
+    
+        //先考虑顶点情况，再考虑中部的情况
+
+        if (mididx == begidx && vec[mididx] < vec[mididx + 1])
+            begidx = mididx + 1;
+        else if (mididx == endidx && vec[mididx] < vec[mididx - 1])
+            endidx = mididx - 1;
+        else if ((mididx == begidx && vec[mididx] > vec[mididx + 1]) || (mididx == endidx && vec[mididx] > vec[mididx - 1]))
+            return make_pair(vec[mididx], mididx);
+        else if (vec[mididx] > vec[mididx - 1] && vec[mididx] > vec[mididx + 1])
+            return make_pair(vec[mididx], mididx);
+        else if (vec[mididx] < vec[mididx - 1])
+            endidx = mididx-1;
+        else if (vec[mididx] < vec[mididx + 1])
+            begidx = mididx+1;
+    }
+}
+#endif
+
+
+///在数值范围内的二分查找(二分答案)
+//经验：
+//如果一开始不知道问题的解是什么，但是知道解的范围是多少，
+// 则可以尝试在这个范围内应用二分查找
+//假设解的范围的最小值是min，最大值是max，先尝试范围内的中间值mid。
+// 如果mid正好是问题的解，那么固然好。当mid不是问题的解时，
+// 如果能够判断接下来应该在从min到mid - 1或从mid + 1到max的范围内查找，
+// 那么就可以继续重复二分查找的过程，直到找到解为止。
+//应用这种思路的关键在于两点：
+// 一是确定解的范围，即解的可能的最小值和最大值。
+// 二是在发现中间值不是解之后如何判断接下来应该在解的范围的
+// 前半部分还是后半部分查找。只有每次将查找范围减少一半时才能应用二分查找算法
+
+//面试题72：求平方根
+#if 1
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+long CalSquareRoot(long num);
+
+int main()
+{
+    int num = 0;
+    cout << CalSquareRoot(num) << endl;
+
+    num = 1;
+    cout << CalSquareRoot(num) << endl;
+
+    num = 2;
+    cout << CalSquareRoot(num) << endl;
+
+    num = 4;
+    cout << CalSquareRoot(num) << endl;
+
+    num = 18;
+    cout << CalSquareRoot(num) << endl;
+
+    return 0;
+}
+
+long CalSquareRoot(long num)
+{
+    if (num < 0)
+        return -1;
+
+    int bidx, eidx, midx;
+    bidx = 0, eidx = 5;
+    long midxMultiplymidx;
+
+    while (bidx <= eidx)
+    {
+        //midx = bidx + ((eidx - bidx) >> 1);
+        midx = bidx + eidx >> 1;
+
+		midxMultiplymidx = midx * midx;
+
+        //如果发生溢出
+        if(midxMultiplymidx<0)
+        {
+            eidx = midx - 1;
+            continue;
+        }
+
+        if (midxMultiplymidx == num)
+            return midx;
+        else if (midxMultiplymidx > num)
+            eidx = midx - 1;
+        else if (midxMultiplymidx < num)
+        {
+            if (pow(midx + 1, 2) > num)
+                return midx;
+            else
+                bidx = midx + 1;
+        }
+    }
+
+    return -2;
 }
 #endif
 
