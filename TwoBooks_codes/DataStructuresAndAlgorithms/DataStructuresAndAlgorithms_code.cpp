@@ -4417,8 +4417,9 @@ pair<int, int> FindClimax(const vector<int>& vec)
 // 二是在发现中间值不是解之后如何判断接下来应该在解的范围的
 // 前半部分还是后半部分查找。只有每次将查找范围减少一半时才能应用二分查找算法
 
+
 //面试题72：求平方根
-#if 1
+#if 0
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -4445,13 +4446,14 @@ int main()
     return 0;
 }
 
+#if 0
 long CalSquareRoot(long num)
 {
     if (num < 0)
         return -1;
 
     int bidx, eidx, midx;
-    bidx = 0, eidx = 5;
+    bidx = 0, eidx = numeric_limits<int>::max();
     long midxMultiplymidx;
 
     while (bidx <= eidx)
@@ -4484,6 +4486,169 @@ long CalSquareRoot(long num)
     return -2;
 }
 #endif
+//可优化：
+//1.整数num的平方根一定小于等于num
+//所以eidx最大可以缩小范围至num
+//2.上述处理溢出的方法不太好
+//将midx * midx == num优化为
+//midx == num/midx  这两个式子在数学上等价，
+// 但后者可以防止计算溢出
+
+long CalSquareRoot(long num)
+{
+    if (num < 0)
+        return -1;
+
+    int bidx, eidx, midx;
+    bidx = 0, eidx = num;
+    int tmp;
+
+    if (num == 0)
+        return 0;
+    else if (num == 1)
+        return 1;
+
+    while (bidx <= eidx)
+    {
+        //midx = bidx + ((eidx - bidx) >> 1);
+        midx = bidx + eidx >> 1;
+
+        tmp = num/midx;
+
+        if (midx == tmp)
+            return midx;
+        else if (midx > tmp)
+            eidx = midx - 1;
+        else if (midx < tmp)
+        {
+            if (pow(midx + 1, 2) > tmp)
+                return midx;
+            else
+                bidx = midx + 1;
+        }
+    }
+
+    return -2;
+}
+#endif
+
+
+//面试题73：狒狒吃香蕉
+// 狒狒很喜欢吃香蕉。一天它发现了n堆香蕉，第i堆有piles[i]根香蕉。
+// 门卫刚好走开，H小时后才会回来。狒狒吃香蕉喜欢细嚼慢咽，
+// 但又想在门卫回来之前吃完所有的香蕉。
+// 请问狒狒每小时至少吃多少根香蕉？
+// 如果狒狒决定每小时吃k根香蕉，而它在吃的某一堆剩余的香蕉的数目少于k，
+// 那么它只会将这一堆的香蕉吃完，下一个小时才会开始吃另一堆的香蕉。
+// 该题目较为抽象
+//用具体的数字做特例化解释
+//有4堆香蕉，第i堆有piles[i]根香蕉，piles[4]={1,3,5,7}。门卫6小时后回来
+//若每小时至少吃4根香蕉，能在6小时吃完香蕉
+#if 0
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+using namespace std;
+
+int CalNumsToEat(vector<int>& piles,int H);
+int CalCostTime(vector<int>& data, int speed);
+
+int main()
+{
+    vector<int> piles{1,3,5,7};
+    int k,H=6;
+
+    k = CalNumsToEat(piles,H);
+    cout << k << endl;
+
+    piles = { 1,3,5,7 }, H = 4;
+    k = CalNumsToEat(piles, H);
+    cout << k << endl;
+
+    piles = {1,1,1,1},H=4;
+    k = CalNumsToEat(piles, H);
+    cout << k << endl;
+
+    piles = { 2,1,1,1 }, H = 4;
+    k = CalNumsToEat(piles, H);
+    cout << k << endl;
+
+    piles = { 3,2,2,2 }, H = 10;
+    k = CalNumsToEat(piles, H);
+    cout << k << endl;
+
+    return 0;
+}
+int CalNumsToEat(vector<int>& piles, int H)
+{
+    //如果香蕉的堆数大于H小时数，
+    //那么无论每小时吃多少香蕉，都不可能在H小时吃完
+    if (piles.empty() || H <= 0 ||piles.size()>H)
+        return -1;
+
+    int Bnum, Enum, Mnum;
+
+    Bnum = 1;
+    //Enum = accumulate(piles.cbegin(),piles.cend(),0,plus<int>());
+
+    //最少都需要piles.size()的时间吃完，
+    //所以最多数量香蕉的堆的香蕉数可以定为吃的最大速度
+    //往后吃的速度可以减少，到指定的H小时内吃完
+    Enum = *(max_element(piles.cbegin(),piles.cend()));//*是解引用
+
+    while (Bnum <= Enum)
+    {
+        Mnum = Bnum + Enum >> 1;
+
+		int CostTime= CalCostTime(piles,Mnum);
+
+        if (CostTime == H)
+            return Mnum;
+        else if (CostTime > H)//如果花费时间大于规定的H
+        {
+            Bnum = Mnum + 1;//速度要加快
+        }
+        else//如果花费时间小于规定的H
+        {
+            //***注意最小速度是1***
+            if (Mnum==1||CalCostTime(piles, Mnum - 1) > H)
+                return Mnum;
+            else
+                Enum = Mnum - 1;
+        }
+    }
+
+    return -2;
+}
+
+int CalCostTime(vector<int>&data,int speed)
+{
+    int CostTime = 0;
+
+    for (int i = 0; i < data.size(); ++i)
+    {
+        if (data[i] <= speed)
+            CostTime += 1;
+        else//***注***
+            CostTime += data[i] / speed + ((data[i] % speed) ? 1 : 0);
+    }
+
+    return CostTime;
+}
+#endif
+
+
+//快速排序
+//面试题76：数组中第k大的数字
+// (比较//面试题59：数据流的第k大的数字，时间复杂度为O(nlogk))
+
+//
+
+
+
+
+
 
 
 //面试题81：允许重复选择元素的组合
