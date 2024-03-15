@@ -3638,7 +3638,7 @@ vector<int> FindNumbers(const vector<int>& input, int k)
 
     //***注***
     //错误思路：
-    //因此要实现【键值对按值来排序】【按从大小的顺序】
+    //因此要实现【键值对按值来排序】【按从大到小的顺序】
 
     SortCriterion SC;
 
@@ -4639,16 +4639,166 @@ int CalCostTime(vector<int>&data,int speed)
 #endif
 
 
-//快速排序
 //面试题76：数组中第k大的数字
 // (比较//面试题59：数据流的第k大的数字，时间复杂度为O(nlogk))
+//本题不一样，数据都保存在一个数组中，所有操作都在内存中完成。
+//有更快找出第k大的数字的算法，可以利用快速排序算法中的partition()
+#if 1
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <random>
 
-//
+using namespace std;
 
+int FindKthLargest_Fun1(vector<int> data,int k);
+int FindKthLargest_Fun2(vector<int> data, int k);
 
+int main()
+{
+    vector<int> dataInput{2,3,7,5,9,11,11,12};
+    int k = 5;
 
+    cout << FindKthLargest_Fun1(dataInput,k)<<endl;
 
+    k = 6;
+    cout << FindKthLargest_Fun2(dataInput, k);
 
+    return 0;
+}
+
+void Swap(int* a, int* b)
+{
+    int tmp = *b;
+
+    *b = *a;
+    *a = tmp;
+}
+//思路：
+//在长度为n的排序数组中，第k大的数字的下标是n-k。
+//用快速排序的函数partition对数组分区，如果函数partition选取的中间值
+// 在分区之后的下标正好是n - k，分区后左边的值都比中间值小，
+// 右边的值都比中间值大，即使整个数组不是排序的，中间值也肯定是第k大的数字。
+int FindKthLargest_Fun1(vector<int> data, int k)
+{
+    if (data.empty() || k == 0 || k > data.size())
+        throw exception("Error input!");
+
+    int bidx = 0;
+    int eidx = data.size()-1;
+
+    //C++ STL中的partition()实参需要起始迭代器、终止迭代器、一元谓词函数做单参判断式
+    //返回的是第二组元素首元素的迭代器
+    //不能满足左边的分区都比中间值小，右边的分区都比中间值大
+
+    //在长度为Len的排序数组中，第k大的数字的下标是Len - k。
+    //vector<int>:: iterator targetIter=next(data.begin(), eidx+1-k);
+    int targetIdx = data.size() - k;
+
+    default_random_engine rd_engine;
+
+    //错误写法1：
+    //uniform_int_distribution<int> rd_num(bidx,eidx);
+    //data[rd_num];
+
+    //错误写法2：
+    //uniform_int_distribution<int> rd_num(bidx,eidx);
+    //int rd_idx=rd_num;
+
+    //正确写法：
+    uniform_int_distribution<int> rd_num(bidx, eidx);
+    int rd_idx = rd_num(rd_engine);
+
+    //1.将随机索引值对应的值移到数组末尾，做为比较标尺
+    Swap(&data[rd_idx],&data[eidx]);
+
+    //2.使用 STL 的 partition 函数进行分区
+    auto it = partition(data.begin(), data.end(),
+        [&](int x) {return x <= data[eidx]; });
+
+    // 枢轴值的位置
+    int it_idx = it - data.begin();
+
+    // 将枢轴值放到正确的位置上
+    Swap(&data[it_idx], &data[eidx]);
+
+    while (it_idx != targetIdx)
+    {
+        if (it_idx > targetIdx)
+            eidx = it_idx - 1;
+        else
+            bidx = it_idx + 1;
+
+        uniform_int_distribution<int> rd_num(bidx, eidx);
+        rd_idx = rd_num(rd_engine);
+
+        Swap(&data[rd_idx], &data[eidx]);
+
+        it = partition(data.begin()+ bidx, data.begin()+ eidx,
+            [&](int x) {return x <= data[eidx]; });
+        it_idx = it - data.begin();
+
+        Swap(&data[it_idx], &data[eidx]);
+    }
+
+    return data[targetIdx];
+}
+
+//由此可见，不封装partition()及其依赖代码块，代码篇幅较大
+//可对重复调用部分进行封装
+
+int MyPartition(vector<int>& data, int bidx, int eidx)
+{
+    //1.取一个随机的索引值
+    default_random_engine rd_engine;
+    uniform_int_distribution<int> rd_num(bidx, eidx);
+    int rd_idx = rd_num(rd_engine);
+
+    //2.将随机索引值对应的值移到数组末尾，做为比较标尺
+    Swap(&data[rd_idx],&data[eidx]);
+
+    //3.使用 partition 函数进行分区，返回一个枢轴位置(迭代器的形式)
+    auto it = partition(data.begin()+bidx,data.begin()+eidx,
+        [&](int x) {return x <= data[eidx]; });//***注***是小于等于
+
+    //现在第一组元素的值都小于等于第二组元素的值，
+    //而it指向第二组的首元素
+
+    int idx = distance(data.begin(), it);
+
+    //4.原来随机的索引值对应的数字  回到  现在枢纽值代表的位置
+    Swap(&data[idx], &data[eidx]);
+
+    //现在第一组元素仍都小于第二组元素
+    //返回第二组首元素索引值
+    return idx;
+}
+
+int FindKthLargest_Fun2(vector<int> data, int k)
+{
+    if (data.empty() || k == 0 || k > data.size())
+        throw exception("Error input!");
+
+    int bidx = 0;
+    int eidx = data.size() - 1;
+
+    int targetIdx = data.size() - k;
+
+    int idx = MyPartition(data,bidx,eidx);
+
+    while (idx != targetIdx)
+    {
+        if (idx > targetIdx)
+            eidx = idx - 1;
+        else
+            bidx = idx + 1;
+
+        idx = MyPartition(data, bidx, eidx);
+    }
+
+    return data[targetIdx];
+}
+#endif
 
 
 //面试题81：允许重复选择元素的组合
