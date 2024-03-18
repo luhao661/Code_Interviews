@@ -4643,7 +4643,7 @@ int CalCostTime(vector<int>&data,int speed)
 // (比较//面试题59：数据流的第k大的数字，时间复杂度为O(nlogk))
 //本题不一样，数据都保存在一个数组中，所有操作都在内存中完成。
 //有更快找出第k大的数字的算法，可以利用快速排序算法中的partition()
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -4675,7 +4675,7 @@ void Swap(int* a, int* b)
     *a = tmp;
 }
 //思路：
-//在长度为n的排序数组中，第k大的数字的下标是n-k。
+//***在长度为n的排序数组中，第k大的数字的下标是n-k。***
 //用快速排序的函数partition对数组分区，如果函数partition选取的中间值
 // 在分区之后的下标正好是n - k，分区后左边的值都比中间值小，
 // 右边的值都比中间值大，即使整个数组不是排序的，中间值也肯定是第k大的数字。
@@ -4801,10 +4801,15 @@ int FindKthLargest_Fun2(vector<int> data, int k)
 #endif
 
 
+//如果解决一个问题需要若干步骤，每一步都面临若干选项，
+// 并且题目要求列出问题所有的解，那么可以尝试用回溯法解决这个问题。
+// 回溯法通常可以用递归的代码实现
+
 //面试题81：允许重复选择元素的组合
 //给定一个没有重复数字的正整数集合，请列举出所有元素之和
 // 等于某个给定值的所有组合。同一个数字可以在组合中出现任意次。
 //回溯法解决
+//回溯法可以用递归的代码实现
 #if 0
 //能够用回溯法解决的问题都能够分成若干步来解决，每一步都面临若干选择。
 
@@ -4970,6 +4975,179 @@ int main()
     }
 
     return 0;
+}
+#endif
+
+
+//面试题85：生成匹配的括号
+//分析：
+// 如果输入n，那么生成的括号组合包含n个左括号和n个右括号。
+// 因此生成这样的组合需要2n步，每一步生成一个括号。
+// 每一步都面临两个选项，既可能生成左括号也可能生成右括号。
+// 由此来看，这个问题很适合采用回溯法解决
+#if 0
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+vector<string> GenerateMatching(int n);
+void GenerateMatchingCore
+(vector<string>&res, int left, int right, string current);
+
+int main()
+{
+    int n = 0;
+
+    n = 2;//2个左括号，2个右括号
+    vector<string> res = GenerateMatching(n);
+
+    for (auto x : res)
+    {
+        cout << x<<endl;
+    }
+
+    return 0;
+}
+
+//错误的写法逻辑：
+#if 0
+vector<string> GenerateMatching(int n)
+{
+    if (n < 0)
+        throw exception("Error input!");
+
+    vector<string> res;
+
+    return GenerateMatchingCore(res, n, n, "");
+}
+
+vector<string> GenerateMatchingCore
+(vector<string>res, int left, int right, string current)
+{
+    if (left == 0 && right == 0)
+    {
+        res.push_back(current);
+    }
+
+    if (left > 0)
+        GenerateMatchingCore(res,left-1,right,current+"(");
+
+    if (right > 0)//会出现”())(“”)(()“等情况
+        GenerateMatchingCore(res, left, right-1, current + ")");
+
+    return res;
+}
+#endif
+//错误原因：
+//GenerateMatchingCore()反复递归调用后，最终返回的仍会是第一次调用该函数时
+//其内部(局部)变量res的状态，即res中内容仍为空
+//修改：
+//递归函数的返回值设为void，真正的结果数据用一个容器的引用来存放
+#if 1
+vector<string> GenerateMatching(int n)
+{
+    if (n < 0)
+        throw exception("Error input!");
+
+    vector<string> res;
+    GenerateMatchingCore(res, n, n, "");
+
+    return res;
+}
+
+void GenerateMatchingCore
+(vector<string>&res, int left, int right, string current)
+{
+    if (left == 0 && right == 0)
+    {
+        res.push_back(current);
+    }
+
+    if (left > 0)
+        GenerateMatchingCore(res, left - 1, right, current + "(");
+
+    //if (right > 0)//会出现”())(“”)(()“等情况
+    //    GenerateMatchingCore(res, left, right - 1, current + ")");
+
+	if (right > left)
+		GenerateMatchingCore(res, left, right - 1, current + ")");
+
+    /*
+在生成括号组合时需要注意每一步都要满足限制条件。
+第1个限制条件是左括号或右括号的数目不能超过n个。
+第2个限制条件是括号的匹配原则，
+即在任意步骤中已经生成的右括号的数目不能超过左括号的数目。
+例如，如果在已经生成"()"之后再生成第3个括号，此时第3个括号只能是左括号不能是右括号。
+如果第3个是右括号，那么组合变成"()）"，由于右括号的数目超过左括号的数目，
+之后不管怎么生成后面的括号，这个组合的左括号和右括号都不能匹配
+
+//第2个限制条件可以用right > left解决
+    */
+
+    return;
+}
+#endif
+#endif
+
+
+//面试题86：分割回文字符串
+#if 0
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+vector<vector<string>> SegmentStr(string data);
+void SegmentStrCore(string data);
+
+int main()
+{
+    string data{"google"};
+
+    vector<vector<string>> res = SegmentStr(data);
+
+    for (auto x : res)
+    {
+        for (auto y : x)
+            cout << "\"" << y << "\"  ";
+
+        cout << endl;
+    }
+
+    return 0;
+}
+
+vector<vector<string>> SegmentStr(string data)
+{
+    if (data.empty())
+        throw exception("Error data!");
+
+    vector<vector<string>> res;
+
+    //回溯法，如何确定每次进入递归函数时，实参应该是什么
+
+    //思路：
+    //输入字符串"google"，假设处理到第1个字符'g'。
+    // 此时包括字符'g'在内后面一共有6个字符，
+    // 所以此时面临6个选项，即可以分割出6个以字符'g'开头的子字符串，
+    // 分别为"g"、"go"、"goo"、"goog"、"googl"和"google"，
+    // 其中只有"g"和"goog"是回文子字符串。
+    // 分割出"g"和"goog"这两个回文子字符串之后，
+    // 再用同样的方法分割后面的字符串
+
+    //每次进入递归函数的实参要体现的意思是
+    //在该index位置之前的各个位置，已经分割好
+    //现在处理并分割该位置之后的位置
+
+    SegmentStr(res,data,start,current);
+
+    return;
+}
+
+void SegmentStrCore(string data,int bidx,int increaIdx)
+{
+    
 }
 #endif
 
