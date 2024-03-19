@@ -5092,14 +5092,15 @@ void GenerateMatchingCore
 
 
 //面试题86：分割回文字符串
-#if 0
+#if 1
 #include <iostream>
 #include <vector>
 #include <string>
 using namespace std;
 
-vector<vector<string>> SegmentStr(string data);
-void SegmentStrCore(string data);
+vector<vector<string>> SegmentStr(const string& data);
+void SegmentStrCore
+(vector<vector<string>>&res, const string& data, int start, vector<string> &current);
 
 int main()
 {
@@ -5118,12 +5119,13 @@ int main()
     return 0;
 }
 
-vector<vector<string>> SegmentStr(string data)
+vector<vector<string>> SegmentStr(const string& data)
 {
     if (data.empty())
         throw exception("Error data!");
 
     vector<vector<string>> res;
+    vector<string> current;
 
     //回溯法，如何确定每次进入递归函数时，实参应该是什么
 
@@ -5140,15 +5142,141 @@ vector<vector<string>> SegmentStr(string data)
     //在该index位置之前的各个位置，已经分割好
     //现在处理并分割该位置之后的位置
 
-    SegmentStr(res,data,start,current);
+    SegmentStrCore(res,data,0,current);
 
-    return;
+    return res;
 }
 
-void SegmentStrCore(string data,int bidx,int increaIdx)
+
+bool isHuiWen(const string& str, int bidx, int eidx)
 {
-    
+    bool flag = false;
+
+    while (bidx<=eidx)
+    {
+        if(str[bidx] == str[eidx])
+			flag = true;
+        else
+        {
+            flag = false;
+            break;
+        }
+
+        ++bidx, --eidx;
+    }
+
+    return flag;
 }
+
+void SegmentStrCore
+(vector<vector<string>>&res, const string& str,int start, vector<string> &current)
+{
+    if (start == str.size())
+    {
+        res.push_back(current);
+        return;
+    }
+
+    for (int i = start; i < str.size(); ++i)
+    {
+        if (isHuiWen(str, start, i))
+        {
+            current.push_back(str.substr(start, i - start + 1));
+
+            for (auto x : current)
+            {
+                cout << x << " ";
+            }
+            cout << endl;
+
+            SegmentStrCore(res,str,i+1,current);
+
+            current.pop_back();
+            for (auto x : current)
+            {
+                cout << x << " ";
+            }
+            cout << endl;
+        }
+    }
+
+}
+
+//编写难点：
+//如何用回溯法实现所有情况的枚举尝试
+//人的惯性想法：
+//从首个字符进行枚举，会呈现：
+//g go goo goog googl google
+//明显这样枚举会漏掉很多种情况
+//分析：
+//在SegmentStrCore()中for()循环作用是确定当前是从start开始到str.size()结束
+//有这些若干种子串结果进行回文判断的尝试
+//先截取一个字母的情况，有 g  o  o  g  l  e
+//回溯，(回溯前进行current弹出操作，变成g  o  o  g  l，
+// 然后进入上一级的for中的current.pop_back()，变成g  o  o  g)
+//尝试le不满足，
+//回溯，(同上，current，变成g  o  o)
+//尝试gl 尝试gle
+//。。。
+//回溯到current变成g
+//尝试oo 可行  current变成g oo
+//再次尝试g ,可行，curret变成g oo g l e，回溯，尝试gl  尝试gle
+//以此类推
+
+
+//回溯+记忆搜索
+#if 1
+class Solution
+{
+private:
+    vector<vector<int>> f;
+    vector<vector<string>> ret;
+    vector<string> ans;
+    int n;
+
+public:
+    void dfs(const string& s, int i) 
+    {
+        if (i == n) 
+        {
+            ret.push_back(ans);
+            return;
+        }
+        for (int j = i; j < n; ++j)
+        {
+            if (isPalindrome(s, i, j) == 1)
+            {
+                ans.push_back(s.substr(i, j - i + 1));
+                dfs(s, j + 1);
+                ans.pop_back();
+            }
+        }
+    }
+
+    // 记忆化搜索中，f[i][j] = 0 表示未搜索，1 表示是回文串，-1 表示不是回文串
+    int isPalindrome(const string& s, int i, int j)
+    {
+        if (f[i][j]) 
+        {
+            return f[i][j];
+        }
+        if (i >= j)
+        {
+            return f[i][j] = 1;
+        }
+        return f[i][j] = (s[i] == s[j] ? isPalindrome(s, i + 1, j - 1) : -1);
+    }
+
+    vector<vector<string>> partition(string s)
+    {
+        n = s.size();
+        f.assign(n, vector<int>(n));
+
+        dfs(s, 0);
+        return ret;
+    }
+};
+#endif
 #endif
 
 
