@@ -4801,9 +4801,292 @@ int FindKthLargest_Fun2(vector<int> data, int k)
 #endif
 
 
-//如果解决一个问题需要若干步骤，每一步都面临若干选项，
+//经验：
+// 回溯算法本质上是纯暴力搜索，但有些问题用多层的for循环都很难解答
+// 回溯法能解答已经是算可以的了。
+// 如果解决一个问题需要若干步骤，每一步都面临若干选项，
 // 并且题目要求列出问题所有的解，那么可以尝试用回溯法解决这个问题。
 // 回溯法通常可以用递归的代码实现
+//回溯法可以解决的问题类型：
+//组合问题
+//切割问题
+//子集问题
+//排列问题
+//棋盘问题
+
+//回溯算法很抽象，理解时最好把回溯法抽象成一个图形结构
+//脑内模拟回溯十分困难
+//所有的回溯法都可以抽象为一个【树形结构】
+/*
+
+    -------- for ----------------->
+  |                             ○
+  |  递                      /  \
+  |  归                    ○      ○ 
+  |                      /  |  \    /\
+  |                    ○   ○  ○  ○ ○
+ ∨
+
+*/
+
+//       void  backtracking(参数)
+//       {
+//              if(终止节点)
+//              {
+//                收集结果
+//                return;
+//              }
+//             for(集合的元素集)
+//             {
+//               处理节点; 
+//               递归函数;
+//               回溯操作(撤销操作)
+//             }
+//            return;
+//       }
+
+
+//引入：
+//LeetCode 77 组合
+#if 0
+/*
+有数字集合 1 2 3 4 5 6 7 8，求所有可能的3个数字的组合
+
+用for循环：
+for(int i=0;i<size;++i)
+    for(int j=i+1;j<size;++j)
+        for(int k=j+1;k<size;++k)
+        {  }
+
+时间效率不达标
+*/
+
+//回溯算法如何解决该问题？
+//回溯算法也是模拟这种嵌套for的过程，用
+//【递归来控制有多少层for循环】，有多少次递归就有多少个嵌套for循环
+
+//对于该题，画树形结构：
+/*
+                      1              2      3       4 
+                     /               /         \        \
+                    1              2           3       4        取用
+                 2 3 4         3  4         4       无       余下
+                /   |   \         |    \         |
+            1 2  1 3  1 4   2 3  2 4   3 4
+
+细节1：对于     2 
+                       /  
+                      2   
+                    3  4   为什么 1 2 不写了呢
+           若写为    2 
+                        /  
+                       2   
+                   1 2  3  4    那么就会变成    2 
+                                                           /  
+                                                          2   
+                                                    1  2    3    4 
+                                                   /    |      \    \
+                                                2 1   2 2  2 3  2 4 其中的2 1和前面的1 2情况重复，2 2不符合题意
+
+         所以取用什么数字，余下的就是该数字后面的若干数字
+
+
+写代码——【回溯三部曲】：
+1.递归函数的参数和返回值
+2.确定终止条件
+3.单层搜索逻辑
+
+*/
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+//startindex 确定每次搜索余下若干数字的起始位置
+void backtracking(vector<vector<int>> &res, vector<int> &path,int n,int k,int startindex)
+{
+    //终止节点：
+    //如果树形结构到达了叶子结点，即path的大小等于k值，就证明找到了组合
+    if (path.size() == k)
+    {
+        //收集结果
+        res.push_back(path);
+        return;
+    }
+
+    //单层搜索逻辑：
+    //集合的元素集
+    for (int i = startindex; i <= n; ++i)//范围[1, n]  所以是小于等于
+    {
+        //处理节点：取哪个数字   比如取1
+        path.push_back(i);
+		//递归函数                        比如取1，那剩下2 3 4 只能从2开始搜索
+        backtracking(res, path, n, k, i + 1);
+        //回溯操作(撤销操作)
+        //理解：得到结果1 2，把2弹出后，才能在后续得到1 3
+        //【反应在树形结构上就是回到上一个节点】
+        path.pop_back();
+    }
+
+    return;
+}
+
+int main()
+{
+    int n, k;
+
+    cin >> n >> k;
+
+    vector<int> path;
+    vector<vector<int>>res;    
+    backtracking(res,path,n,k,1);//返回范围[1, n] 中所有可能的 k 个数的组合，所以startindex为1
+
+    for (const auto& x : res)
+    {
+        cout << '[';
+        for (auto it = x.cbegin(); it != x.cend(); ++it)
+        {
+            cout << *it;
+
+            if (it == x.cend() - 1)
+                cout << "],\n";
+            else
+                cout << ',';
+        }
+    }
+}
+#endif
+//组合问题的剪枝操作  【针对单层搜索逻辑】
+#if 1
+//对于LeetCode 77 组合，如果n为4，k为4
+//那么对于树形结构
+/*
+                      1              2      3       4 
+                     /               /         \        \
+                    1              2           3       4        取用
+                 2 3 4         3  4         4       无       余下
+                /   |   \         |    \         |
+            1 2  1 3  1 4   2 3  2 4   3 4
+
+    仅可以保留取用1，余下2 3 4 的情况，其他情况都可以剪除
+    当剪除了有深度的分支，对于降低时间复杂度是有效果的
+
+                1   
+                /    
+               1     
+            2 3 4    
+            /   |   \ 
+        1 2  1 3  1 4 
+        3 4    4     无               可以剪除  3 4    
+                                                           |   \ 
+                                                          1 3  1 4 
+                                                            4     无
+
+       变成：             1   
+                              /    
+                             1     
+                          2     
+                          /      
+                      1 2  
+                      3 4  
+                      /   \
+                  1 2 3  1 2 4
+                     4       无               可以剪除     1 2
+                                                                   3 4
+                                                                        \
+                                                                         1 2 4
+                                                                            无
+
+          最后变成：   1
+                             /
+                            1
+                         2
+                         /
+                     1 2
+                     3 4
+                     /   
+                 1 2 3  
+                    4       
+                    /
+             1 2 3 4
+
+             剪枝，剪的是节点的子孩子，如何体现在单层搜索逻辑上？
+             单层搜索逻辑：
+             for (int i = startindex; i <= n; ++i)
+             应该缩小 i 的取值范围，来达到剪枝的目的
+
+             k：要选的数字的个数
+             path.size()：已经选了的数字的个数
+             k-path.size()：还需要选的数字的个数
+             n：范围[1,n]
+
+             n-(k-path.size())+1：最大是从该值开始搜索
+             4-(4-0)+1=1 达到了最大从1开始搜索
+*/
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+//startindex 确定每次搜索余下若干数字的起始位置
+void backtracking(vector<vector<int>>& res, vector<int>& path, int n, int k, int startindex)
+{
+    //终止节点：
+    //如果树形结构到达了叶子结点，即path的大小等于k值，就证明找到了组合
+    if (path.size() == k)
+    {
+        //收集结果
+        res.push_back(path);
+        return;
+    }
+
+    //单层搜索逻辑：
+    //集合的元素集
+    for (int i = startindex; i <= n - (k - path.size()) + 1; ++i)
+    {
+        //处理节点：取哪个数字   比如取1
+        path.push_back(i);
+        //递归函数                        比如取1，那剩下2 3 4 只能从2开始搜索
+        backtracking(res, path, n, k, i + 1);
+        //回溯操作(撤销操作)
+        //理解：得到结果1 2，把2弹出后，才能在后续得到1 3
+        //【反应在树形结构上就是回到上一个节点】
+        path.pop_back();
+    }
+
+    return;
+}
+
+int main()
+{
+    int n, k;
+
+    cin >> n >> k;
+
+    vector<int> path;
+    vector<vector<int>>res;
+    backtracking(res, path, n, k, 1);//返回范围[1, n] 中所有可能的 k 个数的组合，所以startindex为1
+
+    for (const auto& x : res)
+    {
+        cout << '[';
+        for (auto it = x.cbegin(); it != x.cend(); ++it)
+        {
+            cout << *it;
+
+            if (it == x.cend() - 1)
+                cout << "],\n";
+            else
+                cout << ',';
+        }
+    }
+}
+
+#endif
+
+
 
 //面试题81：允许重复选择元素的组合
 //给定一个没有重复数字的正整数集合，请列举出所有元素之和
@@ -5092,7 +5375,7 @@ void GenerateMatchingCore
 
 
 //面试题86：分割回文字符串
-#if 1
+#if 0
 #include <iostream>
 #include <vector>
 #include <string>
@@ -5210,10 +5493,11 @@ void SegmentStrCore
 //明显这样枚举会漏掉很多种情况
 //分析：
 //在SegmentStrCore()中for()循环作用是确定当前是从start开始到str.size()结束
-//有这些若干种子串结果进行回文判断的尝试
-//先截取一个字母的情况，有 g  o  o  g  l  e
+//有这些 若干种 子串结果进行回文判断的尝试
+//先是截取一个字母的情况，有 g  o  o  g  l  e
 //回溯，(回溯前进行current弹出操作，变成g  o  o  g  l，
-// 然后进入上一级的for中的current.pop_back()，变成g  o  o  g)
+// 然后进入上一级的for中，i值递增1后值为6，再次回溯，
+// 进入上一级for中的current.pop_back()，变成g  o  o  g)
 //尝试le不满足，
 //回溯，(同上，current，变成g  o  o)
 //尝试gl 尝试gle
