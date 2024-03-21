@@ -4639,10 +4639,13 @@ int CalCostTime(vector<int>&data,int speed)
 #endif
 
 
+//排序算法
+//经验：
+
 //面试题76：数组中第k大的数字
 // (比较//面试题59：数据流的第k大的数字，时间复杂度为O(nlogk))
 //本题不一样，数据都保存在一个数组中，所有操作都在内存中完成。
-//有更快找出第k大的数字的算法，可以利用快速排序算法中的partition()
+//经验：有更快找出第k大的数字的算法，可以利用快速排序算法中的partition()
 #if 0
 #include <iostream>
 #include <vector>
@@ -4801,6 +4804,7 @@ int FindKthLargest_Fun2(vector<int> data, int k)
 #endif
 
 
+//回溯算法
 //经验：
 // 回溯算法本质上是纯暴力搜索，但有些问题用多层的for循环都很难解答
 // 回溯法能解答已经是算可以的了。
@@ -4847,7 +4851,7 @@ int FindKthLargest_Fun2(vector<int> data, int k)
 
 
 //引入：
-//LeetCode 77 组合
+//面试题：LeetCode 77 组合
 #if 0
 /*
 有数字集合 1 2 3 4 5 6 7 8，求所有可能的3个数字的组合
@@ -4894,7 +4898,7 @@ for(int i=0;i<size;++i)
 写代码——【回溯三部曲】：
 1.递归函数的参数和返回值
 2.确定终止条件
-3.单层搜索逻辑
+3.单层搜索逻辑 (处理节点，递归函数，回溯操作)
 
 */
 
@@ -4958,7 +4962,7 @@ int main()
 }
 #endif
 //组合问题的剪枝操作  【针对单层搜索逻辑】
-#if 1
+#if 0
 //对于LeetCode 77 组合，如果n为4，k为4
 //那么对于树形结构
 /*
@@ -5021,7 +5025,7 @@ int main()
              k-path.size()：还需要选的数字的个数
              n：范围[1,n]
 
-             n-(k-path.size())+1：最大是从该值开始搜索
+             n-(k-path.size())+1：【至多】是从该值开始搜索
              4-(4-0)+1=1 达到了最大从1开始搜索
 */
 
@@ -5083,9 +5087,203 @@ int main()
         }
     }
 }
-
 #endif
 
+
+//面试题：组合总和
+#if 0
+//分析：
+/*
+                            1           2           3           4          5
+                        /
+                      1
+                2 3 4 5
+               /
+           1 2 
+         3 4 5
+       可剪枝
+
+*/
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> FindCombinations(int n,int k);
+void FindCombinationsCore
+(vector<vector<int>>&res, vector<int>&path,int n,int k,int start);
+
+int main()
+{
+    int n, k;  //  范围[1,n]        要求组合的数字和为n，组合包含数字个数k  
+
+    n = 5, k = 3;
+
+    vector<vector<int>> res = FindCombinations(n,k);
+
+    if (!res.empty())
+        for (const auto& x : res)
+        {
+            for (auto y : x)
+                cout << y << " ";
+
+            cout << endl;
+        }
+    else
+        cout << "No result!\n";
+
+    n = 9, k = 3;
+    res = FindCombinations(n, k);
+
+    if (!res.empty())
+        for (const auto& x : res)
+        {
+            for (auto y : x)
+                cout << y << " ";
+
+            cout << endl;
+        }
+    else
+        cout << "No result!\n";
+
+    return 0;
+}
+
+vector<vector<int>> FindCombinations(int n, int k)
+{
+    if (n < 1 || k < 1)
+        throw exception("Error data");
+
+    vector<vector<int>>res;
+    vector<int> path;
+
+    FindCombinationsCore(res,path,n,k,1);
+
+    return res;
+}
+
+void FindCombinationsCore
+(vector<vector<int>>& res, vector<int>& path, int n, int k, int start)
+{
+    //优化1：
+    if (path.size() > k)
+    {
+        return;
+    }
+
+    if (n == 0 && path.size() == k)
+    {
+        res.push_back(path);
+
+        return;
+    }
+
+    for (int i = start; i <= n; ++i)
+    {
+        path.push_back(i);
+
+        //                                         优化2：n-i
+        FindCombinationsCore(res,path,n-i,k,i+1);
+
+        path.pop_back();
+    }
+
+    return;
+}
+#endif
+//官方版本：
+#if 0
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> FindCombinations(int n, int k);
+void FindCombinationsCore
+(vector<vector<int>>& res, vector<int>& path,
+    int targetSum, int currentSum, int k, int start);
+
+int main()
+{
+    int n, k;  //  范围[1,n]        要求组合的数字和为n，组合包含数字个数k  
+
+    n = 5, k = 3;
+
+    vector<vector<int>> res = FindCombinations(n, k);
+
+    if (!res.empty())
+        for (const auto& x : res)
+        {
+            for (auto y : x)
+                cout << y << " ";
+
+            cout << endl;
+        }
+    else
+        cout << "No result!\n";
+
+    n = 9, k = 3;
+    res = FindCombinations(n, k);
+
+    if (!res.empty())
+        for (const auto& x : res)
+        {
+            for (auto y : x)
+                cout << y << " ";
+
+            cout << endl;
+        }
+    else
+        cout << "No result!\n";
+
+    return 0;
+}
+
+vector<vector<int>> FindCombinations(int n, int k)
+{
+    if (n < 1 || k < 1)
+        throw exception("Error data");
+
+    vector<vector<int>>res;
+    vector<int> path;
+
+    FindCombinationsCore(res, path, n, 0, k, 1);
+
+    return res;
+}
+
+void FindCombinationsCore
+(vector<vector<int>>& res, vector<int>& path,
+    int targetSum, int currentSum, int k, int start)
+{
+    //剪枝1：
+    if (currentSum > targetSum)
+        return;
+
+    if (path.size() == k && currentSum == targetSum)
+    {
+        res.push_back(path);
+        return;
+    }
+
+    //剪枝2：
+    //若n=9，k=2，那么i从数字9开始取数字就没有意义
+    //n-(k-path.size())+1  【至多】是从该值开始搜索
+
+    //for (int i = start; i <= targetSum; ++i)
+    for (int i = start; i <= targetSum - (k - path.size()) + 1; ++i)
+    {
+        currentSum += i;
+        path.push_back(i);
+
+        FindCombinationsCore(res, path, targetSum, currentSum, k, i + 1);
+
+        currentSum -= i;
+        path.pop_back();
+    }
+}
+#endif
 
 
 //面试题81：允许重复选择元素的组合
@@ -5564,21 +5762,95 @@ public:
 #endif
 
 
+//贪心算法
+//经验：
+//贪心算法的本质是找到每个阶段的局部最优从而得到全局最优
+//贪心算法的两个极端：感觉题目极简单或者感觉极难
+//贪心没有套路
+//感觉这道题能用贪心试试，且找不到明显的反例去反驳这种
+//局部最优推到全局最优的思路，就用贪心方法去做吧，
+//不用硬要把这种想法用数学归纳法或者什么数学方法去证明，那样
+//太耗费时间，得不偿失。
+//面试题：LeetCode 455 分发饼干
+#if 1
+//小孩胃口：1   2  7  10
+//饼干：       1  3  5  9
+
+//思路：大饼干喂大胃口的小孩，不至于浪费大饼干
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    vector<int> appetites{ 1,2,7,10 };
+    vector<int> cookie{ 1,3,5,9 };
+
+    sort(appetites.begin(),appetites.end());
+    sort(cookie.begin(), cookie.end());
+
+    int res = 0;
+#if 0
+    int index = cookie.size()-1;
+
+    //遍历每个待投喂的小孩
+    for (int i = appetites.size() - 1; i >= 0; --i)
+    {
+        //饼干量比小孩胃口大，就算可以喂饱，处理下一块饼干
+        if (index >= 0 && cookie[index] >= appetites[i])
+        {
+            ++res;
+            --index;
+        }
+    }
+
+    cout << res;
+    //细节：
+    //可否遍历的是饼干，而内部遍历的是小孩胃口？
+    //不可行
+    //因为饼干只有在投喂成功一个小孩后才进行下标移动，
+    // 硬要实现的话需要更多重复的下标移动操作
+#endif
+
+    //写法二：双指针法
+    int ia, ic;
+    ia = appetites.size() - 1, ic = cookie.size() - 1;
+
+    while (ia >= 0 && ic >= 0)
+    {
+        if (appetites[ia] <= cookie[ic])
+        {
+            ++res;
+            --ia, --ic;
+        }
+        else
+            --ia;
+    }
+
+    cout << res;
+
+    return 0;
+}
+#endif
+
+
+//动态规划算法
 //运用动态规划解决问题的第1步是识别哪些问题适合运用动态规划。
 // 和适合运用回溯法的问题类似，适用动态规划的问题都存在若干步骤，
-// 并且每个步骤都面临若干选择。
- 
+// 并且每个步骤都面临若干选择。 
+
 //经验：
 //【如果题目要求列举出所有的解，那么很有可能需要用回溯法解决】
 //【如果题目是求一个问题的最优解（通常是求最大值或最小值）】
-
 // 或者求问题的解的数目（或判断问题是否存在解），
 // 那么这个题目有可能适合运用动态规划
 //比如//面试题81：允许重复选择元素的组合  适用回溯法
 //但题目改为：
-
-//给定一个没有重复数字的正整数集合，
+//面试题：给定一个没有重复数字的正整数集合，
 //请找出所有元素之和等于某个给定值的所有组合的数目
+//(每个元素可以重复取用)
 //就适用于动态规划
 #if 0
 //每一步都从集合中取出一个下标为i的数字，
@@ -5902,3 +6174,4 @@ int FindLCS(const string& S1, const string& S2)
 #if 1
 
 #endif
+
