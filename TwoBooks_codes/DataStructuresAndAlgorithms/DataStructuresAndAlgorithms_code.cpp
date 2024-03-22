@@ -5192,7 +5192,7 @@ void FindCombinationsCore
     return;
 }
 #endif
-//官方版本：
+//代码随想录官方版本：
 #if 0
 #include <iostream>
 #include <vector>
@@ -5772,7 +5772,7 @@ public:
 //不用硬要把这种想法用数学归纳法或者什么数学方法去证明，那样
 //太耗费时间，得不偿失。
 //面试题：LeetCode 455 分发饼干
-#if 1
+#if 0
 //小孩胃口：1   2  7  10
 //饼干：       1  3  5  9
 
@@ -5836,18 +5836,232 @@ int main()
 #endif
 
 
+//面试题： LeetCode 376 摆动序列
+#if 0
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution
+{
+public:
+    int CalTheLongestSubSequence(const vector<int>& vec)
+    {
+        if (vec.size() == 1)
+            return 1;
+        if (vec.size() == 2)
+        {
+            if (vec[0] != vec[1])
+                return 2;
+            else
+                return 1;
+        }
+
+        return CalTheLongestSubSequenceCore(vec);
+    }
+
+    int CalTheLongestSubSequenceCore(const vector<int>& vec)
+    {
+        vector<int> CalTheDiffValue;
+
+        for (auto it = vec.cbegin(); it != vec.cend() - 1; ++it)
+        {
+            int diff = *next(it) - *it;
+
+            CalTheDiffValue.push_back(diff);
+        }
+
+        copy(CalTheDiffValue.begin(), CalTheDiffValue.end(), ostream_iterator<int>(cout, " "));
+        //1,17,5,10,13,15,10,5,16,8
+        //  16 -12 5 3 2 -5 -5 11 -8 
+        //删掉单调的几个数字后得到1, 17, 10, 13, 10, 16, 8
+        //                                           16, -7, 3, -3, 6, -8
+
+        //把16 -12 5 3 2 -5 -5 11 -8 变成 16 -12 5 -5 11 -8  同样可以得到size为6
+        //那就对CalTheDiffValue进行处理
+#if 0
+        //***至少三个元素，才可运行如下代码***
+        int thefrontValue = CalTheDiffValue[0];
+        for (auto it = CalTheDiffValue.begin() + 1; it != CalTheDiffValue.end();)
+        {
+            if ((thefrontValue >= 0 && *it <= 0) || ((thefrontValue < 0 && *it > 0)))
+            {
+                thefrontValue = *it;
+                ++it;
+            }
+            else
+            {
+                it = CalTheDiffValue.erase(it);
+            }
+        }
+        //没有考虑上下坡中有平坡的情况
+        //DataInput = { 1,2,2,2,1 };
+        //1 0 0 -1
+#endif
+
+#if 0
+        int thefrontValue = CalTheDiffValue[0];
+        for (auto it = CalTheDiffValue.begin() + 1; it != CalTheDiffValue.end();)
+        {
+            if ((thefrontValue > 0 && *it < 0) || ((thefrontValue < 0 && *it > 0)))
+            {
+                thefrontValue = *it;
+                ++it;
+            }
+            else
+            {
+                it = CalTheDiffValue.erase(it);
+            }
+        }
+        //没有考虑单调有平坡后单调的情况
+        //DataInput = { 1,2,2,3 };
+        //1 0 1
+#endif
+
+        //考虑完后代码仍为：
+        int thefrontValue = CalTheDiffValue[0];
+        for (auto it = CalTheDiffValue.begin() + 1; it != CalTheDiffValue.end();)
+        {
+            if ((thefrontValue > 0 && *it < 0) || ((thefrontValue < 0 && *it > 0)))
+            {
+                thefrontValue = *it;
+                ++it;
+            }
+            else
+            {
+                it = CalTheDiffValue.erase(it);
+            }
+        }
+
+        return CalTheDiffValue.size() + 1;
+    }
+    //细节：
+    //若真的对数组中的某些数字进行删除操作，反而会使问题更复杂
+};
+
+int main()
+{
+    Solution S;
+
+    vector<int> DataInput;
+
+    DataInput = { 1,7,4,9,2,5 };
+    cout << S.CalTheLongestSubSequence(DataInput)<<endl;
+
+    DataInput = { 1,17,5,10,13,15,10,5,16,8 };
+    cout<<S.CalTheLongestSubSequence(DataInput)<<endl;
+
+    DataInput = { 1,2,3,4,5,6,7,8,9 };
+    cout << S.CalTheLongestSubSequence(DataInput)<<endl;
+
+    DataInput = { 1,2,2,2,1 };
+    cout << S.CalTheLongestSubSequence(DataInput)<<endl;
+
+    DataInput = { 1,2,2,2 };
+    cout << S.CalTheLongestSubSequence(DataInput)<<endl;
+
+    DataInput = { 1,2,2,3 };
+    cout << S.CalTheLongestSubSequence(DataInput)<<endl;
+
+    DataInput = { 1,2 };
+    cout << S.CalTheLongestSubSequence(DataInput)<<endl;
+
+    DataInput = { 2,2 };
+    cout << S.CalTheLongestSubSequence(DataInput) << endl;
+
+    return 0;
+}
+#endif
+
+
 //动态规划算法
-//运用动态规划解决问题的第1步是识别哪些问题适合运用动态规划。
-// 和适合运用回溯法的问题类似，适用动态规划的问题都存在若干步骤，
-// 并且每个步骤都面临若干选择。 
+//经验：
+//动态规划算法可以解决的问题类型：
+//基础类(斐波那契数列，爬楼梯)
+//背包问题
+//打家劫舍
+//股票问题
+//子序列问题
+
+//误区：
+//只关注递推公式，没真正理解解题步骤
+
+//【动态规划五部曲】：
+//1.动态规划dp数组以及下标的含义
+//2.递推公式
+//3.dp数组如何初始化
+//4.遍历顺序
+//5.打印dp数组可以作为调试分析结果
+
 
 //经验：
+// 运用动态规划解决问题的第1步是识别哪些问题适合运用动态规划。
+// 和适合运用回溯法的问题类似，适用动态规划的问题都存在若干步骤，
+// 并且每个步骤都面临若干选择。 
 //【如果题目要求列举出所有的解，那么很有可能需要用回溯法解决】
 //【如果题目是求一个问题的最优解（通常是求最大值或最小值）】
 // 或者求问题的解的数目（或判断问题是否存在解），
 // 那么这个题目有可能适合运用动态规划
-//比如//面试题81：允许重复选择元素的组合  适用回溯法
-//但题目改为：
+ 
+ 
+//引入：
+//面试题：LeetCode 509 斐波那契数
+#if 1
+/*
+1.动态规划dp数组以及下标的含义
+  dp[i]：第i个斐波那契数的值为dp[i]
+
+2.递推公式
+  dp[i]=dp[i-1]+dp[i-2]
+
+3.dp数组如何初始化
+  dp[0]=0  dp[1]=1
+
+4.遍历顺序
+由于dp[i]由dp[i-1]和dp[i-2]得到，所以应该从前向后遍历
+这样保证dp[i]都是最新的值
+*/
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int Fib(int n)
+{
+    if (n <= 0)
+        throw exception("Error input!\n");
+
+    if (n == 1)
+        return 1;
+
+    vector<int> dp(n + 1, 0);
+
+    dp[0] = 0, dp[1] = 1;
+
+    for (int i = 2; i <= n; ++i)
+    {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+
+    return dp[n];
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    cout << Fib(n);
+
+    return 0;
+}
+//补充：
+//状态压缩优化：//面试题10：斐波那契数列
+#endif 
+ 
+ 
+//看//面试题81：允许重复选择元素的组合  适用回溯法
+//题目改为：
 //面试题：给定一个没有重复数字的正整数集合，
 //请找出所有元素之和等于某个给定值的所有组合的数目
 //(每个元素可以重复取用)
