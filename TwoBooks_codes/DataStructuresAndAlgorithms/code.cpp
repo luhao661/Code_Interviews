@@ -10,7 +10,7 @@ using namespace std;
 void CountBits(int num, vector<int>&);
 
 int main()
-{
+{ 
     unsigned int num; 
     cin >> num;
 
