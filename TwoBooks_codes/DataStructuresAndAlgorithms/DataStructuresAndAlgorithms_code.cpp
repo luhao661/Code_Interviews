@@ -4898,7 +4898,7 @@ for(int i=0;i<size;++i)
 写代码——【回溯三部曲】：
 1.递归函数的参数和返回值
 2.确定终止条件
-3.单层搜索逻辑 (处理节点，递归函数，回溯操作)
+3.单层搜索逻辑 (集合元素集(有时可剪枝)，处理节点，递归函数，回溯操作)
 
 */
 
@@ -6006,7 +6006,7 @@ int main()
  
 //引入：
 //面试题：LeetCode 509 斐波那契数
-#if 1
+#if 0
 /*
 1.动态规划dp数组以及下标的含义
   dp[i]：第i个斐波那契数的值为dp[i]
@@ -6058,6 +6058,180 @@ int main()
 //补充：
 //状态压缩优化：//面试题10：斐波那契数列
 #endif 
+
+
+//面试题：LeetCode 70 爬楼梯
+//若用回溯法：(相当于排列问题，但会超时)
+#if 0
+/*
+                        1              2
+                         |
+                       1 
+                    1  2
+                   /
+                  1 
+                1 2
+*/
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void HowManyWays
+(vector<vector<int>>&res, vector<int>& currentWays,
+    int targetLadder,int currentLadder,int start)
+{
+    if (currentLadder > targetLadder)
+    {
+        return;
+    }
+
+    if (currentLadder == targetLadder)
+    {
+        res.push_back(currentWays);
+        return;
+    }
+
+    for (int i = start; i <= 2; ++i)
+    {
+        currentWays.push_back(i);
+        currentLadder += i;
+
+        HowManyWays(res,currentWays, targetLadder, currentLadder,1);
+
+        currentLadder -= i;
+        currentWays.pop_back();
+    }
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    vector<vector<int>>res;
+    vector<int>current;
+    HowManyWays(res,current,n,0,1);
+
+    for (const auto& x : res)
+    {
+        for (auto y : x)
+            cout << y << ' ';
+
+        cout << endl;
+    }
+
+    cout << res.size()<<endl;
+}
+#endif
+//使用动态规划
+#if 0
+//倒着想：
+// 1阶   1种
+// 2阶   2种
+// 3阶：只能从第1阶或者第2阶上来，1阶的可以迈2阶，2阶的可以迈1阶
+//          共3种
+//同理4阶  5种
+            
+//1.dp数组以及下标的含义：达到第i阶有dp[i]种方法
+//2.递推公式：dp[i]=dp[i-1]+dp[i-2]
+//3.dp数组如何初始化
+//dp[0]=?
+//由于题目的n为正整数
+//所以dp[0]没有意义，直接可从dp[1]初始化，dp[1]=1
+//由于dp[2]=dp[1]+dp[0]=2
+//所以dp[0]=1
+
+//4.遍历顺序：从前往后
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    vector<int>dp(n+1);
+
+    dp[0] = 1;
+    dp[1] = 1;
+
+    for (int i = 2; i <= n; ++i)
+    {
+        dp[i] = dp[i-1] + dp[i-2];
+    }
+
+    for (const auto& x : dp)
+    {
+        cout << x<<' ';
+    }
+    cout << endl;
+
+    cout << dp[n];
+}
+#endif
+
+
+//爬楼梯花费体力版
+//面试题：LeetCode 88 使用最小花费爬楼梯
+/*
+数组的每个下标作为一个阶梯，第个阶梯对应着
+开始)。一个非负数的体力花费值[下标从cost[1
+每当爬上一个阶梯都要花费对应的体力值,
+-旦支付了相应的体力值，就可以选择向上爬一个阶梯或者爬两个阶梯。
+请找出达到楼层顶部的最低花费。在开始时，你可以选择从下标为 0或1的元素作为初始阶梯。
+*/
+#if 1
+
+#endif
+
+
+//爬楼梯进阶版
+//每次你可以爬至多m (1 <= m < n)个台阶。有多少种不同的方法可以爬到n阶楼顶
+//可以看成是完全背包问题
+#if 0
+//1.确定dp数组以及下标的含义
+//dp[i]：爬到有i个台阶的楼顶，有dp[i]种方法。
+//2.确定递推公式
+//求装满背包有几种方法，递推公式一般都是dp[i] += dp[i - nums[j]];
+//此题dp[i]有几种来源，dp[i - 1]，dp[i - 2]，dp[i - 3] 等等，即：dp[i - j]
+//那么递推公式为：dp[i] += dp[i - j]
+//3.dp数组如何初始化
+//递归公式是 dp[i] += dp[i - j]，那么dp[0] 一定为1，dp[0]是递归中一切数值的基础所在，
+// 如果dp[0]是0的话，其他数值都是0了。
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    int m, n;
+    cin >> m >> n;
+
+    vector<int>dp(n + 1);
+
+    dp[0] = 1;
+
+    //遍历背包
+    for (int i = 1; i <= n; ++i)
+    {
+        //遍历物品
+        for (int j = 1; j <= m; ++j)
+        {
+            if (i - j >= 0)
+                dp[i] += dp[i - j];
+        }
+    }
+
+    cout << dp[n];
+
+    return 0;
+}
+#endif
  
  
 //看//面试题81：允许重复选择元素的组合  适用回溯法
