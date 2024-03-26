@@ -6177,14 +6177,167 @@ int main()
 //爬楼梯花费体力版
 //面试题：LeetCode 88 使用最小花费爬楼梯
 /*
-数组的每个下标作为一个阶梯，第个阶梯对应着
-开始)。一个非负数的体力花费值[下标从cost[1
-每当爬上一个阶梯都要花费对应的体力值,
--旦支付了相应的体力值，就可以选择向上爬一个阶梯或者爬两个阶梯。
-请找出达到楼层顶部的最低花费。在开始时，你可以选择从下标为 0或1的元素作为初始阶梯。
+数组的每个下标作为一个阶梯，第i个阶梯对应着一个非负数的体力花费值cost[i](下标从0开始)
+每当爬上一个阶梯都要花费对应的体力值，一旦支付了相应的体力值，
+就可以选择向上爬一个阶梯或者爬两个阶梯。
+请找出达到楼层顶部的最低花费。在开始时，你可以选择从下标为 0 或 1 的元素作为初始阶梯。
 */
-#if 1
+#if 0
+/*
+1.dp[i]表示到第i个阶梯所花费的最小体力值为dp[i]
+2.递推公式
+假设现在在第0阶梯，那么最小花费是dp[0]=0
+假设现在在第1阶梯，那么最小花费是dp[1]=0
+假设现在在第2阶梯，那么最小花费是dp[2]=min(cost[1],cost[0])
+                                                                 =min(dp[1]+cost[1],dp[0]+cost[0])
+假设现在在第3阶梯，那么最小花费是dp[3]=min(dp[2]+cost[2],dp[1]+cost[1])
+dp[i]=min(dp[i-1]+cost[i-1],dp[i-2]+cost[i-2])
+3.初始化
+dp[0]=0   dp[1]=0
+4.遍历顺序  从左往右
+*/
 
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace  std;
+
+int LowestCost(const vector<int>&vec);
+
+int main()
+{
+    vector<int>cost;
+    cost = { 10,15 };
+    cout << LowestCost(cost) << endl;
+
+    cost = { 10,15,20 };
+    cout << LowestCost(cost) << endl;
+
+    cost = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
+    cout << LowestCost(cost) << endl;
+
+    return 0;
+}
+int LowestCost(const vector<int>& vec_cost)
+{
+    int len = vec_cost.size();
+
+    if (len <= 1)
+        return 0;
+
+    //错误理解：
+    //假设vec_cost={10，15}  要上到第1阶梯输出应该为0而不是10
+    //假设vec_cost={10，15，20}  要上到第2阶梯输出为15   ？？？
+
+    //正确理解：
+    //阶梯总数为vec_cost.size()，也就是说假设vec_cost={10，15}
+    //要到顶为第2阶梯，输出为10
+    //假设vec_cost={10，15，20}  要上到第3阶梯输出为15
+    //                dp={0,      0,    10,   15}
+
+    vector<int>dp(len+1,0);
+
+    for (int i = 2; i <= len; ++i)
+    {
+        dp[i] = min(dp[i-1] + vec_cost[i-1], dp[i-2] + vec_cost[i-2]);
+    }
+
+    copy(dp.begin(), dp.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    return dp[len];
+}
+#endif
+
+
+//面试题：LeetCode 98 不同路径
+#if 1
+/*
+一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。
+机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。
+问总共有多少条不同的路径？
+*/
+
+//1.动态规划dp数组以及下标的含义
+//dp[i][j]：机器人到达位置(i,j)有dp[i][j]种路径
+//2.递推公式
+/*
+“机器人每次只能向下或者向右移动一步”
+
+        i/j        0  1  2  3  4  5  6
+                 
+        0         1   1  1  1  1  1  1
+        1         1   2  3  4  5  6  7 
+        2         1   3  6  7
+        3         1   4
+        4         1
+        5         1
+        6         1
+
+        错误：dp[i][j]=max(dp[i-1][j],dp[i][j-1])+1
+
+                i/j        0  1  2  3  4  5  6
+
+        0         1   1  1  1  1  1  1
+        1         1   2  3  4  5  6  7
+        2         1   3  6  10
+        3         1   4
+        4         1
+        5         1
+        6         1
+
+        dp[i][j]=dp[i-1][j]+dp[i][j-1]
+*/
+
+//3.dp数组如何初始化
+//第一行第一列都初始化为1
+//4.遍历顺序
+//从上到下，从左到右
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iomanip>
+using namespace std;
+
+int GetPaths(int rows, int cols)
+{
+    vector<vector<int>>dp(rows, vector<int>(cols, 0));
+
+    fill((*dp.begin()).begin(), (*dp.begin()).end(), 1);
+
+    for (auto it = dp.begin(); it != dp.end(); ++it)
+    {
+        (*(it))[0] = 1;
+    }
+
+    for(int i=1;i<=rows-1;++i)
+        for (int j = 1; j <= cols-1; ++j)
+        {
+            //dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) + 1;
+            dp[i][j] = dp[i - 1][j]+ dp[i][j - 1];
+        }
+
+    for (auto const& x : dp)
+    {
+        for (auto y : x)
+            cout << setw(3) << right << y;
+
+        cout << endl;
+    }
+
+    return dp[rows-1][cols-1];
+}
+
+int main()
+{
+    int m, n;
+    cin >> m >> n;
+
+    cout << GetPaths(m,n)<<endl;
+
+    return 0;
+}
 #endif
 
 
