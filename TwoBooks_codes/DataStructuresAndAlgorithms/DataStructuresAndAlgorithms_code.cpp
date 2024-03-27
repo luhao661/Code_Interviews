@@ -6251,7 +6251,7 @@ int LowestCost(const vector<int>& vec_cost)
 
 
 //面试题：LeetCode 98 不同路径
-#if 1
+#if 0
 /*
 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。
 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。
@@ -6276,7 +6276,7 @@ int LowestCost(const vector<int>& vec_cost)
 
         错误：dp[i][j]=max(dp[i-1][j],dp[i][j-1])+1
 
-                i/j        0  1  2  3  4  5  6
+       i/j        0  1  2  3  4  5  6
 
         0         1   1  1  1  1  1  1
         1         1   2  3  4  5  6  7
@@ -6287,6 +6287,17 @@ int LowestCost(const vector<int>& vec_cost)
         6         1
 
         dp[i][j]=dp[i-1][j]+dp[i][j-1]
+
+        出现错误的原因：
+        纯粹地依靠画图填数字来推导规律，没有结合题目情景
+        来考虑每一个位置对应dp[i][j]的意义
+        正确的思考：
+        dp[i][j]的路径个数=走到该位置上方的路径个数+走到该位置左方的路径个数  即：
+        dp[i][j]的路径个数 = 走到dp[i-1][j]的路径个数+走到dp[i][j-1]的路径个数
+        为什么不是
+        dp[i][j]的路径个数 = 走到dp[i-1][j]的路径个数+走到dp[i][j-1]的路径个数+1   ？
+        混淆了一点：dp[i-1][j]表示的是走到位置[i-1][j]有多少路径，而不是有多少步
+        因此在位置[i-1][j]再向下走一步到终点，路径数还是dp[i-1][j]
 */
 
 //3.dp数组如何初始化
@@ -6338,6 +6349,142 @@ int main()
 
     return 0;
 }
+#endif
+
+
+//面试题：LeetCode 63 不同路径2
+#if 1
+/*
+一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。
+机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish”）。
+现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？
+网格中的障碍物和空位置分别用 1 和 0 来表示。
+*/
+
+//1.动态规划dp数组以及下标的含义
+//dp[i][j]：机器人到达位置(i, j)有dp[i][j]种路径
+//2.递推公式
+/*
+对于网格：
+01
+00
+
+       i/j       0  1  
+
+       0        1  0  
+       1        1  1  
+ 
+对于网格：
+000
+010
+000
+
+       i/j       0  1  2  
+
+       0        1  1  1
+       1        1  0  1
+       2        1  1  2
+
+       有障碍物的位置，dp[i][j]设为0
+       dp[i][j]=dp[i-1][j]+dp[i][j-1]
+*/
+//3.dp数组如何初始化
+//第一行第一列都初始化为1
+//4.遍历顺序
+//从上到下，从左到右
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+#if 0
+int CalThePaths(const vector<vector<int>>& grid)
+{
+    vector<vector<int>>dp(grid.size(), vector<int>(grid[0].size(), 0));
+
+    for (int j = 0; j < dp[0].size(); ++j)
+       if(grid[0][j]==0)//如果该位置不是障碍物
+        dp[0][j] = 1;
+
+    for (int i=0;i<dp.size();++i)
+    {
+        if (grid[i][0] == 0)//如果该位置不是障碍物
+            dp[i][0] = 1;
+    }
+
+    for (int i = 1; i <= dp.size()-1; ++i)
+        for (int j = 1; j <= dp[0].size()-1; ++j)
+        {
+            if (grid[i][j] == 0)
+                dp[i][j] = dp[i-1][j] + dp[i][j-1];
+        }
+
+    return dp[dp.size()-1][dp[0].size()-1];
+}
+#endif
+//错误，没有考虑以下情况：
+//如果第一行或者第一列有障碍，不仅是该位置为0，【该位置及其后的位置也要为0】
+//如果起始和终止位置为障碍，直接return 0
+#if 1
+int CalThePaths(const vector<vector<int>>& grid)
+{
+    if (grid[0][0] == 1 || grid[grid.size()-1][grid[0].size()-1] == 1)
+        return 0;
+
+    vector<vector<int>>dp(grid.size(), vector<int>(grid[0].size(), 0));
+
+    for (int j = 0; j < dp[0].size(); ++j)
+    {
+        if (grid[0][j] == 0)//如果该位置不是障碍物
+            dp[0][j] = 1;
+        else
+            break;
+    }
+
+    for (int i = 0; i < dp.size(); ++i)
+    {
+        if (grid[i][0] == 0)//如果该位置不是障碍物
+            dp[i][0] = 1;
+        else
+            break;
+    }
+
+    for (int i = 1; i <= dp.size() - 1; ++i)
+        for (int j = 1; j <= dp[0].size() - 1; ++j)
+        {
+            if (grid[i][j] == 0)
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+        }
+
+    return dp[dp.size() - 1][dp[0].size() - 1];
+}
+#endif
+
+int main()
+{
+    vector<vector<int>> grid;
+
+    grid = {
+        {0,0,0},
+        {0,1,0},
+        {0,0,0} };
+
+    cout << CalThePaths(grid)<<endl;
+
+    return 0;
+}
+#endif
+
+
+//面试题：LeetCode 343 整数拆分
+#if 1
+/*
+给定一个正整数 n ，将其拆分为 k 个 正整数 的和（ k >= 2 ），并使这些整数的乘积最大化。
+返回你可以获得的最大乘积
+*/
+
+
 #endif
 
 
