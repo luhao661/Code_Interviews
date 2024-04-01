@@ -6478,7 +6478,7 @@ int main()
 
 
 //面试题：LeetCode 343 整数拆分
-#if 1
+#if 0
 /*
 给定一个正整数 n ，将其拆分为 k 个 正整数的和（ k >= 2 ），并使这些整数的乘积最大化。
 返回你可以获得的最大乘积
@@ -6575,6 +6575,203 @@ int main()
     cout << endl<<endl;
 
     cout << dp[n];
+
+    return 0;
+}
+#endif
+
+
+//面试题：LeetCode 96 不同的二叉搜索树
+#if 0
+//给你一个整数 n ，求恰由 n 个节点组成且节点值
+// 从 1 到 n 互不相同的二叉搜索树有多少种？
+// 返回满足题意的二叉搜索树的种数。
+
+/*
+分析：
+二叉搜索树，就是某个节点的左子节点比该节点值小，右子节点比该节点值大
+
+n=1            n=2                     
+  1                 1                   2
+                         2            1
+n=3                                
+         1                1                    2                         3                     3   
+          \                                                      
+           2                    3         1        3               2                     1
+              \                                                                                  
+               3            2                                     1                             2
+
+规避一个错误：
+     2                      2
+   /                          \
+ 1                              3
+   \                            /
+      3                       1        不是二叉搜索树
+
+二叉搜索树定义：
+1.任何一个节点的左子树上的点，都必须小于当前节点。
+2.任何一个节点的右子树上的点，都必须大于当前节点。
+3.任何一棵子树，也都满足上面两个条件。
+4.二叉查找树中，是不存在重复节点的。
+
+因此上述的错误在于没有满足第3个条件。
+
+
+找规律，找【排列的规律】
+n=3时，以1为根节点时，其子树的排列和n=2时一样
+
+规律如何应用上？
+n=3时， 种数=根节点为1的情况+根节点为2的情况+根节点为3的情况
+根节点为1的情况=左0 * 右2个节点=1*2  (解释：n=0的二叉搜索树种数为1  *  n=2的二叉搜索树种数为2)
+根节点为2的情况=左1 * 右1个节点=1*1
+根节点为3的情况=左2 * 右0个节点=2*1
+
+由此，n=3时的情况都可以由n=0，1，2的情况推导出来
+*/
+
+//1.动态规划dp数组以及下标的含义
+// dp[i]：n=i时二叉搜索树有dp[i]种
+//2.递推公式
+// dp[i]+=dp[j]*dp[k]
+//3.dp数组如何初始化
+// dp[0]=1  dp[1]=1
+//4.遍历顺序
+//从左往右
+//5.打印dp数组可以作为调试分析结果
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    vector<int>dp(n+1,0);
+
+	dp[0] = 1;
+
+	for (int i = 1; i <= n; ++i)
+	{
+		for (int left = 0; left <= i - 1; ++left)
+		{
+			dp[i] += dp[left] * dp[i-left-1];
+		}
+    }
+
+    copy(dp.cbegin(), dp.cend(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    cout << dp[n];
+
+    return 0;
+}
+#endif
+
+
+//面试题：LeetCode 416 分割等和子集
+#if 1
+//给你一个 只包含正整数的非空数组 nums 。
+//请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
+/*
+nums = [1,5,11,5]    输出：true
+nums = [1,2,3,5]      输出：false
+*/
+
+//怎么看出是用动态规划做的？
+// 这是多项式复杂程度的非确定性问题，我们不应期望该问题有多项式时间复杂度的解法。
+// 我们能想到的，例如基于贪心算法的「将数组降序排序后，依次将每个元素添加至
+// 当前元素和较小的子集中」之类的方法都是错误的，可以轻松地举出反例。
+// 因此，我们必须尝试非多项式时间复杂度的算法，
+// 例如时间复杂度与元素大小相关的动态规划。
+
+//在考虑此问题之前，思考能否根据输入的数组，得出两个子集的元素和为多少
+//若nums = [1,5,11,5]    则sum=22 ，两个子集的元素和为11
+//因此，可以根据输入数组，得到子集的元素和为SubArraySum=sum/2
+//用回溯法会超时
+
+//可以想象成01背包问题的应用
+//***思路***
+//只要物品装满后的价值也是背包容量值，那就证明可以分割
+
+//物品的重量和价值都等于数组中某个元素的值
+//对于nums = [1,5,11,5]，有容量11的背包，有这些物品，看看能否装满
+
+//1.确定dp数组以及下标的含义
+//dp[i][j]：下标0到i的物品，每种取一样，
+// 放到容量为j的背包中，能获得的最大价值为dp[i][j]
+//2.确定递推公式
+/*
+               i/j          0    1  2  3  4  5  6  7  8  9  10  11
+
+               0     ?    0    0  0  0  0   0  0  0  0  0   0    0
+               1     1    0    1  1  1  1   1  1  1  1  1   1    1  
+               2     5    0    1   1  1  1  5  6  6  6  6   6    6
+               3    11   0    1   1  1  1  5  6  6  6  6   6   11
+               4     5    0    1   1  1  1  5  6  6  6  6  10  11
+               
+              dp[i][j]=max(dp[i-1][j],dp[i-1][j-nums[i]]+nums[i]);
+*/
+
+
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <algorithm>
+using namespace std;
+
+bool CanbeDivided(const vector<int>& nums)
+{
+    int Sum = accumulate(nums.begin(),nums.end(),0);
+
+    int SubArraySum = Sum >> 1;
+
+    //nums = [1, 5, 11, 4]的情况
+    if (Sum != SubArraySum << 1)
+        return false;
+
+    int rows = nums.size()+1;
+    int cols = SubArraySum+1;
+    vector<int> inputNums(rows, 0);
+    copy(nums.begin(), nums.end(), next(inputNums.begin()));
+
+    //for (auto x : inputNums)
+    //    cout << x << endl;
+
+    vector<vector<int>> dp(rows,vector<int>(cols,0));
+
+    for (int i = 1; i <= rows-1; ++i)
+    {
+        for (int j = 1; j <= cols-1; ++j)
+        {
+            if (j < inputNums[i])
+                dp[i][j] = dp[i - 1][j];
+            else
+                dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - inputNums[i]] + inputNums[i]);
+        }
+    }
+
+    for (const auto& x : dp)
+    {
+        for (auto y : x)
+            cout << y << ' ';
+
+        cout << endl;
+    }
+
+    return dp[nums.size()][SubArraySum] == SubArraySum;
+}
+
+int main()
+{
+    vector<int> nums;
+    nums = { 1,5,11,5 };
+    cout << ((CanbeDivided(nums) == 1) ? "true" : "false") << endl;
+
+    nums = {1, 2, 3, 5};
+    cout << ((CanbeDivided(nums) == 1) ? "true" : "false") << endl;
 
     return 0;
 }
@@ -6824,8 +7021,7 @@ int CalCombinations(vector<int> input, int k)
             cout << right << setw(3) << y;
         }
         cout << endl;
-    }
-    
+    }    
 
     return dp[input.size()][k];
 }
