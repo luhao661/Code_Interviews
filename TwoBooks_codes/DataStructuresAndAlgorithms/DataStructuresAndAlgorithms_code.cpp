@@ -6671,8 +6671,9 @@ int main()
 #endif
 
 
+//01背包应用
 //面试题：LeetCode 416 分割等和子集
-#if 1
+#if 0
 //给你一个 只包含正整数的非空数组 nums 。
 //请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
 /*
@@ -6742,6 +6743,7 @@ bool CanbeDivided(const vector<int>& nums)
 
     vector<vector<int>> dp(rows,vector<int>(cols,0));
 
+    //从第一个物品开始
     for (int i = 1; i <= rows-1; ++i)
     {
         for (int j = 1; j <= cols-1; ++j)
@@ -6772,6 +6774,120 @@ int main()
 
     nums = {1, 2, 3, 5};
     cout << ((CanbeDivided(nums) == 1) ? "true" : "false") << endl;
+
+    return 0;
+}
+#endif
+
+
+//面试题：LeetCode 1049 最后一块石头的重量2
+#if 1
+/*
+有一堆石头，用整数数组 stones 表示。其中 stones[i] 表示第 i 块石头的重量。
+每一回合，从中选出任意两块石头，然后将它们一起粉碎。
+假设石头的重量分别为 x 和 y，且 x <= y。那么粉碎的可能结果如下：
+如果 x == y，那么两块石头都会被完全粉碎；
+如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。
+最后，最多只会剩下一块石头。返回此石头最小的可能重量。
+如果没有石头剩下，就返回 0。
+*/
+
+/*
+stones = [2,7,4,1,8,1] 
+组合 2 和 4，得到 2，所以数组转化为 [2,7,1,8,1]，
+组合 7 和 8，得到 1，所以数组转化为 [2,1,1,1]，
+组合 2 和 1，得到 1，所以数组转化为 [1,1,1]，
+组合 1 和 1，得到 0，所以数组转化为 [1]，这就是最优值。
+
+根据解释，得到只要尽量将大重量的石头归为一堆，将小重量的石头归为另一堆
+就可以得到最优值
+
+（思路和//面试题：LeetCode 416 分割等和子集 基本相同）
+（相撞之后剩下的最小石头重量就是 sum - dp[target] - dp[target]。）
+*/
+#endif
+
+
+//完全背包应用
+//面试题：LeetCode 518 零钱兑换2
+#if 1
+/*
+给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。
+请你计算并返回可以凑成总金额的硬币组合数。
+如果任何硬币组合都无法凑出总金额，返回 0 。
+假设每一种面额的硬币有无限个。
+*/
+
+//1.dp[i][j]：下标1~i的硬币，每种可以取1样及以上，放到总容量为j的钱包
+//能获得的最大价值为dp[i][j]
+//2.确定递推公式
+/*
+                    i/j          0     1    2    3    4    5   
+                    0    ?      
+                    1    1            1    1    1    1    1
+                    2    2            1    2    2    3    3
+                    3    5            1    2    3    3    4
+            由于是完全背包问题，所以考虑的是 dp[i][j - w[i]] + v[i] 而不是 dp[i - 1][j - w[i]] + v[i]        
+            对于dp[2][2] 应要计算dp[2][0]+1  所以dp[2][0]=1
+                    i/j          0     1    2    3    4    5
+                    0    ?     
+                    1    1     1     1    1    1    1    1
+                    2    2     1     1    2    2    3    3
+                    3    5     1     1    2    2    3    4
+
+           重量=>硬币面额       价值=>组合数
+
+           dp[i][j]=max(dp[i-1][j],dp[i][j-coins[i]]+dp[i-1][j])   =>dp[i][j-coins[i]]+dp[i-1][j]
+*/
+
+#include <iostream>
+#include <vector>
+#include <deque>
+using namespace std;
+
+long long HowManyCombinations(int amount,  const vector<int>& input)
+{
+    deque<int>coins(input.begin(),input.end());
+    coins.push_front(0);
+
+    vector<vector<long long>>dp(coins.size(),vector<long long>(amount+1,0));
+
+    for (int i = 0; i <= input.size(); ++i)
+        dp[i][0] = 1;
+
+    for(int i=1;i<=input.size();++i)
+        for (int j = 1; j <= amount; ++j)
+        {
+            if (j < coins[i])
+                dp[i][j] = dp[i - 1][j];
+            else
+                dp[i][j] = dp[i][j - coins[i]] + dp[i - 1][j];
+            //***理解***
+            //放入至少一件第 i 个面额的硬币的情况(即价值=>组合数)            
+            //加上不放入第 i 个面额的硬币的情况
+            //【重点理解dp[1][3]的值怎么来的】
+        }
+
+    for (const auto& x : dp)
+    {
+        for (auto y : x)
+            cout << y<<' ';
+        cout << endl;
+    }
+
+    long long theNums = dp[input.size()][amount];
+
+    return theNums;
+}
+
+int main()
+{
+    int amount;
+    vector<int> coins;
+
+    amount=5,coins = {2,1,5};
+
+    cout << HowManyCombinations(amount,coins);
 
     return 0;
 }
@@ -6820,6 +6936,63 @@ int main()
     }
 
     cout << dp[n];
+
+    return 0;
+}
+#endif
+//二维数组解  【有误】
+#if 0
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    int m, n;//m：物品  n：背包容量
+    cin >> m >> n;
+
+    vector<vector<int>>dp(m + 1,vector<int>(n+1,0));
+
+    for (int i = 0; i <= m; ++i) 
+    {
+        dp[i][0] = 1;
+    }
+
+    //遍历物品
+    for (int i = 1; i <= m; ++i)
+    {
+        //遍历背包
+        for (int j = 1; j <= n; ++j)
+        {
+            /*
+            不使用第 i 种爬楼方式（即不爬 i 阶）达到第 j 阶的方法数。
+            换句话说，它是在前 i-1 种爬楼方式的基础上，达到第 j 阶的方法数。
+            */
+            if (j < i)
+                dp[i][j] = dp[i - 1][j];
+            else
+                dp[i][j] = dp[i-1][j]+dp[i][j-i];
+            /*      
+            dp[i][j-i]表示使用至少一次第 i 种爬楼方式的方法数。
+            如果我们至少爬了一次 i 阶，那么我们需要算出在此之前能达到第 j-i 阶的方法数，
+            这个值就是 dp[i][j-i]。由于可重复使用每种爬楼方式，
+            我们依旧在考虑第 i 种方式，因此使用 dp[i][...] 而不是 dp[i-1][...]
+
+            将两部分相加，我们就得到了总的方法数，即在考虑前 i 种爬楼方式时，
+            达到第 j 阶楼梯的总方法数。
+            */
+        }
+    }
+
+    for (const auto& x : dp)
+    {
+        for (auto y : x)
+            cout << y << ' ';
+        cout << endl;
+    }
+
+    cout << dp[m][n];
 
     return 0;
 }
