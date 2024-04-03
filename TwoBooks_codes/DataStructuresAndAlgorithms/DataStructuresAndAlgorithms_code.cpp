@@ -6808,9 +6808,253 @@ stones = [2,7,4,1,8,1]
 #endif
 
 
+//面试题：LeetCode 494 目标和
+#if 0
+/*
+给你一个非负整数数组 nums 和一个整数 target 。
+向数组中的每个整数前添加 '+' 或 '-' ，然后串联起所有整数，可以构造一个 表达式 ：
+例如，nums = [2, 1] ，可以在 2 之前添加 '+' ，在 1 之前添加 '-' ，
+然后串联起来得到表达式 "+2-1" 。
+返回可以通过上述方法构造的、运算结果等于 target 的不同表达式的数目。
+
+输入：nums = [1,1,1,1,1], target = 3
+输出：5
+解释：一共有 5 种方法让最终目标和为 3 。
+-1 + 1 + 1 + 1 + 1 = 3
++1 - 1 + 1 + 1 + 1 = 3
++1 + 1 - 1 + 1 + 1 = 3
++1 + 1 + 1 - 1 + 1 = 3
++1 + 1 + 1 + 1 - 1 = 3
+*/
+
+//分析：相当于要把数组分为两组，一组元素都要加正号，一组都要加负号
+// 正号集合PositiveArraySum + 负号集合NegativeArraySum = Sum
+// 正号集合PositiveArraySum - 负号集合NegativeArraySum = Target
+//  2*PositiveArraySum = Sum +Target   =>  PositiveArraySum=(Sum +Target)/2
+//问题转化为
+//求容量为PositiveArraySum的背包，向其中装数字，得到数字的和为背包容量的装法有几种
+//判定为01背包问题
+
+//1.dp[i][j]：下标1~i的nums，每种可以取1样，放到总容量为j的钱包
+//能获得的装法为dp[i][j]
+//2.确定递推公式
+/*
+                  i/j           0    1   2   3  4
+                  0     0     
+                  1     1     0    1   0   0   0 
+                  2     1     0    2   1   0   0
+                  3     1     0    3   3   1   0
+                  4     1     0    4   5        1
+                  5     1                          5
+                  根据此题题意，这样列表不行
+
+                  i/j           0    1   2   3  4
+                  0     0
+                  1     1     0    1   1   1   1
+                  2     1     0    1   2   2   2
+                  3     1     0    1   2   3   3
+                  4     1     0    1   2   3   4
+                  5     1     0    1   2   3   4
+                  以01背包的重量-价值来写表格，也不符合题意
+
+                  i/j           0    1   2   3   4
+                  0     0     1    0   0   0   0
+                  1     1     1    1   1   1   1  
+                  2     1     1    2   2   2   2
+                  3     1     1    3   4   4   4
+                  4     1     1    4   7   8   8
+                  5     1     1   
+
+
+*/
+
+#include <iostream>
+#include <vector>
+#include <deque>
+#include <numeric>
+using namespace std;
+
+int HowMany(deque<int> nums,int target)
+{
+    int Sum = accumulate(nums.begin(), nums.end(),0);
+    int PositiveArraySum = (Sum + target) >> 1;
+
+    if (PositiveArraySum << 1 != Sum + target)
+        return 0;
+
+    nums.push_front(0);
+
+    vector<vector<int>>dp(nums.size(),vector<int>(PositiveArraySum+1,0));
+
+    for(int i=)
+}
+
+int main()
+{
+    deque<int> nums;
+    int target;
+
+    nums = { 1,1,1,1,1 }, target = 3;
+    cout << HowMany(nums, target) << endl;
+
+
+
+    return 0;
+}
+#endif
+//解答：
+#if 1
+#include <iostream>
+#include <vector>
+#include <numeric>
+
+using namespace std;
+
+//法一：
+//假设添加 "-" 号的元素之和为 neg
+#if 0
+class Solution {
+public:
+    int findTargetSumWays(vector<int>& nums, int target) {
+        int sum = 0;
+        for (int& num : nums) {
+            sum += num;
+        }
+        int diff = sum - target;
+        if (diff < 0 || diff % 2 != 0) {
+            return 0;
+        }
+        int n = nums.size(), neg = diff / 2;
+        vector<vector<int>> dp(n + 1, vector<int>(neg + 1));
+        dp[0][0] = 1;
+        for (int i = 1; i <= n; i++) {
+            int num = nums[i - 1];
+            for (int j = 0; j <= neg; j++) {
+                dp[i][j] = dp[i - 1][j];
+                if (j >= num) {
+                    dp[i][j] += dp[i - 1][j - num];
+                }
+            }
+        }
+
+        for (const auto& x : dp)
+        {
+            for (auto y : x)
+                cout << y << ' ';
+
+            cout << endl;
+        }
+
+        return dp[n][neg];
+    }
+};
+#endif
+
+//法二：假设添加 "+" 号的元素之和为 pos
+/*
+2.确定递推公式
+
+                  i/j           0    1   2   3  4
+                  0     0     1    0   0   0   0
+                  1     1     1    1   0   0   0
+                  2     1     1    2   1   0   0
+                  3     1     1    3   3   1   0
+                  4     1     1    4   6   4   1
+                  5     1     1    5  10 10  5
+
+做题时硬要在脑内推有几种组合方法，结果导致有一些位置的值推导错误
+经验：
+既然知道了用01背包解决最大组合数，那就用dp[i-1][j - nums[i]] + dp[i-1][j]公式辅助推导
+*/
+
+#if 1
+
+class Solution
+{
+public:
+    int findTargetSumWays(vector<int> nums, int target)
+    {
+        int Sum = accumulate(nums.begin(), nums.end(), 0);
+
+        if (Sum < target)
+            return 0;
+
+        int PositiveArraySum = (Sum + target) >> 1;
+
+        if (PositiveArraySum << 1 != Sum + target)
+            return 0;
+
+        nums.insert(nums.begin(),0);
+
+        vector<vector<int>>dp(nums.size(), vector<int>(PositiveArraySum + 1, 0));
+
+#if 1
+        // 初始化，没有数字时，和为0的方式只有一种
+        //有数字时，和为0的方式也只有一种
+        for (int i = 0; i <= nums.size()-1; ++i)
+            dp[i][0] = 1;
+
+        for (int i = 1; i <= nums.size()-1; ++i) 
+        {
+            for (int j = 0; j <= PositiveArraySum; ++j)
+            {
+                if(j<nums[i])
+					dp[i][j] = dp[i - 1][j]; 
+                else
+                {
+                    dp[i][j] = dp[i - 1][j - nums[i]]+dp[i - 1][j];
+                }
+            }
+        }
+#endif
+#if 0
+        dp[0][0] = 1; // 初始化，没有数字时，和为0的方式只有一种
+
+        for (int i = 1; i <= nums.size()-1; i++) 
+        {
+            for (int j = 0; j <= PositiveArraySum; j++) 
+            {
+                dp[i][j] = dp[i - 1][j]; // 不选择当前数字
+                if (j >= nums[i]) 
+                {
+                    dp[i][j] += dp[i - 1][j - nums[i]]; // 选择当前数字
+                }
+            }
+        }
+#endif
+
+        for (const auto& x : dp)
+        {
+            for (auto y : x)
+                cout << y << ' ';
+
+            cout << endl;
+        }
+
+        return dp[nums.size()-1][PositiveArraySum];
+    }
+};
+#endif
+int main()
+{
+    Solution S;
+
+    vector<int> nums;
+    int target;
+
+    nums = { 1,1,1,1,1 }, target = 3;
+    cout << S.findTargetSumWays(nums, target) << endl;
+
+
+    return 0;
+}
+#endif
+
+
 //完全背包应用
 //面试题：LeetCode 518 零钱兑换2
-#if 1
+//用回溯法会超时
+#if 0
 /*
 给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。
 请你计算并返回可以凑成总金额的硬币组合数。
@@ -6839,6 +7083,9 @@ stones = [2,7,4,1,8,1]
 
            dp[i][j]=max(dp[i-1][j],dp[i][j-coins[i]]+dp[i-1][j])   =>dp[i][j-coins[i]]+dp[i-1][j]
 */
+//3.如何初始化
+
+//4.遍历顺序
 
 #include <iostream>
 #include <vector>
