@@ -7194,7 +7194,7 @@ int main()
     return 0;
 }
 #endif
-#if 1
+#if 0
 //二维数组解
 //方法：完全背包求【排列数】
 //1.dp[i][j]：能爬1~i阶时，爬到第j阶的方法数
@@ -7479,7 +7479,274 @@ int CalCombinations(vector<int> input, int k)
     return dp[input.size()][k];
 }
 #endif
+#if 0
+//更易于理解的动态规划写法
+//完全背包求组合数
+/*
+                i/j          0  1  2  3  4  5  6  7  8
 
+                0    0     0   0  0  0  0  0  0  0  0
+                1    2     1   0  1  0  1  0  1  0  1
+                2    3     1   0  1  1  1  1  2  1  2
+                3    5     1   0  1  1  1  2  2  2  3
+*/
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iomanip>
+using namespace std;
+
+int CalCombinations(vector<int> input, int k)
+{
+    if (input.empty() || k <= 0)
+        return 0;
+
+    input.insert(input.begin(),0);
+
+    vector<vector<int>> dp(input.size(), vector<int>(k + 1, 0));
+
+    for (int i = 0; i <= input.size()-1; ++i)
+        dp[i][0] = 1;
+
+    for (int i = 1; i <= input.size()-1; ++i)
+    {
+        for (int j = 1; j <= k; ++j)
+        {
+            if(j<input[i])
+				dp[i][j] = dp[i - 1][j];
+            else            
+            {
+                dp[i][j] = dp[i][j - input[i]]+dp[i-1][j]; 
+            }
+        }
+    }
+
+    for (auto x : dp)
+    {
+        for (auto y : x)
+        {
+            cout << right << setw(3) << y;
+        }
+        cout << endl;
+    }
+
+    return dp[input.size()-1][k];
+}
+
+int main()
+{
+    vector<int> dataInput{ 2, 3, 5 };
+    int k = 8;
+
+    cout << CalCombinations(dataInput, k);
+
+    return 0;
+}
+#endif
+
+
+//面试题：LeetCode 198 打家劫舍
+/*
+你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，
+影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，
+如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，
+一夜之内能够偷窃到的最高金额
+
+输入：[2,7,9,3,1]
+输出：12
+解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。
+          偷窃到的最高金额 = 2 + 9 + 1 = 12 。
+*/
+#if 0
+//难点：选择房屋的自由度很高，可以相隔很多间房屋来再次进行偷窃
+
+//1.dp[i]：考虑到下标i时，能偷到的最高金额  【下标 i 的房屋未必被偷】
+//2.递推公式
+/*
+比如：[2,7,9,3,1]
+
+下标到4，那么计算dp[4]的话，下标i为3一定不能偷窃
+dp[4]=dp[2]+nums[4]
+为什么会是dp[2] ? 回过头看看dp[]的定义，这指的是到下标2时能偷到的最高金额
+
+以上分析缺少了情况。
+
+情况分类：
+对于下标i为4
+偷：dp[4]=dp[2]+nums[4]
+不偷：dp[4]=dp[3]
+
+         i         0    1    2    3    4    5
+                   0    2    7    9    3    1                     
+     dp[i]       0    2    7   11  11  12     
+*/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int Rob(vector<int>& nums)
+{
+    if (nums.empty())
+        return 0;
+
+    nums.insert(nums.begin(),0);
+
+    vector<int> dp(nums.size(),0);
+
+    dp[1] = nums[1];
+
+    for (int i = 2; i <= nums.size() - 1; ++i)
+    {
+        dp[i] = max(dp[i-1],dp[i-2]+nums[i]);
+    }
+
+    for (auto x : dp)
+        cout << x << ' ';
+    cout << endl;
+
+    return dp[nums.size() - 1];
+}
+
+int main()
+{
+    vector<int> nums;
+    nums = { 2,7,9,3,1 };
+
+    cout << Rob(nums);
+
+    return 0;
+}
+#endif
+
+
+//面试题：LeetCode 213 打家劫舍2
+/*
+你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。
+这个地方所有的房屋都围成一圈 ，这意味着第一个房屋和最后一个房屋是紧挨着的。
+同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，
+系统会自动报警 。
+给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下 ，
+今晚能够偷窃到的最高金额。
+
+输入：nums = [2,3,2]
+输出：3
+解释：你不能先偷窃 1 号房屋（金额 = 2），然后偷窃 3 号房屋（金额 = 2）, 因为他们是相邻的。
+*/
+#if 0
+//难点：起点/终点的元素到底选不选，怎么实现这种判断？
+
+/*
+思路：将环形转换为线性数组
+分析：起点/终点的元素到底选不选，有三种情况
+比如  [2,7,9,3,1]  
+情况一：考虑起点不考虑终点
+情况一：考虑终点不考虑起点
+情况一：起点终点都不考虑
+*/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int Rob(vector<int>& nums)
+{
+    if (nums.empty())
+        return 0;
+
+    nums.insert(nums.begin(), 0);
+
+    int case1ans, case2ans, case3ans;
+    //情况一：考虑起点不考虑终点
+    /*
+             i         0    1    2    3    4    5
+                       0    2    7    9    3    1                     
+         dp[i]       0    2    7   11  11   0
+    */
+    vector<int> dp1(nums.size(), 0);
+
+    dp1[1] = nums[1];
+
+    for (int i = 2; i <= nums.size() - 2; ++i)
+    {
+        dp1[i] = max(dp1[i - 1], dp1[i - 2] + nums[i]);
+    }
+    for (auto x : dp1)
+        cout << x << ' ';
+    cout << endl;
+    case1ans = dp1[nums.size() - 2];
+
+    //情况二：考虑终点不考虑起点
+    /*
+             i         0    1    2    3    4    5
+                       0    2    7    9    3    1
+         dp[i]       0    0    7    9    10  10
+    */
+    vector<int> dp2(nums.size(), 0);
+
+    dp2[2] = nums[2];
+
+    for (int i = 3; i <= nums.size() - 1; ++i)
+    {
+        dp2[i] = max(dp2[i - 1], dp2[i - 2] + nums[i]);
+    }
+    for (auto x : dp2)
+        cout << x << ' ';
+    cout << endl;
+    case2ans = dp2[nums.size() - 1];
+
+    //情况三：起点终点都不考虑
+    /*
+             i         0    1    2    3    4    5
+                       0    2    7    9    3    1
+         dp[i]       0    0    7    9    10  0
+    */
+    vector<int> dp3(nums.size(), 0);
+
+    dp3[2] = nums[2];
+
+    for (int i = 3; i <= nums.size() - 2; ++i)
+    {
+        dp3[i] = max(dp3[i - 1], dp3[i - 2] + nums[i]);
+    }
+    for (auto x : dp3)
+        cout << x << ' ';
+    cout << endl;
+    case3ans = dp3[nums.size() - 2];
+
+    return max(max(case1ans,case2ans),case3ans);
+}
+//补充：其实情况三可以被优化掉，因为情况一或者情况二已经包含了情况三的考虑范围
+
+int main()
+{
+    vector<int> nums;
+    nums = { 2,7,9,3,1 };
+
+    cout << Rob(nums);
+
+    return 0;
+}
+#endif
+
+
+//面试题：LeetCode 337 打家劫舍3
+/*
+小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为 root 。
+除了 root 之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，
+聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 
+如果两个直接相连的房子在同一天晚上被打劫，房屋将自动报警。
+给定二叉树的 root 。返回 在不触动警报的情况下，小偷能够盗取的最高金额 。
+*/
+#if 1
+//是否可以用层序遍历，将其转化为一维数组？
+//不行，因为可以同时取子节点和右边的节点 ，这两个在相邻层但是可以取更大。
+
+
+#endif
 
 
 //动态规划解决单序列问题
