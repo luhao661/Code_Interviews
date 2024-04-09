@@ -7742,9 +7742,197 @@ int main()
 给定二叉树的 root 。返回 在不触动警报的情况下，小偷能够盗取的最高金额 。
 */
 #if 1
-//是否可以用层序遍历，将其转化为一维数组？
-//不行，因为可以同时取子节点和右边的节点 ，这两个在相邻层但是可以取更大。
+/*
+                     3
+                 2      3
+                   3        1
 
+输入: root = [3,2,3,null,3,null,1]
+输出: 7
+解释: 小偷一晚能够盗取的最高金额 3 + 3 + 1 = 7
+*/
+//是否可以用层序遍历，将其转化为一维数组？
+//不行，因为可以同时取某个节点和其右边的节点 ，这两个节点属于直接相连的。
+//思考：
+// 树形dp
+//对于一个节点，只有两种状态，dp[0] 为不偷 dp[1] 为偷
+//其他节点的状态如何保存？
+//因为遍历节点是用递归去遍历的，在递归遍历的每一层
+// 都会单独存储当前层的节点的状态
+
+//dp[0]：不偷，当前节点所获得的最高金额    dp[1]：偷，当前节点所获得的最高金额
+
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+struct BinaryTreeNode
+{
+    double                 m_dbValue;
+    BinaryTreeNode* m_pLeft;
+    BinaryTreeNode* m_pRight;
+};
+
+BinaryTreeNode* CreateBinaryTreeNode(double dbValue)
+{
+    BinaryTreeNode* pNode = new BinaryTreeNode();
+    pNode->m_dbValue = dbValue;
+    pNode->m_pLeft = nullptr;
+    pNode->m_pRight = nullptr;
+
+    return pNode;
+}
+
+void ConnectTreeNodes(BinaryTreeNode* pParent, BinaryTreeNode* pLeft, BinaryTreeNode* pRight)
+{
+    if (pParent != nullptr)
+    {
+        pParent->m_pLeft = pLeft;
+        pParent->m_pRight = pRight;
+    }
+}
+
+void DestroyTree(BinaryTreeNode* pRoot)
+{
+    //将用前序遍历得到的二叉树的内容从头开始删除
+    if (pRoot != nullptr)
+    {
+        BinaryTreeNode* pLeft = pRoot->m_pLeft;
+        BinaryTreeNode* pRight = pRoot->m_pRight;
+
+        delete pRoot;
+        pRoot = nullptr;//防止出现野指针
+
+        DestroyTree(pLeft);
+        DestroyTree(pRight);
+    }
+}
+
+//暴力递归
+#if 0
+int rob(BinaryTreeNode* root)
+{
+    if (root == NULL) 
+        return 0;
+
+    if (root->m_pLeft == NULL && root->m_pRight == NULL) 
+        return root->m_dbValue;
+
+    // 偷父节点
+    int val1 = root->m_dbValue;
+    if (root->m_pLeft) 
+        val1 += rob(root->m_pLeft->m_pLeft) + 
+        rob(root->m_pLeft->m_pRight); // 跳过root->m_pLeft，相当于不考虑左孩子了
+    if (root->m_pRight) 
+        val1 += rob(root->m_pRight->m_pLeft) + 
+        rob(root->m_pRight->m_pRight); // 跳过root->m_pRight，相当于不考虑右孩子了
+   
+    // 不偷父节点
+    int val2 = rob(root->m_pLeft) + rob(root->m_pRight); // 考虑root的左右孩子
+
+    return max(val1, val2);
+}
+#endif
+
+//记忆化递归
+unordered_map<BinaryTreeNode*, int> umap; // 记录计算过的结果
+int rob(BinaryTreeNode* root)
+{
+    if (root == NULL)
+        return 0;
+
+    if (root->m_pLeft == NULL && root->m_pRight == NULL) 
+        return root->m_dbValue;
+
+    if (umap[root]) 
+        return umap[root]; // 如果umap里已经有记录则直接返回
+
+    /*
+    使用了递归来遍历树，而不是进行显式的树遍历（如前序、中序或后序遍历）。
+    递归函数 rob 对每个节点进行了两种情况的考虑
+    */
+
+    // 偷父节点
+    int val1 = root->m_dbValue;
+    if (root->m_pLeft) 
+        val1 += rob(root->m_pLeft->m_pLeft) + 
+        rob(root->m_pLeft->m_pRight); // 跳过root->left
+    if (root->m_pRight) 
+        val1 += rob(root->m_pRight->m_pLeft) +
+        rob(root->m_pRight->m_pRight); // 跳过root->right
+
+    // 不偷父节点
+    int val2 = rob(root->m_pLeft) + rob(root->m_pRight); // 考虑root的左右孩子
+
+    umap[root] = max(val1, val2); // umap记录一下结果
+
+    return max(val1, val2);
+}
+/*
+***注***  此处不是使用回溯的三步曲，而是使用了递归+记忆搜索
+ "House Robber III"问题，我们的目标是找到一个最优解（即可偷取的最大金额），
+ 而不是搜索所有可能的解决方案。对于每个节点，我们考虑偷或者不偷两种情况，
+ 并存储这些节点的结果，以便在以后遇到相同子问题时可以直接使用。
+ 这里不需要回溯，
+ 记忆化递归足以解决这个问题，在计算每个节点的最优解时避免了不必要的重复计算。
+ 并且提高了效率。 
+*/
+
+//树形dp
+int rob(BinaryTreeNode* root) 
+{
+    vector<int> result = robTree(root);
+    return max(result[0], result[1]);
+}
+// 长度为2的数组，0：不偷，1：偷
+vector<int> robTree(BinaryTreeNode* cur)
+{
+    if (cur == NULL) 
+        return vector<int>{0, 0};
+
+    //【后序遍历】，因为通过递归函数的返回值来做下一步计算。
+    vector<int> left = robTree(cur->m_pLeft);
+    vector<int> right = robTree(cur->m_pRight);
+    // 偷cur，那么就不能偷左右节点。
+    int val1 = cur->m_dbValue + left[0] + right[0];
+
+    // 不偷cur，那么可以偷也可以不偷左右节点，则取较大的情况
+    int val2 = max(left[0], left[1]) + max(right[0], right[1]);
+
+    return { val2, val1 };
+}
+
+int main()
+{
+    vector<int> TreeNode;
+
+    TreeNode = { 3,2,3,-1,3,-1,1 };
+
+    vector<BinaryTreeNode*>pBinaryTreeNode;
+
+    for (int i = 0; i < TreeNode.size(); ++i)
+    {
+        if (TreeNode[i] != -1)
+            pBinaryTreeNode.push_back(CreateBinaryTreeNode(TreeNode[i]));
+        else
+            pBinaryTreeNode.push_back(nullptr);
+    }
+
+    ConnectTreeNodes(pBinaryTreeNode[0], pBinaryTreeNode[1], pBinaryTreeNode[2]);
+    ConnectTreeNodes(pBinaryTreeNode[1], pBinaryTreeNode[3], pBinaryTreeNode[4]);
+    ConnectTreeNodes(pBinaryTreeNode[2], pBinaryTreeNode[5], pBinaryTreeNode[6]);
+    
+    cout << rob(pBinaryTreeNode[0]);
+
+    DestroyTree(pBinaryTreeNode[0]);
+    return 0;
+}
+#endif
+
+
+//面试题：LeetCode 121 买卖股票的最佳时机
+#if 1
 
 #endif
 
