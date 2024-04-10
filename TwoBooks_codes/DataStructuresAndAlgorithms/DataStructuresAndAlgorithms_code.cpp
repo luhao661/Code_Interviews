@@ -7741,7 +7741,7 @@ int main()
 如果两个直接相连的房子在同一天晚上被打劫，房屋将自动报警。
 给定二叉树的 root 。返回 在不触动警报的情况下，小偷能够盗取的最高金额 。
 */
-#if 1
+#if 0
 /*
                      3
                  2      3
@@ -7932,8 +7932,158 @@ int main()
 
 
 //面试题：LeetCode 121 买卖股票的最佳时机
-#if 1
+/*
+给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
+你只能选择某一天买入这只股票，并选择在未来的某一个不同的日子卖出该股票。
+设计一个算法来计算你所能获取的最大利润。
+返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
 
+输入：[7,1,5,3,6,4]
+输出：5
+解释：在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，
+最大利润 = 6-1 = 5 。
+注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
+*/
+#if 1
+/*
+思路一：
+两层for循环，枚举每两个为一组的数据，时间复杂度O(n^2)
+思路二：
+贪心，时间复杂度O(n)
+*/
+
+#include <iostream>
+#include <vector>
+#include <climits>
+#include <algorithm>
+using namespace std;
+
+#if 0
+int maxProfit(vector<int>& prices)
+{
+    //双指针暴力解法
+    int leftPos, rightPos;
+    leftPos = 0;
+
+    int MaxProfit = INT_MIN;
+
+    while (leftPos <= prices.size() - 2)
+    {
+        for (rightPos = leftPos + 1; rightPos <= prices.size() - 1; ++rightPos)
+        {
+            int CurProfit = prices[rightPos] - prices[leftPos];
+
+            MaxProfit = max(MaxProfit,CurProfit);
+        }
+
+        ++leftPos;
+    }
+
+    return MaxProfit;
+}
+#endif
+
+#if 0
+int maxProfit(vector<int>& prices)
+{
+    //贪心
+    int lowest = INT_MAX;
+    int MaxProfit=0;
+
+    for(int i=0;i<prices.size();++i)
+    {
+        lowest = min(lowest, prices[i]);
+
+        //***
+        MaxProfit = max(MaxProfit,prices[i]-lowest);
+    }
+
+    return MaxProfit;
+}
+#endif
+
+//1.dp[i][0]：持有股票第 i 天的最大利润  dp[i][1]：不持有股票第 i 天的最大利润
+//什么是“持有”：可能不是第 i 天买的，可能早就买了
+//同理“不持有”：可能不是第 i 天卖的，可能早就卖了
+//dp含义的小细节，这是一种【保持的状态】，有了这个含义，那就不必再用别的变量去
+//表示没有包括的状态。
+
+//***注***
+//把单纯地计算利润转化为 -买入金额+卖出金额
+
+//2.递推公式
+//dp[i][0] 可由哪些状态来推出呢？
+//如果第i天持有股票即dp[i][0]， 那么可以由两个状态推出来
+//状态一：第 i - 1天就持有股票，那么就保持现状，
+//所得现金就是昨天持有股票的所得现金即：dp[i - 1][0]
+//状态二：第 i 天买入股票，所得现金就是买入今天的股票后所得现金即： - prices[i]
+//那么dp[i][0]应该选所得现金最大的，dp[i][0] = max(dp[i - 1][0], -prices[i]);
+
+//如果第i天不持有股票即dp[i][1]， 也可以由两个状态推出来
+//状态一：第 i - 1 天就不持有股票，那么就保持现状，
+//所得现金就是昨天不持有股票的所得现金 即：dp[i - 1][1]
+//状态二：第 i 天卖出股票，所得现金就是按照今天股票价格卖出后
+//所得现金即：dp[i - 1][0] + prices[i]
+//同样dp[i][1]取最大的，dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
+
+//3.初始化
+//dp[0][0]表示第0天持有股票，此时的持有股票就一定是买入股票了，
+//因为不可能有前一天推出来，所以dp[0][0] -= prices[0];
+//dp[0][1]表示第0天不持有股票，不持有股票那么现金就是0，所以dp[0][1] = 0;
+
+/*
+辅助理解：（  对于{ 7,1,5,3,6,4 }  ）
+
+                i/j              0        1
+                0     0        0        0
+                1     7        -7       0
+                2     1        -1       max(0,-7+1)=0
+                3     5        -1       max(0,-1+5)=4
+                4     3        -1       max(4,-1+3)=4
+                5     6        -1       max(4,-1+6)=5
+                6     4        -1       max(5,-1+4)=5
+
+为什么不是dp[5][0]呢？
+因为本题中不持有股票状态所得金钱一定比持有股票状态得到的多！
+*/
+
+#if 1
+int maxProfit(vector<int>& prices)
+{
+    prices.insert(prices.begin(),0);
+
+    vector<vector<int>>dp(prices.size(),vector<int>(2,0));
+
+    dp[1][0] = -prices[1];
+
+    for (int i = 2; i <= prices.size() - 1; ++i)
+    {
+		dp[i][0] = max(dp[i - 1][0], -prices[i]);
+
+        dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
+    }
+
+    for (const auto& x : dp)
+    {
+        for (auto y : x)
+            cout << y << ' ';
+
+        cout << endl;
+    }
+
+    return dp[prices.size() - 1][1];
+}
+#endif
+
+int main()
+{
+    vector<int> prices;
+    prices = { 7,1,5,3,6,4 };
+
+    cout << maxProfit(prices) << endl;
+
+    return 0;
+}
 #endif
 
 
