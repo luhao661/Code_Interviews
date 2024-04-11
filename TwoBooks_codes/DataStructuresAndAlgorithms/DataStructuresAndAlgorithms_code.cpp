@@ -7944,7 +7944,7 @@ int main()
 最大利润 = 6-1 = 5 。
 注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
 */
-#if 1
+#if 0
 /*
 思路一：
 两层for循环，枚举每两个为一组的数据，时间复杂度O(n^2)
@@ -8013,13 +8013,13 @@ int maxProfit(vector<int>& prices)
 
 //2.递推公式
 //dp[i][0] 可由哪些状态来推出呢？
-//如果第i天持有股票即dp[i][0]， 那么可以由两个状态推出来
+//如果第i天【持有】股票即dp[i][0]， 那么可以由两个状态推出来
 //状态一：第 i - 1天就持有股票，那么就保持现状，
 //所得现金就是昨天持有股票的所得现金即：dp[i - 1][0]
 //状态二：第 i 天买入股票，所得现金就是买入今天的股票后所得现金即： - prices[i]
 //那么dp[i][0]应该选所得现金最大的，dp[i][0] = max(dp[i - 1][0], -prices[i]);
 
-//如果第i天不持有股票即dp[i][1]， 也可以由两个状态推出来
+//如果第i天【不持有】股票即dp[i][1]， 也可以由两个状态推出来
 //状态一：第 i - 1 天就不持有股票，那么就保持现状，
 //所得现金就是昨天不持有股票的所得现金 即：dp[i - 1][1]
 //状态二：第 i 天卖出股票，所得现金就是按照今天股票价格卖出后
@@ -8079,6 +8079,206 @@ int main()
 {
     vector<int> prices;
     prices = { 7,1,5,3,6,4 };
+
+    cout << maxProfit(prices) << endl;
+
+    return 0;
+}
+#endif
+
+
+//面试题：LeetCode 122 买卖股票的最佳时机2
+/*
+给你一个整数数组 prices ，其中 prices[i] 表示某支股票第 i 天的价格。
+在每一天，你可以决定是否购买和/或出售股票。你在任何时候 最多 只能持有 一股 股票。
+你也可以先购买，然后在 同一天 出售。
+返回 你能获得的 最大利润 。
+
+输入：prices = [7,1,5,3,6,4]
+输出：7
+解释：在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 
+这笔交易所能获得利润 = 5 - 1 = 4 。随后，在第 4 天（股票价格 = 3）的时候买入，
+在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6 - 3 = 3 。
+总利润为 4 + 3 = 7 。
+*/
+#if 0
+//分析：
+/*
+//1.dp[i][0]：持有股票第 i 天的最大利润  dp[i][1]：不持有股票第 i 天的最大利润
+
+//2.递推公式：
+对于{ 7,1,5,3,6,4 }：
+
+                        i/j                 0                           1
+                        0     0
+                        1     7           -7                          0
+                        2     1           -1                          0
+                        3     5           -1                          4
+                        4     3         max(-1,4-3)=1        4
+                        5     6            1                           7
+                        6     4            3                           7 
+
+//持有股票：第i-1天就已经持有和第i天才持有取最大值
+dp[i][0]=max(dp[i-1][0],dp[i-1][1]-prices[i])
+//持有股票：第i-1天就已经不持有和第i天才不持有取最大值
+dp[i][1]=max(dp[i-1][1],dp[i-1][0]+prices[i])
+//当天买和当天卖的情况
+//不会给dp[i][1]的值带来影响
+*/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int maxProfit(vector<int>& data)
+{
+    data.insert(data.begin(),0);
+
+    vector<vector<int>> dp(data.size(),vector<int>(2,0));
+
+    dp[1][0] = -data[1];
+
+    for (int i = 2; i <= data.size() - 1; ++i)
+    {
+        dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - data[i]);
+        //与买卖股票的最佳时机解题代码的区别：
+        //买卖股票的最佳时机解题代码：只能买一次，买之前现金一定是0
+        //此处可以买卖多次，买之前的现金可以是之前的盈利金额
+
+        dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + data[i]);
+    }
+
+    for (const auto& x : dp)
+    {
+        for (auto y : x)
+            cout << y << " ";
+        cout << endl;
+    }
+
+    return dp[data.size() - 1][1];
+}
+
+/*
+贪心算法
+
+        int res = 0;
+        for (int i = 1; i < prices.size(); i++)
+            res += max(0, prices[i] - prices[i-1]);
+        return res;
+*/
+
+int main()
+{
+    vector<int> prices;
+    prices = { 7,1,5,3,6,4 };
+
+    cout << maxProfit(prices)<<endl;
+
+    return 0;
+}
+#endif
+
+
+//面试题：LeetCode 123 买卖股票的最佳时机3
+/*
+给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。
+设计一个算法来计算你所能获取的最大利润。你最多可以完成 【两笔】 交易。
+注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+
+输入：prices = [3,3,5,0,0,3,1,4]
+输出：6
+解释：在第 4 天（股票价格 = 0）的时候买入，在第 6 天（股票价格 = 3）的时候
+卖出，这笔交易所能获得利润 = 3-0 = 3 。
+随后，在第 7 天（股票价格 = 1）的时候买入，在第 8 天 （股票价格 = 4）的时候
+卖出，这笔交易所能获得利润 = 4-1 = 3 。
+*/
+#if 0
+/*
+分析：
+与买卖股票的最佳时机2的区别：此题最多买卖两次
+
+//1.dp表达式的含义
+//之前的定义及含义：“dp[i][0]：持有股票第 i 天的最大利润  
+dp[i][1]：不持有股票第 i 天的最大利润”
+
+无法表示所有状态，需要重新进行定义
+
+dp[i][0]    不操作
+dp[i][1]    第一次持有
+dp[i][2]    第一次不持有
+dp[i][3]    第二次持有
+dp[i][4]    第二次不持有
+
+2.递推公式
+这些状态可由哪些状态来推出呢？
+
+dp[i][0]=dp[i-1][0]
+dp[i][1]=max(dp[i-1][1],dp[i-1][0]-prices[i])
+dp[i][2]=max(dp[i-1][2],dp[i-1][1]+prices[i])
+dp[i][3]=max(dp[i-1][3],dp[i-1][2]-prices[i])
+dp[i][4]=max(dp[i-1][4],dp[i-1][3]+prices[i])
+
+3.初始化
+dp[1][0]=0
+dp[1][1]=-prices[1]
+dp[1][2]理解为同一天买卖，利润为0
+dp[1][3]理解为买入后卖出然后又买入，-prices[1]
+dp[1][4]理解为买入后卖出然后又买入卖出，利润为0
+
+
+                      i/j                0          1         2        3       4
+                      0      0         0                                             
+                      1      3         0          -3        0        -3      0                          
+                      2      3         0          -3        0        -3      0                                      
+                      3      5         0          -3        2        -3      2                                    
+                      4      0         0           0         2         2      2                            
+                      5      0         0           0         2         2      2                                     
+                      6      3         0           0         3         2      5                                      
+                      7      1         0           0         3         2      5                                      
+                      8      4         0           0         4         2      6                                   
+
+*/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int maxProfit(vector<int>& data)
+{
+    data.insert(data.begin(), 0);
+
+    vector<vector<int>> dp(data.size(), vector<int>(5, 0));
+
+    dp[1][0] = 0, dp[1][1] = -data[1], dp[1][2] = 0, dp[1][3] = -data[1], dp[1][4] = 0;
+
+    for (int i = 2; i <= data.size() - 1; ++i)
+    {
+        dp[i][0] = dp[i - 1][0];
+        dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - data[i]);
+        dp[i][2] = max(dp[i - 1][2], dp[i - 1][1] + data[i]);
+        dp[i][3] = max(dp[i - 1][3], dp[i - 1][2] - data[i]);
+        dp[i][4] = max(dp[i - 1][4], dp[i - 1][3] + data[i]);
+    }
+
+    for (const auto& x : dp)
+    {
+        for (auto y : x)
+            cout << y << ' ';
+
+        cout << endl;
+    }
+
+    return dp[data.size() - 1][4];
+}
+
+int main()
+{
+    vector<int> prices;
+    prices = { 3,3,5,0,0,3,1,4 };
 
     cout << maxProfit(prices) << endl;
 
