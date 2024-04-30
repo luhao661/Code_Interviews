@@ -16,7 +16,7 @@ int main()
 
     //数字0到数字num
     vector<int> vec(num + 1);
- 
+  
     try
     {
         CountBits(num, vec);
