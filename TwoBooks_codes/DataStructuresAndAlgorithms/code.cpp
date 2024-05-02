@@ -348,7 +348,7 @@ int main()
 }
 void FindThreeNumbers(vector<int>& vec, int fixedNum, vector<int>::iterator theIterator)
 {
-    if (vec.size() < 3)
+    if (vec.size() < 3) 
         return;
 
     int SumOfPairOfTargetNums = -fixedNum;
