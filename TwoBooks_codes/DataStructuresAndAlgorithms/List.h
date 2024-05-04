@@ -8,8 +8,8 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 *******************************************************************/
 
 //==================================================================
-// ¡¶½£Ö¸Offer¡ª¡ªÃûÆóÃæÊÔ¹Ù¾«½²µäĞÍ±à³ÌÌâ¡·´úÂë
-// ×÷Õß£ººÎº£ÌÎ
+// ã€Šå‰‘æŒ‡Offerâ€”â€”åä¼é¢è¯•å®˜ç²¾è®²å…¸å‹ç¼–ç¨‹é¢˜ã€‹ä»£ç 
+// ä½œè€…ï¼šä½•æµ·æ¶›
 //==================================================================
 
 struct ListNode
@@ -24,4 +24,4 @@ __declspec( dllexport ) void PrintListNode(ListNode* pNode);
 __declspec( dllexport ) void PrintList(ListNode* pHead);
 __declspec( dllexport ) void DestroyList(ListNode* pHead);
 __declspec( dllexport ) void AddToTail(ListNode** pHead, int value);
-__declspec( dllexport ) void RemoveNode(ListNode** pHead, int value);
+__declspec( dllexport ) void RemoveNode(ListNode** pHead, int value); 
