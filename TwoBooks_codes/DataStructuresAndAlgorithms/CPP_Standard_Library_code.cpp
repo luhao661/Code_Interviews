@@ -5,7 +5,7 @@
 /*
 C：
 lambda函数、智能指针、nullptr
-新关键字auto、后置返回类型decltype
+新关键字auto、后置返回类型decltype 
 基于范围的for循环、
 一致性初始化{}、noexcept、constexpr
 
