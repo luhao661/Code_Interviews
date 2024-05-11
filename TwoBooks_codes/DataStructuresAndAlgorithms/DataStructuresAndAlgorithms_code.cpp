@@ -4,7 +4,7 @@
 //面试题3：前n个数字二进制形式中1的个数
 #if 0
 #include <iostream>
-#include <vector>
+#include <vector> 
 using namespace std;
 
 void CountBits(int num, vector<int>&);
