@@ -1059,7 +1059,7 @@ int SumOfTwoDemensionSubArray(const vector<vector<int>>& vec,
             rowSum += vec[i][j];
 
             PreSum[i + 1][j + 1] = PreSum[i][j + 1] + rowSum;
-            //***理解***
+            //***理解*** 
             //某行某列的二维前缀和等于上一行某列的值加上当前行
             //遍历到某列的和
         }
