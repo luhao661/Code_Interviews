@@ -1185,7 +1185,7 @@ int main()
         //元素加入则对应的hash表位置处的值-1，退出则+1
         ++right;
         --hash.get()[str2[right] - 'a'];
-
+ 
         ++hash.get()[str2[left] - 'a'];
         ++left;
 
