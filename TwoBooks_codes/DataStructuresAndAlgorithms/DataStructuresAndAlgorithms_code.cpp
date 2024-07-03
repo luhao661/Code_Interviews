@@ -919,7 +919,7 @@ int FindTheLengthOfCorrespondingSubArray(const vector<int>& vec)
         //对应的值之和为-3
         //因此索引值3、4对应的子数组的0、1个数一定相同
         //长度正好为当前index减去之前的index
-    }
+    } 
 
     return MaxLen;
 }
