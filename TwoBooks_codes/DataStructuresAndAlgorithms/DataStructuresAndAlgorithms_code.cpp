@@ -2509,7 +2509,7 @@ void insertNodeCore(ListNode* pHead, int Val)
 using namespace std;
 
 class RandomizedSet 
-{
+{ 
 private:
     //哈希表key存放值，value存放下标
     unordered_map<int, int>IndexOfNum;
