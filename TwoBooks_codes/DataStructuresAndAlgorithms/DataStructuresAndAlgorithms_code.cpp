@@ -2483,7 +2483,7 @@ void insertNodeCore(ListNode* pHead, int Val)
             {
                 pNode->m_pNext = new ListNode{ Val,pNext };
                 break;
-            }
+            } 
         }
 
 		pNode = pNext;
