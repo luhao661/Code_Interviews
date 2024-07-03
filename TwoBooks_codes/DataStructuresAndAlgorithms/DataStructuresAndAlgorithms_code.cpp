@@ -1347,7 +1347,7 @@ int LongestSubString(const string& str)
     }
 
     return MaxLen;
-}
+} 
 #endif
 
 #if 1
