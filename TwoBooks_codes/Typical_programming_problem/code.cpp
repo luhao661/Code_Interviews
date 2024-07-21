@@ -1,7 +1,7 @@
-//¡¶½£Ö¸Offer ÃûÆóÃæÊÔ¹Ù¾«½²µäĞÍ±à³ÌÌâ¡·
+//ã€Šå‰‘æŒ‡Offer åä¼é¢è¯•å®˜ç²¾è®²å…¸å‹ç¼–ç¨‹é¢˜ã€‹
 
 
-//ÃæÊÔÌâ1£º¸³ÖµÔËËã·ûº¯Êı
+//é¢è¯•é¢˜1ï¼šèµ‹å€¼è¿ç®—ç¬¦å‡½æ•°
 #if 0
 #include <string.h>
 
@@ -20,46 +20,46 @@ private:
     char* m_pData;
 };
 
-//¾­µä½â·¨£º
+//ç»å…¸è§£æ³•ï¼š
 #if 0
-//Èç¹û´«ÈëµÄ²ÎÊı²»ÊÇÒıÓÃ¶øÊÇÊµÀı£¬ÄÇÃ´´ÓĞÎ²Îµ½Êµ²Î»áµ÷ÓÃÒ»´Î
-//¸´ÖÆ¹¹Ôìº¯Êı¡£°Ñ²ÎÊıÉùÃ÷ÎªÒıÓÃ¿ÉÒÔ±ÜÃâÕâÑùµÄÎŞÎ½ÏûºÄ£¬
-//ÄÜÌá¸ß´úÂëµÄĞ§ÂÊ¡£Í¬Ê±£¬ÎÒÃÇÔÚ¸³ÖµÔËËã·ûº¯ÊıÄÚ²»»á¸Ä±ä
-//´«ÈëµÄÊµÀıµÄ×´Ì¬£¬Òò´ËÓ¦¸ÃÎª´«ÈëµÄÒıÓÃ²ÎÊı¼ÓÉÏconst¹Ø¼ü×Ö¡£
+//å¦‚æœä¼ å…¥çš„å‚æ•°ä¸æ˜¯å¼•ç”¨è€Œæ˜¯å®ä¾‹ï¼Œé‚£ä¹ˆä»å½¢å‚åˆ°å®å‚ä¼šè°ƒç”¨ä¸€æ¬¡
+//å¤åˆ¶æ„é€ å‡½æ•°ã€‚æŠŠå‚æ•°å£°æ˜ä¸ºå¼•ç”¨å¯ä»¥é¿å…è¿™æ ·çš„æ— è°“æ¶ˆè€—ï¼Œ
+//èƒ½æé«˜ä»£ç çš„æ•ˆç‡ã€‚åŒæ—¶ï¼Œæˆ‘ä»¬åœ¨èµ‹å€¼è¿ç®—ç¬¦å‡½æ•°å†…ä¸ä¼šæ”¹å˜
+//ä¼ å…¥çš„å®ä¾‹çš„çŠ¶æ€ï¼Œå› æ­¤åº”è¯¥ä¸ºä¼ å…¥çš„å¼•ç”¨å‚æ•°åŠ ä¸Šconstå…³é”®å­—ã€‚
 CMyString& CMyString::operator = (const CMyString& str)
 {
-    //´íÎóĞ´·¨£º
-	//if (*this == str) //Ô­Òò£ºÀà¶ÔÏóÖ®¼äÓÃ==ÔËËã·û£¬µ«´ËÔËËã·û»¹Ã»ÓĞ±»ÖØÔØ¶¨Òå¡£
+    //é”™è¯¯å†™æ³•ï¼š
+	//if (*this == str) //åŸå› ï¼šç±»å¯¹è±¡ä¹‹é—´ç”¨==è¿ç®—ç¬¦ï¼Œä½†æ­¤è¿ç®—ç¬¦è¿˜æ²¡æœ‰è¢«é‡è½½å®šä¹‰ã€‚
 
-    if (this == &str)//1.¼ì²éÊÇ·ñÊÇ×ÔÎÒ¸´ÖÆ
+    if (this == &str)//1.æ£€æŸ¥æ˜¯å¦æ˜¯è‡ªæˆ‘å¤åˆ¶
         return *this;
 
-    delete[] m_pData;//2.ÊÍ·Åm_pDataÖ¸ÏòµÄÔ­Êı¾İÄÚÈİ
+    delete[] m_pData;//2.é‡Šæ”¾m_pDataæŒ‡å‘çš„åŸæ•°æ®å†…å®¹
 
-    size_t len = strlen(str.m_pData);//3.ÎªĞÂ×Ö·û´®·ÖÅä×ã¹»µÄÄÚ´æ¿Õ¼ä
+    size_t len = strlen(str.m_pData);//3.ä¸ºæ–°å­—ç¬¦ä¸²åˆ†é…è¶³å¤Ÿçš„å†…å­˜ç©ºé—´
     m_pData = new char[len + 1];
     strcpy(m_pData, str.m_pData);
 
-    return *this;//4.ÊµÏÖÁ¬Ğø¸³Öµ
+    return *this;//4.å®ç°è¿ç»­èµ‹å€¼
 }
 #endif
 
-//¸ß¼¶½â·¨1£º
+//é«˜çº§è§£æ³•1ï¼š
 #if 0
-//Ò»µ©ÔÚ¸³ÖµÔËËã·ûº¯ÊıÄÚ²¿Å×³öÒ»¸öÒì³££¬
-//CMyStringµÄÊµÀı²»ÔÙ±£³ÖÓĞĞ§µÄ×´Ì¬£¬Õâ¾ÍÎ¥±³ÁË
-//Òì³£°²È«ĞÔ(Exception Safety)Ô­Ôò¡£
+//ä¸€æ—¦åœ¨èµ‹å€¼è¿ç®—ç¬¦å‡½æ•°å†…éƒ¨æŠ›å‡ºä¸€ä¸ªå¼‚å¸¸ï¼Œ
+//CMyStringçš„å®ä¾‹ä¸å†ä¿æŒæœ‰æ•ˆçš„çŠ¶æ€ï¼Œè¿™å°±è¿èƒŒäº†
+//å¼‚å¸¸å®‰å…¨æ€§(Exception Safety)åŸåˆ™ã€‚
 CMyString& CMyString::operator = (const CMyString& str)
 {
     if (this == &str)
         return *this;
 
-    //¿½±´Ô­Êı¾İµÄµØÖ·
+    //æ‹·è´åŸæ•°æ®çš„åœ°å€
     char* DataTemp = m_pData;
 
     if (m_pData = new char[strlen(str.m_pData) + 1])
     {
-        //Èô¶¯Ì¬ÄÚ´æ¿ÉÒÔÉêÇëµ½
+        //è‹¥åŠ¨æ€å†…å­˜å¯ä»¥ç”³è¯·åˆ°
         delete [] DataTemp;
 
         strcpy(m_pData, str.m_pData);
@@ -67,66 +67,66 @@ CMyString& CMyString::operator = (const CMyString& str)
 
     return *this;
 
-	/* ÏÈÓÃnew·ÖÅäĞÂÄÚÈİ£¬ÔÙÓÃdeleteÊÍ·ÅÒÑÓĞµÄÄÚÈİ¡£ÕâÑù
-		Ö»ÔÚ·ÖÅäÄÚÈİ³É¹¦Ö®ºóÔÙÊÍ·ÅÔ­À´µÄÄÚÈİ£¬Ò²¾ÍÊÇµ±·ÖÅäÄÚ´æÊ§°ÜÊ±
-		ÎÒÃÇÄÜÈ·±£CMyStringµÄÊµÀı²»»á±»ĞŞ¸Ä */
+	/* å…ˆç”¨newåˆ†é…æ–°å†…å®¹ï¼Œå†ç”¨deleteé‡Šæ”¾å·²æœ‰çš„å†…å®¹ã€‚è¿™æ ·
+		åªåœ¨åˆ†é…å†…å®¹æˆåŠŸä¹‹åå†é‡Šæ”¾åŸæ¥çš„å†…å®¹ï¼Œä¹Ÿå°±æ˜¯å½“åˆ†é…å†…å­˜å¤±è´¥æ—¶
+		æˆ‘ä»¬èƒ½ç¡®ä¿CMyStringçš„å®ä¾‹ä¸ä¼šè¢«ä¿®æ”¹ */
 }
 #endif
 
-//¸ß¼¶½â·¨2£º
-//Ğ§ÂÊ¸ü¸ß
+//é«˜çº§è§£æ³•2ï¼š
+//æ•ˆç‡æ›´é«˜
 #if 1
 CMyString& CMyString::operator = (const CMyString& str)
 {        
     if (this != &str)
     {
-        CMyString strTemp(str);//µ÷ÓÃÉî¸´ÖÆ¹¹Ôìº¯Êı£¨Ê¹ÓÃnewµÄ£©
+        CMyString strTemp(str);//è°ƒç”¨æ·±å¤åˆ¶æ„é€ å‡½æ•°ï¼ˆä½¿ç”¨newçš„ï¼‰
 
-        //£¨ÒÔÏÂÈıÌõÓï¾ä¿ÉÒÔÓÃ×Ô¶¨ÒåµÄSwapº¯ÊıÊµÏÖ£©
-        //´´½¨ÁÙÊ±Ö¸Õë´æÁÙÊ±¶ÔÏóµÄË½ÓĞÊı¾İ³ÉÔ±µÄµØÖ·
+        //ï¼ˆä»¥ä¸‹ä¸‰æ¡è¯­å¥å¯ä»¥ç”¨è‡ªå®šä¹‰çš„Swapå‡½æ•°å®ç°ï¼‰
+        //åˆ›å»ºä¸´æ—¶æŒ‡é’ˆå­˜ä¸´æ—¶å¯¹è±¡çš„ç§æœ‰æ•°æ®æˆå‘˜çš„åœ°å€
         char* pTemp = strTemp.m_pData;
-        //ÁÙÊ±¶ÔÏóµÄË½ÓĞÊı¾İ³ÉÔ±Ìæ»»Îªµ±Ç°Àà¶ÔÏóµÄË½ÓĞÊı¾İ³ÉÔ±µÄµØÖ·
+        //ä¸´æ—¶å¯¹è±¡çš„ç§æœ‰æ•°æ®æˆå‘˜æ›¿æ¢ä¸ºå½“å‰ç±»å¯¹è±¡çš„ç§æœ‰æ•°æ®æˆå‘˜çš„åœ°å€
         strTemp.m_pData = m_pData;
-        //µ±Ç°Àà¶ÔÏóµÄË½ÓĞÊı¾İ³ÉÔ±Ìæ»»ÎªÁÙÊ±¶ÔÏóµÄË½ÓĞÊı¾İ³ÉÔ±µÄµØÖ·
+        //å½“å‰ç±»å¯¹è±¡çš„ç§æœ‰æ•°æ®æˆå‘˜æ›¿æ¢ä¸ºä¸´æ—¶å¯¹è±¡çš„ç§æœ‰æ•°æ®æˆå‘˜çš„åœ°å€
         m_pData = pTemp;
-        //Ïàµ±ÓÚ½øĞĞÁËÒ»¸öµ÷»»¹¤×÷
+        //ç›¸å½“äºè¿›è¡Œäº†ä¸€ä¸ªè°ƒæ¢å·¥ä½œ
     }
 
-    //***×¢***
-    //ÓÉÓÚstrTempÊÇÒ»¸ö¾Ö²¿±äÁ¿£¬µ«³ÌĞòÔËĞĞµ½ifµÄÍâÃæÊ±Ò²¾Í³öÁË
-    //¸Ã±äÁ¿µÄ×÷ÓÃÓò£¬¾Í»á×Ô¶¯µ÷ÓÃstrTempµÄÎö¹¹º¯Êı£¬°ÑstrTemp.m_pData
-    //ËùÖ¸ÏòµÄÄÚ´æÊÍ·Åµô¡£ÓÉÓÚ
-    //strTemp.m_pDataÖ¸ÏòµÄÄÚ´æ¾ÍÊÇÊµÀıÖ®Ç°m_pDataµÄÄÚ´æ£¬
-    //Õâ¾ÍÏàµ±ÓÚ×Ô¶¯µ÷ÓÃÎö¹¹º¯ÊıÊÍ·ÅÊµÀıµÄÄÚ´æ¡£
+    //***æ³¨***
+    //ç”±äºstrTempæ˜¯ä¸€ä¸ªå±€éƒ¨å˜é‡ï¼Œä½†ç¨‹åºè¿è¡Œåˆ°ifçš„å¤–é¢æ—¶ä¹Ÿå°±å‡ºäº†
+    //è¯¥å˜é‡çš„ä½œç”¨åŸŸï¼Œå°±ä¼šè‡ªåŠ¨è°ƒç”¨strTempçš„ææ„å‡½æ•°ï¼ŒæŠŠstrTemp.m_pData
+    //æ‰€æŒ‡å‘çš„å†…å­˜é‡Šæ”¾æ‰ã€‚ç”±äº
+    //strTemp.m_pDataæŒ‡å‘çš„å†…å­˜å°±æ˜¯å®ä¾‹ä¹‹å‰m_pDataçš„å†…å­˜ï¼Œ
+    //è¿™å°±ç›¸å½“äºè‡ªåŠ¨è°ƒç”¨ææ„å‡½æ•°é‡Šæ”¾å®ä¾‹çš„å†…å­˜ã€‚
 
-    //»¹¿ÉÒÔ´Ó¡¶Effective C++¡·P56 ÖĞ½øĞĞÀí½â
+    //è¿˜å¯ä»¥ä»ã€ŠEffective C++ã€‹P56 ä¸­è¿›è¡Œç†è§£
 
     return *this;
 
-    /* ¼´ÏÈ´´½¨Ò»¸öÁÙÊ±ÊµÀı£¬ÔÙ½»»»ÁÙÊ±ÊµÀıºÍÔ­À´µÄÊµÀı */
+    /* å³å…ˆåˆ›å»ºä¸€ä¸ªä¸´æ—¶å®ä¾‹ï¼Œå†äº¤æ¢ä¸´æ—¶å®ä¾‹å’ŒåŸæ¥çš„å®ä¾‹ */
 }
 #endif
 #endif
 
 
-//ÃæÊÔÌâ2£ºÊµÏÖSingletonÄ£Ê½
-//(Éè¼ÆÒ»¸öÀà£¬Ö»ÄÜÉú³É¸ÃÀàµÄÒ»¸öÊµÀı)
+//é¢è¯•é¢˜2ï¼šå®ç°Singletonæ¨¡å¼
+//(è®¾è®¡ä¸€ä¸ªç±»ï¼Œåªèƒ½ç”Ÿæˆè¯¥ç±»çš„ä¸€ä¸ªå®ä¾‹)
 #if 0
 
-//´íÎó·½·¨£º
-//***×¢***
-//¾²Ì¬³ÉÔ±±äÁ¿±ØĞë½øĞĞ³õÊ¼»¯£¬·ñÔò»á±àÒë´íÎó
+//é”™è¯¯æ–¹æ³•ï¼š
+//***æ³¨***
+//é™æ€æˆå‘˜å˜é‡å¿…é¡»è¿›è¡Œåˆå§‹åŒ–ï¼Œå¦åˆ™ä¼šç¼–è¯‘é”™è¯¯
 #if 0
 class Singleton
 {
 private:
     static Singleton* instance;
 
-    Singleton()//ÊéP382 ºÃ´¦£º±ÜÃâÁË±¾À´½«×Ô¶¯Éú³ÉµÄÄ¬ÈÏµÄÄ¬ÈÏ¹¹Ôìº¯Êı£»
-    {}//ÉùÃ÷ÎªË½ÓĞµÄ£¬¾ÍÖ¸³ö²»ÔÊĞíÖ±½ÓÓÃÄ¬ÈÏ¹¹Ôìº¯ÊıÉú³É¶ÔÏó
+    Singleton()//ä¹¦P382 å¥½å¤„ï¼šé¿å…äº†æœ¬æ¥å°†è‡ªåŠ¨ç”Ÿæˆçš„é»˜è®¤çš„é»˜è®¤æ„é€ å‡½æ•°ï¼›
+    {}//å£°æ˜ä¸ºç§æœ‰çš„ï¼Œå°±æŒ‡å‡ºä¸å…è®¸ç›´æ¥ç”¨é»˜è®¤æ„é€ å‡½æ•°ç”Ÿæˆå¯¹è±¡
 
 public:
-    //ÔÚĞèÒªÊµÀıÊ±£¬µ÷ÓÃ¾²Ì¬º¯ÊıÀ´´´½¨¶ÔÏó
+    //åœ¨éœ€è¦å®ä¾‹æ—¶ï¼Œè°ƒç”¨é™æ€å‡½æ•°æ¥åˆ›å»ºå¯¹è±¡
     static Singleton* GetInstance()
     {
         if (instance == nullptr)
@@ -139,10 +139,10 @@ public:
 };
 #endif
 
-//¶öººµ¥Àı£ºÔÚÀà×°ÔØÊ±Íê³ÉÁË³õÊ¼»¯£¬¾²Ì¬³ÉÔ±¶ÔÏó³õÊ¼»¯³É¹¦
-//Àà¼ÓÔØËÙ¶ÈÏà±ÈÀÁººÂı£¬µ«»ñÈ¡¶ÔÏóµÄËÙ¶È¿ì£¬ÊÇÒ»ÖÖµäĞÍµÄÒÔÊ±¼ä»»È¡¿Õ¼äµÄ×ö·¨
-//ÓÅµã£ºÏß³Ì°²È«
-//È±µã£º²»¹ÜÄãÓÃ²»ÓÃÕâ¸ö¶ÔÏó£¬Ëû¶¼»áÏÈ´´½¨³öÀ´£¬»áÔì³ÉÀË·ÑÄÚ´æ¿Õ¼ä
+//é¥¿æ±‰å•ä¾‹ï¼šåœ¨ç±»è£…è½½æ—¶å®Œæˆäº†åˆå§‹åŒ–ï¼Œé™æ€æˆå‘˜å¯¹è±¡åˆå§‹åŒ–æˆåŠŸ
+//ç±»åŠ è½½é€Ÿåº¦ç›¸æ¯”æ‡’æ±‰æ…¢ï¼Œä½†è·å–å¯¹è±¡çš„é€Ÿåº¦å¿«ï¼Œæ˜¯ä¸€ç§å…¸å‹çš„ä»¥æ—¶é—´æ¢å–ç©ºé—´çš„åšæ³•
+//ä¼˜ç‚¹ï¼šçº¿ç¨‹å®‰å…¨
+//ç¼ºç‚¹ï¼šä¸ç®¡ä½ ç”¨ä¸ç”¨è¿™ä¸ªå¯¹è±¡ï¼Œä»–éƒ½ä¼šå…ˆåˆ›å»ºå‡ºæ¥ï¼Œä¼šé€ æˆæµªè´¹å†…å­˜ç©ºé—´
 #include <iostream>
 
 using namespace std;
@@ -169,15 +169,15 @@ public:
     }
 };
 
-//²»ÄÜÔÚÀàÉùÃ÷ÖĞ³õÊ¼»¯²»´øconstµÄ¾²Ì¬³ÉÔ±±äÁ¿
-//¶ÔÓÚ¾²Ì¬Àà³ÉÔ±£¬¿ÉÒÔÔÚÀàÉùÃ÷Ö®ÍâÊ¹ÓÃµ¥¶ÀµÄÓï¾äÀ´½øĞĞ³õÊ¼»¯
+//ä¸èƒ½åœ¨ç±»å£°æ˜ä¸­åˆå§‹åŒ–ä¸å¸¦constçš„é™æ€æˆå‘˜å˜é‡
+//å¯¹äºé™æ€ç±»æˆå‘˜ï¼Œå¯ä»¥åœ¨ç±»å£°æ˜ä¹‹å¤–ä½¿ç”¨å•ç‹¬çš„è¯­å¥æ¥è¿›è¡Œåˆå§‹åŒ–
 Singleon* Singleon::instance = new Singleon();
-//***×¢***
-//´Ë´¦¿ÉÒÔµ÷ÓÃÄ¬ÈÏ¹¹Ôìº¯Êı£¬Ô­ÒòÊÇÔÚÀà×°ÔØÊ±ÒÑÍê³ÉÁË³õÊ¼»¯
+//***æ³¨***
+//æ­¤å¤„å¯ä»¥è°ƒç”¨é»˜è®¤æ„é€ å‡½æ•°ï¼ŒåŸå› æ˜¯åœ¨ç±»è£…è½½æ—¶å·²å®Œæˆäº†åˆå§‹åŒ–
 
 int main()
 {
-    //Singleon()²»¿É·ÃÎÊ
+    //Singleon()ä¸å¯è®¿é—®
     //Singleon* S1 = new Singleon();
 
     Singleon* sl1 = Singleon::GetSingleon();
@@ -192,7 +192,7 @@ int main()
 #endif
 
 
-//ÃæÊÔÌâ3£ºÊı×éÖĞÖØ¸´µÄÊı×Ö
+//é¢è¯•é¢˜3ï¼šæ•°ç»„ä¸­é‡å¤çš„æ•°å­—
 #if 0
 #include <iostream>
 #include <vector>
@@ -225,7 +225,7 @@ void find_num(int* p, int n)
 {
     //sort(p,p+n);
 
-    //ÀûÓÃÊı×éµÄË÷ÒıÓëÖµµÄ¶ÔÓ¦¹ØÏµ£¬¼ÇÂ¼µ¥¸öÊı×ÖµÄ³öÏÖ´ÎÊı
+    //åˆ©ç”¨æ•°ç»„çš„ç´¢å¼•ä¸å€¼çš„å¯¹åº”å…³ç³»ï¼Œè®°å½•å•ä¸ªæ•°å­—çš„å‡ºç°æ¬¡æ•°
     int suoyin[10] = {0};
 
 	for (int i = 0; i < n; i++)
@@ -241,15 +241,15 @@ void find_num(int* p, int n)
 
     return ;
 }
-//ĞŞ¸Ä£º
-//void find_num(int* p, int n)¿ÉÒÔ¸Ä³É
+//ä¿®æ”¹ï¼š
+//void find_num(int* p, int n)å¯ä»¥æ”¹æˆ
 //bool find_num(int* p, int n)
-//²¢ÔÚº¯ÊıÄÚ¼ÓÈëÕë¶ÔÎŞĞ§ÊäÈëµÄ´úÂë¶Î
+//å¹¶åœ¨å‡½æ•°å†…åŠ å…¥é’ˆå¯¹æ— æ•ˆè¾“å…¥çš„ä»£ç æ®µ
 //{ if(p==nullptr)   ......    }
 #endif
 
 
-//ÃæÊÔÌâ4£º¶şÎ¬Êı×éÖĞµÄ²éÕÒ
+//é¢è¯•é¢˜4ï¼šäºŒç»´æ•°ç»„ä¸­çš„æŸ¥æ‰¾
 #if 0
 #include <iostream>
 
@@ -274,9 +274,9 @@ int main()
 }
 bool Find(int(*matrix)[4], int rows, int columns, int target)
 {
-    //Ã¿´Î¶¼Ñ¡ÔñÒ»¸ö¾ØĞÎÇøÓòµÄÓÒÉÏ½ÇµÄÔªËØ
-    //ÓëtargetÊı×Ö½øĞĞ±È½Ï£¬´Ó¶øËõĞ¡²éÕÒ·¶Î§
-    //Ã¿´Î¿ÉÒÔËõĞ¡Ò»ÁĞµÄËÑË÷·¶Î§
+    //æ¯æ¬¡éƒ½é€‰æ‹©ä¸€ä¸ªçŸ©å½¢åŒºåŸŸçš„å³ä¸Šè§’çš„å…ƒç´ 
+    //ä¸targetæ•°å­—è¿›è¡Œæ¯”è¾ƒï¼Œä»è€Œç¼©å°æŸ¥æ‰¾èŒƒå›´
+    //æ¯æ¬¡å¯ä»¥ç¼©å°ä¸€åˆ—çš„æœç´¢èŒƒå›´
 
     if (matrix == nullptr)
         return false;
@@ -293,22 +293,22 @@ bool Find(int(*matrix)[4], int rows, int columns, int target)
         else if (matrix[row][column]>target)
         {
             column--;
-        }
+        } 
         else
         {
             row++;
         }
     }
-    //***×¢***
-    //ÈôÃ¿´ÎÑ¡ÔñµÄÊÇ¾ØĞÎÇøÓòµÄ×óÉÏ½Ç»òÓÒÏÂ½Ç
-    //ÄÇ¾ÍÎŞ·¨ËõĞ¡ËÑË÷ÇøÓò
+    //***æ³¨***
+    //è‹¥æ¯æ¬¡é€‰æ‹©çš„æ˜¯çŸ©å½¢åŒºåŸŸçš„å·¦ä¸Šè§’æˆ–å³ä¸‹è§’
+    //é‚£å°±æ— æ³•ç¼©å°æœç´¢åŒºåŸŸ
 
     return false;
 }
 #endif
 
 
-//³õÊ¼»¯×Ö·ûÊı×éÀ´´æ´¢×Ö·û´®ºÍ³õÊ¼»¯Ö¸ÕëÀ´Ö¸Ïò×Ö·û´®ÓĞºÎÇø±ğ
+//åˆå§‹åŒ–å­—ç¬¦æ•°ç»„æ¥å­˜å‚¨å­—ç¬¦ä¸²å’Œåˆå§‹åŒ–æŒ‡é’ˆæ¥æŒ‡å‘å­—ç¬¦ä¸²æœ‰ä½•åŒºåˆ«
 #if 0
 #include <stdio.h>
 int main()
@@ -330,16 +330,16 @@ int main()
 
     return 0;
 
-	//³õÊ¼»¯Êı×é°Ñ¾²Ì¬´æ´¢ÇøµÄ×Ö·û´®¿½±´µ½Êı×éÖĞ£¬(¶østr1Óëstr2Á½¸öÊı×éµÄ³õÊ¼µØÖ·ÊÇ²»Í¬µÄ)
-	//	¶ø³õÊ¼»¯Ö¸ÕëÖ»°Ñ×Ö·û´®µÄµØÖ·¿½±´¸øÖ¸Õë
+	//åˆå§‹åŒ–æ•°ç»„æŠŠé™æ€å­˜å‚¨åŒºçš„å­—ç¬¦ä¸²æ‹·è´åˆ°æ•°ç»„ä¸­ï¼Œ(è€Œstr1ä¸str2ä¸¤ä¸ªæ•°ç»„çš„åˆå§‹åœ°å€æ˜¯ä¸åŒçš„)
+	//	è€Œåˆå§‹åŒ–æŒ‡é’ˆåªæŠŠå­—ç¬¦ä¸²çš„åœ°å€æ‹·è´ç»™æŒ‡é’ˆ
 }
 #endif
 
 
-//ÃæÊÔÌâ5£ºÌæ»»¿Õ¸ñ
-//ÆÕÍ¨½â·¨£º
-//±éÀú£¬´ÓÇ°ÏòºóÌæ»»£¬µ«»áÔì³ÉÔ½ÊÇºóÃæµÄ×Ö·û´®
-//±»ÒÆ¶¯µÄ´ÎÊıÔ½¶à£¬Ôì³ÉÊ±¼äĞ§ÂÊµÍÏÂ
+//é¢è¯•é¢˜5ï¼šæ›¿æ¢ç©ºæ ¼
+//æ™®é€šè§£æ³•ï¼š
+//éå†ï¼Œä»å‰å‘åæ›¿æ¢ï¼Œä½†ä¼šé€ æˆè¶Šæ˜¯åé¢çš„å­—ç¬¦ä¸²
+//è¢«ç§»åŠ¨çš„æ¬¡æ•°è¶Šå¤šï¼Œé€ æˆæ—¶é—´æ•ˆç‡ä½ä¸‹
 #if 0
 #include <iostream>
 #include <string>
@@ -372,17 +372,17 @@ bool replace(string& s)
             s.erase(it);
             s.insert(it,seq.begin(),seq.end());
 
-            //***×¢***
-            //±ØĞëÒª¼ÓÉÏÕâÒ»¾ä£¬ÓÃÀ´¸üĞÂitÖ¸ÏòµÄĞÂÎ»ÖÃ
+            //***æ³¨***
+            //å¿…é¡»è¦åŠ ä¸Šè¿™ä¸€å¥ï¼Œç”¨æ¥æ›´æ–°itæŒ‡å‘çš„æ–°ä½ç½®
             it = s.begin();
         }
         //Expression: cannot increment string iterator because the iterator wasinvalidated (e.g. reallocation occurred, or the string was destroyed)
-        //***×¢***
-        //ÔÚ½øĞĞµü´úÆ÷±éÀúÈİÆ÷Ê±£¬Ô­À´µÄÈİÆ÷²»Ó¦¸ÃÔÙ¼ÌĞøÑ¹ÈëÈÎºÎÔªËØÁË£¬·ñÔòµü´úÆ÷¿ÉÄÜÊ§Ğ§¡£
-        //vectorµÄµü´úÆ÷Ê§Ğ§µÄÔ­ÒòÊÇ£¬vector½øĞĞÁË¸Ä±äÈİÁ¿´óĞ¡£¨×¢ÒâÊÇcapacity¶ø·Çsize£©µÄ²Ù×÷£¬Õâ¸öÊ±ºò£¬
-        //¡¾»áÖØĞÂÉêÇëÄÚ´æ¿Õ¼ä¡¿£¬
-        //²¢½«Ô­À´µÄÔªËØ½øĞĞ¿½±´£¬Õâ¸öÊ±ºòÖ¸ÏòÔ­À´Î»ÖÃµÄiteratorÈÔ¾ÉÖ¸ÏòÔ­À´µÄÎ»ÖÃ£¬
-        //¶øÕâÊ±Ô­À´µÄÎ»ÖÃµÄÔªËØÔçÒÑÔÚvectorÀ©Èİ²Ù×÷Àï±»É¾³ıÁË£¬¹Ê´ËÊ±iteratorÖ¸ÏòµÄÊÇÒ»¸öÎ´ÖªµÄÖµ£¬¹Êµü´úÆ÷Ê§Ğ§
+        //***æ³¨***
+        //åœ¨è¿›è¡Œè¿­ä»£å™¨éå†å®¹å™¨æ—¶ï¼ŒåŸæ¥çš„å®¹å™¨ä¸åº”è¯¥å†ç»§ç»­å‹å…¥ä»»ä½•å…ƒç´ äº†ï¼Œå¦åˆ™è¿­ä»£å™¨å¯èƒ½å¤±æ•ˆã€‚
+        //vectorçš„è¿­ä»£å™¨å¤±æ•ˆçš„åŸå› æ˜¯ï¼Œvectorè¿›è¡Œäº†æ”¹å˜å®¹é‡å¤§å°ï¼ˆæ³¨æ„æ˜¯capacityè€Œésizeï¼‰çš„æ“ä½œï¼Œè¿™ä¸ªæ—¶å€™ï¼Œ
+        //ã€ä¼šé‡æ–°ç”³è¯·å†…å­˜ç©ºé—´ã€‘ï¼Œ
+        //å¹¶å°†åŸæ¥çš„å…ƒç´ è¿›è¡Œæ‹·è´ï¼Œè¿™ä¸ªæ—¶å€™æŒ‡å‘åŸæ¥ä½ç½®çš„iteratorä»æ—§æŒ‡å‘åŸæ¥çš„ä½ç½®ï¼Œ
+        //è€Œè¿™æ—¶åŸæ¥çš„ä½ç½®çš„å…ƒç´ æ—©å·²åœ¨vectoræ‰©å®¹æ“ä½œé‡Œè¢«åˆ é™¤äº†ï¼Œæ•…æ­¤æ—¶iteratoræŒ‡å‘çš„æ˜¯ä¸€ä¸ªæœªçŸ¥çš„å€¼ï¼Œæ•…è¿­ä»£å™¨å¤±æ•ˆ
         //https ://blog.csdn.net/m0_48966435/article/details/119775625
     }
 
@@ -391,10 +391,10 @@ bool replace(string& s)
     return flag;
 }
 #endif
-//ºÃµÄ½â·¨£º
-//ÏÈ±éÀúÒ»´Î×Ö·û´®£¬Í³¼Æ³ö¿Õ¸ñµÄ×ÜÊı£¬¿ÉÒÔ¼ÆËã³ö
-//Ìæ»»Ö®ºó×Ö·û´®µÄ³¤¶È
-//´ÓºóÍùÇ°¸´ÖÆ£¬ÕâÑù¾ÍÄÜ¼õÉÙÒÆ¶¯µÄ´ÎÊı£¬´Ó¶øÌá¸ßĞ§ÂÊ
+//å¥½çš„è§£æ³•ï¼š
+//å…ˆéå†ä¸€æ¬¡å­—ç¬¦ä¸²ï¼Œç»Ÿè®¡å‡ºç©ºæ ¼çš„æ€»æ•°ï¼Œå¯ä»¥è®¡ç®—å‡º
+//æ›¿æ¢ä¹‹åå­—ç¬¦ä¸²çš„é•¿åº¦
+//ä»åå¾€å‰å¤åˆ¶ï¼Œè¿™æ ·å°±èƒ½å‡å°‘ç§»åŠ¨çš„æ¬¡æ•°ï¼Œä»è€Œæé«˜æ•ˆç‡
 #if 0
 #include <iostream>
 #include <string>
@@ -418,7 +418,7 @@ int main()
 }
 char* replace(char* source, int length)
 {
-    //²¹³ä´úÂë
+    //è¡¥å……ä»£ç 
     if (source == nullptr || length <= 0||source[0]=='\0')
         return nullptr;
 
@@ -433,13 +433,13 @@ char* replace(char* source, int length)
     char* res = new char[length + 2 * space_count+1];
 
     char string[3] = {'%','2','0'};
-    //p2Ö¸ÏòÒª´æ´¢ÔÚresÖĞµÄsource¼Ó³¤ºóµÄ¿Õ×Ö·û´¦
+    //p2æŒ‡å‘è¦å­˜å‚¨åœ¨resä¸­çš„sourceåŠ é•¿åçš„ç©ºå­—ç¬¦å¤„
     int p2 = length + 2 * space_count;
-    //p1Ö¸ÏòsourceÄ©Î²µÄ¿Õ×Ö·û´¦
+    //p1æŒ‡å‘sourceæœ«å°¾çš„ç©ºå­—ç¬¦å¤„
     int p1 = length;
 
-    //ÓĞè¦´ÃµÄĞ´·¨£º
-    //ÎŞ·¨´¦Àí×Ö·û´®ÖĞÓĞÁ¬Ğø¶à¸ö¿Õ¸ñ
+    //æœ‰ç‘•ç–µçš„å†™æ³•ï¼š
+    //æ— æ³•å¤„ç†å­—ç¬¦ä¸²ä¸­æœ‰è¿ç»­å¤šä¸ªç©ºæ ¼
 #if 0
     while (p1>=0&&p2>=0)
     {
@@ -459,7 +459,7 @@ char* replace(char* source, int length)
     }
 #endif 
      
-    //ĞŞ¸Ä£º
+    //ä¿®æ”¹ï¼š
 #if 1
     while (p1 >= 0 && p2 >= 0)
     {
@@ -482,12 +482,12 @@ char* replace(char* source, int length)
     return res;
 }
 #endif
-//ÔÚºÏ²¢Á½¸öÊı×é(°üÀ¨×Ö·û´®)Ê±£¬Èç¹û´ÓÇ°Íùºó¸´ÖÆÃ¿¸öÊı×Ö(»ò
-//×Ö·û)ÔòĞèÒªÖØ¸´ÒÆ¶¯Êı×Ö(»ò×Ö·û)¶à´Î£¬ÄÇÃ´ÎÒÃÇ¿ÉÒÔ¿¼ÂÇ´ÓºóÍùÇ°
-//¸´ÖÆ£¬ÕâÑù¾ÍÄÜ¼õÉÙÒÆ¶¯µÄ´ÎÊı£¬´Ó¶øÌá¸ßĞ§ÂÊ¡£
+//åœ¨åˆå¹¶ä¸¤ä¸ªæ•°ç»„(åŒ…æ‹¬å­—ç¬¦ä¸²)æ—¶ï¼Œå¦‚æœä»å‰å¾€åå¤åˆ¶æ¯ä¸ªæ•°å­—(æˆ–
+//å­—ç¬¦)åˆ™éœ€è¦é‡å¤ç§»åŠ¨æ•°å­—(æˆ–å­—ç¬¦)å¤šæ¬¡ï¼Œé‚£ä¹ˆæˆ‘ä»¬å¯ä»¥è€ƒè™‘ä»åå¾€å‰
+//å¤åˆ¶ï¼Œè¿™æ ·å°±èƒ½å‡å°‘ç§»åŠ¨çš„æ¬¡æ•°ï¼Œä»è€Œæé«˜æ•ˆç‡ã€‚
 
 
-//ÃæÊÔÌâ6£º´ÓÎ²µ½Í·´òÓ¡Á´±í
+//é¢è¯•é¢˜6ï¼šä»å°¾åˆ°å¤´æ‰“å°é“¾è¡¨
 #if 0
 #include <iostream>
 #include <stack>
@@ -530,7 +530,7 @@ void PrintListReversingly(ListNode* pHead)
     return;
 }
 
-//µİ¹é·¨£º
+//é€’å½’æ³•ï¼š
 #if 0
 void PrintListReversingly(ListNode* pHead)
 {
@@ -547,12 +547,12 @@ void PrintListReversingly(ListNode* pHead)
 #endif
 
 #endif
-//»ùÓÚµİ¹éµÄ´úÂë¿´ÆğÀ´ºÜ¼ò½à£¬µ«ÓĞÒ»¸öÎÊÌâ£ºµ±Á´±í·Ç³£³¤
-//µÄÊ±ºò£¬¾Í»áµ¼ÖÂº¯Êıµ÷ÓÃµÄ²ã¼¶ºÜÉî£¬´Ó¶øÓĞ¿ÉÄÜµ¼ÖÂº¯Êıµ÷ÓÃÕ»Òç³ö¡£
-//ÏÔÈ»ÓÃÕ»»ùÓÚÑ­»·ÊµÏÖµÄ´úÂëµÄÂ³°ôĞÔÒªºÃÒ»Ğ©¡£
+//åŸºäºé€’å½’çš„ä»£ç çœ‹èµ·æ¥å¾ˆç®€æ´ï¼Œä½†æœ‰ä¸€ä¸ªé—®é¢˜ï¼šå½“é“¾è¡¨éå¸¸é•¿
+//çš„æ—¶å€™ï¼Œå°±ä¼šå¯¼è‡´å‡½æ•°è°ƒç”¨çš„å±‚çº§å¾ˆæ·±ï¼Œä»è€Œæœ‰å¯èƒ½å¯¼è‡´å‡½æ•°è°ƒç”¨æ ˆæº¢å‡ºã€‚
+//æ˜¾ç„¶ç”¨æ ˆåŸºäºå¾ªç¯å®ç°çš„ä»£ç çš„é²æ£’æ€§è¦å¥½ä¸€äº›ã€‚
 
 
-//ÃæÊÔÌâ7£ºÖØ½¨¶ş²æÊ÷
+//é¢è¯•é¢˜7ï¼šé‡å»ºäºŒå‰æ ‘
 #if 0
 #include <iostream>
 struct BinaryTreeNode
@@ -571,20 +571,20 @@ BinaryTreeNode* Construct(int* startPreorder, int* startInorder, int length)
 
     return ConstructCore(startPreorder, startPreorder+length-1, startInorder, startInorder+length-1);
 }
-                                //Ç°Ğò±éÀúµÄ×Ö·ûÊı×éµØÖ·                                         ÖĞĞò±éÀúµÄ×Ö·ûÊı×éµØÖ·
+                                //å‰åºéå†çš„å­—ç¬¦æ•°ç»„åœ°å€                                         ä¸­åºéå†çš„å­—ç¬¦æ•°ç»„åœ°å€
 BinaryTreeNode* ConstructCore(int* startPreorder, int* endPreorder, int* startInorder, int* endInorder)
 {
-    //Ç°Ğò±éÀúµÄµÚÒ»¸öÊı×ÖÊÇ¸ù½ÚµãµÄÖµ
+    //å‰åºéå†çš„ç¬¬ä¸€ä¸ªæ•°å­—æ˜¯æ ¹èŠ‚ç‚¹çš„å€¼
     int rootValue = startPreorder[0];
 
-    //½¨Á¢¿Õ½Úµã
+    //å»ºç«‹ç©ºèŠ‚ç‚¹
     BinaryTreeNode* root = new BinaryTreeNode();
 
-    //Îª½Úµã¸³Öµ
+    //ä¸ºèŠ‚ç‚¹èµ‹å€¼
     root->m_nValue = rootValue;
     root->m_pLeft = root->m_pRight = nullptr;
 
-    //ÈôÇ°Ğò±éÀúµÄÊı×é½öÒ»¸öÔªËØ
+    //è‹¥å‰åºéå†çš„æ•°ç»„ä»…ä¸€ä¸ªå…ƒç´ 
     if (startPreorder == endPreorder)
     {
         if (startInorder == endInorder && *startPreorder == *startInorder)
@@ -593,33 +593,33 @@ BinaryTreeNode* ConstructCore(int* startPreorder, int* endPreorder, int* startIn
             throw std::exception("Invalid input");
     }
 
-    //ÔÚÖĞĞò±éÀúĞòÁĞÖĞÕÒµ½¸ù½ÚµãµÄÖµ
+    //åœ¨ä¸­åºéå†åºåˆ—ä¸­æ‰¾åˆ°æ ¹èŠ‚ç‚¹çš„å€¼
     int* rootInorder = startInorder;
     while (rootInorder <= endInorder && *rootInorder != rootValue)
     {
         ++rootInorder;
     }
 
-    //ÈôÔÚÖĞĞò±éÀúÖĞÎ´ÕÒµ½ÔÚÇ°Ğò±éÀúÖĞ³öÏÖµÄ¸ù½Úµã
+    //è‹¥åœ¨ä¸­åºéå†ä¸­æœªæ‰¾åˆ°åœ¨å‰åºéå†ä¸­å‡ºç°çš„æ ¹èŠ‚ç‚¹
     if(rootInorder==endInorder&&*rootInorder!=rootValue)
         throw std::exception("Invalid input");
 
-    //ÔÚÖĞĞò±éÀúÖĞ
-    //¼ÆËã³öÁ½Ö¸Õë¼äµÄ¾àÀëÖµ£¬×÷Îª×ó×ÓÊ÷µÄ¸öÊıµÄÖµ
+    //åœ¨ä¸­åºéå†ä¸­
+    //è®¡ç®—å‡ºä¸¤æŒ‡é’ˆé—´çš„è·ç¦»å€¼ï¼Œä½œä¸ºå·¦å­æ ‘çš„ä¸ªæ•°çš„å€¼
     int leftLength = rootInorder - startInorder;
-    //ÔÚÇ°Ğò±éÀúÖĞ
-    //´´½¨Ö¸ÕëÖ¸Ïò×ó×ÓÊ÷ĞòÁĞµÄÄ©Î²µÄÎ»ÖÃ
+    //åœ¨å‰åºéå†ä¸­
+    //åˆ›å»ºæŒ‡é’ˆæŒ‡å‘å·¦å­æ ‘åºåˆ—çš„æœ«å°¾çš„ä½ç½®
     int* leftPreorderEnd = startPreorder + leftLength;
 
     if (leftLength > 0)
     {
-        //¹¹½¨×ó×ÓÊ÷
+        //æ„å»ºå·¦å­æ ‘
         root->m_pLeft = ConstructCore(startPreorder+1,leftPreorderEnd,startInorder,rootInorder-1);
     }
     
     if(leftLength<endPreorder-startPreorder)
     {
-        //¹¹½¨ÓÒ×ÓÊ÷
+        //æ„å»ºå³å­æ ‘
         root->m_pRight = ConstructCore(leftPreorderEnd +1,endPreorder,rootInorder+1,endInorder);
     }
 
@@ -628,8 +628,8 @@ BinaryTreeNode* ConstructCore(int* startPreorder, int* endPreorder, int* startIn
 #endif
 
 
-//ÃæÊÔÌâ8£º¶ş²æÊ÷µÄÏÂÒ»¸ö½Úµã
-//¶ÔÓÚÒ»¿Å¶ş²æÊ÷£¬¸ø³öÒ»¸öÖĞĞò±éÀúÏÂµÄ½ÚµãºÅ£¬ÒªÇó¸ø³öÆäÏÂÒ»¸ö½Úµã¡£
+//é¢è¯•é¢˜8ï¼šäºŒå‰æ ‘çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
+//å¯¹äºä¸€é¢—äºŒå‰æ ‘ï¼Œç»™å‡ºä¸€ä¸ªä¸­åºéå†ä¸‹çš„èŠ‚ç‚¹å·ï¼Œè¦æ±‚ç»™å‡ºå…¶ä¸‹ä¸€ä¸ªèŠ‚ç‚¹ã€‚
 #if 0
 #include <iostream>
 struct BinaryTreeNode
@@ -645,13 +645,13 @@ BinaryTreeNode* GetNext(BinaryTreeNode* pNode)
     if (pNode == nullptr)
         return nullptr;
 
-    //´´½¨Ò»¸ö½ÚµãÖ¸ÕëÓÃÓÚ´æ´¢ÏÂÒ»¸ö½ÚµãµÄµØÖ·
+    //åˆ›å»ºä¸€ä¸ªèŠ‚ç‚¹æŒ‡é’ˆç”¨äºå­˜å‚¨ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„åœ°å€
     BinaryTreeNode* pNext = nullptr;
 
     if (pNode->m_pRight != nullptr)
     {
-        //Èô¸Ã½ÚµãÓĞÓÒ×ÓÊ÷£¬
-        //ÄÇÃ´ËüµÄÏÂÒ»¸ö½Úµã¾ÍÊÇËüµÄÓÒ×ÓÊ÷ÖĞ×î×óµÄ×Ó½Úµã
+        //è‹¥è¯¥èŠ‚ç‚¹æœ‰å³å­æ ‘ï¼Œ
+        //é‚£ä¹ˆå®ƒçš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹å°±æ˜¯å®ƒçš„å³å­æ ‘ä¸­æœ€å·¦çš„å­èŠ‚ç‚¹
         BinaryTreeNode* pRight = pNode->m_pRight;
 
         while (pRight->m_pLeft != nullptr)
@@ -661,15 +661,15 @@ BinaryTreeNode* GetNext(BinaryTreeNode* pNode)
 
         pNext = pRight;
     }
-    else if (pNode->m_pParent != nullptr)//ÈôÓĞ¸¸½Úµã
+    else if (pNode->m_pParent != nullptr)//è‹¥æœ‰çˆ¶èŠ‚ç‚¹
     {
-        //Èô¸Ã½ÚµãÎŞÓÒ×ÓÊ÷ÇÒ¸Ã½ÚµãÊÇÆä¸¸½ÚµãµÄ×ó×Ó½Úµã£¬
-        //ÄÇÃ´ËüµÄÏÂÒ»¸ö½Úµã¾ÍÊÇËüµÄ¸¸½Úµã
+        //è‹¥è¯¥èŠ‚ç‚¹æ— å³å­æ ‘ä¸”è¯¥èŠ‚ç‚¹æ˜¯å…¶çˆ¶èŠ‚ç‚¹çš„å·¦å­èŠ‚ç‚¹ï¼Œ
+        //é‚£ä¹ˆå®ƒçš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹å°±æ˜¯å®ƒçš„çˆ¶èŠ‚ç‚¹
         
-        //Èô¸Ã½ÚµãÎŞÓÒ×ÓÊ÷ÇÒ¸Ã½ÚµãÊÇÆä¸¸½ÚµãµÄÓÒ×Ó½Úµã£¬
-        //ÄÇÃ´ËüµÄÏÂÒ»¸ö½Úµã¾ÍÊÇËüµÄÖ¸Ïò¸¸½ÚµãµÄÖ¸ÕëÒ»Ö±ÏòÉÏ±éÀúÊ±£¬
-        //Ò»¸öÂú×ãÈçÏÂÌõ¼şµÄ½Úµã£º
-        //Ä³¸ö½ÚµãÊÇÆä¸¸½ÚµãµÄ×ó×Ó½Úµã£¬Ôò¸Ã½ÚµãµÄ¸¸½Úµã¾ÍÊÇÂú×ãÌõ¼şµÄ½Úµã¡£
+        //è‹¥è¯¥èŠ‚ç‚¹æ— å³å­æ ‘ä¸”è¯¥èŠ‚ç‚¹æ˜¯å…¶çˆ¶èŠ‚ç‚¹çš„å³å­èŠ‚ç‚¹ï¼Œ
+        //é‚£ä¹ˆå®ƒçš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹å°±æ˜¯å®ƒçš„æŒ‡å‘çˆ¶èŠ‚ç‚¹çš„æŒ‡é’ˆä¸€ç›´å‘ä¸Šéå†æ—¶ï¼Œ
+        //ä¸€ä¸ªæ»¡è¶³å¦‚ä¸‹æ¡ä»¶çš„èŠ‚ç‚¹ï¼š
+        //æŸä¸ªèŠ‚ç‚¹æ˜¯å…¶çˆ¶èŠ‚ç‚¹çš„å·¦å­èŠ‚ç‚¹ï¼Œåˆ™è¯¥èŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹å°±æ˜¯æ»¡è¶³æ¡ä»¶çš„èŠ‚ç‚¹ã€‚
 
         BinaryTreeNode* pCurrent = pNode;
         BinaryTreeNode* pParent = pNode->m_pParent;
@@ -688,7 +688,7 @@ BinaryTreeNode* GetNext(BinaryTreeNode* pNode)
 #endif
 
 
-//ÃæÊÔÌâ9£ºÓÃÁ½¸öÕ»ÊµÏÖ¶ÓÁĞ
+//é¢è¯•é¢˜9ï¼šç”¨ä¸¤ä¸ªæ ˆå®ç°é˜Ÿåˆ—
 #if 0
 #include <stack>
 #include <exception>
@@ -739,21 +739,21 @@ T CQucue<T>::deleteHead()
 #endif
 
 
-//ÓÃÁ½¸ö¶ÓÁĞÊµÏÖÕ»
-//ÓÉÓÚÕ»ÊÇºó½øÏÈ³ö£¬Ïò¶ÓÁĞÍÆÈëÔªËØºó£¬
-//ÈôÒªµ¯³ö£¬ÔòÒªµ¯³öµÄÓ¦¸ÃÊÇ×îºóÍÆÈëµÄÔªËØ¡£
-//ÄÇÃ´ĞèÒªÈÃqueue1²»¶Ïµ¯³ö¶ÓÍ·ÔªËØµ½queue2£¬
-//Ö±µ½½öÊ£1¸öÔªËØ£¬¶øÆäËûÔªËØ¶¼½øÈëÁËqueue2£¬
-//Çå¿Õqueue1¡£
-//Í¬ÑùÔÙ´Îµ¯³öÔªËØÊ±£¬queue2Òª²»¶ÏÏòqueue1µ¯³öÔªËØ¡£
-//Ö±µ½queue2½öÊ£1¸öÔªËØ£¬È»ºó¸ÃÔªËØÖµ¿ÉÒÔ×÷Îª·µ»ØÖµ¡£
-//queue2Çå¿Õ¡£ÕâÑù¾ÍÊµÏÖÁËÕ»µÄÏÈ½øÏÈ³ö¹¦ÄÜ¡£
+//ç”¨ä¸¤ä¸ªé˜Ÿåˆ—å®ç°æ ˆ
+//ç”±äºæ ˆæ˜¯åè¿›å…ˆå‡ºï¼Œå‘é˜Ÿåˆ—æ¨å…¥å…ƒç´ åï¼Œ
+//è‹¥è¦å¼¹å‡ºï¼Œåˆ™è¦å¼¹å‡ºçš„åº”è¯¥æ˜¯æœ€åæ¨å…¥çš„å…ƒç´ ã€‚
+//é‚£ä¹ˆéœ€è¦è®©queue1ä¸æ–­å¼¹å‡ºé˜Ÿå¤´å…ƒç´ åˆ°queue2ï¼Œ
+//ç›´åˆ°ä»…å‰©1ä¸ªå…ƒç´ ï¼Œè€Œå…¶ä»–å…ƒç´ éƒ½è¿›å…¥äº†queue2ï¼Œ
+//æ¸…ç©ºqueue1ã€‚
+//åŒæ ·å†æ¬¡å¼¹å‡ºå…ƒç´ æ—¶ï¼Œqueue2è¦ä¸æ–­å‘queue1å¼¹å‡ºå…ƒç´ ã€‚
+//ç›´åˆ°queue2ä»…å‰©1ä¸ªå…ƒç´ ï¼Œç„¶åè¯¥å…ƒç´ å€¼å¯ä»¥ä½œä¸ºè¿”å›å€¼ã€‚
+//queue2æ¸…ç©ºã€‚è¿™æ ·å°±å®ç°äº†æ ˆçš„å…ˆè¿›å…ˆå‡ºåŠŸèƒ½ã€‚
 #if 1
 
 #endif
 
 
-//ÃæÊÔÌâ10£ºì³²¨ÄÇÆõÊıÁĞ
+//é¢è¯•é¢˜10ï¼šæ–æ³¢é‚£å¥‘æ•°åˆ—
 #if 0
 #include <iostream>
 
@@ -770,7 +770,7 @@ int main()
     return 0;
 }
 
-//²»Ì«ºÃµÄ½â·¨£º
+//ä¸å¤ªå¥½çš„è§£æ³•ï¼š
 #if 0
 long long Fibo(int n)
 {
@@ -786,12 +786,12 @@ long long Fibo(int n)
     //return num;
 }
 #endif
-//»­³öÇóF(10)Ê±µÄµİ¹éµ÷ÓÃÊ÷£¬¿ÉÒÔ·¢ÏÖ£º
-//ÖØ¸´µÄ½ÚµãÊıÌ«¶à¼´ÖØ¸´µÄ¼ÆËãÌ«¶à
+//ç”»å‡ºæ±‚F(10)æ—¶çš„é€’å½’è°ƒç”¨æ ‘ï¼Œå¯ä»¥å‘ç°ï¼š
+//é‡å¤çš„èŠ‚ç‚¹æ•°å¤ªå¤šå³é‡å¤çš„è®¡ç®—å¤ªå¤š
 
-//½ÏºÃµÄ½â·¨
-//±ÜÃâÖØ¸´µÄ¼ÆËã£¬ÄÇ¾Í°ÑÒÑ¾­µÃµ½µÄÖĞ¼äÏî±£´æÆğÀ´£¬ÄÇÃ´¾Í²»ÄÜÓÃµİ¹éÁË
-//Ñ¡ÔñÓÃÑ­»·
+//è¾ƒå¥½çš„è§£æ³•
+//é¿å…é‡å¤çš„è®¡ç®—ï¼Œé‚£å°±æŠŠå·²ç»å¾—åˆ°çš„ä¸­é—´é¡¹ä¿å­˜èµ·æ¥ï¼Œé‚£ä¹ˆå°±ä¸èƒ½ç”¨é€’å½’äº†
+//é€‰æ‹©ç”¨å¾ªç¯
 #if 1
 long long Fibo(int n)
 {
@@ -818,8 +818,8 @@ long long Fibo(int n)
 #endif
 
 
-//ÇàÍÜÌøÌ¨½×ÎÊÌâ
-//ÇàÍÜ¿ÉÒÔÌø1µµÒ²¿ÉÒÔÌø2µµ
+//é’è›™è·³å°é˜¶é—®é¢˜
+//é’è›™å¯ä»¥è·³1æ¡£ä¹Ÿå¯ä»¥è·³2æ¡£
 #if 0
 #include <iostream>
 
@@ -860,19 +860,19 @@ int Cal(int n)
 #endif
 
 
-//ÓÃĞ¡¾ØĞÎÈ¥¸²¸Ç´ó¾ØĞÎµÄ·½·¨ÊıÁ¿£¬±¾ÖÊ»¹ÊÇì³²¨ÄÇÆõÊıÁĞ
+//ç”¨å°çŸ©å½¢å»è¦†ç›–å¤§çŸ©å½¢çš„æ–¹æ³•æ•°é‡ï¼Œæœ¬è´¨è¿˜æ˜¯æ–æ³¢é‚£å¥‘æ•°åˆ—
 #if 1
 
 #endif
 
 
-//ÊµÏÖ¿ìËÙÅÅĞòËã·¨
-//ºËĞÄ£ºÏÈÔÚÊı×éÖĞÑ¡Ò»¸öÊı×Ö£¬ÔÙ½«±ÈÑ¡ÔñµÄÊı×Ö´óµÄÊı×ÖÒÆµ½Êı×éÓÒ±ß
-//½«±ÈÑ¡ÔñµÄÊı×ÖĞ¡µÄÊı×ÖÒÆµ½Êı×é×ó±ß
-//¿ìËÙÅÅĞòÆäÊµ¾ÍÊÇÎÒÃÇÇ°ÃæÈÏÎª×îÂıµÄÃ°ÅİÅÅĞòµÄÉı¼¶£¬ËüÃÇ¶¼ÊôÓÚ½»»»ÅÅĞòÀà¡£
-//¼´ËüÒ²ÊÇÍ¨¹ı²»¶Ï±È½ÏºÍÒÆ¶¯½»»»À´ÊµÏÖÅÅĞòµÄ£¬Ö»²»¹ıËüµÄÊµÏÖ£¬
-//Ôö´óÁË¼ÇÂ¼µÄ±È½ÏºÍÒÆ¶¯µÄ¾àÀë£¬½«¹Ø¼ü×Ö½Ï´óµÄ¼ÇÂ¼´ÓÇ°ÃæÖ±½ÓÒÆ¶¯µ½ºóÃæ£¬
-//¹Ø¼ü×Ö½ÏĞ¡µÄ¼ÇÂ¼´ÓºóÃæÖ±½ÓÒÆ¶¯µ½Ç°Ãæ£¬´Ó¶ø¼õÉÙÁË×ÜµÄ±È½Ï´ÎÊıºÍÒÆ¶¯½»»»´ÎÊı¡£
+//å®ç°å¿«é€Ÿæ’åºç®—æ³•
+//æ ¸å¿ƒï¼šå…ˆåœ¨æ•°ç»„ä¸­é€‰ä¸€ä¸ªæ•°å­—ï¼Œå†å°†æ¯”é€‰æ‹©çš„æ•°å­—å¤§çš„æ•°å­—ç§»åˆ°æ•°ç»„å³è¾¹
+//å°†æ¯”é€‰æ‹©çš„æ•°å­—å°çš„æ•°å­—ç§»åˆ°æ•°ç»„å·¦è¾¹
+//å¿«é€Ÿæ’åºå…¶å®å°±æ˜¯æˆ‘ä»¬å‰é¢è®¤ä¸ºæœ€æ…¢çš„å†’æ³¡æ’åºçš„å‡çº§ï¼Œå®ƒä»¬éƒ½å±äºäº¤æ¢æ’åºç±»ã€‚
+//å³å®ƒä¹Ÿæ˜¯é€šè¿‡ä¸æ–­æ¯”è¾ƒå’Œç§»åŠ¨äº¤æ¢æ¥å®ç°æ’åºçš„ï¼Œåªä¸è¿‡å®ƒçš„å®ç°ï¼Œ
+//å¢å¤§äº†è®°å½•çš„æ¯”è¾ƒå’Œç§»åŠ¨çš„è·ç¦»ï¼Œå°†å…³é”®å­—è¾ƒå¤§çš„è®°å½•ä»å‰é¢ç›´æ¥ç§»åŠ¨åˆ°åé¢ï¼Œ
+//å…³é”®å­—è¾ƒå°çš„è®°å½•ä»åé¢ç›´æ¥ç§»åŠ¨åˆ°å‰é¢ï¼Œä»è€Œå‡å°‘äº†æ€»çš„æ¯”è¾ƒæ¬¡æ•°å’Œç§»åŠ¨äº¤æ¢æ¬¡æ•°ã€‚
 #if 0
 #include <iostream>
 #include <exception>
@@ -882,13 +882,13 @@ using namespace std;
 int RandomInRange(int a,int b)
 {
     srand((unsigned int)time(0));
-    // Éú³É [0, max]
+    // ç”Ÿæˆ [0, max]
     //int x = rand() % (max + 1);
 
-    // Éú³É [1, max]
+    // ç”Ÿæˆ [1, max]
     //int x = 1 + rand() % (max);
 
-    // Éú³É [min, max] ·¶Î§µÄËæ»úÊı
+    // ç”Ÿæˆ [min, max] èŒƒå›´çš„éšæœºæ•°
     //int x = min + rand() % (max - min + 1);
 
     int x = a + rand() % (b-a+1);
@@ -902,7 +902,7 @@ void Swap(int* a,int* b)
     *b = tmp;
 }
 
-//***beginºÍend¶¼Ö¸µÄÊÇË÷ÒıÖµ***
+//***beginå’Œendéƒ½æŒ‡çš„æ˜¯ç´¢å¼•å€¼***
 int Partition(int data[], int length,int begin,int end)
 {
     if (data == nullptr || length <= 0 || begin < 0 || end >= length)
@@ -910,36 +910,36 @@ int Partition(int data[], int length,int begin,int end)
         //throw new exception("Invaild Parameters");
     }
 
-    //Éú³ÉÒ»¸öÔÚÖ¸¶¨·¶Î§ÄÚµÄËæ»úÊı
+    //ç”Ÿæˆä¸€ä¸ªåœ¨æŒ‡å®šèŒƒå›´å†…çš„éšæœºæ•°
     int index = RandomInRange(begin,end);
-    //¸ÃËæ»úÊı×÷ÎªË÷ÒıÖµ¶ÔÓ¦µÄÊı×ÖÓëÊı×éÄ©Î²µÄÊı×Ö½»»»
-    //ÄÇÃ´Êı×éÄ©Î²µÄÊı×Ö¾ÍÊÇËæ»úË÷ÒıÖµ¶ÔÓ¦µÄÊı×Ö
+    //è¯¥éšæœºæ•°ä½œä¸ºç´¢å¼•å€¼å¯¹åº”çš„æ•°å­—ä¸æ•°ç»„æœ«å°¾çš„æ•°å­—äº¤æ¢
+    //é‚£ä¹ˆæ•°ç»„æœ«å°¾çš„æ•°å­—å°±æ˜¯éšæœºç´¢å¼•å€¼å¯¹åº”çš„æ•°å­—
     Swap(&data[index],&data[end]);
 
-    //´´½¨ÊàÖásmall´æ´¢Ë÷ÒıÖµ£¬Æä³õÊ¼Öµ±ÈbeginĞ¡1£¬Èç£ºbeginÎª0£¬ÔòsmallÎª-1
+    //åˆ›å»ºæ¢è½´smallå­˜å‚¨ç´¢å¼•å€¼ï¼Œå…¶åˆå§‹å€¼æ¯”beginå°1ï¼Œå¦‚ï¼šbeginä¸º0ï¼Œåˆ™smallä¸º-1
     int small = begin - 1;
     
-    //Ë÷ÒıÖµ´ÓÍ·¿ªÊ¼£¬Öğ½¥Ôö¼Ó
+    //ç´¢å¼•å€¼ä»å¤´å¼€å§‹ï¼Œé€æ¸å¢åŠ 
     for (index = begin; index < end; ++index)
     {
-        //Èôµ±Ç°Ë÷ÒıÖµÖ¸ÏòµÄÊı×Ö±ÈËæ»úË÷ÒıÖµÖ¸ÏòµÄÊı×ÖĞ¡
-        if (data[index] <= data[end])//×¢ÒâÊÇĞ¡ÓÚµÈÓÚ
+        //è‹¥å½“å‰ç´¢å¼•å€¼æŒ‡å‘çš„æ•°å­—æ¯”éšæœºç´¢å¼•å€¼æŒ‡å‘çš„æ•°å­—å°
+        if (data[index] <= data[end])//æ³¨æ„æ˜¯å°äºç­‰äº
         {
-            //Ôö¼ÓsmallµÄÖµ
+            //å¢åŠ smallçš„å€¼
             ++small;
 
-            //Èôsmall²»Îªµ±Ç°µÄË÷ÒıÖµ
+            //è‹¥smallä¸ä¸ºå½“å‰çš„ç´¢å¼•å€¼
             if (small  !=  index)
-                Swap(&data[index],&data[small]);//»¥»»ÔªËØ£¬Ä¿µÄÊÇ
-            //ÈÃË÷ÒıÖµsmall×ó²àµÄÖµ¶¼Ğ¡ÓÚ¸ÃË÷ÒıÖµËù¶ÔÓ¦µÄÖµ
+                Swap(&data[index],&data[small]);//äº’æ¢å…ƒç´ ï¼Œç›®çš„æ˜¯
+            //è®©ç´¢å¼•å€¼smallå·¦ä¾§çš„å€¼éƒ½å°äºè¯¥ç´¢å¼•å€¼æ‰€å¯¹åº”çš„å€¼
         }        
     }
-	//ÈÃsmallÔÙÔö¼Ó1
+	//è®©smallå†å¢åŠ 1
 	++small;
-	//ÈÃËæ»úË÷ÒıÖµÖ¸ÏòµÄÊı×ÖÒÆ¶¯µ½smallÖ¸ÏòµÄÎ»ÖÃÉÏ
+	//è®©éšæœºç´¢å¼•å€¼æŒ‡å‘çš„æ•°å­—ç§»åŠ¨åˆ°smallæŒ‡å‘çš„ä½ç½®ä¸Š
 	Swap(&data[small], &data[end]);
 
-    //·µ»ØÊàÖáËùÔÚÎ»ÖÃ
+    //è¿”å›æ¢è½´æ‰€åœ¨ä½ç½®
     return small;
 }
 //https://www.youtube.com/watch?v=duln2xAZhBA
@@ -974,7 +974,7 @@ int main()
 #endif
 
 
-//¶ÔÓÚÒ»¸ö½ÏĞ¡·¶Î§ÄÚµÄÊı×ÖĞòÁĞ£¬ÒªÇóÅÅĞò£¬Ê±¼ä¸´ÔÓ¶ÈÎªO(n)
+//å¯¹äºä¸€ä¸ªè¾ƒå°èŒƒå›´å†…çš„æ•°å­—åºåˆ—ï¼Œè¦æ±‚æ’åºï¼Œæ—¶é—´å¤æ‚åº¦ä¸ºO(n)
 #if 0
 void SortAges(int* ages, int length)
 {
@@ -983,16 +983,16 @@ void SortAges(int* ages, int length)
 
     const int OldestAge = 99;
 
-    //´´½¨Ò»¸öÊı×é´æ´¢¸÷ÄêÁäµÄ³öÏÖ´ÎÊı
-    int TimesOfAge[OldestAge + 1] = {0};//Ò»¶¨ÒªÏÈ³õÊ¼»¯
+    //åˆ›å»ºä¸€ä¸ªæ•°ç»„å­˜å‚¨å„å¹´é¾„çš„å‡ºç°æ¬¡æ•°
+    int TimesOfAge[OldestAge + 1] = {0};//ä¸€å®šè¦å…ˆåˆå§‹åŒ–
 
     for (int i = 0; i < length; ++i)
     {
         TimesOfAge[ages[i]]++;
     }
 
-    //***×¢***
-    //ÀûÓÃË÷Òı±¾¾ÍÓĞĞò£¬¶ÔÊı×éµÄÄÚÈİÖØĞÂ½øĞĞÌî³ä
+    //***æ³¨***
+    //åˆ©ç”¨ç´¢å¼•æœ¬å°±æœ‰åºï¼Œå¯¹æ•°ç»„çš„å†…å®¹é‡æ–°è¿›è¡Œå¡«å……
     int index = 0;
     for (int i = 0; i < OldestAge; ++i)
     {
@@ -1006,11 +1006,11 @@ void SortAges(int* ages, int length)
 #endif
 
 
-//Èç¹ûÃæÊÔÌâÊÇÒªÇóÔÚÅÅĞòµÄÊı×é(»òÕß²¿·ÖÅÅĞòµÄÊı×é)ÖĞ²éÕÒÒ»¸öÊı×Ö
-//»òÕßÍ³¼ÆÄ³¸öÊı×Ö³öÏÖµÄ´ÎÊı£¬ÄÇÃ´ÎÒÃÇ¶¼¿ÉÒÔ³¢ÊÔÓÃ¶ş·Ö²éÕÒËã·¨¡£
-//ÃæÊÔÌâ11£ºĞı×ªÊı×éµÄ×îĞ¡Êı×Ö
-//ÔÚĞı×ªÊı×éÖĞ£¬ÓÉÓÚÊÇ°ÑµİÔöÅÅĞòÊı×éÇ°ÃæµÄÈô¸É¸öÊı×Ö°áµ½Êı×éµÄºóÃæ£¬
-//Òò´ËµÚÒ»¸öÊı×Ö×ÜÊÇ´óÓÚ»òÕßµÈÓÚ×îºóÒ»¸öÊı×Ö¡£
+//å¦‚æœé¢è¯•é¢˜æ˜¯è¦æ±‚åœ¨æ’åºçš„æ•°ç»„(æˆ–è€…éƒ¨åˆ†æ’åºçš„æ•°ç»„)ä¸­æŸ¥æ‰¾ä¸€ä¸ªæ•°å­—
+//æˆ–è€…ç»Ÿè®¡æŸä¸ªæ•°å­—å‡ºç°çš„æ¬¡æ•°ï¼Œé‚£ä¹ˆæˆ‘ä»¬éƒ½å¯ä»¥å°è¯•ç”¨äºŒåˆ†æŸ¥æ‰¾ç®—æ³•ã€‚
+//é¢è¯•é¢˜11ï¼šæ—‹è½¬æ•°ç»„çš„æœ€å°æ•°å­—
+//åœ¨æ—‹è½¬æ•°ç»„ä¸­ï¼Œç”±äºæ˜¯æŠŠé€’å¢æ’åºæ•°ç»„å‰é¢çš„è‹¥å¹²ä¸ªæ•°å­—æ¬åˆ°æ•°ç»„çš„åé¢ï¼Œ
+//å› æ­¤ç¬¬ä¸€ä¸ªæ•°å­—æ€»æ˜¯å¤§äºæˆ–è€…ç­‰äºæœ€åä¸€ä¸ªæ•°å­—ã€‚
 #if 0
 #include <iostream>
 #include <exception>
@@ -1036,7 +1036,7 @@ int main()
 
     return 0;
 }
-//¶ş·Ö²éÕÒ·¨£¬Ê±¼ä¸´ÔÓ¶ÈÎªO(logn)
+//äºŒåˆ†æŸ¥æ‰¾æ³•ï¼Œæ—¶é—´å¤æ‚åº¦ä¸ºO(logn)
 #if 0
 int Min(int* numbers, int length)
 {
@@ -1051,10 +1051,10 @@ int Min(int* numbers, int length)
     {
         mid = p1 + (p2 - p1) / 2;
         if (numbers[mid] >= numbers[p1])
-            p1 = mid;//Èç¹û¸ÃÖĞ¼äÔªËØÎ»ÓÚÇ°ÃæµÄµİÔö×ÓÊı×é£¬
-        //ÄÇÃ´ËüÓ¦¸Ã´óÓÚ»òÕßµÈÓÚµÚÒ»¸öÖ¸ÕëÖ¸ÏòµÄÔªËØ¡£´ËÊ±Êı×éÖĞ×îĞ¡µÄÔªËØ
-        //Ó¦¸ÃÎ»ÓÚ¸ÃÖĞ¼äÔªËØµÄºóÃæ¡£ÎÒÃÇ¿ÉÒÔ°ÑµÚÒ»¸öÖ¸ÕëÖ¸Ïò¸ÃÖĞ¼äÔªËØ£¬
-        //ÕâÑù¿ÉÒÔËõĞ¡Ñ°ÕÒµÄ·¶Î§¡£ÒÆ¶¯Ö®ºóµÄµÚÒ»¸öÖ¸ÕëÈÔÈ»Î»ÓÚÇ°ÃæµÄµİÔö×ÓÊı×é¡£
+            p1 = mid;//å¦‚æœè¯¥ä¸­é—´å…ƒç´ ä½äºå‰é¢çš„é€’å¢å­æ•°ç»„ï¼Œ
+        //é‚£ä¹ˆå®ƒåº”è¯¥å¤§äºæˆ–è€…ç­‰äºç¬¬ä¸€ä¸ªæŒ‡é’ˆæŒ‡å‘çš„å…ƒç´ ã€‚æ­¤æ—¶æ•°ç»„ä¸­æœ€å°çš„å…ƒç´ 
+        //åº”è¯¥ä½äºè¯¥ä¸­é—´å…ƒç´ çš„åé¢ã€‚æˆ‘ä»¬å¯ä»¥æŠŠç¬¬ä¸€ä¸ªæŒ‡é’ˆæŒ‡å‘è¯¥ä¸­é—´å…ƒç´ ï¼Œ
+        //è¿™æ ·å¯ä»¥ç¼©å°å¯»æ‰¾çš„èŒƒå›´ã€‚ç§»åŠ¨ä¹‹åçš„ç¬¬ä¸€ä¸ªæŒ‡é’ˆä»ç„¶ä½äºå‰é¢çš„é€’å¢å­æ•°ç»„ã€‚
         else
             p2 = mid;
     }
@@ -1062,8 +1062,8 @@ int Min(int* numbers, int length)
     return numbers[p2];
 }
 #endif
-//è¦´Ã£ºÈô°ÑÅÅĞòÊı×éµÄÇ°Ãæ0¸öÊı×Ö°áµ½ºóÃæ£¬ÄÇÃ´¸Ã´úÂëÎŞ·¨Ö§³Ö¡£
-//ĞŞ¸Ä£º
+//ç‘•ç–µï¼šè‹¥æŠŠæ’åºæ•°ç»„çš„å‰é¢0ä¸ªæ•°å­—æ¬åˆ°åé¢ï¼Œé‚£ä¹ˆè¯¥ä»£ç æ— æ³•æ”¯æŒã€‚
+//ä¿®æ”¹ï¼š
 #if 0
 int Min(int* numbers, int length)
 {
@@ -1073,10 +1073,10 @@ int Min(int* numbers, int length)
     int p1, p2;
     p1 = 0, p2 = length - 1;
 
-    //³õÊ¼»¯ÎªÊ×ÔªËØµÄË÷ÒıÖµ£¬ÒÔÖ§³ÖÒÆ¶¯0¸öÊı×ÖµÄÇé¿ö
+    //åˆå§‹åŒ–ä¸ºé¦–å…ƒç´ çš„ç´¢å¼•å€¼ï¼Œä»¥æ”¯æŒç§»åŠ¨0ä¸ªæ•°å­—çš„æƒ…å†µ
     int mid=p1;
 
-    //Ê×ÔªËØĞèÒª´óÓÚµÈÓÚÄ©Î²µÄÔªËØ²ÅÄÜ½øÈëÑ­»·
+    //é¦–å…ƒç´ éœ€è¦å¤§äºç­‰äºæœ«å°¾çš„å…ƒç´ æ‰èƒ½è¿›å…¥å¾ªç¯
     while (p2 - p1 != 1&&numbers[p1]>=numbers[p2])
     {
         mid = p1 + (p2 - p1) / 2;
@@ -1089,8 +1089,8 @@ int Min(int* numbers, int length)
     return numbers[mid];
 }
 #endif
-//è¦´Ã£ºÈô³öÏÖp1Óëp2ÓëÖĞ¼äµÄÊı×ÖÏàÍ¬µÄÇé¿ö£¬Èç1£¬0£¬1£¬1£¬1£¬1
-//Ôò´úÂëÎŞ·¨Ö§³Ö
+//ç‘•ç–µï¼šè‹¥å‡ºç°p1ä¸p2ä¸ä¸­é—´çš„æ•°å­—ç›¸åŒçš„æƒ…å†µï¼Œå¦‚1ï¼Œ0ï¼Œ1ï¼Œ1ï¼Œ1ï¼Œ1
+//åˆ™ä»£ç æ— æ³•æ”¯æŒ
 #if 1
 int Min(int* numbers, int length)
 {
@@ -1100,15 +1100,15 @@ int Min(int* numbers, int length)
     int p1, p2;
     p1 = 0, p2 = length - 1;
 
-    //³õÊ¼»¯ÎªÊ×ÔªËØµÄË÷ÒıÖµ£¬ÒÔÖ§³ÖÒÆ¶¯0¸öÊı×ÖµÄÇé¿ö
+    //åˆå§‹åŒ–ä¸ºé¦–å…ƒç´ çš„ç´¢å¼•å€¼ï¼Œä»¥æ”¯æŒç§»åŠ¨0ä¸ªæ•°å­—çš„æƒ…å†µ
     int mid = p1;
 
-    //Ê×ÔªËØĞèÒª´óÓÚµÈÓÚÄ©Î²µÄÔªËØ²ÅÄÜ½øÈëÑ­»·
+    //é¦–å…ƒç´ éœ€è¦å¤§äºç­‰äºæœ«å°¾çš„å…ƒç´ æ‰èƒ½è¿›å…¥å¾ªç¯
     while (p2 - p1 != 1 && numbers[p1] >= numbers[p2])
     {
         mid = p1 + (p2 - p1) / 2;
 
-        //´¦Àí×îÌØÊâµÄÇé¿ö£ºp1Óëp2ÓëÖĞ¼äµÄÊı×ÖÏàÍ¬
+        //å¤„ç†æœ€ç‰¹æ®Šçš„æƒ…å†µï¼šp1ä¸p2ä¸ä¸­é—´çš„æ•°å­—ç›¸åŒ
         if (numbers[p1] == numbers[p2] && numbers[p1] == numbers[mid])
             return MinInOrder(numbers,length);
 
@@ -1121,7 +1121,7 @@ int Min(int* numbers, int length)
     return numbers[mid];
 }
 
-//Õë¶ÔÌØÊâÇé¿ö£¬Ö»ÄÜ²ÉÓÃË³Ğò²éÕÒ·½·¨
+//é’ˆå¯¹ç‰¹æ®Šæƒ…å†µï¼Œåªèƒ½é‡‡ç”¨é¡ºåºæŸ¥æ‰¾æ–¹æ³•
 int MinInOrder(int* number, int length)
 {
     int min = number[0];
@@ -1137,8 +1137,8 @@ int MinInOrder(int* number, int length)
 #endif
 
 
-//ÃæÊÔÌâ12£º¾ØÕóÖĞµÄÂ·¾¶
-//ÓÃdfsÄ£°å×ö
+//é¢è¯•é¢˜12ï¼šçŸ©é˜µä¸­çš„è·¯å¾„
+//ç”¨dfsæ¨¡æ¿åš
 #if 0
 #include <iostream>
 
@@ -1204,7 +1204,7 @@ bool check(const char* ch1, const char* ch2)
     return true;
 }
 #endif
-//ÓÃ»ØËİ·¨Ä£°å×ö
+//ç”¨å›æº¯æ³•æ¨¡æ¿åš
 #if 0
 #include <iostream>
 #include <vector>
@@ -1216,15 +1216,15 @@ bool check(const char* ch1, const char* ch2);
 int dx[4] = { 0,0,1,-1 };
 int dy[4] = { 1,-1,0,0 };
 
-//ÒÔÏÂĞ´·¨²»ĞĞ
+//ä»¥ä¸‹å†™æ³•ä¸è¡Œ
 //bool hasPath(char[][] matrix, );
 
-//***×¢***
-//ÕâÑùĞ´ÀûÓÚ¶¯Ì¬µ÷Õû¾ØÕóµÄ´óĞ¡£¬ÇÒÁĞÓëĞĞ¶¼¿É¶¯Ì¬±ä»¯
+//***æ³¨***
+//è¿™æ ·å†™åˆ©äºåŠ¨æ€è°ƒæ•´çŸ©é˜µçš„å¤§å°ï¼Œä¸”åˆ—ä¸è¡Œéƒ½å¯åŠ¨æ€å˜åŒ–
 bool hasPath(vector<vector<char>>& matrix, int row, int col,
     const char* target);
 
-//ºËĞÄ´úÂë¿é
+//æ ¸å¿ƒä»£ç å—
 bool hasPathCore(vector<vector<char>>& matrix, int row, int col,
     int r, int c, const char* target, int index, bool** visit);
 
@@ -1247,7 +1247,7 @@ bool hasPath(vector<vector<char>>& matrix, int row, int col,
     if (matrix.size() == 0 || row < 1 || col < 1 || target == nullptr)
         return false;
 
-    //ÕâÑùĞ´Ê§°Ü
+    //è¿™æ ·å†™å¤±è´¥
     //bool(*visit)[col] = new bool[row][col];
 
     bool** visit = new bool* [row];
@@ -1262,14 +1262,14 @@ bool hasPath(vector<vector<char>>& matrix, int row, int col,
 
     int index = 0;
 
-    //Â·¾¶¿ÉÒÔ´Ó¾ØÕóµÄÈÎÒâÒ»¸ñ¿ªÊ¼
+    //è·¯å¾„å¯ä»¥ä»çŸ©é˜µçš„ä»»æ„ä¸€æ ¼å¼€å§‹
     for(int r=0;r<row;r++)
         for (int c = 0; c < col; c++)
         {
             if (hasPathCore(matrix, row, col, r, c, target, index, visit))
                 return true;
             else
-                visit[r][c] == false;//È¡ÏûÒÑ·ÃÎÊµÄ±ê¼Ç
+                visit[r][c] == false;//å–æ¶ˆå·²è®¿é—®çš„æ ‡è®°
         }
 
     for (int i = 0; i < row; i++)      
@@ -1289,7 +1289,7 @@ bool hasPathCore(vector<vector<char>>& matrix, int row, int col,
     if (r >= 0 && r < row && c >= 0 && c < col &&
         matrix[r][c] == target[index] && !visit[r][c])
     {
-        //±ê¼ÇÎªÒÑ·ÃÎÊ
+        //æ ‡è®°ä¸ºå·²è®¿é—®
         visit[r][c] = true;
 
         for (int i = 0; i < 4; i++)
@@ -1301,7 +1301,7 @@ bool hasPathCore(vector<vector<char>>& matrix, int row, int col,
             {
                 flag = hasPathCore(matrix, row, col, r1, c1, target, index + 1, visit);
                 
-                //±ØĞëĞ´ÈçÏÂÓï¾ä£¬·ñÔòµİ¹é»ØËİºó£¬×îºóµÄ·µ»ØÖµ»¹ÊÇfalse
+                //å¿…é¡»å†™å¦‚ä¸‹è¯­å¥ï¼Œå¦åˆ™é€’å½’å›æº¯åï¼Œæœ€åçš„è¿”å›å€¼è¿˜æ˜¯false
                 if (flag)
                     return flag;
             }
@@ -1318,7 +1318,7 @@ bool hasPathCore(vector<vector<char>>& matrix, int row, int col,
 #endif
 
 
-//ÃæÊÔÌâ13£º»úÆ÷ÈËµÄÔË¶¯·¶Î§
+//é¢è¯•é¢˜13ï¼šæœºå™¨äººçš„è¿åŠ¨èŒƒå›´
 #if 0
 #include <iostream>
 #include <vector>
@@ -1326,8 +1326,8 @@ using namespace std;
 
 int movingCount(int threshold, int row, int col);
 
-//***×¢***
-//±ØĞëĞ´³ÉÊÇÖ¸ÏòvisitÊı×éµÄÒıÓÃ
+//***æ³¨***
+//å¿…é¡»å†™æˆæ˜¯æŒ‡å‘visitæ•°ç»„çš„å¼•ç”¨
 int movingCountCore(int threshold, int row, int col,int r, int c, vector<vector<bool>>& visit);
 
 bool check(int threshold, int row, int col, int r, int c, vector<vector<bool>>& visit);
@@ -1347,23 +1347,23 @@ int movingCount(int threshold, int row, int col)
     if (row < 0 || col < 0 || threshold < 0)
         return count;
 
-    //***×¢***
-	//´´½¨Ò»¸öĞĞÎªrow£¬ÁĞÎªcol£¬³õÊ¼ÖµÎªfalseµÄ¶şÎ¬Êı×é
-    //·½·¨Ò»£º´´½¨²¢Ö±½Ó³õÊ¼»¯
+    //***æ³¨***
+	//åˆ›å»ºä¸€ä¸ªè¡Œä¸ºrowï¼Œåˆ—ä¸ºcolï¼Œåˆå§‹å€¼ä¸ºfalseçš„äºŒç»´æ•°ç»„
+    //æ–¹æ³•ä¸€ï¼šåˆ›å»ºå¹¶ç›´æ¥åˆå§‹åŒ–
     vector<vector<bool>>visit    (row,vector<bool>(col, false));
 
-    //***×¢***
-    //·½·¨¶ş£ºÓÃresizeÀ´ÌáÇ°¹¹½¨
-    //vector<vector<int>> new_mat(r);//×¢ÒâÕâ¸örÊÇ²»¿ÉÈ±ÉÙµÄ£¬¹æ¶¨ÆäÓĞ¶àÉÙĞĞ
-    //for (int i = 0; i < r; i++) //¶şÎ¬vectorµÄ³õÊ¼»¯Ê±ÓĞÒªÇóµÄ
+    //***æ³¨***
+    //æ–¹æ³•äºŒï¼šç”¨resizeæ¥æå‰æ„å»º
+    //vector<vector<int>> new_mat(r);//æ³¨æ„è¿™ä¸ªræ˜¯ä¸å¯ç¼ºå°‘çš„ï¼Œè§„å®šå…¶æœ‰å¤šå°‘è¡Œ
+    //for (int i = 0; i < r; i++) //äºŒç»´vectorçš„åˆå§‹åŒ–æ—¶æœ‰è¦æ±‚çš„
     //{
     //    new_mat[i].resize(c);
     //}
 
-	//·½·¨Èı£ºÃ¿ĞĞ²»Ò»¶¨¼¸¸öÊı£¬¾ÍÊÇÏë¶ÔÃ¿ĞĞµÄÁĞ½øĞĞ²Ù×÷
-	//	ÕâÑùÒ²¿ÉÒÔ£¬µ«ÊÇÔÚÉùÃ÷Ê±£¬ĞĞÊıÒ»¶¨ÒªÓĞ£¡£¡È»ºópush_back¾Í¿ÉÒÔÁË£¡
-	//	vector<vector<int>>mat(r);//Ã¿ĞĞµÄ¶¨Òå
-	//mat[i].push_back(1);//Õâ¾ÍÊÇ¸ÃµÚi+1ĞĞµÄ²åÈëÒ»¸öÔªËØ£¬ÖµÎª1
+	//æ–¹æ³•ä¸‰ï¼šæ¯è¡Œä¸ä¸€å®šå‡ ä¸ªæ•°ï¼Œå°±æ˜¯æƒ³å¯¹æ¯è¡Œçš„åˆ—è¿›è¡Œæ“ä½œ
+	//	è¿™æ ·ä¹Ÿå¯ä»¥ï¼Œä½†æ˜¯åœ¨å£°æ˜æ—¶ï¼Œè¡Œæ•°ä¸€å®šè¦æœ‰ï¼ï¼ç„¶åpush_backå°±å¯ä»¥äº†ï¼
+	//	vector<vector<int>>mat(r);//æ¯è¡Œçš„å®šä¹‰
+	//mat[i].push_back(1);//è¿™å°±æ˜¯è¯¥ç¬¬i+1è¡Œçš„æ’å…¥ä¸€ä¸ªå…ƒç´ ï¼Œå€¼ä¸º1
 
     count = movingCountCore(threshold,row,col,0,0,visit);
 
@@ -1389,9 +1389,9 @@ int movingCountCore(int threshold, int row, int col, int r, int c, vector<vector
         visit[r][c] = true;
         //cout << visit[r][c] << endl;
         
-//***×¢***
-//ÓÉÓÚÔÚµİ¹é¹ı³ÌÖĞµÄÈëÕ»ÍËÕ»ĞĞÎª£¬µ¼ÖÂÒÔÏÂ´úÂëµÃ³öµÄÊı×Ö²»ÕıÈ·
-//ÈôÒ»¶¨ÒªÓÃ´Ë´úÂë¿é£¬ÔòÒªÓÃµ½È«¾Ö±äÁ¿count
+//***æ³¨***
+//ç”±äºåœ¨é€’å½’è¿‡ç¨‹ä¸­çš„å…¥æ ˆé€€æ ˆè¡Œä¸ºï¼Œå¯¼è‡´ä»¥ä¸‹ä»£ç å¾—å‡ºçš„æ•°å­—ä¸æ­£ç¡®
+//è‹¥ä¸€å®šè¦ç”¨æ­¤ä»£ç å—ï¼Œåˆ™è¦ç”¨åˆ°å…¨å±€å˜é‡count
 
  /*       for (int i = 0; i < 4; i++)
         {
@@ -1400,18 +1400,18 @@ int movingCountCore(int threshold, int row, int col, int r, int c, vector<vector
 
             if (check(threshold, row, col, r1, c1, visit))
             {
-                cout << r1<<"£¬" << c1 <<" " << count << " " << endl;
+                cout << r1<<"ï¼Œ" << c1 <<" " << count << " " << endl;
                 count=1+movingCountCore(threshold, row, col, r1, c1, visit);                
                 cout << endl;
-                cout << r1<<"£¬" << c1 <<" " << count << " " << endl<<endl;
+                cout << r1<<"ï¼Œ" << c1 <<" " << count << " " << endl<<endl;
             }
             else
                 continue;
         }
 */
 
-        cout << r << "£¬" << c << " " << count << " " << endl;
-        //ÕâÑùĞ´ÄÜµÃµ½ÕıÈ·´ğ°¸
+        cout << r << "ï¼Œ" << c << " " << count << " " << endl;
+        //è¿™æ ·å†™èƒ½å¾—åˆ°æ­£ç¡®ç­”æ¡ˆ
         count = 1 + movingCountCore(threshold, row, col, r-1, c, visit)
             + movingCountCore(threshold, row, col, r , c-1, visit)
             + movingCountCore(threshold, row, col, r +1, c, visit)
@@ -1448,7 +1448,7 @@ bool DigitOK(int threshold, int r, int c)
 #endif
 
 
-//ÃæÊÔÌâ14£º¼ôÉş×Ó
+//é¢è¯•é¢˜14ï¼šå‰ªç»³å­
 #if 0
 #include <iostream>
 
@@ -1464,10 +1464,10 @@ int main()
     return 0;
 }
 
-//¶¯Ì¬¹æ»®½â·¨£º
-//ËäÈ»Éş×Ó¿ÉÒÔ¼ôÈô¸Éµ¶£¬µ«Ã¿¼ôÒ»µ¶ºó·Ö³ÉµÄÁ½¸ö²¿·ÖµÄ³¤¶È
-//¶¼ÓĞÆä¶ÔÓ¦µÄÄÜµÃµ½×î´ó³Ë»ıÊı×Ö¶ÔÓ¦µÄ¼ô·¨£¬
-//¿ÉÒÔÀí½â³ÉÒ»¸öÎÊÌâÄÜ·Ö½â³É¶à¸ö×ÓÎÊÌâ£¬Ã¿¸ö×ÓÎÊÌâ¶¼´æÔÚ×îÓÅ½â
+//åŠ¨æ€è§„åˆ’è§£æ³•ï¼š
+//è™½ç„¶ç»³å­å¯ä»¥å‰ªè‹¥å¹²åˆ€ï¼Œä½†æ¯å‰ªä¸€åˆ€ååˆ†æˆçš„ä¸¤ä¸ªéƒ¨åˆ†çš„é•¿åº¦
+//éƒ½æœ‰å…¶å¯¹åº”çš„èƒ½å¾—åˆ°æœ€å¤§ä¹˜ç§¯æ•°å­—å¯¹åº”çš„å‰ªæ³•ï¼Œ
+//å¯ä»¥ç†è§£æˆä¸€ä¸ªé—®é¢˜èƒ½åˆ†è§£æˆå¤šä¸ªå­é—®é¢˜ï¼Œæ¯ä¸ªå­é—®é¢˜éƒ½å­˜åœ¨æœ€ä¼˜è§£
 #if 0
 int maxProuct(int length)
 {
@@ -1478,24 +1478,24 @@ int maxProuct(int length)
     if (length == 3)
         return 2;
 
-    //´´½¨Ò»¸ö¶¯Ì¬Êı×éÒÔ´æ´¢¸÷¸ö³¤¶ÈµÄÉş×Ó¼ÆËã³öµÄÖĞ¼äÖµ
+    //åˆ›å»ºä¸€ä¸ªåŠ¨æ€æ•°ç»„ä»¥å­˜å‚¨å„ä¸ªé•¿åº¦çš„ç»³å­è®¡ç®—å‡ºçš„ä¸­é—´å€¼
     int* product = new int[length + 1] {0};
 
-    //***×¢***
-    //´Ë´¦product[1]Îª1£¬ÒòÎªÆäÒª×÷Îª¼ôÍêºóµÃµ½µÄ²¿·ÖµÄ³¤¶ÈÖµ£¬
-    //¶ø²»ÊÇ×÷ÎªÒª¶Ô³¤¶ÈÎª1µÄÉş×Ó·Ö¸îºó¿ÉµÃµ½µÄ×î´ó³Ë»ıÖµ
-    //product[2]ºÍproduct[3]Í¬Àí
+    //***æ³¨***
+    //æ­¤å¤„product[1]ä¸º1ï¼Œå› ä¸ºå…¶è¦ä½œä¸ºå‰ªå®Œåå¾—åˆ°çš„éƒ¨åˆ†çš„é•¿åº¦å€¼ï¼Œ
+    //è€Œä¸æ˜¯ä½œä¸ºè¦å¯¹é•¿åº¦ä¸º1çš„ç»³å­åˆ†å‰²åå¯å¾—åˆ°çš„æœ€å¤§ä¹˜ç§¯å€¼
+    //product[2]å’Œproduct[3]åŒç†
     product[1] = 1;
     product[2] = 2;
     product[3] = 3;
 
-    //Éş×ÓµÄ³¤¶È
+    //ç»³å­çš„é•¿åº¦
     for (int i = 4; i <= length; i++)
     {
-        //´´½¨±äÁ¿maxÒÔ´æ´¢ÒÑ¼ÆËã³öµÄÖµÀ´ÓÃÓÚ±È½Ï
+        //åˆ›å»ºå˜é‡maxä»¥å­˜å‚¨å·²è®¡ç®—å‡ºçš„å€¼æ¥ç”¨äºæ¯”è¾ƒ
         int max = 0;
 
-        //´´½¨Ò»¸ö·Ö¸îµãj
+        //åˆ›å»ºä¸€ä¸ªåˆ†å‰²ç‚¹j
         for (int j = 1; j <= i / 2; j++)
         {
            int num = product[j] * product[i-j];
@@ -1518,10 +1518,10 @@ int maxProuct(int length)
 }
 #endif
 
-//Ì°ĞÄËã·¨
-//°´ÕÕÈçÏÂµÄ²ßÂÔÀ´¼ôÉş×Ó£¬ÔòµÃµ½µÄ¸÷¶ÎÉş×ÓµÄ³¤¶ÈµÄ³Ë»ı
-//½«×î´ó£ºµ±n¡İ5Ê±£¬ÎÒÃÇ¾¡¿ÉÄÜ¶àµØ¼ô³¤¶ÈÎª3µÄÉş×Ó£»µ±Ê£ÏÂµÄÉş×Ó
-//³¤¶ÈÎª4Ê±£¬°ÑÉş×Ó¼ô³ÉÁ½¶Î³¤¶ÈÎª2µÄÉş×Ó¡£
+//è´ªå¿ƒç®—æ³•
+//æŒ‰ç…§å¦‚ä¸‹çš„ç­–ç•¥æ¥å‰ªç»³å­ï¼Œåˆ™å¾—åˆ°çš„å„æ®µç»³å­çš„é•¿åº¦çš„ä¹˜ç§¯
+//å°†æœ€å¤§ï¼šå½“nâ‰¥5æ—¶ï¼Œæˆ‘ä»¬å°½å¯èƒ½å¤šåœ°å‰ªé•¿åº¦ä¸º3çš„ç»³å­ï¼›å½“å‰©ä¸‹çš„ç»³å­
+//é•¿åº¦ä¸º4æ—¶ï¼ŒæŠŠç»³å­å‰ªæˆä¸¤æ®µé•¿åº¦ä¸º2çš„ç»³å­ã€‚
 #if 0
 int maxProuct(int length)
 {
@@ -1548,7 +1548,7 @@ int maxProuct(int length)
 #endif
 
 
-//½«Ê®½øÖÆÊı×ÖÓÃ×ÖÄ¸A~Z±íÊ¾
+//å°†åè¿›åˆ¶æ•°å­—ç”¨å­—æ¯A~Zè¡¨ç¤º
 #if 0
 #include <iostream>
 #include <vector>
@@ -1584,7 +1584,7 @@ vector<char> convert(int num)
 #endif
 
 
-//ÃæÊÔÌâ15£º¶ş½øÖÆÖĞ1µÄ¸öÊı
+//é¢è¯•é¢˜15ï¼šäºŒè¿›åˆ¶ä¸­1çš„ä¸ªæ•°
 #if 0
 #include <iostream>
 #include <vector>
@@ -1600,7 +1600,7 @@ int main()
     return 0;
 }
 
-//½â·¨Ò»£º½«num¿´³ÉÊ®½øÖÆÊı£¬ÓÃÈ¡ÓàµÄ·½·¨×ª»»³É¶ş½øÖÆ
+//è§£æ³•ä¸€ï¼šå°†numçœ‹æˆåè¿›åˆ¶æ•°ï¼Œç”¨å–ä½™çš„æ–¹æ³•è½¬æ¢æˆäºŒè¿›åˆ¶
 #if 0
 int number_of_one(int num)
 {
@@ -1623,7 +1623,7 @@ int number_of_one(int num)
 }
 #endif
 
-//½â·¨¶ş£º½«num¿´³É¶ş½øÖÆÊı£¬ÓÃÎ»ÔËËã¼ÆËã1µÄ¸öÊı
+//è§£æ³•äºŒï¼šå°†numçœ‹æˆäºŒè¿›åˆ¶æ•°ï¼Œç”¨ä½è¿ç®—è®¡ç®—1çš„ä¸ªæ•°
 #if 0
 int number_of_one(int num)
 {
@@ -1634,16 +1634,16 @@ int number_of_one(int num)
         if (num & 0x01)
             cnt++;
 
-        num >>= 1;//***×¢***
-    }                      //³ı·¨Ğ§ÂÊ±ÈÒÆÎ»ÔËËãÒªµÍµÃ¶à£¬Êµ¼Ê±à³ÌÖĞÒª¾¡Á¿±ÜÃâÊ¹ÓÃ³Ë³ı·¨£¬
-                           //¶øÊÇÓÃÒÆÎ»ÔËËãÀ´Ìæ´ú
+        num >>= 1;//***æ³¨***
+    }                      //é™¤æ³•æ•ˆç‡æ¯”ç§»ä½è¿ç®—è¦ä½å¾—å¤šï¼Œå®é™…ç¼–ç¨‹ä¸­è¦å°½é‡é¿å…ä½¿ç”¨ä¹˜é™¤æ³•ï¼Œ
+                           //è€Œæ˜¯ç”¨ç§»ä½è¿ç®—æ¥æ›¿ä»£
     return cnt;
 }
 #endif
-//è¦´Ã£ºÈô×î¸ßÎ»Îª1£¬Ôò»áÏİÈëËÀÑ­»·
+//ç‘•ç–µï¼šè‹¥æœ€é«˜ä½ä¸º1ï¼Œåˆ™ä¼šé™·å…¥æ­»å¾ªç¯
 
-//¸üÍêÉÆµÄ½â·¨£º
-//²»¶Ô¸ø³öµÄÊı×Ö±¾Éí½øĞĞÒÆÎ»ÔËËã£¬¶øÊÇ¶Ôflag½øĞĞÒÆÎ»£¬ÓÃÀ´ÅĞ¶ÏÃ¿Î»ÊÇ·ñÎª1
+//æ›´å®Œå–„çš„è§£æ³•ï¼š
+//ä¸å¯¹ç»™å‡ºçš„æ•°å­—æœ¬èº«è¿›è¡Œç§»ä½è¿ç®—ï¼Œè€Œæ˜¯å¯¹flagè¿›è¡Œç§»ä½ï¼Œç”¨æ¥åˆ¤æ–­æ¯ä½æ˜¯å¦ä¸º1
 #if 0
 int number_of_one(int num)
 {
@@ -1663,10 +1663,10 @@ int number_of_one(int num)
 }
 #endif
 
-//¼¼ÇÉĞÔ¸üÇ¿µÄ½â·¨£º
-// ***¼Ç***
-//°ÑÒ»¸öÕûÊı¼õÈ¥1,ÔÙºÍÔ­ÕûÊı×öÓëÔËËã£¬»á°Ñ¸ÃÕûÊı×îÓÒ±ßµÄ1±ä³É0¡£
-//ÄÇÃ´Ò»¸öÕûÊıµÄ¶ş½øÖÆ±íÊ¾ÖĞÓĞ¶àÉÙ¸ö1,¾Í¿ÉÒÔ½øĞĞ¶àÉÙ´ÎÕâÑùµÄ²Ù×÷¡£
+//æŠ€å·§æ€§æ›´å¼ºçš„è§£æ³•ï¼š
+// ***è®°***
+//æŠŠä¸€ä¸ªæ•´æ•°å‡å»1,å†å’ŒåŸæ•´æ•°åšä¸è¿ç®—ï¼Œä¼šæŠŠè¯¥æ•´æ•°æœ€å³è¾¹çš„1å˜æˆ0ã€‚
+//é‚£ä¹ˆä¸€ä¸ªæ•´æ•°çš„äºŒè¿›åˆ¶è¡¨ç¤ºä¸­æœ‰å¤šå°‘ä¸ª1,å°±å¯ä»¥è¿›è¡Œå¤šå°‘æ¬¡è¿™æ ·çš„æ“ä½œã€‚
 #if 1
 int number_of_one(int num)
 {
@@ -1684,7 +1684,7 @@ int number_of_one(int num)
 #endif
 
 
-//Ò»¸ö¶ş½øÖÆÊıÒª¸Ä±ä¶àÉÙÎ»²ÅÄÜµÃµ½ÁíÒ»¸ö¶ş½øÖÆÊı
+//ä¸€ä¸ªäºŒè¿›åˆ¶æ•°è¦æ”¹å˜å¤šå°‘ä½æ‰èƒ½å¾—åˆ°å¦ä¸€ä¸ªäºŒè¿›åˆ¶æ•°
 #if 0
 #include<iostream>
 
@@ -1702,7 +1702,7 @@ int main()
 
     return 0;
 }
-//²»Ê¹ÓÃforÑ­»·£¬¶øÊ¹ÓÃÒì»òÔËËã£¬È»ºóÍ³¼ÆÊıÖĞµÄ1µÄ¸öÊı
+//ä¸ä½¿ç”¨forå¾ªç¯ï¼Œè€Œä½¿ç”¨å¼‚æˆ–è¿ç®—ï¼Œç„¶åç»Ÿè®¡æ•°ä¸­çš„1çš„ä¸ªæ•°
 int need_change(int num1, int num2)
 {
     int tmp = num1 ^ num2;
@@ -1724,7 +1724,7 @@ int number_of_one(int num)
 #endif
 
 
-//ÓÃÕ»ÊµÏÖ¶ş²æÊ÷µÄÉî¶ÈÓÅÏÈ±éÀú
+//ç”¨æ ˆå®ç°äºŒå‰æ ‘çš„æ·±åº¦ä¼˜å…ˆéå†
 #if 0
 #include <iostream>
 #include<stack>
@@ -1735,19 +1735,19 @@ struct BinaryTreeNode
     BinaryTreeNode* m_pRight;
 };
 
-//Ç°Ğò±éÀú¡ª¡ªµİ¹é
+//å‰åºéå†â€”â€”é€’å½’
 void preorder(BinaryTreeNode * rootNode)
 {
     if (!rootNode)
         return;
 
-    //¸ù->×ó->ÓÒ
+    //æ ¹->å·¦->å³
     std::cout << rootNode->m_nValue << " ";
     preorder(rootNode->m_pLeft);
     preorder(rootNode->m_pRight);
 }
 
-//Ç°Ğò±éÀú¡ª¡ªÊ¹ÓÃÕ»
+//å‰åºéå†â€”â€”ä½¿ç”¨æ ˆ
 void preorder2(BinaryTreeNode* rootNode)
 {
     std::stack<BinaryTreeNode*> nodeStack;
@@ -1759,29 +1759,29 @@ void preorder2(BinaryTreeNode* rootNode)
         {
             std::cout << tempNode->m_nValue << " ";
             nodeStack.push(tempNode);
-            tempNode = tempNode->m_pLeft;//¸ù->×ó
+            tempNode = tempNode->m_pLeft;//æ ¹->å·¦
         }
         else 
         {
             tempNode = nodeStack.top();
             nodeStack.pop();
-            tempNode = tempNode->m_pRight;//ÓÒ
+            tempNode = tempNode->m_pRight;//å³
         }
     }
 }
 
-//ÖĞĞò±éÀú¡ª¡ªµİ¹é
+//ä¸­åºéå†â€”â€”é€’å½’
 void inorder(BinaryTreeNode* rootNode)
 {
     if (!rootNode)
         return;
-    //×ó->¸ù->ÓÒ	
+    //å·¦->æ ¹->å³	
     inorder(rootNode->m_pLeft);
     std::cout << rootNode->m_nValue << " ";
     inorder(rootNode->m_pRight);
 }
 
-//ÖĞĞò±éÀú --Õ»
+//ä¸­åºéå† --æ ˆ
 template<typename T>
 void inorder2(BinaryTreeNode* rootNode)
 {
@@ -1792,36 +1792,36 @@ void inorder2(BinaryTreeNode* rootNode)
     {
         if (tempNode) {
             nodeStack.push(tempNode);
-            tempNode = tempNode->m_pLeft;//×ó
+            tempNode = tempNode->m_pLeft;//å·¦
         }
         else {
             tempNode = nodeStack.top();
             nodeStack.pop();
             std::cout << tempNode->m_nValue << " ";
-            tempNode = tempNode->m_pRight;//¸ù->ÓÒ
+            tempNode = tempNode->m_pRight;//æ ¹->å³
         }
     }
 }
 
-//ºóĞò±éÀú¡ª¡ªµİ¹é
+//ååºéå†â€”â€”é€’å½’
 void postorder(BinaryTreeNode* rootNode)
 {
     if (!rootNode)
         return;
-    //×ó->ÓÒ->¸ù	
+    //å·¦->å³->æ ¹	
     postorder(rootNode->m_pLeft);
     postorder(rootNode->m_pRight);
     std::cout << rootNode->m_nValue << " ";
 }
 
-//ºóĞò±éÀú¡ª¡ªÕ»
+//ååºéå†â€”â€”æ ˆ
 void postorder2(BinaryTreeNode* rootNode)
 {
     std::stack<BinaryTreeNode*> nodeStack;
-    BinaryTreeNode* curNode = rootNode; //µ±Ç°½Úµã
-    BinaryTreeNode* preNode = nullptr; //Ö®Ç°·ÃÎÊ¹ıµÄ½Úµã£¬ÓÃÀ´´æ
+    BinaryTreeNode* curNode = rootNode; //å½“å‰èŠ‚ç‚¹
+    BinaryTreeNode* preNode = nullptr; //ä¹‹å‰è®¿é—®è¿‡çš„èŠ‚ç‚¹ï¼Œç”¨æ¥å­˜
 
-    //°ÑcurÒÆ¶¯µ½×ó×ÓÊ÷×îÏÂ±ß
+    //æŠŠcurç§»åŠ¨åˆ°å·¦å­æ ‘æœ€ä¸‹è¾¹
     while (curNode)
     {
         nodeStack.push(curNode);
@@ -1830,23 +1830,23 @@ void postorder2(BinaryTreeNode* rootNode)
 
     while (!nodeStack.empty())
     {
-        //×ßµ½ÕâÀï£¬cur¿Õ£¬²¢ÒÑ¾­±éÀúµ½×ó×ÓÊ÷µ×¶Ë
+        //èµ°åˆ°è¿™é‡Œï¼Œcurç©ºï¼Œå¹¶å·²ç»éå†åˆ°å·¦å­æ ‘åº•ç«¯
         curNode = nodeStack.top();
         nodeStack.pop();
 
-        //ÎŞÓÒ»òÓÒÒÑ·ÃÎÊ²Å·ÃÎÊ¸ù½Úµã
+        //æ— å³æˆ–å³å·²è®¿é—®æ‰è®¿é—®æ ¹èŠ‚ç‚¹
         if (!curNode->m_pRight || curNode->m_pRight == preNode)
         {
             std::cout << curNode->m_nValue << " ";
             preNode = curNode;
         }
-        //ÓÒ×ÓÊ÷Î´·ÃÎÊ
+        //å³å­æ ‘æœªè®¿é—®
         else {
-            //¸ù½ÚµãÔÙ´ÎÈëÕ»
+            //æ ¹èŠ‚ç‚¹å†æ¬¡å…¥æ ˆ
             nodeStack.push(curNode);
-            //½øÈëÓÒ×ÓÊ÷
+            //è¿›å…¥å³å­æ ‘
             curNode = curNode->m_pRight;
-            //°ÑcurÒÆ¶¯µ½ÓÒ×ÓÊ÷µÄ×ó×ÓÊ÷×îÏÂ±ß
+            //æŠŠcurç§»åŠ¨åˆ°å³å­æ ‘çš„å·¦å­æ ‘æœ€ä¸‹è¾¹
             while (curNode)
             {
                 nodeStack.push(curNode);
@@ -1855,13 +1855,13 @@ void postorder2(BinaryTreeNode* rootNode)
         }
     }
 }
-//¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
-//°æÈ¨ÉùÃ÷£º±¾ÎÄÎªCSDN²©Ö÷¡¸¹¨½¨²¨¡¹µÄÔ­´´ÎÄÕÂ£¬×ñÑ­CC 4.0 BY - SA°æÈ¨Ğ­Òé£¬×ªÔØÇë¸½ÉÏÔ­ÎÄ³ö´¦Á´½Ó¼°±¾ÉùÃ÷¡£
-//Ô­ÎÄÁ´½Ó£ºhttps ://blog.csdn.net/gongjianbo1992/article/details/88378805
+//â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
+//ç‰ˆæƒå£°æ˜ï¼šæœ¬æ–‡ä¸ºCSDNåšä¸»ã€Œé¾šå»ºæ³¢ã€çš„åŸåˆ›æ–‡ç« ï¼Œéµå¾ªCC 4.0 BY - SAç‰ˆæƒåè®®ï¼Œè½¬è½½è¯·é™„ä¸ŠåŸæ–‡å‡ºå¤„é“¾æ¥åŠæœ¬å£°æ˜ã€‚
+//åŸæ–‡é“¾æ¥ï¼šhttps ://blog.csdn.net/gongjianbo1992/article/details/88378805
 #endif
 
 
-//ÓÃÁ´±íÊµÏÖ¶ş²æÊ÷µÄ¹ã¶ÈÓÅÏÈ±éÀú(²ãĞò±éÀú)
+//ç”¨é“¾è¡¨å®ç°äºŒå‰æ ‘çš„å¹¿åº¦ä¼˜å…ˆéå†(å±‚åºéå†)
 #if 0
 #include <iostream>
 #include<queue>
@@ -1898,13 +1898,13 @@ void breadthFirst(BinaryTreeNode* rootNode)
 #endif
 
 
-//***×¢***
-//´úÂëµÄ¹æ·¶ĞÔ£ºÊéĞ´ÇåÎú¡¢²¼¾ÖÇåÎú¡¢ÃüÃûºÏÀí
-//´úÂëµÄÍêÕûĞÔ£º¹¦ÄÜ²âÊÔ¡¢±ß½ç²âÊÔ¡¢´íÎó´¦Àí
-//´úÂëµÄÂ³°ôĞÔ£º²ÉÈ¡·ÀÓùĞÔ±à³Ì´¦ÀíÎŞĞ§µÄÊäÈë
+//***æ³¨***
+//ä»£ç çš„è§„èŒƒæ€§ï¼šä¹¦å†™æ¸…æ™°ã€å¸ƒå±€æ¸…æ™°ã€å‘½ååˆç†
+//ä»£ç çš„å®Œæ•´æ€§ï¼šåŠŸèƒ½æµ‹è¯•ã€è¾¹ç•Œæµ‹è¯•ã€é”™è¯¯å¤„ç†
+//ä»£ç çš„é²æ£’æ€§ï¼šé‡‡å–é˜²å¾¡æ€§ç¼–ç¨‹å¤„ç†æ— æ•ˆçš„è¾“å…¥
 
 
-//ÃæÊÔÌâ16£ºÊıÖµµÄÕûÊı´Î·½
+//é¢è¯•é¢˜16ï¼šæ•°å€¼çš„æ•´æ•°æ¬¡æ–¹
 #if 0
 #include <iostream>
 #include <exception>
@@ -1951,8 +1951,8 @@ double Power(double base, int exponent)
     return res;
 }
 #endif
-//è¦´Ã£ºÃ»ÓĞ¿¼ÂÇÖ¸ÊıÊÇ¸ºÊıµÄÇé¿ö
-//Ö¸Êı»¹¿ÉÄÜÊÇ¸ºÊı
+//ç‘•ç–µï¼šæ²¡æœ‰è€ƒè™‘æŒ‡æ•°æ˜¯è´Ÿæ•°çš„æƒ…å†µ
+//æŒ‡æ•°è¿˜å¯èƒ½æ˜¯è´Ÿæ•°
 #if 0
 double Power(double base, int exponent)
 {
@@ -1997,7 +1997,7 @@ bool equal(double num1, double num2)
         return false;
 }
 
-//ÇóÊıµÄn´Î·½µÄĞ§ÂÊ¸ü¸ßµÄ½â·¨£º
+//æ±‚æ•°çš„næ¬¡æ–¹çš„æ•ˆç‡æ›´é«˜çš„è§£æ³•ï¼š
 double Power(double base, int exponent)
 {
     g_InvalidInput = false;
@@ -2027,8 +2027,8 @@ double PowerWithUnsignedExponent(double base, unsigned int exponent)
     if (exponent == 1)
         return base;
 
-    //nÎªÅ¼ÊıÊ±£¬aµÄn´Î·½µÈÓÚaµÄn/2´Î·½³ËÒÔaµÄn/2´Î·½
-    //nÎªÆæÊıÊ±£¬aµÄn´Î·½µÈÓÚaµÄn/2´Î·½³ËÒÔaµÄn/2´Î·½³ËÒÔa
+    //nä¸ºå¶æ•°æ—¶ï¼Œaçš„næ¬¡æ–¹ç­‰äºaçš„n/2æ¬¡æ–¹ä¹˜ä»¥açš„n/2æ¬¡æ–¹
+    //nä¸ºå¥‡æ•°æ—¶ï¼Œaçš„næ¬¡æ–¹ç­‰äºaçš„n/2æ¬¡æ–¹ä¹˜ä»¥açš„n/2æ¬¡æ–¹ä¹˜ä»¥a
     double result = PowerWithUnsignedExponent(base, exponent >> 1);
     result *= result;
 
@@ -2037,14 +2037,14 @@ double PowerWithUnsignedExponent(double base, unsigned int exponent)
 
     return result;
 }
-//ÓÅ»¯´úÂëµÄÏ¸½Ú£º
-//1.Ê¹ÓÃÁË¹«Ê½ÇóaµÄn´Î·½£¬±È½öÓÃÑ­»·ÇóÒªÉÙ2±¶Ê±¼ä
-//2.ÓÃÒÆÎ»ÔËËã´úÌæ³Ë³ıÔËËã
-//3.ÓÃÎ»ÓëÔËËã´úÌæÇóÓàÔËËãÀ´ÅĞ¶ÏÊıµÄÆæÅ¼ĞÔ
+//ä¼˜åŒ–ä»£ç çš„ç»†èŠ‚ï¼š
+//1.ä½¿ç”¨äº†å…¬å¼æ±‚açš„næ¬¡æ–¹ï¼Œæ¯”ä»…ç”¨å¾ªç¯æ±‚è¦å°‘2å€æ—¶é—´
+//2.ç”¨ç§»ä½è¿ç®—ä»£æ›¿ä¹˜é™¤è¿ç®—
+//3.ç”¨ä½ä¸è¿ç®—ä»£æ›¿æ±‚ä½™è¿ç®—æ¥åˆ¤æ–­æ•°çš„å¥‡å¶æ€§
 #endif
 
 
-//ÃæÊÔÌâ17£º´òÓ¡´Ó1µ½×î´óµÄnÎ»Êı
+//é¢è¯•é¢˜17ï¼šæ‰“å°ä»1åˆ°æœ€å¤§çš„nä½æ•°
 #if 0
 #include <iostream>
 #include <exception>
@@ -2068,9 +2068,9 @@ int main()
     return 0;
 }
 
-//Ã»ÓĞ¿¼ÂÇ´óÊıÎÊÌâ
-//¼´µ±ÊäÈëµÄnºÜ´óµÄÊ±ºò£¬ÎÒÃÇÇó×î´óµÄnÎ»ÊıÊ±£¬
-//ÓÃÕûĞÍ(int)»òÕß³¤ÕûĞÍ(long long)¶¼»áÒç³ö
+//æ²¡æœ‰è€ƒè™‘å¤§æ•°é—®é¢˜
+//å³å½“è¾“å…¥çš„nå¾ˆå¤§çš„æ—¶å€™ï¼Œæˆ‘ä»¬æ±‚æœ€å¤§çš„nä½æ•°æ—¶ï¼Œ
+//ç”¨æ•´å‹(int)æˆ–è€…é•¿æ•´å‹(long long)éƒ½ä¼šæº¢å‡º
 #if 0
 void Paint_1_to_n(long  long n)
 {
@@ -2091,18 +2091,18 @@ void Paint_1_to_n(long  long n)
 }
 #endif
 
-//½â·¨1£º
-//ÀûÓÃ×Ö·û´®µÄÄ£Äâ¼Ó·¨
+//è§£æ³•1ï¼š
+//åˆ©ç”¨å­—ç¬¦ä¸²çš„æ¨¡æ‹ŸåŠ æ³•
 #if 0
 void Paint_1_to_n(long  long n)
 {
     if (n < 1)
         throw new exception("Invaild data !");
 
-    //´´½¨number×Ö·ûÊı×éÀ´´æ´¢Êı×Ö×Ö·û   
+    //åˆ›å»ºnumberå­—ç¬¦æ•°ç»„æ¥å­˜å‚¨æ•°å­—å­—ç¬¦   
 
-    //***×¢***
-    //ÒÔÏÂĞ´·¨»á½«µÚÒ»¸öÔªËØÉèÖÃÎª×Ö·û0£¬¶øÆäÓàÔªËØÉèÖÃÎªASCIIÖµ0£¬¼´¶ÔÓ¦×Ö·û'\0'
+    //***æ³¨***
+    //ä»¥ä¸‹å†™æ³•ä¼šå°†ç¬¬ä¸€ä¸ªå…ƒç´ è®¾ç½®ä¸ºå­—ç¬¦0ï¼Œè€Œå…¶ä½™å…ƒç´ è®¾ç½®ä¸ºASCIIå€¼0ï¼Œå³å¯¹åº”å­—ç¬¦'\0'
     //char* number = new char[n + 1]{'0'};
 
     char* number = new char[n + 1];
@@ -2111,8 +2111,8 @@ void Paint_1_to_n(long  long n)
     //for (int i = 0; i < n; i++)
     //    cout << number[i];
 
-    //Êı×ÖµÄ×îµÍÎ»µÄºóÒ»Î»µÄÔªËØÄÚÈİÎª0
-    //¾Í¿ÉÒÔÕı³£ÓÃstrlen()¼ÆËã×Ö·û´®³¤¶È
+    //æ•°å­—çš„æœ€ä½ä½çš„åä¸€ä½çš„å…ƒç´ å†…å®¹ä¸º0
+    //å°±å¯ä»¥æ­£å¸¸ç”¨strlen()è®¡ç®—å­—ç¬¦ä¸²é•¿åº¦
     number[n] = '\0';
 
     while (!Increment(number))
@@ -2125,47 +2125,47 @@ void Paint_1_to_n(long  long n)
 
 bool Increment(char* number)
 {
-    //´´½¨Òç³öÎ»±êÖ¾
+    //åˆ›å»ºæº¢å‡ºä½æ ‡å¿—
     bool isOverflow = false;
 
-    //´æ½øÎ»Öµ
+    //å­˜è¿›ä½å€¼
     int nTake = 0;
 
     int Length = strlen(number);
 
-    //Êı×Ö×Ö·ûµÄË÷Òı´Ó×îµÍÎ»¿ªÊ¼£¬Ïò¸ßÎ»ÒÆ¶¯
+    //æ•°å­—å­—ç¬¦çš„ç´¢å¼•ä»æœ€ä½ä½å¼€å§‹ï¼Œå‘é«˜ä½ç§»åŠ¨
     for (int i = Length - 1; i >= 0; i--)
     {
-        //´´½¨±äÁ¿Sum´æ¸ÃÎ»µ±Ç°µÄÖµ
+        //åˆ›å»ºå˜é‡Sumå­˜è¯¥ä½å½“å‰çš„å€¼
         int Sum = number[i] - '0' + nTake;
 
-        //ÈôË÷ÒıÖ¸ÏòÊı×ÖµÄ×îµÍÎ»
+        //è‹¥ç´¢å¼•æŒ‡å‘æ•°å­—çš„æœ€ä½ä½
         if (i == Length - 1)
             Sum++;
 
-        //Èô¸ÃÎ»ÉÏµÄÖµÔÙÔö1ºó£¬µ½10£¬ÔòÒª½øĞĞ´¦Àí
+        //è‹¥è¯¥ä½ä¸Šçš„å€¼å†å¢1åï¼Œåˆ°10ï¼Œåˆ™è¦è¿›è¡Œå¤„ç†
         if (Sum >= 10)
         {
-            //Èô¸ÃÎ»ÊÇ×î¸ßÎ»
-			//***×¢***
-		    //ÕâÖÖÅĞ¶Ï·½·¨Ê±¼äĞ§ÂÊºÃ£¬ÎªO(1)
-            //ÈôÓÃstrcmp()ÅĞ¶Ï£¬Ê±¼äĞ§ÂÊÎªO(n)
+            //è‹¥è¯¥ä½æ˜¯æœ€é«˜ä½
+			//***æ³¨***
+		    //è¿™ç§åˆ¤æ–­æ–¹æ³•æ—¶é—´æ•ˆç‡å¥½ï¼Œä¸ºO(1)
+            //è‹¥ç”¨strcmp()åˆ¤æ–­ï¼Œæ—¶é—´æ•ˆç‡ä¸ºO(n)
             if (i == 0)
                 isOverflow = true;
             else
             {
-                //Sumµ½10Ê±£¬¸ÃÎ»Òª±äÎª0
+                //Sumåˆ°10æ—¶ï¼Œè¯¥ä½è¦å˜ä¸º0
                 Sum -= 10;
-                //ÏòÇ°½ø1Î»
+                //å‘å‰è¿›1ä½
                 nTake = 1;
-                //ÉèÖÃ¸ÃÎ»ÉÏµÄÖµ
+                //è®¾ç½®è¯¥ä½ä¸Šçš„å€¼
                 number[i] = Sum + '0';
             }
         }
         else
         {
             number[i] = Sum + '0';
-            //ÍË³öÑ­»·
+            //é€€å‡ºå¾ªç¯
             break;
         }
     }
@@ -2176,18 +2176,18 @@ void PrintNumber(char* number)
 {
     int Length = strlen(number);
 
-    //Êı×Ö¿ªÍ··Ç0µÄ±ê¼Ç
+    //æ•°å­—å¼€å¤´é0çš„æ ‡è®°
     bool flag=false;
 
-    //±éÀúÊı×Ö×Ö·ûÊı×é
+    //éå†æ•°å­—å­—ç¬¦æ•°ç»„
     for (int i = 0; i < Length; i++)
     {
-        //***×¢***
-        //ÈôĞ´³ÉÕâÑù£º
+        //***æ³¨***
+        //è‹¥å†™æˆè¿™æ ·ï¼š
         //  if (number[i] == '0' && !flag)
-        //ÔòÊı×ÖÈôÎª010£¬Ôò´òÓ¡²»³ö10         
+        //åˆ™æ•°å­—è‹¥ä¸º010ï¼Œåˆ™æ‰“å°ä¸å‡º10         
         
-        //Êı×Ö½öÂú×ã¿ªÍ·ÖÁÉÙÓĞÒ»¸öÊÇ·Ç0Ê±£¬²Å´òÓ¡
+        //æ•°å­—ä»…æ»¡è¶³å¼€å¤´è‡³å°‘æœ‰ä¸€ä¸ªæ˜¯é0æ—¶ï¼Œæ‰æ‰“å°
         if (number[i] != '0' && !flag)
             flag = true;
 
@@ -2199,28 +2199,28 @@ void PrintNumber(char* number)
 }
 #endif
 
-//½â·¨2£º
-//½«ÎÊÌâ×ª»¯³ÉÊı×ÖµÄÈ«ÅÅÁĞ£¬²¢ÓÃµİ¹éÊµÏÖÈ«ÅÅÁĞ
+//è§£æ³•2ï¼š
+//å°†é—®é¢˜è½¬åŒ–æˆæ•°å­—çš„å…¨æ’åˆ—ï¼Œå¹¶ç”¨é€’å½’å®ç°å…¨æ’åˆ—
 #if 1
 void Paint_1_to_n(long  long n)
 {
     if (n < 1)
         throw new exception("Invaild data !");
 
-    //´´½¨number×Ö·ûÊı×éÀ´´æ´¢Êı×Ö×Ö·û   
+    //åˆ›å»ºnumberå­—ç¬¦æ•°ç»„æ¥å­˜å‚¨æ•°å­—å­—ç¬¦   
     char* number = new char[n + 1];
 
     //fill(number, number + n + 1, '0');
 
-    //Êı×ÖµÄ×îµÍÎ»µÄºóÒ»Î»µÄÔªËØÄÚÈİÎª0
-    //¾Í¿ÉÒÔÕı³£ÓÃstrlen()¼ÆËã×Ö·û´®³¤¶È
+    //æ•°å­—çš„æœ€ä½ä½çš„åä¸€ä½çš„å…ƒç´ å†…å®¹ä¸º0
+    //å°±å¯ä»¥æ­£å¸¸ç”¨strlen()è®¡ç®—å­—ç¬¦ä¸²é•¿åº¦
     number[n] = '\0';
 
     for (int i = 0; i < 10; ++i)
     {
-        //Êı×Ö×î¸ßÎ»´Ó0µ½9±éÀú
+        //æ•°å­—æœ€é«˜ä½ä»0åˆ°9éå†
         number[0] = i + '0';
-                                //Êı×Ö³¤¶È£¬Ë÷ÒıÖµ
+                                //æ•°å­—é•¿åº¦ï¼Œç´¢å¼•å€¼
         Recursively(number,n,0);
     }
 
@@ -2235,7 +2235,7 @@ void Recursively(char* number, int length, int index)
         return;
     }
 
-    //Êı×Ö³ı×î¸ßÎ»Ö®ÍâµÄÎ»¾ù´Ó0¿ªÊ¼µİÔöµ½9
+    //æ•°å­—é™¤æœ€é«˜ä½ä¹‹å¤–çš„ä½å‡ä»0å¼€å§‹é€’å¢åˆ°9
     for (int i = 0; i < 10; ++i)
     {
         number[index + 1] = i + '0';
@@ -2248,18 +2248,18 @@ void PrintNumber(char* number)
 {
     int Length = strlen(number);
 
-    //Êı×Ö¿ªÍ··Ç0µÄ±ê¼Ç
+    //æ•°å­—å¼€å¤´é0çš„æ ‡è®°
     bool flag = false;
 
-    //±éÀúÊı×Ö×Ö·ûÊı×é
+    //éå†æ•°å­—å­—ç¬¦æ•°ç»„
     for (int i = 0; i < Length; i++)
     {
-        //***×¢***
-        //ÈôĞ´³ÉÕâÑù£º
+        //***æ³¨***
+        //è‹¥å†™æˆè¿™æ ·ï¼š
         //  if (number[i] == '0' && !flag)
-        //ÔòÊı×ÖÈôÎª010£¬Ôò´òÓ¡²»³ö10         
+        //åˆ™æ•°å­—è‹¥ä¸º010ï¼Œåˆ™æ‰“å°ä¸å‡º10         
 
-        //Êı×Ö½öÂú×ã¿ªÍ·ÖÁÉÙÓĞÒ»¸öÊÇ·Ç0Ê±£¬²Å´òÓ¡
+        //æ•°å­—ä»…æ»¡è¶³å¼€å¤´è‡³å°‘æœ‰ä¸€ä¸ªæ˜¯é0æ—¶ï¼Œæ‰æ‰“å°
         if (number[i] != '0' && !flag)
             flag = true;
 
@@ -2273,7 +2273,7 @@ void PrintNumber(char* number)
 #endif
 
 
-//ÃæÊÔÌâ18£ºÉ¾³ıÁ´±íµÄ½Úµã
+//é¢è¯•é¢˜18ï¼šåˆ é™¤é“¾è¡¨çš„èŠ‚ç‚¹
 #if 0
 #include <iostream>
 #include <exception>
@@ -2294,45 +2294,45 @@ int main()
     return 0;
 }
 
-//***×¢***
-//Ñ°ÕÒÁ´±íÖĞ·ûºÏÒªÇóµÄ½Úµã£¬Ê±¼äĞ§ÂÊO(n)£¬ÕâÊÇ²»±äµÄ
-//ÏÖÔÚÒªÓÅ»¯µÄÊÇÒÑ¾­ÕÒµ½¸Ã·ûºÏÒªÇóµÄ½ÚµãµÄµØÖ·£¬ÒªÔÚO(1)ÄÚ½øĞĞÉ¾³ı²Ù×÷
+//***æ³¨***
+//å¯»æ‰¾é“¾è¡¨ä¸­ç¬¦åˆè¦æ±‚çš„èŠ‚ç‚¹ï¼Œæ—¶é—´æ•ˆç‡O(n)ï¼Œè¿™æ˜¯ä¸å˜çš„
+//ç°åœ¨è¦ä¼˜åŒ–çš„æ˜¯å·²ç»æ‰¾åˆ°è¯¥ç¬¦åˆè¦æ±‚çš„èŠ‚ç‚¹çš„åœ°å€ï¼Œè¦åœ¨O(1)å†…è¿›è¡Œåˆ é™¤æ“ä½œ
 void DeleteNode(ListNode** pListHead, ListNode* pToBeDeleted)
 {
     if (pListHead == nullptr || pToBeDeleted == nullptr)
         throw new exception("Error !");
 
-    //ÓÉÓÚÁ´±íµÄ½Úµã²»º¬Ç°Ò»¸ö½ÚµãµÄÖ¸Õë£¬ËùÒÔ
-    //³£¹æµÄ·½·¨ÊÇË³Ğò±éÀúÃ¿¸ö½Úµã£¬ÕÒµ½ÒªÉ¾³ıµÄ½Úµãºó
-    //ÏÈ¶ÔÆäÇ°Ò»¸ö½ÚµãµÄm_pNextÖ¸Õë½øĞĞÉèÖÃ
-    //µ«Ê±¼ä¸´ÔÓ¶ÈÎªO(n)£¬ÒòÎªÒª±éÀúµ½ÒªÉ¾³ıµÄ½ÚµãµÄÇ°Ò»¸ö½Úµã
+    //ç”±äºé“¾è¡¨çš„èŠ‚ç‚¹ä¸å«å‰ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆï¼Œæ‰€ä»¥
+    //å¸¸è§„çš„æ–¹æ³•æ˜¯é¡ºåºéå†æ¯ä¸ªèŠ‚ç‚¹ï¼Œæ‰¾åˆ°è¦åˆ é™¤çš„èŠ‚ç‚¹å
+    //å…ˆå¯¹å…¶å‰ä¸€ä¸ªèŠ‚ç‚¹çš„m_pNextæŒ‡é’ˆè¿›è¡Œè®¾ç½®
+    //ä½†æ—¶é—´å¤æ‚åº¦ä¸ºO(n)ï¼Œå› ä¸ºè¦éå†åˆ°è¦åˆ é™¤çš„èŠ‚ç‚¹çš„å‰ä¸€ä¸ªèŠ‚ç‚¹
 
-    //¿ÉÒÔ²»±éÀú£¬¶øÊÇ½«ÒªÉ¾³ıµÄ½ÚµãµÄÏÂÒ»¸ö½ÚµãµÄÄÚÈİ¶¼
-    //¸³Öµ¸øÒªÉ¾³ıµÄ½Úµã¡£Ïàµ±ÓÚÉ¾³ıÁË¸Ã½Úµã¡£
-    //ÕâÖÖ·½·¨²»ÓÃÊÍ·ÅÒªÉ¾³ıµÄ½ÚµãµÄÄÚ´æ¿Õ¼ä
+    //å¯ä»¥ä¸éå†ï¼Œè€Œæ˜¯å°†è¦åˆ é™¤çš„èŠ‚ç‚¹çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„å†…å®¹éƒ½
+    //èµ‹å€¼ç»™è¦åˆ é™¤çš„èŠ‚ç‚¹ã€‚ç›¸å½“äºåˆ é™¤äº†è¯¥èŠ‚ç‚¹ã€‚
+    //è¿™ç§æ–¹æ³•ä¸ç”¨é‡Šæ”¾è¦åˆ é™¤çš„èŠ‚ç‚¹çš„å†…å­˜ç©ºé—´
 
-    //ÈôÒªÉ¾³ıµÄ½ÚµãÊÇ    ·Ç½öÒ»¸ö½ÚµãµÄÁ´±íÒ²    ·ÇÁ´±íµÄÎ²½Úµã
+    //è‹¥è¦åˆ é™¤çš„èŠ‚ç‚¹æ˜¯    éä»…ä¸€ä¸ªèŠ‚ç‚¹çš„é“¾è¡¨ä¹Ÿ    éé“¾è¡¨çš„å°¾èŠ‚ç‚¹
     if (pToBeDeleted->m_pNext != nullptr)
     {
-        //tmpÖ¸ÏòÒªÉ¾³ıµÄ½ÚµãµÄÏÂÒ»¸ö½Úµã
+        //tmpæŒ‡å‘è¦åˆ é™¤çš„èŠ‚ç‚¹çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
         ListNode* tmp = pToBeDeleted->m_pNext;
 
-        //ÏÂÒ»¸ö½ÚµãµÄÄÚÈİ¸³¸øÒªÉ¾³ıµÄ½Úµã
+        //ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„å†…å®¹èµ‹ç»™è¦åˆ é™¤çš„èŠ‚ç‚¹
         pToBeDeleted->m_nValue = tmp->m_nValue;
-        //ÏÂÒ»¸ö½ÚµãµÄÖ¸ÏòÆäÔÙÏÂÒ»¸ö½ÚµãµÄÖ¸ÕëµÄÖµ¸³¸øÒªÉ¾³ıµÄ½ÚµãµÄm_pNext³ÉÔ±
+        //ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡å‘å…¶å†ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆçš„å€¼èµ‹ç»™è¦åˆ é™¤çš„èŠ‚ç‚¹çš„m_pNextæˆå‘˜
         pToBeDeleted->m_pNext = tmp->m_pNext;
 
-        //É¾³ıÒªÉ¾³ıµÄ½ÚµãµÄÏÂÒ»¸ö½Úµã
+        //åˆ é™¤è¦åˆ é™¤çš„èŠ‚ç‚¹çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
         delete tmp;
 
-        //***×¢***
-        //Òª¸½¼ÓÏÂÒ»¾ä»°
-        //ÒòÎªÉÏÒ»¾äÖ»ÊÇÊÍ·ÅÁËtmpÖ¸ÕëËùÖ¸ÏòµÄÄÚ´æ¿Õ¼ä£¬¶ø
-        //tmp¾Í»á³ÉÎªÒ°Ö¸Õë
-        //¡°Ò°Ö¸Õë¡±²»ÊÇ NULL Ö¸Õë£¬ÊÇÖ¸Ïò¡°À¬»ø¡±ÄÚ´æµÄÖ¸Õë¡£
+        //***æ³¨***
+        //è¦é™„åŠ ä¸‹ä¸€å¥è¯
+        //å› ä¸ºä¸Šä¸€å¥åªæ˜¯é‡Šæ”¾äº†tmpæŒ‡é’ˆæ‰€æŒ‡å‘çš„å†…å­˜ç©ºé—´ï¼Œè€Œ
+        //tmpå°±ä¼šæˆä¸ºé‡æŒ‡é’ˆ
+        //â€œé‡æŒ‡é’ˆâ€ä¸æ˜¯ NULL æŒ‡é’ˆï¼Œæ˜¯æŒ‡å‘â€œåƒåœ¾â€å†…å­˜çš„æŒ‡é’ˆã€‚
         tmp = nullptr;
     }
-    else if (pToBeDeleted->m_pNext==nullptr)//ÈôÒªÉ¾³ıµÄÊÇ½öÒ»¸ö½ÚµãµÄÁ´±í
+    else if (pToBeDeleted->m_pNext==nullptr)//è‹¥è¦åˆ é™¤çš„æ˜¯ä»…ä¸€ä¸ªèŠ‚ç‚¹çš„é“¾è¡¨
     {
         delete pToBeDeleted;
 
@@ -2340,9 +2340,9 @@ void DeleteNode(ListNode** pListHead, ListNode* pToBeDeleted)
 
         *pListHead = nullptr;
     }
-    else//ÈôÒªÉ¾³ıµÄÊÇÎ²½Úµã
+    else//è‹¥è¦åˆ é™¤çš„æ˜¯å°¾èŠ‚ç‚¹
     {
-        //Ö»ÄÜÓÃ±éÀúµÄ·½·¨
+        //åªèƒ½ç”¨éå†çš„æ–¹æ³•
         ListNode* tmp = *pListHead;
 
         while (tmp)
@@ -2366,7 +2366,7 @@ void DeleteNode(ListNode** pListHead, ListNode* pToBeDeleted)
 #endif
 
 
-//É¾³ıÁ´±íÖĞÖØ¸´µÄ½Úµã
+//åˆ é™¤é“¾è¡¨ä¸­é‡å¤çš„èŠ‚ç‚¹
 #if 0
 #include <iostream>
 #include <exception>
@@ -2379,74 +2379,74 @@ struct ListNode
     ListNode* m_pNext;
 };
 
-//***×¢***
-//Õâ¸öº¯ÊıĞèÒªÊäÈë´ıÉ¾³ıÁ´±íµÄÍ·½Úµã¡£
-//Í·½Úµã¿ÉÄÜÓëºóÃæµÄ½ÚµãÖØ¸´£¬Ò²¾ÍÊÇËµÍ·½ÚµãÒ²¿ÉÄÜ±»É¾³ı£¬
-//Òò´ËÉ¾³ıº¯ÊıÓ¦¸ÃÉùÃ÷Îªvoid deleteDuplication(ListNode * *pHead), 
-//¶ø²»ÊÇvoid deleteDuplication(ListNode* pHead)¡£
+//***æ³¨***
+//è¿™ä¸ªå‡½æ•°éœ€è¦è¾“å…¥å¾…åˆ é™¤é“¾è¡¨çš„å¤´èŠ‚ç‚¹ã€‚
+//å¤´èŠ‚ç‚¹å¯èƒ½ä¸åé¢çš„èŠ‚ç‚¹é‡å¤ï¼Œä¹Ÿå°±æ˜¯è¯´å¤´èŠ‚ç‚¹ä¹Ÿå¯èƒ½è¢«åˆ é™¤ï¼Œ
+//å› æ­¤åˆ é™¤å‡½æ•°åº”è¯¥å£°æ˜ä¸ºvoid deleteDuplication(ListNode * *pHead), 
+//è€Œä¸æ˜¯void deleteDuplication(ListNode* pHead)ã€‚
 void DeleteDuplication(ListNode** pHead)
 {
-    //ÈôÖ¸ÏòÍ·Ö¸ÕëµÄÖ¸ÕëÄÚÈİÎªnullptr»òÍ·Ö¸ÕëÄÚÈİÎªnullptr(Ã»ÓĞ½Úµã)
+    //è‹¥æŒ‡å‘å¤´æŒ‡é’ˆçš„æŒ‡é’ˆå†…å®¹ä¸ºnullptræˆ–å¤´æŒ‡é’ˆå†…å®¹ä¸ºnullptr(æ²¡æœ‰èŠ‚ç‚¹)
     if (pHead == nullptr || *pHead == nullptr)
         return;
 
-    //´´½¨Ò»¸öÖ¸Ïòµ±Ç°½ÚµãµÄÇ°Ò»¸ö½ÚµãµÄÖ¸Õë
+    //åˆ›å»ºä¸€ä¸ªæŒ‡å‘å½“å‰èŠ‚ç‚¹çš„å‰ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆ
     ListNode* pPreNode = nullptr;
-    //´´½¨Ò»¸öÖ¸Ïòµ±Ç°½ÚµãµÄÖ¸Õë
+    //åˆ›å»ºä¸€ä¸ªæŒ‡å‘å½“å‰èŠ‚ç‚¹çš„æŒ‡é’ˆ
     ListNode* pNode = *pHead;
 
     while (pNode != nullptr)
     {
-        //´´½¨Ò»¸öÖ¸Ïòµ±Ç°½ÚµãµÄºóÒ»¸ö½ÚµãµÄÖ¸Õë
+        //åˆ›å»ºä¸€ä¸ªæŒ‡å‘å½“å‰èŠ‚ç‚¹çš„åä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆ
         ListNode* pNextNode = pNode->m_pNext;
 
-        //´´½¨Ò»¸ö±ê¼Ç£¬±íÃ÷½ÚµãÊÇ·ñ¸ÃÉ¾³ı
+        //åˆ›å»ºä¸€ä¸ªæ ‡è®°ï¼Œè¡¨æ˜èŠ‚ç‚¹æ˜¯å¦è¯¥åˆ é™¤
         bool needDelete = false;
 
-        //Èôµ±Ç°½ÚµãÓĞºóÒ»¸ö½ÚµãÇÒÆäºóÒ»¸ö½ÚµãµÄÄÚÈİÓëµ±Ç°½ÚµãÄÚÈİÏàÍ¬
+        //è‹¥å½“å‰èŠ‚ç‚¹æœ‰åä¸€ä¸ªèŠ‚ç‚¹ä¸”å…¶åä¸€ä¸ªèŠ‚ç‚¹çš„å†…å®¹ä¸å½“å‰èŠ‚ç‚¹å†…å®¹ç›¸åŒ
         if (pNextNode != nullptr && pNextNode->m_nValue == pNode->m_nValue)
-            needDelete = true;//±ê¼Ç´Ë½Úµã¸ÃÉ¾³ı
+            needDelete = true;//æ ‡è®°æ­¤èŠ‚ç‚¹è¯¥åˆ é™¤
 
-        //Èôµ±Ç°½ÚµãµÄºóÒ»¸ö½ÚµãÄÚÈİÓëµ±Ç°½ÚµãµÄÄÚÈİ²»Í¬
+        //è‹¥å½“å‰èŠ‚ç‚¹çš„åä¸€ä¸ªèŠ‚ç‚¹å†…å®¹ä¸å½“å‰èŠ‚ç‚¹çš„å†…å®¹ä¸åŒ
         if (!needDelete)
         {
-            //µ±Ç°½ÚµãµÄÇ°Ò»¸ö½ÚµãµÄÖ¸ÕëÉèÖÃÎªµ±Ç°½ÚµãµÄµØÖ·
+            //å½“å‰èŠ‚ç‚¹çš„å‰ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆè®¾ç½®ä¸ºå½“å‰èŠ‚ç‚¹çš„åœ°å€
             pPreNode = pNode;
-            pNode = pNode->m_pNext;//µ±Ç°½ÚµãµÄÖ¸ÕëÏòºóÒÆ¶¯Ò»¸ö½ÚµãµÄÎ»ÖÃ
+            pNode = pNode->m_pNext;//å½“å‰èŠ‚ç‚¹çš„æŒ‡é’ˆå‘åç§»åŠ¨ä¸€ä¸ªèŠ‚ç‚¹çš„ä½ç½®
         }
-        else//Èôµ±Ç°½ÚµãÓĞºóÒ»¸ö½ÚµãÇÒÆäºóÒ»¸ö½ÚµãµÄÄÚÈİÓëµ±Ç°½ÚµãÄÚÈİÏàÍ¬
+        else//è‹¥å½“å‰èŠ‚ç‚¹æœ‰åä¸€ä¸ªèŠ‚ç‚¹ä¸”å…¶åä¸€ä¸ªèŠ‚ç‚¹çš„å†…å®¹ä¸å½“å‰èŠ‚ç‚¹å†…å®¹ç›¸åŒ
         {
             int value = pNode->m_nValue;
 
-            //´´½¨Ò»¸öÖ¸ÏòÓ¦¸ÃÉ¾³ıµÄ½ÚµãµÄÖ¸ÕëpToBeDeleted£¬Æä±»³õÊ¼»¯Îªµ±Ç°½ÚµãµÄµØÖ·
+            //åˆ›å»ºä¸€ä¸ªæŒ‡å‘åº”è¯¥åˆ é™¤çš„èŠ‚ç‚¹çš„æŒ‡é’ˆpToBeDeletedï¼Œå…¶è¢«åˆå§‹åŒ–ä¸ºå½“å‰èŠ‚ç‚¹çš„åœ°å€
             ListNode* pToBeDeleted = pNode;
 
-            //ÈôpToBeDeleted²»ÎªÎŞĞ§ÄÚÈİÇÒpToBeDeletedÖ¸ÏòµÄ½ÚµãµÄÄÚÈİ
-            //Óëµ±Ç°Ö¸ÕëÖ¸ÏòµÄ½ÚµãµÄÄÚÈİÏàÍ¬
+            //è‹¥pToBeDeletedä¸ä¸ºæ— æ•ˆå†…å®¹ä¸”pToBeDeletedæŒ‡å‘çš„èŠ‚ç‚¹çš„å†…å®¹
+            //ä¸å½“å‰æŒ‡é’ˆæŒ‡å‘çš„èŠ‚ç‚¹çš„å†…å®¹ç›¸åŒ
             while (pToBeDeleted != nullptr && pToBeDeleted->m_nValue == value)
             {
-                //pNextNodeÖ¸Ïòµ±Ç°½ÚµãµÄºóÒ»¸ö½Úµã
+                //pNextNodeæŒ‡å‘å½“å‰èŠ‚ç‚¹çš„åä¸€ä¸ªèŠ‚ç‚¹
                 pNextNode = pToBeDeleted->m_pNext;
 
-                //ÊÍ·Åµ±Ç°½ÚµãËùÖ¸ÏòµÄÄÚ´æ¿Õ¼ä
+                //é‡Šæ”¾å½“å‰èŠ‚ç‚¹æ‰€æŒ‡å‘çš„å†…å­˜ç©ºé—´
                 delete pToBeDeleted;
                 pToBeDeleted = nullptr;
 
-                //pToBeDeleted´æµ±Ç°½ÚµãµÄºóÒ»¸ö½Úµã£¬ÕâÑùµÄ»°£¬µ±Ç°½ÚµãµÄºóÒ»¸ö½Úµã
-                //Ò²»á±»É¾³ı
+                //pToBeDeletedå­˜å½“å‰èŠ‚ç‚¹çš„åä¸€ä¸ªèŠ‚ç‚¹ï¼Œè¿™æ ·çš„è¯ï¼Œå½“å‰èŠ‚ç‚¹çš„åä¸€ä¸ªèŠ‚ç‚¹
+                //ä¹Ÿä¼šè¢«åˆ é™¤
                 pToBeDeleted = pNextNode;
             }
 
-            //ÏÂÃæÒª´¦Àí±»É¾³ıµÄ½ÚµãµÄÇ°Ò»¸ö½ÚµãµÄm_pNextÊı¾İ³ÉÔ±£¬Ê¹Õâ¸ö½Úµã
-            //×îÖÕ´æpNextNodeÖ¸ÏòµÄ½ÚµãµÄµØÖ·£¬Íê³ÉÁ´±íµÄÖØÁ¬
+            //ä¸‹é¢è¦å¤„ç†è¢«åˆ é™¤çš„èŠ‚ç‚¹çš„å‰ä¸€ä¸ªèŠ‚ç‚¹çš„m_pNextæ•°æ®æˆå‘˜ï¼Œä½¿è¿™ä¸ªèŠ‚ç‚¹
+            //æœ€ç»ˆå­˜pNextNodeæŒ‡å‘çš„èŠ‚ç‚¹çš„åœ°å€ï¼Œå®Œæˆé“¾è¡¨çš„é‡è¿
 
-            //Èô´ÓµÚÒ»¸ö½Úµã¿ªÊ¼£¬ÒªÉ¾³ıÈô¸É¸ö½Úµã
+            //è‹¥ä»ç¬¬ä¸€ä¸ªèŠ‚ç‚¹å¼€å§‹ï¼Œè¦åˆ é™¤è‹¥å¹²ä¸ªèŠ‚ç‚¹
             if (pPreNode == nullptr)
                 *pHead = pNextNode;
-            else//Èô²»ÊÇ´ÓµÚÒ»¸ö½Úµã¿ªÊ¼É¾³ı
+            else//è‹¥ä¸æ˜¯ä»ç¬¬ä¸€ä¸ªèŠ‚ç‚¹å¼€å§‹åˆ é™¤
                 pPreNode->m_pNext = pNextNode;
 
-            //µ±Ç°½ÚµãÖ¸ÏòÁ´±íÖĞÖØ¸´µÄÊı¸ö½ÚµãºóµÄÒ»¸ö½Úµã
+            //å½“å‰èŠ‚ç‚¹æŒ‡å‘é“¾è¡¨ä¸­é‡å¤çš„æ•°ä¸ªèŠ‚ç‚¹åçš„ä¸€ä¸ªèŠ‚ç‚¹
             pNode = pNextNode;
         }
     }
@@ -2454,13 +2454,13 @@ void DeleteDuplication(ListNode** pHead)
 #endif
 
 
-//ÃæÊÔÌâ19£ºÕıÔò±í´ïÊ½Æ¥Åä
+//é¢è¯•é¢˜19ï¼šæ­£åˆ™è¡¨è¾¾å¼åŒ¹é…
 #if 0
 #include <iostream>
 
 using namespace std;
 
-                //×Ö·û´®         Ä£Ê½£¬¼´ÕıÔò±í´ïÊ½
+                //å­—ç¬¦ä¸²         æ¨¡å¼ï¼Œå³æ­£åˆ™è¡¨è¾¾å¼
 bool match(char* str, char* pattern);
 bool matchCore(char* str, char* pattern);
 
@@ -2502,46 +2502,46 @@ bool match(char* str, char* pattern)
     return matchCore(str,pattern);
 }
 
-//¼ÙÉè×Ö·û´®Îªaaa
+//å‡è®¾å­—ç¬¦ä¸²ä¸ºaaa
 bool matchCore(char* str, char* pattern)
 {
-    //Èô×Ö·û´®ÓëÕıÔò±í´ïÊ½¶¼±éÀúµ½ÁË×îºó
+    //è‹¥å­—ç¬¦ä¸²ä¸æ­£åˆ™è¡¨è¾¾å¼éƒ½éå†åˆ°äº†æœ€å
     if (*str == '\0' && *pattern == '\0')
         return true;
 
-    //ÈôÕıÔò±í´ïÊ½ÏÈ±éÀúµ½ÁË×îºó
+    //è‹¥æ­£åˆ™è¡¨è¾¾å¼å…ˆéå†åˆ°äº†æœ€å
     if (*str != '\0' && *pattern == '\0')
         return false;
 
-    //Çé¿ö·ÖÎªÕıÔò±í´ïÊ½patternÖ¸ÕëÖ¸ÏòµÄÎ»ÖÃºóµÄµÚ1¸ö×Ö·ûÊÇ'*'ºÍ²»ÊÇ'*'
+    //æƒ…å†µåˆ†ä¸ºæ­£åˆ™è¡¨è¾¾å¼patternæŒ‡é’ˆæŒ‡å‘çš„ä½ç½®åçš„ç¬¬1ä¸ªå­—ç¬¦æ˜¯'*'å’Œä¸æ˜¯'*'
     if (pattern[1] == '*')
     {        
 		//if (str[0] == pattern[0] || (pattern[0] == '.' && str[0] != '\0'))
 
-        //Èôµ±Ç°Á½Ö¸ÕëÖ¸ÏòµÄ×Ö·ûÏàÍ¬  »ò  ÕıÔò±í´ïÊ½×Ö·ûÎª'.'ÇÒ×Ö·û´®Î´±éÀúµ½Ä©Î²
+        //è‹¥å½“å‰ä¸¤æŒ‡é’ˆæŒ‡å‘çš„å­—ç¬¦ç›¸åŒ  æˆ–  æ­£åˆ™è¡¨è¾¾å¼å­—ç¬¦ä¸º'.'ä¸”å­—ç¬¦ä¸²æœªéå†åˆ°æœ«å°¾
         if (*str == *pattern || (*pattern == '.' && *str != '\0'))
         {
-            //²âÊÔ×Ö·û´®¸ÃÎ»ÖÃºóµÄµÚ1¸ö×Ö·ûºÍÕıÔò±í´ïÊ½¸ÃÎ»ÖÃºóµÄµÚ2¸ö×Ö·û
+            //æµ‹è¯•å­—ç¬¦ä¸²è¯¥ä½ç½®åçš„ç¬¬1ä¸ªå­—ç¬¦å’Œæ­£åˆ™è¡¨è¾¾å¼è¯¥ä½ç½®åçš„ç¬¬2ä¸ªå­—ç¬¦
             return matchCore(str + 1, pattern + 2) ||
-                //²âÊÔ×Ö·û´®¸ÃÎ»ÖÃºóµÄµÚ1¸ö×Ö·ûºÍÕıÔò±í´ïÊ½¸ÃÎ»ÖÃµÄ×Ö·û
-                matchCore(str + 1, pattern) ||//ÒòÎªÕıÔò±í´ïÊ½¿ÉÄÜÊÇa*
-                //²âÊÔ×Ö·û´®¸ÃÎ»ÖÃµÄ×Ö·ûºÍÕıÔò±í´ïÊ½¸ÃÎ»ÖÃºóµÄµÚ2¸ö×Ö·û
-                matchCore(str, pattern + 2)//ÒòÎªÕıÔò±í´ïÊ½¿ÉÄÜÊÇa*a*
+                //æµ‹è¯•å­—ç¬¦ä¸²è¯¥ä½ç½®åçš„ç¬¬1ä¸ªå­—ç¬¦å’Œæ­£åˆ™è¡¨è¾¾å¼è¯¥ä½ç½®çš„å­—ç¬¦
+                matchCore(str + 1, pattern) ||//å› ä¸ºæ­£åˆ™è¡¨è¾¾å¼å¯èƒ½æ˜¯a*
+                //æµ‹è¯•å­—ç¬¦ä¸²è¯¥ä½ç½®çš„å­—ç¬¦å’Œæ­£åˆ™è¡¨è¾¾å¼è¯¥ä½ç½®åçš„ç¬¬2ä¸ªå­—ç¬¦
+                matchCore(str, pattern + 2)//å› ä¸ºæ­£åˆ™è¡¨è¾¾å¼å¯èƒ½æ˜¯a*a*
                 ;
         }
         else
-            //²âÊÔ×Ö·û´®¸ÃÎ»ÖÃµÄ×Ö·ûºÍÕıÔò±í´ïÊ½¸ÃÎ»ÖÃºóµÄµÚ2¸ö×Ö·û
-            return matchCore(str,pattern+2);//ÒòÎªÕıÔò±í´ïÊ½¿ÉÄÜÊÇb*a*
+            //æµ‹è¯•å­—ç¬¦ä¸²è¯¥ä½ç½®çš„å­—ç¬¦å’Œæ­£åˆ™è¡¨è¾¾å¼è¯¥ä½ç½®åçš„ç¬¬2ä¸ªå­—ç¬¦
+            return matchCore(str,pattern+2);//å› ä¸ºæ­£åˆ™è¡¨è¾¾å¼å¯èƒ½æ˜¯b*a*
     }
 
-    //ÕıÔò±í´ïÊ½patternÖ¸ÕëÖ¸ÏòµÄÎ»ÖÃºóµÄµÚ1¸ö×Ö·û²»ÊÇ'*'
+    //æ­£åˆ™è¡¨è¾¾å¼patternæŒ‡é’ˆæŒ‡å‘çš„ä½ç½®åçš„ç¬¬1ä¸ªå­—ç¬¦ä¸æ˜¯'*'
     if (*str == *pattern || (*pattern == '.' && *str != '\0'))
         return matchCore(str+1,pattern+1);
 }
 #endif
 
 
-//ÃæÊÔÌâ20£º±íÊ¾ÊıÖµµÄ×Ö·û´®
+//é¢è¯•é¢˜20ï¼šè¡¨ç¤ºæ•°å€¼çš„å­—ç¬¦ä¸²
 #if 0
 #include <iostream>
 //#include <string>
@@ -2567,29 +2567,29 @@ int main()
     return 0;
 }
 
-//ÓĞĞí¶àÇé¿ö£¬ÈçºÎ·ÖÀà£¿
-//ÓÉÓÚÇé¿öºÜ¶à£¬ËùÒÔ²»ÄÜÖ±½ÓÓÃÒ»¸öÑ­»·±éÀúÀ´²İ²İÅĞ¶Ï
-//ÒªÕÒµ½¹æÂÉ£º
-//Ğ¡ÊıµãºóÕße»òEÇ°ºóµÄÊı×Ö¿ÉÒÔÓÃ±éÀúÉ¨Ãè½â¾ö£¬
-//Ğ¡ÊıµãºóµÄ»òÕße»òEºóµÄÊı×Ö²¿·ÖÒ²ÒªÓÃ±éÀúÉ¨ÃèµÄ»°£¬
-//ÄÇ¿ÉÒÔ½«±éÀúÉ¨ÃèÉè¼Æ³ÉÒ»¸öÄ£¿é
+//æœ‰è®¸å¤šæƒ…å†µï¼Œå¦‚ä½•åˆ†ç±»ï¼Ÿ
+//ç”±äºæƒ…å†µå¾ˆå¤šï¼Œæ‰€ä»¥ä¸èƒ½ç›´æ¥ç”¨ä¸€ä¸ªå¾ªç¯éå†æ¥è‰è‰åˆ¤æ–­
+//è¦æ‰¾åˆ°è§„å¾‹ï¼š
+//å°æ•°ç‚¹åè€…eæˆ–Eå‰åçš„æ•°å­—å¯ä»¥ç”¨éå†æ‰«æè§£å†³ï¼Œ
+//å°æ•°ç‚¹åçš„æˆ–è€…eæˆ–Eåçš„æ•°å­—éƒ¨åˆ†ä¹Ÿè¦ç”¨éå†æ‰«æçš„è¯ï¼Œ
+//é‚£å¯ä»¥å°†éå†æ‰«æè®¾è®¡æˆä¸€ä¸ªæ¨¡å—
 bool isNum(const char* str)
 {
     if (str == nullptr)
         return false;
 
-    //Êı×ÖµÄ¿ªÍ·ÓĞ¿ÉÄÜ³öÏÖÕı¸ººÅ£¬Òò´ËÒª½øĞĞ´¦Àí£¬
-    //ÈôÓĞÕı¸ººÅ£¬ÔòÒª½«Ö¸ÕëÏòºóÒÆ¶¯Ò»Î»µÄ¾àÀë£¬
-    //¼ÌĞøÅĞ¶ÏÎŞ·ûºÅµÄ²¿·Ö
+    //æ•°å­—çš„å¼€å¤´æœ‰å¯èƒ½å‡ºç°æ­£è´Ÿå·ï¼Œå› æ­¤è¦è¿›è¡Œå¤„ç†ï¼Œ
+    //è‹¥æœ‰æ­£è´Ÿå·ï¼Œåˆ™è¦å°†æŒ‡é’ˆå‘åç§»åŠ¨ä¸€ä½çš„è·ç¦»ï¼Œ
+    //ç»§ç»­åˆ¤æ–­æ— ç¬¦å·çš„éƒ¨åˆ†
     bool flag = scanInteger(&str);
 
-    //¾­¹ıÈçÉÏµÄ´úÂë¶Î£¬strÖ¸ÕëÒÑ¾­Ö¸ÏòÁËĞ¡Êıµã»òe»òE
-    //µ«ÈôÊäÈëÊı×Ö.123£¬ÔòÇ°Ãæ´úÂëµÄflag=false;
+    //ç»è¿‡å¦‚ä¸Šçš„ä»£ç æ®µï¼ŒstræŒ‡é’ˆå·²ç»æŒ‡å‘äº†å°æ•°ç‚¹æˆ–eæˆ–E
+    //ä½†è‹¥è¾“å…¥æ•°å­—.123ï¼Œåˆ™å‰é¢ä»£ç çš„flag=false;
     if (*str == '.')
     {
         ++str;
 
-        //ÒªÕÕ¹Ëµ½¶àÖÖÇé¿ö£¬±ÈÈç
+        //è¦ç…§é¡¾åˆ°å¤šç§æƒ…å†µï¼Œæ¯”å¦‚
         //  .123     123. 
         flag = scanInteger(&str) || flag;
 
@@ -2599,31 +2599,31 @@ bool isNum(const char* str)
     {
         ++str;
 
-        //***×¢***
-        //´Ë´¦ÓÃÓë£¬ÒòÎª²»ÄÜ½ÓÊÜ   .e1   
+        //***æ³¨***
+        //æ­¤å¤„ç”¨ä¸ï¼Œå› ä¸ºä¸èƒ½æ¥å—   .e1   
         flag = scanInteger(&str) && flag;
     }
 
-    //²»ÄÜ½ÓÊÜ10e+5.4
+    //ä¸èƒ½æ¥å—10e+5.4
     return flag && *str == '\0';
 }
 
 bool scanInteger(const char** str)
 {
     if (**str == '+' || **str == '-')
-        ++(*str);//***×¢***
-    //´Ë´¦strÉùÃ÷Îªconst£¬¼´²»ÄÜ¸Ä±ästrÖ¸ÏòµÄÄÚÈİ£¬¶østrÖ¸ÕëÊÇ¿ÉÒÔ¸Ä±äµÄ
-    //¼´²»ÄÜ³öÏÖ**str = 0x00;¼´Ö¸ÏòÊı×Ö×Ö·û´®µÄÖ¸ÕëËù´æ´¢µÄÎ»ÖÃ²»ÄÜ±ä
-    //¶øÖ¸ÏòÊı×Ö×Ö·û´®µÄÖ¸Õë´æ´¢µÄÄÚÈİ¿ÉÒÔ±ä¡£    
-    //¼´Ö¸Õë¿ÉÒÔÖ¸ÏòÏÂÒ»¸ö×Ö·û
+        ++(*str);//***æ³¨***
+    //æ­¤å¤„strå£°æ˜ä¸ºconstï¼Œå³ä¸èƒ½æ”¹å˜stræŒ‡å‘çš„å†…å®¹ï¼Œè€ŒstræŒ‡é’ˆæ˜¯å¯ä»¥æ”¹å˜çš„
+    //å³ä¸èƒ½å‡ºç°**str = 0x00;å³æŒ‡å‘æ•°å­—å­—ç¬¦ä¸²çš„æŒ‡é’ˆæ‰€å­˜å‚¨çš„ä½ç½®ä¸èƒ½å˜
+    //è€ŒæŒ‡å‘æ•°å­—å­—ç¬¦ä¸²çš„æŒ‡é’ˆå­˜å‚¨çš„å†…å®¹å¯ä»¥å˜ã€‚    
+    //å³æŒ‡é’ˆå¯ä»¥æŒ‡å‘ä¸‹ä¸€ä¸ªå­—ç¬¦
 
     return scanUnsignedInteger(str);
 }
 
-//¸Ãº¯ÊıÓÃÀ´É¨Ãè×Ö·û´®ÖĞ0~9µÄÊıÎ»
+//è¯¥å‡½æ•°ç”¨æ¥æ‰«æå­—ç¬¦ä¸²ä¸­0~9çš„æ•°ä½
 bool scanUnsignedInteger(const char** str)
 {
-    //´´½¨beforeÖ¸ÕëÖ¸ÏòÉ¨ÃèÊ±Ò»¿ªÊ¼µÄ×Ö·û
+    //åˆ›å»ºbeforeæŒ‡é’ˆæŒ‡å‘æ‰«ææ—¶ä¸€å¼€å§‹çš„å­—ç¬¦
     const char* before = *str;
 
     while (**str != '\0' && **str >= '0' && **str <= '9')
@@ -2631,14 +2631,14 @@ bool scanUnsignedInteger(const char** str)
         ++(*str);
     }
 
-    //ÈôÖ¸Ïò×Ö·û´®µÄÖ¸ÕëºóÒÆÁË£¬ÄÇÃ´×Ö·û´®ÖĞÈ·Êµ´æÔÚ0~9µÄ×Ö·û£¬
-    //¿ÉÒÔ¼ÌĞø½øĞĞÏÂÃæµÄÅĞ¶Ï
+    //è‹¥æŒ‡å‘å­—ç¬¦ä¸²çš„æŒ‡é’ˆåç§»äº†ï¼Œé‚£ä¹ˆå­—ç¬¦ä¸²ä¸­ç¡®å®å­˜åœ¨0~9çš„å­—ç¬¦ï¼Œ
+    //å¯ä»¥ç»§ç»­è¿›è¡Œä¸‹é¢çš„åˆ¤æ–­
     return *str > before;
 }
 #endif
 
 
-//ÃæÊÔÌâ21£ºµ÷ÕûÊı×éË³ĞòÊ¹ÆæÊıÎ»ÓÚÅ¼ÊıÇ°Ãæ
+//é¢è¯•é¢˜21ï¼šè°ƒæ•´æ•°ç»„é¡ºåºä½¿å¥‡æ•°ä½äºå¶æ•°å‰é¢
 #if 0
 #include <iostream>
 
@@ -2661,10 +2661,10 @@ int main()
     int index = 0;
     int num;
 
-    //***×¢***
-    //´íÎóĞ´·¨£º
-    //cin.get()¶ÁÈ¡µÄÊÇ×Ö·û£¬¶øÇÒ
-    //°ÑÊı×ÖÖ®¼äµÄÓÃÓÚ·Ö¸îµÄ¿Õ¸ñÒ²ÊÓÎªÊäÈëÁË
+    //***æ³¨***
+    //é”™è¯¯å†™æ³•ï¼š
+    //cin.get()è¯»å–çš„æ˜¯å­—ç¬¦ï¼Œè€Œä¸”
+    //æŠŠæ•°å­—ä¹‹é—´çš„ç”¨äºåˆ†å‰²çš„ç©ºæ ¼ä¹Ÿè§†ä¸ºè¾“å…¥äº†
     //while (index<length&&(( num=cin.get() )!= '\n'))
     //{        
     //    data[index++] = num - '0';
@@ -2706,25 +2706,25 @@ void Reorder(int* pData, int length)
     int p1, p2;
     p1 = 0, p2 = length - 1;
 
-    //ÊäÈë1£¬2£¬3£¬4£¬5
+    //è¾“å…¥1ï¼Œ2ï¼Œ3ï¼Œ4ï¼Œ5
     while (p1 < p2)
     {
-        //Èôp1Ö¸ÏòµÄÊÇÆæÊı
+        //è‹¥p1æŒ‡å‘çš„æ˜¯å¥‡æ•°
         if (pData[p1] & 0x01)
             ++p1;
-        else if (!(pData[p1] & 0x01) && pData[p2] & 0x01)//Ò»Å¼£¬Ò»Ææ
+        else if (!(pData[p1] & 0x01) && pData[p2] & 0x01)//ä¸€å¶ï¼Œä¸€å¥‡
         {
             Swap(&pData[p1], &pData[p2]);
             ++p1, --p2;
         }
-        else//Ò»Å¼£¬Ò»Å¼
+        else//ä¸€å¶ï¼Œä¸€å¶
             --p2;
 
-        //Ò»Ææ£¬Ò»Ææ
-        //ÕûºÏµ½Çé¿öÒ»
+        //ä¸€å¥‡ï¼Œä¸€å¥‡
+        //æ•´åˆåˆ°æƒ…å†µä¸€
 
-        //Ò»Ææ£¬Ò»Å¼
-        //ÕûºÏµ½Çé¿öÒ»
+        //ä¸€å¥‡ï¼Œä¸€å¶
+        //æ•´åˆåˆ°æƒ…å†µä¸€
     }
 }
 
@@ -2737,7 +2737,7 @@ void Swap(int* a, int* b)
 }
 #endif
 
-//·¨¶ş£º
+//æ³•äºŒï¼š
 #if 0
 void Reorder(int* pData, int length)
 {
@@ -2749,11 +2749,11 @@ void Reorder(int* pData, int length)
 
 	while (pBegin < pEnd)
 	{
-		// ÏòºóÒÆ¶¯pBegin£¬Ö±µ½ËüÖ¸ÏòÅ¼Êı
+		// å‘åç§»åŠ¨pBeginï¼Œç›´åˆ°å®ƒæŒ‡å‘å¶æ•°
 		while (pBegin < pEnd && (*pBegin & 0x1) != 0)
 			pBegin++;
 
-		// ÏòÇ°ÒÆ¶¯pEnd£¬Ö±µ½ËüÖ¸ÏòÆæÊı
+		// å‘å‰ç§»åŠ¨pEndï¼Œç›´åˆ°å®ƒæŒ‡å‘å¥‡æ•°
 		while (pBegin < pEnd && (*pEnd & 0x1) == 0)
 			pEnd--;
 
@@ -2767,9 +2767,9 @@ void Reorder(int* pData, int length)
 }
 #endif
 
-//***×¢***
-//½«µ¥Ò»º¯Êı½øĞĞ½âñî£¬½«¸Ãº¯ÊıµÄÖ°Ôğ½øĞĞ·ÖÀë¡£
-//¿ÉÒÔÌá¸ß´úÂëµÄÖØÓÃĞÔ£¬ÀûÓÚ¹¦ÄÜµÄÀ©Õ¹
+//***æ³¨***
+//å°†å•ä¸€å‡½æ•°è¿›è¡Œè§£è€¦ï¼Œå°†è¯¥å‡½æ•°çš„èŒè´£è¿›è¡Œåˆ†ç¦»ã€‚
+//å¯ä»¥æé«˜ä»£ç çš„é‡ç”¨æ€§ï¼Œåˆ©äºåŠŸèƒ½çš„æ‰©å±•
 void Reorder(int* pData, int length, bool (*pfun)(int n))
 {
     if (pData == nullptr || length == 0)
@@ -2780,11 +2780,11 @@ void Reorder(int* pData, int length, bool (*pfun)(int n))
 
     while (pBegin < pEnd)
     {
-        // ÏòºóÒÆ¶¯pBegin£¬Ö±µ½ËüÖ¸ÏòÅ¼Êı
+        // å‘åç§»åŠ¨pBeginï¼Œç›´åˆ°å®ƒæŒ‡å‘å¶æ•°
         while (pBegin < pEnd && (*pfun)(*pBegin))
             pBegin++;
 
-        // ÏòÇ°ÒÆ¶¯pEnd£¬Ö±µ½ËüÖ¸ÏòÆæÊı
+        // å‘å‰ç§»åŠ¨pEndï¼Œç›´åˆ°å®ƒæŒ‡å‘å¥‡æ•°
         while (pBegin < pEnd && !pfun(*pEnd))
             pEnd--;
 
@@ -2803,13 +2803,13 @@ bool isEven(int n)
 #endif
 
 
-//***×¢***
-//Ìá¸ß´úÂëµÄÂ³°ôĞÔµÄÓĞĞ§Í¾¾¶ÊÇ½øĞĞ·ÀÓùĞÔ±à³Ì
-//·ÀÓùĞÔ±à³ÌÊÇÒ»ÖÖ±à³ÌÏ°¹ß£¬ÊÇÖ¸Ô¤¼ûÔÚÊ²Ã´µØ·½¿ÉÄÜ»á³öÏÖÎÊÌâ£¬
-//²¢ÎªÕâĞ©¿ÉÄÜ³öÏÖµÄÎÊÌâÖÆ¶¨´¦Àí·½Ê½¡£
+//***æ³¨***
+//æé«˜ä»£ç çš„é²æ£’æ€§çš„æœ‰æ•ˆé€”å¾„æ˜¯è¿›è¡Œé˜²å¾¡æ€§ç¼–ç¨‹
+//é˜²å¾¡æ€§ç¼–ç¨‹æ˜¯ä¸€ç§ç¼–ç¨‹ä¹ æƒ¯ï¼Œæ˜¯æŒ‡é¢„è§åœ¨ä»€ä¹ˆåœ°æ–¹å¯èƒ½ä¼šå‡ºç°é—®é¢˜ï¼Œ
+//å¹¶ä¸ºè¿™äº›å¯èƒ½å‡ºç°çš„é—®é¢˜åˆ¶å®šå¤„ç†æ–¹å¼ã€‚
 
 
-//ÃæÊÔÌâ22£ºÁ´±íÖĞµ¹ÊıµÚk¸ö½Úµã
+//é¢è¯•é¢˜22ï¼šé“¾è¡¨ä¸­å€’æ•°ç¬¬kä¸ªèŠ‚ç‚¹
 #if 0
 #include <iostream>
 #include <exception>
@@ -2831,20 +2831,20 @@ int main()
     return 0;
 }
 
-//Ò»°ãÄÜÏëµ½µÄÊÇ±éÀúÁ´±íÁ½´Î£¬Ò»´Î±éÀúµÃµ½Á´±í×Ü½ÚµãÊın
-//Ò»´Î±éÀúµÃµ½´ÓÍ·¿ªÊ¼µÄµÚn-k+1¸ö½Úµã(Ïàµ±ÓÚÊÇµ¹ÊıµÚk¸ö½Úµã)
+//ä¸€èˆ¬èƒ½æƒ³åˆ°çš„æ˜¯éå†é“¾è¡¨ä¸¤æ¬¡ï¼Œä¸€æ¬¡éå†å¾—åˆ°é“¾è¡¨æ€»èŠ‚ç‚¹æ•°n
+//ä¸€æ¬¡éå†å¾—åˆ°ä»å¤´å¼€å§‹çš„ç¬¬n-k+1ä¸ªèŠ‚ç‚¹(ç›¸å½“äºæ˜¯å€’æ•°ç¬¬kä¸ªèŠ‚ç‚¹)
 
-//Ïëµ½Ã¿´Î±éÀúÊ±Ç°½øÒ»¸ö½Úµã¶¼ÓÃÖ¸ÕëÈ¥Ö¸Ïò
-//µ«ÕâÑùÒ²ÊÇÌáÇ°ĞèÒª¿ª±ÙÒ»¸ö´óÄÚ´æ¿Õ¼äÈ¥´æÖ¸ÕëµÄ
+//æƒ³åˆ°æ¯æ¬¡éå†æ—¶å‰è¿›ä¸€ä¸ªèŠ‚ç‚¹éƒ½ç”¨æŒ‡é’ˆå»æŒ‡å‘
+//ä½†è¿™æ ·ä¹Ÿæ˜¯æå‰éœ€è¦å¼€è¾Ÿä¸€ä¸ªå¤§å†…å­˜ç©ºé—´å»å­˜æŒ‡é’ˆçš„
 
-//ÄÜ²»ÄÜÓÃÁ½¸öÖ¸ÕëÈ¥Íê³ÉÕâ¼şÊÂ£¿
-//ÒòÎªÁ´±í×ÜÊÇÒª±éÀúµ½×îºóµÄÒ»¸ö½ÚµãµÄ
-//¶ø×îºóÒ»¸ö½Úµã¿ÉÒÔ×öÎª¿ªÊ¼¼ÆÊıµÄ½Úµã£¬ÄÇ¾ÍÓÃÖ¸Õë1È¥Ö¸Ïò
-//¶øÖ¸Õë2Ê¼ÖÕ½«ÓëÖ¸Õë1Ïà¸ôk-1¸ö½ÚµãµÄ¾àÀë(×¢ÒâÁ´±íµÄÄÚ´æµÄÄÚ´æ¿Õ¼ä²»Á¬Ğø£¡£¡£¡)
+//èƒ½ä¸èƒ½ç”¨ä¸¤ä¸ªæŒ‡é’ˆå»å®Œæˆè¿™ä»¶äº‹ï¼Ÿ
+//å› ä¸ºé“¾è¡¨æ€»æ˜¯è¦éå†åˆ°æœ€åçš„ä¸€ä¸ªèŠ‚ç‚¹çš„
+//è€Œæœ€åä¸€ä¸ªèŠ‚ç‚¹å¯ä»¥åšä¸ºå¼€å§‹è®¡æ•°çš„èŠ‚ç‚¹ï¼Œé‚£å°±ç”¨æŒ‡é’ˆ1å»æŒ‡å‘
+//è€ŒæŒ‡é’ˆ2å§‹ç»ˆå°†ä¸æŒ‡é’ˆ1ç›¸éš”k-1ä¸ªèŠ‚ç‚¹çš„è·ç¦»(æ³¨æ„é“¾è¡¨çš„å†…å­˜çš„å†…å­˜ç©ºé—´ä¸è¿ç»­ï¼ï¼ï¼)
 
-//Ïàµ±ÓÚÁ½¸öÖ¸ÕëĞÎ³ÉÒ»¶Î¹Ì¶¨¾àÀëµÄÇøÓò    (³ßÈ¡·¨)
-//Ö¸Õë1´ÓÍ·½áµã¿ªÊ¼×ß£¬×ßk-1¸ö½ÚµãµÄ¾àÀëºó£¬Ö¸Õë2¿ªÊ¼ÓëÖ¸Õë1Ò»Æğ×ß
-//Ö±µ½Ö¸Õë1µ½´ïÎ²½Úµã£¬ÔòÖ¸Õë2Ö¸ÏòµÄ½áµã¾ÍÊÇÒªÇóµÄµ¹ÊıµÚk¸ö½Úµã
+//ç›¸å½“äºä¸¤ä¸ªæŒ‡é’ˆå½¢æˆä¸€æ®µå›ºå®šè·ç¦»çš„åŒºåŸŸ    (å°ºå–æ³•)
+//æŒ‡é’ˆ1ä»å¤´ç»“ç‚¹å¼€å§‹èµ°ï¼Œèµ°k-1ä¸ªèŠ‚ç‚¹çš„è·ç¦»åï¼ŒæŒ‡é’ˆ2å¼€å§‹ä¸æŒ‡é’ˆ1ä¸€èµ·èµ°
+//ç›´åˆ°æŒ‡é’ˆ1åˆ°è¾¾å°¾èŠ‚ç‚¹ï¼Œåˆ™æŒ‡é’ˆ2æŒ‡å‘çš„ç»“ç‚¹å°±æ˜¯è¦æ±‚çš„å€’æ•°ç¬¬kä¸ªèŠ‚ç‚¹
 ListNode* FindNode(ListNode** pListHead, int k)
 {
     if (pListHead == nullptr || k <= 0||*pListHead==nullptr)
@@ -2853,13 +2853,13 @@ ListNode* FindNode(ListNode** pListHead, int k)
     ListNode* p1 = *pListHead;
     ListNode* p2 = *pListHead;
 
-    //p1ÏÈ×ßk-1¸ö½Úµã
-    for (int i = 1; i < k; ++i)  //***×¢***
-    {                                      //ÓĞ·ûºÅÓëÎŞ·ûºÅÊı×Ö×öËãÊıÔËËãÊ±»áÒşÊ½×ª»»³ÉÎŞ·ûºÅÊı×Ö
-        p1 = p1->m_pNext;   //½á¹ûÒ²ÊÇ½âÊÍ³ÉÎŞ·ûºÅÊı×Ö
+    //p1å…ˆèµ°k-1ä¸ªèŠ‚ç‚¹
+    for (int i = 1; i < k; ++i)  //***æ³¨***
+    {                                      //æœ‰ç¬¦å·ä¸æ— ç¬¦å·æ•°å­—åšç®—æ•°è¿ç®—æ—¶ä¼šéšå¼è½¬æ¢æˆæ— ç¬¦å·æ•°å­—
+        p1 = p1->m_pNext;   //ç»“æœä¹Ÿæ˜¯è§£é‡Šæˆæ— ç¬¦å·æ•°å­—
 
         if(p1==nullptr)
-            throw new exception("Invaild data !");//×¢Òâ´úÂëµÄÂ³°ôĞÔ
+            throw new exception("Invaild data !");//æ³¨æ„ä»£ç çš„é²æ£’æ€§
     }
 
     while (p1->m_pNext != nullptr)
@@ -2873,15 +2873,15 @@ ListNode* FindNode(ListNode** pListHead, int k)
 #endif
 
 
-//ÇóÁ´±íµÄÖĞ¼ä½Úµã
-//½â·¨£º
-//¶¨ÒåÁ½¸öÖ¸Õë£¬Ò»¸öÖ¸ÕëÒ»´Î×ßÒ»²½£¬ÁíÒ»¸öÖ¸ÕëÒ»´Î×ßÁ½²½¡£
-//µ±×ßµÃ¿ìµÄÖ¸Õë×ßµ½Á´±íµÄÄ©Î²Ê±£¬×ßµÃÂıµÄÖ¸ÕëÕıºÃÔÚÁ´±íµÄÖĞ¼ä¡£
+//æ±‚é“¾è¡¨çš„ä¸­é—´èŠ‚ç‚¹
+//è§£æ³•ï¼š
+//å®šä¹‰ä¸¤ä¸ªæŒ‡é’ˆï¼Œä¸€ä¸ªæŒ‡é’ˆä¸€æ¬¡èµ°ä¸€æ­¥ï¼Œå¦ä¸€ä¸ªæŒ‡é’ˆä¸€æ¬¡èµ°ä¸¤æ­¥ã€‚
+//å½“èµ°å¾—å¿«çš„æŒ‡é’ˆèµ°åˆ°é“¾è¡¨çš„æœ«å°¾æ—¶ï¼Œèµ°å¾—æ…¢çš„æŒ‡é’ˆæ­£å¥½åœ¨é“¾è¡¨çš„ä¸­é—´ã€‚
 
 
-//ÃæÊÔÌâ23£ºÁ´±íÖĞ»·µÄÈë¿Ú½Úµã
-//***×¢***
-//ĞèÒª·ÖÈı²½×ß
+//é¢è¯•é¢˜23ï¼šé“¾è¡¨ä¸­ç¯çš„å…¥å£èŠ‚ç‚¹
+//***æ³¨***
+//éœ€è¦åˆ†ä¸‰æ­¥èµ°
 #if 0
 #include <iostream>
 #include <exception>
@@ -2904,7 +2904,7 @@ int main()
     return 0;
 }
 
-//ÏÈÕÒµ½»·ÖĞµÄÈÎÒâÒ»¸ö½Úµã
+//å…ˆæ‰¾åˆ°ç¯ä¸­çš„ä»»æ„ä¸€ä¸ªèŠ‚ç‚¹
 ListNode* MeetingNode(ListNode* pHead)
 {
     if (pHead == nullptr)
@@ -2930,8 +2930,8 @@ ListNode* MeetingNode(ListNode* pHead)
     return pSlow;
 }
 
-//ÕÒµ½»·ÖĞµÄÈÎÒâÒ»¸ö½Úµãºó£¬µÃ³ö»·ÖĞ½ÚµãµÄÊıÄ¿
-//½ø¶øÕÒµ½»·µÄÈë¿Ú½Úµã
+//æ‰¾åˆ°ç¯ä¸­çš„ä»»æ„ä¸€ä¸ªèŠ‚ç‚¹åï¼Œå¾—å‡ºç¯ä¸­èŠ‚ç‚¹çš„æ•°ç›®
+//è¿›è€Œæ‰¾åˆ°ç¯çš„å…¥å£èŠ‚ç‚¹
 ListNode* EntryNodeOfLoop(ListNode* pHead)
 {
     if (pHead == nullptr)
@@ -2945,19 +2945,19 @@ ListNode* EntryNodeOfLoop(ListNode* pHead)
     int cnt = 1;
     ListNode* tmp = meetingNode->m_pNext;
 
-    //¼ÆËã³ö»·ÖĞ½ÚµãµÄ¸öÊı
+    //è®¡ç®—å‡ºç¯ä¸­èŠ‚ç‚¹çš„ä¸ªæ•°
     while (tmp != meetingNode)
     {
         ++cnt;
         tmp = tmp->m_pNext;
     }
 
-    //***×¢***
-    //ÔÙÕÒµ½»·µÄÈë¿Ú½Úµã
-    //·½·¨£º
-    //´´½¨Á½¸öÖ¸Õë£¬Ò»¸öÖ¸ÕëÏÈÒÆ¶¯»·ÖĞ½ÚµãµÄÊıÄ¿¸ö½Úµã£¬
-    //È»ºóÁíÒ»¸öÖ¸ÕëÔÙÍ¬µÚÒ»¸öÖ¸ÕëÒ»ÆğÒÆ¶¯
-    //ËüÃÇÏàÓöºóµÄ½Úµã¾ÍÊÇ»·µÄÈë¿Ú½Úµã
+    //***æ³¨***
+    //å†æ‰¾åˆ°ç¯çš„å…¥å£èŠ‚ç‚¹
+    //æ–¹æ³•ï¼š
+    //åˆ›å»ºä¸¤ä¸ªæŒ‡é’ˆï¼Œä¸€ä¸ªæŒ‡é’ˆå…ˆç§»åŠ¨ç¯ä¸­èŠ‚ç‚¹çš„æ•°ç›®ä¸ªèŠ‚ç‚¹ï¼Œ
+    //ç„¶åå¦ä¸€ä¸ªæŒ‡é’ˆå†åŒç¬¬ä¸€ä¸ªæŒ‡é’ˆä¸€èµ·ç§»åŠ¨
+    //å®ƒä»¬ç›¸é‡åçš„èŠ‚ç‚¹å°±æ˜¯ç¯çš„å…¥å£èŠ‚ç‚¹
 
     ListNode* p1 = pHead;
     ListNode* p2 = pHead;
@@ -2976,7 +2976,7 @@ ListNode* EntryNodeOfLoop(ListNode* pHead)
 #endif
 
 
-//ÃæÊÔÌâ24£º·´×ªÁ´±í
+//é¢è¯•é¢˜24ï¼šåè½¬é“¾è¡¨
 #if 0
 #include <iostream>
 
@@ -3016,11 +3016,11 @@ int main()
 }
 
 #if 0
-//***×¢***
-//Ë¼¿¼
-//¼ÙÈçÓĞ½Úµã i ->  j -> k
-//Ôò²Ù×÷ºó±ä³É  i <- j <- k
-//ÔòÔÚ²Ù×÷½Úµã i ºÍ j Ê±ĞèÒªÓĞÁÙÊ±Ö¸ÕëÈ¥±£´æÔ­±¾jÖ¸ÏòµÄÏÂÒ»¸ö½ÚµãkµÄµØÖ·
+//***æ³¨***
+//æ€è€ƒ
+//å‡å¦‚æœ‰èŠ‚ç‚¹ i ->  j -> k
+//åˆ™æ“ä½œåå˜æˆ  i <- j <- k
+//åˆ™åœ¨æ“ä½œèŠ‚ç‚¹ i å’Œ j æ—¶éœ€è¦æœ‰ä¸´æ—¶æŒ‡é’ˆå»ä¿å­˜åŸæœ¬jæŒ‡å‘çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹kçš„åœ°å€
 ListNode* ReverseList(ListNode* pHead)
 {
     if (pHead == nullptr)
@@ -3029,12 +3029,12 @@ ListNode* ReverseList(ListNode* pHead)
     ListNode* i = pHead;
     ListNode* j = i->m_pNext;
 
-    //Õû¸öÁ´±í½öÓĞ1¸ö½Úµã
+    //æ•´ä¸ªé“¾è¡¨ä»…æœ‰1ä¸ªèŠ‚ç‚¹
     if (j == nullptr)
         return pHead;
         
     ListNode* tmp = j->m_pNext;
-    //Õû¸öÁ´±í½öÓĞ2¸ö½Úµã
+    //æ•´ä¸ªé“¾è¡¨ä»…æœ‰2ä¸ªèŠ‚ç‚¹
     if (tmp == nullptr)
     {
         j->m_pNext = i;
@@ -3043,8 +3043,8 @@ ListNode* ReverseList(ListNode* pHead)
         return j;
     }
 
-    //Õû¸öÁ´±íÓĞ3¸ö¼°ÒÔÉÏ¸ö½Úµã
-    //Çé¿ö£º
+    //æ•´ä¸ªé“¾è¡¨æœ‰3ä¸ªåŠä»¥ä¸Šä¸ªèŠ‚ç‚¹
+    //æƒ…å†µï¼š
     //i <- j <- k -> L
     //i <- j <- k <- L
 
@@ -3052,9 +3052,9 @@ ListNode* ReverseList(ListNode* pHead)
 
     while (tmp != nullptr)
     {
-        //³ÃÖ¸ÏòÃ»±äÊ±´æÖ¸ÏòµÄÏÂÒ»¸ö½Úµã´æ´¢µÄÎ»ÖÃ
+        //è¶æŒ‡å‘æ²¡å˜æ—¶å­˜æŒ‡å‘çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹å­˜å‚¨çš„ä½ç½®
         tmp1=tmp->m_pNext;
-        //È»ºóÔÙ¸Ä±äÖ¸Ïò
+        //ç„¶åå†æ”¹å˜æŒ‡å‘
         tmp->m_pNext = j;
 
         j->m_pNext = i;
@@ -3062,14 +3062,14 @@ ListNode* ReverseList(ListNode* pHead)
         if (i == pHead)
         {
             i->m_pNext = nullptr;
-            i = j;//  i Ç°½ø
+            i = j;//  i å‰è¿›
         }
         else
             i = j;
 
-        j = tmp;//  j Ç°½ø
+        j = tmp;//  j å‰è¿›
 
-        tmp = tmp1;//tmpÇ°½ø
+        tmp = tmp1;//tmpå‰è¿›
     }
 
     return j;
@@ -3090,11 +3090,11 @@ ListNode* ReverseList(ListNode* pHead)
     {
         ListNode* pNext = pNode->m_pNext;
 
-        //Èôµ½´ïÁ´±íÄ©Î²µÄ½Úµã
+        //è‹¥åˆ°è¾¾é“¾è¡¨æœ«å°¾çš„èŠ‚ç‚¹
         if (pNext == nullptr)
             pReversedHead = pNode;
 
-        //Ö¸ÕëÖ¸Ïò¸Ä±ä
+        //æŒ‡é’ˆæŒ‡å‘æ”¹å˜
         pNode->m_pNext = pPrev;
 
         pPrev = pNode;
@@ -3106,7 +3106,7 @@ ListNode* ReverseList(ListNode* pHead)
 #endif
 
 
-//¸¡µãÊıÖ®¼äÈçºÎÅĞ¶ÏÏàµÈ
+//æµ®ç‚¹æ•°ä¹‹é—´å¦‚ä½•åˆ¤æ–­ç›¸ç­‰
 #if 0
 #include <iostream>
 #include <cmath>
@@ -3124,34 +3124,34 @@ int main()
 
     fun(&i,&j);
 
-    //***×¢****
-    //´íÎóĞ´·¨£º
+    //***æ³¨****
+    //é”™è¯¯å†™æ³•ï¼š
     if (i == j)
     {
 
     }
 
-    //´íÎóÔ­Òò£º
-    //¸¡µãÊı¾­¹ıºÜ¶à´ÎÔËËãºó£¬ÄãÈÏÎªËûÁ©ÏàµÈ£¬
-    //µ«¼ÆËã»úÒòÎªÎó²îµÄÔ­Òò£¬¿ÉÄÜ»áÔì³ÉÁ½¸öÊı×Ö²»ÏàµÈ
-    //±ÈÈç£º
+    //é”™è¯¯åŸå› ï¼š
+    //æµ®ç‚¹æ•°ç»è¿‡å¾ˆå¤šæ¬¡è¿ç®—åï¼Œä½ è®¤ä¸ºä»–ä¿©ç›¸ç­‰ï¼Œ
+    //ä½†è®¡ç®—æœºå› ä¸ºè¯¯å·®çš„åŸå› ï¼Œå¯èƒ½ä¼šé€ æˆä¸¤ä¸ªæ•°å­—ä¸ç›¸ç­‰
+    //æ¯”å¦‚ï¼š
     // a = 1.1     b = 1.1
-    //µ«¼ÆËã»úÖĞÊµ¼Ê¶ş½øÖÆ±íÊ¾µÄ¿ÉÄÜÊÇ1.09999999ºÍ1.1000000001
+    //ä½†è®¡ç®—æœºä¸­å®é™…äºŒè¿›åˆ¶è¡¨ç¤ºçš„å¯èƒ½æ˜¯1.09999999å’Œ1.1000000001
 
 
-    //ÕıÈ··½·¨1£º
+    //æ­£ç¡®æ–¹æ³•1ï¼š
     if(abs(i - j) < 0.000001)
 
-    //ÕıÈ··½·¨2£º»¯ÎªÕûÊı·¨
-    //ÔËËãÇ°ÏÖ½«Á½¸öÊı×Ö½øĞĞÀ©´ó
-    //×îºóÊä³öÊ±²Å½«½á¹ûËõĞ¡
+    //æ­£ç¡®æ–¹æ³•2ï¼šåŒ–ä¸ºæ•´æ•°æ³•
+    //è¿ç®—å‰ç°å°†ä¸¤ä¸ªæ•°å­—è¿›è¡Œæ‰©å¤§
+    //æœ€åè¾“å‡ºæ—¶æ‰å°†ç»“æœç¼©å°
 
     return 0;
 }
 #endif
 
 
-//ÃæÊÔÌâ25£ººÏ²¢Á½¸öÅÅĞòµÄÁ´±í
+//é¢è¯•é¢˜25ï¼šåˆå¹¶ä¸¤ä¸ªæ’åºçš„é“¾è¡¨
 #if 0
 #include "List.h"
 #include <iostream>
@@ -3187,8 +3187,8 @@ int main()
     return 0;
 }
 
-//½â·¨Ò»£º
-//ºÏ²¢Ê±ÊÇÒÔÆäÖĞÒ»¸öÁ´±íÎª»ù´¡£¬½øĞĞºÏ²¢
+//è§£æ³•ä¸€ï¼š
+//åˆå¹¶æ—¶æ˜¯ä»¥å…¶ä¸­ä¸€ä¸ªé“¾è¡¨ä¸ºåŸºç¡€ï¼Œè¿›è¡Œåˆå¹¶
 #if 0
 ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
 {
@@ -3209,15 +3209,15 @@ ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
     {
         if (pNode1->m_nValue <= pNode2->m_nValue)
         {
-            //½â¾öÒÔÏÂÇé¿ö£º
-            //ÈôÁ´±íÒ»Îª 1 2 5 7
-            //   Á´±í¶şÎª 3 4 6 8
+            //è§£å†³ä»¥ä¸‹æƒ…å†µï¼š
+            //è‹¥é“¾è¡¨ä¸€ä¸º 1 2 5 7
+            //   é“¾è¡¨äºŒä¸º 3 4 6 8
             while (pNode1->m_pNext!=nullptr&&pNode1->m_pNext-> m_nValue <= pNode2->m_nValue)
             {
                 pNode1 = pNode1->m_pNext;
             }
 
-            //¿¼ÂÇÍ·½áµãÊÇÄÄ¸öÁ´±íµÄÍ·½áµã
+            //è€ƒè™‘å¤´ç»“ç‚¹æ˜¯å“ªä¸ªé“¾è¡¨çš„å¤´ç»“ç‚¹
             if (OnlyOne)
             {
                 Begin = pNode1;
@@ -3238,15 +3238,15 @@ ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
         }
         else
         {
-            //½â¾öÒÔÏÂÇé¿ö£º
-            //ÈôÁ´±íÒ»Îª 3 4 6 8
-            //   Á´±í¶şÎª 1 2 5 7
+            //è§£å†³ä»¥ä¸‹æƒ…å†µï¼š
+            //è‹¥é“¾è¡¨ä¸€ä¸º 3 4 6 8
+            //   é“¾è¡¨äºŒä¸º 1 2 5 7
             while (pNode2->m_pNext!=nullptr&&pNode2->m_pNext->m_nValue <= pNode1->m_nValue)
             {
                 pNode2 = pNode2->m_pNext;
             }
 
-            //¿¼ÂÇÍ·½áµãÊÇÄÄ¸öÁ´±íµÄÍ·½áµã
+            //è€ƒè™‘å¤´ç»“ç‚¹æ˜¯å“ªä¸ªé“¾è¡¨çš„å¤´ç»“ç‚¹
             if (OnlyOne)
             {
                 Begin = pNode2;
@@ -3270,26 +3270,26 @@ ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
 }
 #endif
 
-//½â·¨¶ş£º
-//ÀûÓÃµİ¹é£¬µ¥¶ÀÉú³ÉÒ»¸öºÏ²¢ºóµÄÁ´±í
-//ºÃ´¦£º
-//¿ÉÒÔ±ÜÃâ½ÚµãÖ®¼ä¶ÏÁ¬ºóÔÙÁ¬ÉÏµÄ¸´ÔÓÖ¸Õë²Ù×÷ÎÊÌâ
-//²»±Ø¿¼ÂÇÒÔÏÂÎÊÌâ
-//ÈôÁ´±íÒ»Îª 3 4 6 8
-//   Á´±í¶şÎª 1 2 5 7
-//ÓÅ»¯ÁËÊ±¼ä¸´ÔÓ¶È
+//è§£æ³•äºŒï¼š
+//åˆ©ç”¨é€’å½’ï¼Œå•ç‹¬ç”Ÿæˆä¸€ä¸ªåˆå¹¶åçš„é“¾è¡¨
+//å¥½å¤„ï¼š
+//å¯ä»¥é¿å…èŠ‚ç‚¹ä¹‹é—´æ–­è¿åå†è¿ä¸Šçš„å¤æ‚æŒ‡é’ˆæ“ä½œé—®é¢˜
+//ä¸å¿…è€ƒè™‘ä»¥ä¸‹é—®é¢˜
+//è‹¥é“¾è¡¨ä¸€ä¸º 3 4 6 8
+//   é“¾è¡¨äºŒä¸º 1 2 5 7
+//ä¼˜åŒ–äº†æ—¶é—´å¤æ‚åº¦
 #if 1
 ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
 {
-    //***×¢***
-    //´¦ÀíÁ½¸öÁ´±í³¤¶È²»Ò»ÖÂµÄÎÊÌâ
+    //***æ³¨***
+    //å¤„ç†ä¸¤ä¸ªé“¾è¡¨é•¿åº¦ä¸ä¸€è‡´çš„é—®é¢˜
     if (pHead1 == nullptr)
         return pHead2;
 
     if (pHead2 == nullptr)
         return pHead1;
 
-    //´´½¨Ò»¸ö½Úµã£¬²¢ÓÉpMergedHeadÖ¸ÕëÖ¸Ïò
+    //åˆ›å»ºä¸€ä¸ªèŠ‚ç‚¹ï¼Œå¹¶ç”±pMergedHeadæŒ‡é’ˆæŒ‡å‘
     ListNode* pMergedHead = nullptr;
 
     if (pHead1->m_nValue < pHead2->m_nValue)
@@ -3309,10 +3309,10 @@ ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
 #endif
 
 
-//ÃæÊÔÌâ26£ºÊ÷µÄ×Ó½á¹¹
-//Ë¼Â·£º
-//ĞèÒª¶ÔÒ»¿ÅÊ÷½øĞĞ±éÀú
-//ĞèÒªÔÚÊ÷AÖĞÕÒµ½ºÍÊ÷BµÄ¸ù½ÚµãÖµÒ»ÑùµÄ½Úµãºó£¬¼ÌĞøÅĞ¶ÏÁ½ÕßµÄ×ÓÊ÷½á¹¹ºÍÄÚÈİÊÇ·ñÏàµÈ
+//é¢è¯•é¢˜26ï¼šæ ‘çš„å­ç»“æ„
+//æ€è·¯ï¼š
+//éœ€è¦å¯¹ä¸€é¢—æ ‘è¿›è¡Œéå†
+//éœ€è¦åœ¨æ ‘Aä¸­æ‰¾åˆ°å’Œæ ‘Bçš„æ ¹èŠ‚ç‚¹å€¼ä¸€æ ·çš„èŠ‚ç‚¹åï¼Œç»§ç»­åˆ¤æ–­ä¸¤è€…çš„å­æ ‘ç»“æ„å’Œå†…å®¹æ˜¯å¦ç›¸ç­‰
 #if 0
 #include <iostream>
 #include <cmath>
@@ -3354,18 +3354,18 @@ int main()
 
 bool HasSubtree(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2)
 {
-    //ÓÃµİ¹éµÄ·½Ê½È¥±éÀúÊ÷
+    //ç”¨é€’å½’çš„æ–¹å¼å»éå†æ ‘
     bool res = false;
 
     if (pRoot1 != nullptr && pRoot2 != nullptr)
     {
-        //***×¢***
-        //´íÎóĞ´·¨£º
+        //***æ³¨***
+        //é”™è¯¯å†™æ³•ï¼š
         //if(pRoot1->m_dbValue==pRoot2->m_dbValue)
-        //´íÎóÔ­Òò£º
-        //¼ÆËã»ú±íÊ¾Ğ¡Êı¶¼ÓĞÎó²î£¬²»ÄÜÖ±½ÓÓÃµÈºÅÈ¥ÅĞ¶ÏÁ½¸öĞ¡ÊıÊÇ·ñÏàµÈ
+        //é”™è¯¯åŸå› ï¼š
+        //è®¡ç®—æœºè¡¨ç¤ºå°æ•°éƒ½æœ‰è¯¯å·®ï¼Œä¸èƒ½ç›´æ¥ç”¨ç­‰å·å»åˆ¤æ–­ä¸¤ä¸ªå°æ•°æ˜¯å¦ç›¸ç­‰
 
-        //ÕıÈ·Ğ´·¨£º
+        //æ­£ç¡®å†™æ³•ï¼š
         if (Equal(pRoot1->m_dbValue, pRoot2->m_dbValue))
             res = DoesTree1HaveTree2(pRoot1,pRoot2);
 
@@ -3384,30 +3384,30 @@ bool Equal(double a, double b)
     return abs(a - b) < 0.0000001;
 }
 
-//ÔÚ¸ù½ÚµãÈ·¶¨ÖµÏàÍ¬µÄÇ°ÆÚÏÂ£¬¼ÌĞø
-//µİ¹éÅĞ¶ÏÁ½¿Ã×ÓÊ÷½á¹¹ÓëÆäËûÔªËØÊÇ·ñÏàÍ¬
+//åœ¨æ ¹èŠ‚ç‚¹ç¡®å®šå€¼ç›¸åŒçš„å‰æœŸä¸‹ï¼Œç»§ç»­
+//é€’å½’åˆ¤æ–­ä¸¤æ£µå­æ ‘ç»“æ„ä¸å…¶ä»–å…ƒç´ æ˜¯å¦ç›¸åŒ
 bool DoesTree1HaveTree2(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2)
 {
-    //Ê÷2ÒÑ¾­±éÀúÍêÁË
+    //æ ‘2å·²ç»éå†å®Œäº†
     if (pRoot2==nullptr)
         return true;
 
-    //Ê÷1ÒÑ¾­±éÀúÍêÁË
+    //æ ‘1å·²ç»éå†å®Œäº†
     if (pRoot1 == nullptr)
         return false;
 
-    //´íÎóĞ´·¨£º
+    //é”™è¯¯å†™æ³•ï¼š
     //if (Equal(pRoot1->m_dbValue, pRoot2->m_dbValue))
     //    return true;
     //else
     //    return false;
 
-    //ÕıÈ·Ğ´·¨£º
+    //æ­£ç¡®å†™æ³•ï¼š
     if (!Equal(pRoot1->m_dbValue, pRoot2->m_dbValue))
         return false;
 
-    //Ô­Òò£ºÈôĞ´³É´íÎóĞ´·¨£¬ÄÇÃ´Ö»ÒªÁ½¸ö¸ù½ÚµãÏàÍ¬£¬ÔòÖ±½Ó·µ»Øtrue£¬
-    //²»»áÔÙ½øĞĞºóĞøµÄÅĞ¶Ï
+    //åŸå› ï¼šè‹¥å†™æˆé”™è¯¯å†™æ³•ï¼Œé‚£ä¹ˆåªè¦ä¸¤ä¸ªæ ¹èŠ‚ç‚¹ç›¸åŒï¼Œåˆ™ç›´æ¥è¿”å›trueï¼Œ
+    //ä¸ä¼šå†è¿›è¡Œåç»­çš„åˆ¤æ–­
 
     bool flag = false;
 
@@ -3420,13 +3420,13 @@ bool DoesTree1HaveTree2(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2)
 #endif
 
 
-//ÃæÊÔÌâ27£º¶ş²æÊ÷µÄ¾µÏñ
-//ÄÑµã£º
-//Âú¶ş²æÊ÷ËÆºõ¿ÉÒÔÍ¨¹ı²ãĞò±éÀú½øĞĞ½ÚµãµÄÖµÖ®¼äµÄ½»»»£¿
-//Ë¼Â·´íÎóÁË¡£
-//ÖµµÄ½»»»¿ÉÒÔ²»ÊÇÓÃµ¥µ¥¸³ÖµµÄ·½Ê½À´²Ù×÷£¬¶øÊÇÓÃ½»»»×óÓÒ×ÓÊ÷µÄ·½Ê½
-//ÊµÏÖÖµµÄ½»»»
-//±éÀú·½Ê½¿ÉÒÔÓÃÇ°Ğò±éÀú
+//é¢è¯•é¢˜27ï¼šäºŒå‰æ ‘çš„é•œåƒ
+//éš¾ç‚¹ï¼š
+//æ»¡äºŒå‰æ ‘ä¼¼ä¹å¯ä»¥é€šè¿‡å±‚åºéå†è¿›è¡ŒèŠ‚ç‚¹çš„å€¼ä¹‹é—´çš„äº¤æ¢ï¼Ÿ
+//æ€è·¯é”™è¯¯äº†ã€‚
+//å€¼çš„äº¤æ¢å¯ä»¥ä¸æ˜¯ç”¨å•å•èµ‹å€¼çš„æ–¹å¼æ¥æ“ä½œï¼Œè€Œæ˜¯ç”¨äº¤æ¢å·¦å³å­æ ‘çš„æ–¹å¼
+//å®ç°å€¼çš„äº¤æ¢
+//éå†æ–¹å¼å¯ä»¥ç”¨å‰åºéå†
 #if 0
 #include <iostream>
 #include "Tree.h"
@@ -3487,11 +3487,11 @@ void Mirror(BinaryTreeNode* rootNode)
     if (rootNode == nullptr)
         return;
 
-    //ÈôÉ¨Ãèµ½Ò¶×Ó½Úµã£¬Ôò²»ÓÃ×öºóĞøµÄ×Ó½Úµã½»»»
+    //è‹¥æ‰«æåˆ°å¶å­èŠ‚ç‚¹ï¼Œåˆ™ä¸ç”¨åšåç»­çš„å­èŠ‚ç‚¹äº¤æ¢
     if (rootNode->m_pLeft == nullptr && rootNode->m_pRight == nullptr)
         return;
 
-    //½»»»µ±Ç°½ÚµãÏÂµÄ×óÓÒ½Úµã
+    //äº¤æ¢å½“å‰èŠ‚ç‚¹ä¸‹çš„å·¦å³èŠ‚ç‚¹
     BinaryTreeNode* tmp = rootNode->m_pLeft;
 
     rootNode->m_pLeft = rootNode->m_pRight;
@@ -3502,7 +3502,7 @@ void Mirror(BinaryTreeNode* rootNode)
 }
 #endif
 
-//ÓÃÑ­»·À´ÊµÏÖ
+//ç”¨å¾ªç¯æ¥å®ç°
 #if 1
 void Mirror(BinaryTreeNode* rootNode)
 {
@@ -3515,10 +3515,10 @@ void Mirror(BinaryTreeNode* rootNode)
         {
             //std::cout << tempNode->m_dbValue << " ";
 
-            //ÈôÉ¨Ãèµ½Ò¶×Ó½Úµã£¬Ôò²»ÓÃ×öºóĞøµÄ×Ó½Úµã½»»»
+            //è‹¥æ‰«æåˆ°å¶å­èŠ‚ç‚¹ï¼Œåˆ™ä¸ç”¨åšåç»­çš„å­èŠ‚ç‚¹äº¤æ¢
             if (tempNode->m_pLeft != nullptr || tempNode->m_pRight != nullptr)
             {
-                //½»»»µ±Ç°½ÚµãÏÂµÄ×óÓÒ½Úµã
+                //äº¤æ¢å½“å‰èŠ‚ç‚¹ä¸‹çš„å·¦å³èŠ‚ç‚¹
                 BinaryTreeNode* tmp = tempNode->m_pLeft;
 
                 tempNode->m_pLeft = tempNode->m_pRight;
@@ -3527,15 +3527,15 @@ void Mirror(BinaryTreeNode* rootNode)
 
             nodeStack.push(tempNode);
 
-            tempNode = tempNode->m_pLeft;//¸ù->×ó
+            tempNode = tempNode->m_pLeft;//æ ¹->å·¦
         }
         else
         {
-            //½«ÒÑ¾­É¨Ãè¹ıµÄÄ³×ÓÊ÷µÄÎŞ×ó×Ó½ÚµãµÄ½Úµã±£´æºóµ¯³ö
+            //å°†å·²ç»æ‰«æè¿‡çš„æŸå­æ ‘çš„æ— å·¦å­èŠ‚ç‚¹çš„èŠ‚ç‚¹ä¿å­˜åå¼¹å‡º
             tempNode = nodeStack.top();
             nodeStack.pop();
 
-            tempNode = tempNode->m_pRight;//ÓÒ
+            tempNode = tempNode->m_pRight;//å³
         }
     }
 }
@@ -3543,9 +3543,9 @@ void Mirror(BinaryTreeNode* rootNode)
 #endif
 
 
-//ÃæÊÔÌâ28£º¶Ô³ÆµÄ¶ş²æÊ÷
-//¶Ô³ÆµÄÇ°ÌáÊÇ½á¹¹×óÓÒ¶Ô³ÆºÍ½ÚµãµÄÖµ×óÓÒ¶Ô³Æ
-//ÓÃ¶ş²æÊ÷µÄ¾µÏñÀ´ÅĞ¶Ï£¬Ö»ÄÜÅĞ¶Ï½á¹¹ÉÏµÄ¶Ô³Æ£¬»¹ÒªÅĞ¶Ï½ÚµãµÄÖµÊÇ·ñ¶Ô³Æ
+//é¢è¯•é¢˜28ï¼šå¯¹ç§°çš„äºŒå‰æ ‘
+//å¯¹ç§°çš„å‰ææ˜¯ç»“æ„å·¦å³å¯¹ç§°å’ŒèŠ‚ç‚¹çš„å€¼å·¦å³å¯¹ç§°
+//ç”¨äºŒå‰æ ‘çš„é•œåƒæ¥åˆ¤æ–­ï¼Œåªèƒ½åˆ¤æ–­ç»“æ„ä¸Šçš„å¯¹ç§°ï¼Œè¿˜è¦åˆ¤æ–­èŠ‚ç‚¹çš„å€¼æ˜¯å¦å¯¹ç§°
 #if 0
 #include <iostream>
 #include "Tree.h"
@@ -3581,9 +3581,9 @@ bool isSymmetric(BinaryTreeNode* p)
 {
     return isSymmetricCore(p,p);
 }
-//·½·¨£º
-//Í¨¹ı±È½Ï¶ş²æÊ÷µÄº¬nullptrµÄÄÚÈİµÄÇ°Ğò±éÀúºÍº¬nullptrÄÚÈİµÄ¶Ô³ÆÇ°Ğò±éÀúµÄÄÚÈİ
-//À´ÅĞ¶Ï¶ş²æÊ÷ÊÇ·ñ¶Ô³Æ
+//æ–¹æ³•ï¼š
+//é€šè¿‡æ¯”è¾ƒäºŒå‰æ ‘çš„å«nullptrçš„å†…å®¹çš„å‰åºéå†å’Œå«nullptrå†…å®¹çš„å¯¹ç§°å‰åºéå†çš„å†…å®¹
+//æ¥åˆ¤æ–­äºŒå‰æ ‘æ˜¯å¦å¯¹ç§°
 bool isSymmetricCore(BinaryTreeNode* rootNode1, BinaryTreeNode* rootNode2)
 {
     if (rootNode1 == nullptr && rootNode2 == nullptr)
@@ -3597,8 +3597,8 @@ bool isSymmetricCore(BinaryTreeNode* rootNode1, BinaryTreeNode* rootNode2)
     else
         return true;
 
-    //***×¢***
-    //Õı³£Ç°Ğò±éÀúÊÇ¸ù×óÓÒ£¬¶ø¶Ô³ÆÇ°Ğò±éÀúÊÇ¸ùÓÒ×ó
+    //***æ³¨***
+    //æ­£å¸¸å‰åºéå†æ˜¯æ ¹å·¦å³ï¼Œè€Œå¯¹ç§°å‰åºéå†æ˜¯æ ¹å³å·¦
 
     return isSymmetricCore(rootNode1->m_pLeft, rootNode2->m_pRight) &&
         isSymmetricCore(rootNode1->m_pRight,rootNode2->m_pLeft);
@@ -3610,7 +3610,7 @@ bool Equal(double a, double b)
 #endif
 
 
-//ÃæÊÔÌâ29£ºË³Ê±Õë´òÓ¡¾ØÕó
+//é¢è¯•é¢˜29ï¼šé¡ºæ—¶é’ˆæ‰“å°çŸ©é˜µ
 #if 0
 #include <iostream>
 
@@ -3656,9 +3656,9 @@ void PrintMatrix(int** matrix, int row, int col)
     if (matrix == nullptr || row < 1 || col < 1)
         return;
 
-	//ÓÉÓÚÃ¿Ò»È¦µÄÖÕÖ¹Î»ÖÃµÄ×ø±êÖµ¶¼»á±ä£¬ËùÒÔÒªÕÒµ½
-    //Ã¿Ò»È¦ÖÕÖ¹´òÓ¡µÄÌõ¼ş£¬ÕâÓĞÄÑ¶È
-    //Èôµ¥ÓÃÒ»¸öÑ­»·£¬ÄÇÊÇÎŞ·¨Íê³É´òÓ¡ÈÎÎñµÄ
+	//ç”±äºæ¯ä¸€åœˆçš„ç»ˆæ­¢ä½ç½®çš„åæ ‡å€¼éƒ½ä¼šå˜ï¼Œæ‰€ä»¥è¦æ‰¾åˆ°
+    //æ¯ä¸€åœˆç»ˆæ­¢æ‰“å°çš„æ¡ä»¶ï¼Œè¿™æœ‰éš¾åº¦
+    //è‹¥å•ç”¨ä¸€ä¸ªå¾ªç¯ï¼Œé‚£æ˜¯æ— æ³•å®Œæˆæ‰“å°ä»»åŠ¡çš„
     //int r, c;
     //r = c = 0;
     //while (1)
@@ -3670,18 +3670,18 @@ void PrintMatrix(int** matrix, int row, int col)
     //    }
     //}
 
-    //´´½¨´ú±íĞĞºÅµÄ±äÁ¿start
-    //×÷ÓÃÒ»£º
-    //ÒÔĞĞºÅ×÷Îª¿ªÊ¼´òÓ¡µÄÆğÊ¼Î»ÖÃ£¬±ÈÈç´ÓË÷ÒıÎª0µÄĞĞ¿ªÊ¼´òÓ¡£¬´ÓË÷ÒıÎª1µÄĞĞ¿ªÊ¼´òÓ¡
-    //×÷ÓÃ¶ş£º
-    //ÓÉÓÚÒª´òÓ¡µÄÃ¿Ò»È¦µÄ×óÉÏ½ÇµÄÔªËØµÄ×ø±ê¶¼ÊÇÁ½¸öÏàÍ¬µÄÖµ£¬Èç(0£¬0)¡¢(1£¬1)µÈ
-    //ËùÒÔstartÒ²¿ÉÒÔÓÃÀ´×÷Îª´òÓ¡¿ªÊ¼µÄÌõ¼ş
-    //×÷ÓÃÈı£º
-    //´òÓ¡½áÊøµÄÌõ¼şĞèÒª¹Û²ìºÍÕÒ¹æÂÉºóµÃ³ö
-    //¶ÔÓÚ5*5ºÍ6*6µÄ¾ØÕóÀ´Ëµ£¬ËäÈ»×îºóÒ»È¦»áÖ»ÓĞÒ»¸öÊı×Ö»ò»áÓĞËÄ¸öÊı×Ö£¬
-    //µ«ÊÇ×îºóÒ»È¦×óÉÏ½ÇµÄÊı×ÖËùÔÚµÄ×ø±êÒ»¶¨Âú×ã
+    //åˆ›å»ºä»£è¡¨è¡Œå·çš„å˜é‡start
+    //ä½œç”¨ä¸€ï¼š
+    //ä»¥è¡Œå·ä½œä¸ºå¼€å§‹æ‰“å°çš„èµ·å§‹ä½ç½®ï¼Œæ¯”å¦‚ä»ç´¢å¼•ä¸º0çš„è¡Œå¼€å§‹æ‰“å°ï¼Œä»ç´¢å¼•ä¸º1çš„è¡Œå¼€å§‹æ‰“å°
+    //ä½œç”¨äºŒï¼š
+    //ç”±äºè¦æ‰“å°çš„æ¯ä¸€åœˆçš„å·¦ä¸Šè§’çš„å…ƒç´ çš„åæ ‡éƒ½æ˜¯ä¸¤ä¸ªç›¸åŒçš„å€¼ï¼Œå¦‚(0ï¼Œ0)ã€(1ï¼Œ1)ç­‰
+    //æ‰€ä»¥startä¹Ÿå¯ä»¥ç”¨æ¥ä½œä¸ºæ‰“å°å¼€å§‹çš„æ¡ä»¶
+    //ä½œç”¨ä¸‰ï¼š
+    //æ‰“å°ç»“æŸçš„æ¡ä»¶éœ€è¦è§‚å¯Ÿå’Œæ‰¾è§„å¾‹åå¾—å‡º
+    //å¯¹äº5*5å’Œ6*6çš„çŸ©é˜µæ¥è¯´ï¼Œè™½ç„¶æœ€åä¸€åœˆä¼šåªæœ‰ä¸€ä¸ªæ•°å­—æˆ–ä¼šæœ‰å››ä¸ªæ•°å­—ï¼Œ
+    //ä½†æ˜¯æœ€åä¸€åœˆå·¦ä¸Šè§’çš„æ•°å­—æ‰€åœ¨çš„åæ ‡ä¸€å®šæ»¡è¶³
     //row>start*2  &&  col>start*2
-    //ËùÒÔstartÒ²¿ÉÒÔÓÃÀ´×÷Îª´òÓ¡½áÊøµÄÌõ¼ş
+    //æ‰€ä»¥startä¹Ÿå¯ä»¥ç”¨æ¥ä½œä¸ºæ‰“å°ç»“æŸçš„æ¡ä»¶
 
     int start = 0;
 
@@ -3693,28 +3693,28 @@ void PrintMatrix(int** matrix, int row, int col)
     }
 }
 
-//°´È¦´òÓ¡
+//æŒ‰åœˆæ‰“å°
 void PrintMatrixInCircle(int** matrix, int row, int col, int start)
 {
-    //´òÓ¡ÉÏ·½ĞĞ
+    //æ‰“å°ä¸Šæ–¹è¡Œ
     for (int c = start; c < col - start; ++c)
     {
         cout << matrix[start][c] << ' ';
     }
 
-    //´òÓ¡ÓÒ²àµÄÁĞ
+    //æ‰“å°å³ä¾§çš„åˆ—
     for (int r = start+1; r < row - start; ++r)
     {
         cout << matrix[r][col-start-1] << ' ';
     }
 
-    //´òÓ¡ÏÂ·½ĞĞ
+    //æ‰“å°ä¸‹æ–¹è¡Œ
     for (int c = col-start-1-1; c >= start; --c)
     {
         cout << matrix[row-start-1][c] << ' ';
     }
 
-    //´òÓ¡×ó²àµÄĞĞ
+    //æ‰“å°å·¦ä¾§çš„è¡Œ
     for (int r = row - start - 1 - 1; r > start; --r)
     {
         cout << matrix[r][start] << ' ';
@@ -3723,7 +3723,7 @@ void PrintMatrixInCircle(int** matrix, int row, int col, int start)
 #endif
 
 
-//ÃæÊÔÌâ30£º°üº¬minº¯ÊıµÄÕ»
+//é¢è¯•é¢˜30ï¼šåŒ…å«minå‡½æ•°çš„æ ˆ
 #if 0
 #include <iostream>
 #include <algorithm>
@@ -3756,8 +3756,8 @@ template<typename T>
 class StackWithMin
 {
 private:
-    MyStack<T> m_data;//Êı¾İÕ»
-    MyStack<T> m_min;//¸¨ÖúÕ»
+    MyStack<T> m_data;//æ•°æ®æ ˆ
+    MyStack<T> m_min;//è¾…åŠ©æ ˆ
 
 public:
     StackWithMin();
@@ -3820,24 +3820,24 @@ template<typename T>
 StackWithMin<T>::~StackWithMin()
 {}
 
-//¿ÉÒÔ°ÑÃ¿´ÎµÄ×îĞ¡ÔªËØ(Ö®Ç°µÄ×îĞ¡ÔªËØºÍĞÂÑ¹ÈëÕ»µÄÔªËØÁ½ÕßµÄ½ÏĞ¡Öµ)
-//±£´æÆğÀ´·Åµ½¸¨ÖúÕ»MyStack¶ÔÏóÖĞ
+//å¯ä»¥æŠŠæ¯æ¬¡çš„æœ€å°å…ƒç´ (ä¹‹å‰çš„æœ€å°å…ƒç´ å’Œæ–°å‹å…¥æ ˆçš„å…ƒç´ ä¸¤è€…çš„è¾ƒå°å€¼)
+//ä¿å­˜èµ·æ¥æ”¾åˆ°è¾…åŠ©æ ˆMyStackå¯¹è±¡ä¸­
 template<typename T>
 bool StackWithMin<T>::push(const T& item)
 {
     m_data.push(item);
 
-    //***×¢***
-    //m_min¶ÔÏóÎŞ·¨·ÃÎÊm_topÕâ¸öË½ÓĞÊı¾İ³ÉÔ±,
-    //½«m_topÉùÃ÷ÎªprotectedÒ²²»ĞĞ
-    //Ô­Òò£º
-    // Ë½ÓĞ¼Ì³ĞËùÌá¹©µÄÌØĞÔÈ·Êµ±È°üº¬¶à¡£
-    // ÀıÈç£¬¼ÙÉèÀà°üº¬±£»¤³ÉÔ± £¨¿ÉÒÔÊÇÊı¾İ³ÉÔ±£¬Ò²¿ÉÒÔÊÇ³ÉÔ±º¯Êı£©£¬
-    // ÔòÕâÑùµÄ³ÉÔ±ÔÚÅÉÉúÀàÖĞÊÇ¿ÉÓÃµÄ£¬µ«ÔÚ¼Ì³Ğ²ã´Î½á¹¹ÍâÊÇ²»¿ÉÓÃµÄ¡£
-    // Èç¹ûÊ¹ÓÃ×éºÏ½«ÕâÑùµÄÀà°üº¬ÔÚÁíÒ»¸öÀàÖĞ£¬ÔòºóÕß½«²»ÊÇÅÉÉúÀà£¬
-    // ¶øÊÇÎ»ÓÚ¼Ì³Ğ²ã´Î½á¹¹Ö®Íâ£¬Òò´Ë²»ÄÜ·ÃÎÊ±£»¤³ÉÔ±¡£µ«
-    // Í¨¹ı¼Ì³ĞµÃµ½µÄ½«ÊÇÅÉÉúÀà£¬Òò´ËËüÄÜ¹»·ÃÎÊ±£»¤³ÉÔ±¡£
-    // ËùÒÔÖ»ÄÜÓÃsize()·½·¨
+    //***æ³¨***
+    //m_minå¯¹è±¡æ— æ³•è®¿é—®m_topè¿™ä¸ªç§æœ‰æ•°æ®æˆå‘˜,
+    //å°†m_topå£°æ˜ä¸ºprotectedä¹Ÿä¸è¡Œ
+    //åŸå› ï¼š
+    // ç§æœ‰ç»§æ‰¿æ‰€æä¾›çš„ç‰¹æ€§ç¡®å®æ¯”åŒ…å«å¤šã€‚
+    // ä¾‹å¦‚ï¼Œå‡è®¾ç±»åŒ…å«ä¿æŠ¤æˆå‘˜ ï¼ˆå¯ä»¥æ˜¯æ•°æ®æˆå‘˜ï¼Œä¹Ÿå¯ä»¥æ˜¯æˆå‘˜å‡½æ•°ï¼‰ï¼Œ
+    // åˆ™è¿™æ ·çš„æˆå‘˜åœ¨æ´¾ç”Ÿç±»ä¸­æ˜¯å¯ç”¨çš„ï¼Œä½†åœ¨ç»§æ‰¿å±‚æ¬¡ç»“æ„å¤–æ˜¯ä¸å¯ç”¨çš„ã€‚
+    // å¦‚æœä½¿ç”¨ç»„åˆå°†è¿™æ ·çš„ç±»åŒ…å«åœ¨å¦ä¸€ä¸ªç±»ä¸­ï¼Œåˆ™åè€…å°†ä¸æ˜¯æ´¾ç”Ÿç±»ï¼Œ
+    // è€Œæ˜¯ä½äºç»§æ‰¿å±‚æ¬¡ç»“æ„ä¹‹å¤–ï¼Œå› æ­¤ä¸èƒ½è®¿é—®ä¿æŠ¤æˆå‘˜ã€‚ä½†
+    // é€šè¿‡ç»§æ‰¿å¾—åˆ°çš„å°†æ˜¯æ´¾ç”Ÿç±»ï¼Œå› æ­¤å®ƒèƒ½å¤Ÿè®¿é—®ä¿æŠ¤æˆå‘˜ã€‚
+    // æ‰€ä»¥åªèƒ½ç”¨size()æ–¹æ³•
     if ( m_min.size() == 0 || m_data.top() < m_min.top())
     {
         m_min.push(item);
@@ -3845,8 +3845,8 @@ bool StackWithMin<T>::push(const T& item)
     else
         m_min.push(m_min.top());
 
-    //***×¢***
-    //¸¨ÖúÕ»Ã¿´ÎÑ¹ÈëµÄ¶¼ÊÇÕ»ÖĞÔªËØºÍµ±Ç°´ıÑ¹ÈëÔªËØµÄ½ÏĞ¡ÔªËØ
+    //***æ³¨***
+    //è¾…åŠ©æ ˆæ¯æ¬¡å‹å…¥çš„éƒ½æ˜¯æ ˆä¸­å…ƒç´ å’Œå½“å‰å¾…å‹å…¥å…ƒç´ çš„è¾ƒå°å…ƒç´ 
 
     return true;
 }
@@ -3876,13 +3876,13 @@ int main()
     return 0;
 }
 #endif
-//¿ÉÒÔÓÃassert()ÔÚÔËĞĞ½×¶Î¶Ô¶ÏÑÔ½øĞĞ¼ì²é£¬Èç¹ûÎª true£¬
-//ÏÔÊ¾Ò»ÌõÏûÏ¢£¬·ñÔòµ÷ÓÃ abort()
+//å¯ä»¥ç”¨assert()åœ¨è¿è¡Œé˜¶æ®µå¯¹æ–­è¨€è¿›è¡Œæ£€æŸ¥ï¼Œå¦‚æœä¸º trueï¼Œ
+//æ˜¾ç¤ºä¸€æ¡æ¶ˆæ¯ï¼Œå¦åˆ™è°ƒç”¨ abort()
 
 
-//ÃæÊÔÌâ31£ºÕ»µÄÑ¹Èë¡¢µ¯³öĞòÁĞ
-//ÊäÈëÁ½¸öÕûÊıĞòÁĞ£¬µÚÒ»¸öĞòÁĞ±íÊ¾Õ»µÄÑ¹ÈëË³Ğò£¬ÇëÅĞ¶ÏµÚ¶ş¸öĞòÁĞÊÇ·ñÎª
-//¸ÃÕ»µÄµ¯³öË³Ğò
+//é¢è¯•é¢˜31ï¼šæ ˆçš„å‹å…¥ã€å¼¹å‡ºåºåˆ—
+//è¾“å…¥ä¸¤ä¸ªæ•´æ•°åºåˆ—ï¼Œç¬¬ä¸€ä¸ªåºåˆ—è¡¨ç¤ºæ ˆçš„å‹å…¥é¡ºåºï¼Œè¯·åˆ¤æ–­ç¬¬äºŒä¸ªåºåˆ—æ˜¯å¦ä¸º
+//è¯¥æ ˆçš„å¼¹å‡ºé¡ºåº
 #if 0
 #include <iostream>
 #include <stack>
@@ -3904,7 +3904,7 @@ int main()
     return 0;
 }
 
-//×Ô¼ºĞ´µÄ½â·¨£º
+//è‡ªå·±å†™çš„è§£æ³•ï¼š
 #if 0
 bool IsPopOrder(const int* pPush, const int* pPop, int nLength)
 {
@@ -3915,7 +3915,7 @@ bool IsPopOrder(const int* pPush, const int* pPop, int nLength)
 
     int i = 0;
 
-    //±éÀúpPushĞòÁĞ
+    //éå†pPushåºåˆ—
 	for (int index = 0; index < nLength; index++)
     {
         if (pPush[index] == pPop[i])
@@ -3954,7 +3954,7 @@ bool IsPopOrder(const int* pPush, const int* pPop, int nLength)
 }
 #endif
 
-//ÊéÉÏµÄ½â·¨£º
+//ä¹¦ä¸Šçš„è§£æ³•ï¼š
 #if 1
 bool IsPopOrder(const int* pPush, const int* pPop, int nLength)
 {
@@ -3963,7 +3963,7 @@ bool IsPopOrder(const int* pPush, const int* pPop, int nLength)
 
     stack<int>stk;
 
-    //Ö±½ÓÓÃÖ¸Õë×÷ÎªÅĞ¶ÏÑ­»·ÖÕÖ¹µÄÌõ¼ş
+    //ç›´æ¥ç”¨æŒ‡é’ˆä½œä¸ºåˆ¤æ–­å¾ªç¯ç»ˆæ­¢çš„æ¡ä»¶
     /*const int* pNextPush = pPush;
     const int* pNextPop = pPop;
 
@@ -3976,12 +3976,12 @@ bool IsPopOrder(const int* pPush, const int* pPop, int nLength)
 
     int i = 0;
 
-    //»òÕß
-    //ÓÃË÷Òı×÷ÎªÅĞ¶ÏÑ­»·ÖÕÖ¹µÄÌõ¼ş£¬
-    //±éÀúµÄÊÇpPopĞòÁĞ
+    //æˆ–è€…
+    //ç”¨ç´¢å¼•ä½œä¸ºåˆ¤æ–­å¾ªç¯ç»ˆæ­¢çš„æ¡ä»¶ï¼Œ
+    //éå†çš„æ˜¯pPopåºåˆ—
     for (int index = 0; index < nLength; ++index)
     {
-        //Èô¸¨ÖúÕ»Îª¿Õ£¬»ò¸¨ÖúÕ»µÄÕ»¶¥ÔªËØ²»µÈÓÚpPop[index]
+        //è‹¥è¾…åŠ©æ ˆä¸ºç©ºï¼Œæˆ–è¾…åŠ©æ ˆçš„æ ˆé¡¶å…ƒç´ ä¸ç­‰äºpPop[index]
         while (stk.empty() || stk.top() != pPop[index])
         {
             if (i == nLength)
@@ -3991,11 +3991,11 @@ bool IsPopOrder(const int* pPush, const int* pPop, int nLength)
             ++i;
         }
 
-        //Èô¸¨ÖúÕ»ÒÑ¾­×°ÍêÁËpPushĞòÁĞ£¬ÈÔºÍpPop[index]²»ÏàµÈ
+        //è‹¥è¾…åŠ©æ ˆå·²ç»è£…å®Œäº†pPushåºåˆ—ï¼Œä»å’ŒpPop[index]ä¸ç›¸ç­‰
         if (stk.top() != pPop[index])
             break;
 
-        //Èô¸¨ÖúÕ»µÄÕ»¶¥ÔªËØÓëpPop[index]ÏàµÈ
+        //è‹¥è¾…åŠ©æ ˆçš„æ ˆé¡¶å…ƒç´ ä¸pPop[index]ç›¸ç­‰
         stk.pop();
     }
 
@@ -4009,7 +4009,7 @@ bool IsPopOrder(const int* pPush, const int* pPop, int nLength)
 #endif
 
 
-//ÃæÊÔÌâ32£º´ÓÉÏµ½ÏÂ´òÓ¡¶ş²æÊ÷
+//é¢è¯•é¢˜32ï¼šä»ä¸Šåˆ°ä¸‹æ‰“å°äºŒå‰æ ‘
 #if 0
 #include <iostream>
 #include "Tree.h"
@@ -4076,7 +4076,7 @@ void breadthFirst(BinaryTreeNode* rootNode)
     return;
 }
 
-//ÊéÉÏ½â·¨£º
+//ä¹¦ä¸Šè§£æ³•ï¼š
 void PrintFromToptoBottom(BinaryTreeNode* pTreeRoot)
 {
     if (!pTreeRoot)
@@ -4089,12 +4089,12 @@ void PrintFromToptoBottom(BinaryTreeNode* pTreeRoot)
 
     while (!nodeQueue.empty())
     {
-        //ÏÈÄÃÔªËØ
+        //å…ˆæ‹¿å…ƒç´ 
         tempNode = nodeQueue.front();
 
         std::cout << tempNode->m_dbValue << " ";
 
-        //ºóµ¯³ö
+        //åå¼¹å‡º
         nodeQueue.pop();
 
         if (tempNode->m_pLeft)
@@ -4106,7 +4106,7 @@ void PrintFromToptoBottom(BinaryTreeNode* pTreeRoot)
 #endif
 
 
-//·ÖĞĞ´ÓÉÏµ½ÏÂ´òÓ¡¶ş²æÊ÷
+//åˆ†è¡Œä»ä¸Šåˆ°ä¸‹æ‰“å°äºŒå‰æ ‘
 #if 0
 #include <iostream>
 #include "Tree.h"
@@ -4138,10 +4138,10 @@ int main()
     return 0;
 }
 
-//ÈçºÎ°´²ã´òÓ¡£¿
-//·½·¨£º´´½¨±äÁ¿xÀ´´æ´¢Ã¿²ãµÈ´ı´òÓ¡µÄ½ÚµãÊıÁ¿
-//ÄÑµã£ºÒ»²ãÓĞËÄ¸ö½Úµã£¬ÄÇÔõÃ´°ì£¿
-//µ±±äÁ¿xÖµ½µÎª0ºó£¬´òÓ¡»»ĞĞ·û
+//å¦‚ä½•æŒ‰å±‚æ‰“å°ï¼Ÿ
+//æ–¹æ³•ï¼šåˆ›å»ºå˜é‡xæ¥å­˜å‚¨æ¯å±‚ç­‰å¾…æ‰“å°çš„èŠ‚ç‚¹æ•°é‡
+//éš¾ç‚¹ï¼šä¸€å±‚æœ‰å››ä¸ªèŠ‚ç‚¹ï¼Œé‚£æ€ä¹ˆåŠï¼Ÿ
+//å½“å˜é‡xå€¼é™ä¸º0åï¼Œæ‰“å°æ¢è¡Œç¬¦
 
 void PrintFromToptoBottom(BinaryTreeNode* pTreeRoot)
 {
@@ -4157,9 +4157,9 @@ void PrintFromToptoBottom(BinaryTreeNode* pTreeRoot)
 
     while (!nodeQueue.empty())
     {
-        //ÏÈÄÃÔªËØ
+        //å…ˆæ‹¿å…ƒç´ 
         tempNode = nodeQueue.front();
-        //ºóµ¯³ö
+        //åå¼¹å‡º
         nodeQueue.pop();
 
         std::cout << tempNode->m_dbValue << " ";
@@ -4190,7 +4190,7 @@ void PrintFromToptoBottom(BinaryTreeNode* pTreeRoot)
 #endif
 
 
-//Ö®×ÖĞÎ´òÓ¡¶ş²æÊ÷
+//ä¹‹å­—å½¢æ‰“å°äºŒå‰æ ‘
 #if 0
 #include <iostream>
 #include "Tree.h"
@@ -4237,13 +4237,13 @@ void Print_in_zigzag_pattern(BinaryTreeNode* pTreeRoot)
     queue<BinaryTreeNode*> nodeQueue;
     stack<BinaryTreeNode*> nodeStack;
 
-    //¼ÇÂ¼²ãºÅ
+    //è®°å½•å±‚å·
     int odd_even = 1;
 
-    //¼ÇÂ¼Ä³²ãÓ¦¸Ã´òÓ¡µÄ½ÚµãÊıÁ¿
+    //è®°å½•æŸå±‚åº”è¯¥æ‰“å°çš„èŠ‚ç‚¹æ•°é‡
     int num_of_this_level = 0;
 
-    //¼ÇÂ¼Ä³²ã»¹ÓĞ¶àÉÙ½ÚµãÊıÁ¿Ã»ÓĞ±»´òÓ¡
+    //è®°å½•æŸå±‚è¿˜æœ‰å¤šå°‘èŠ‚ç‚¹æ•°é‡æ²¡æœ‰è¢«æ‰“å°
     int cnt = 1;
 
     nodeQueue.push(pTreeRoot);
@@ -4275,9 +4275,9 @@ void Print_in_zigzag_pattern(BinaryTreeNode* pTreeRoot)
             ++num_of_this_level;
         }
 
-        //´íÎóµã£º
-        //µ±±éÀúµ½ÖµÎª3µÄ½ÚµãÊ±£¬ÒªÏò¶ÓÁĞÑ¹Èë½Úµã£¬µ«Õâ¾Í»áÔì³É¶ÓÁĞÖĞ¸÷½ÚµãµÄÖµ
-        //Îª5  6  4
+        //é”™è¯¯ç‚¹ï¼š
+        //å½“éå†åˆ°å€¼ä¸º3çš„èŠ‚ç‚¹æ—¶ï¼Œè¦å‘é˜Ÿåˆ—å‹å…¥èŠ‚ç‚¹ï¼Œä½†è¿™å°±ä¼šé€ æˆé˜Ÿåˆ—ä¸­å„èŠ‚ç‚¹çš„å€¼
+        //ä¸º5  6  4
 
         if (p_tmpNode->m_pRight)
         {
@@ -4305,9 +4305,9 @@ void Print_in_zigzag_pattern(BinaryTreeNode* pTreeRoot)
 }
 #endif
 
-//×Ô¼ºµÄ½â·¨£º
-//ÔÚ²»¸Ä±ä±éÀú×ó×Ó½ÚµãÔÙ±éÀúÓÒ×Ó½ÚµãµÄË³ĞòÏÂ£¬
-//Ôö¼ÓÒ»¸ö¸¨ÖúÕ»À´ĞŞÕıÔªËØË³Ğò
+//è‡ªå·±çš„è§£æ³•ï¼š
+//åœ¨ä¸æ”¹å˜éå†å·¦å­èŠ‚ç‚¹å†éå†å³å­èŠ‚ç‚¹çš„é¡ºåºä¸‹ï¼Œ
+//å¢åŠ ä¸€ä¸ªè¾…åŠ©æ ˆæ¥ä¿®æ­£å…ƒç´ é¡ºåº
 #if 0
 void Print_in_zigzag_pattern(BinaryTreeNode* pTreeRoot)
 {
@@ -4318,13 +4318,13 @@ void Print_in_zigzag_pattern(BinaryTreeNode* pTreeRoot)
     stack<BinaryTreeNode*> nodeStack;
     stack<BinaryTreeNode*> aux_Stack;
 
-    //¼ÇÂ¼²ãºÅ
+    //è®°å½•å±‚å·
     int odd_even = 1;
 
-    //¼ÇÂ¼Ä³²ãÓ¦¸Ã´òÓ¡µÄ½ÚµãÊıÁ¿
+    //è®°å½•æŸå±‚åº”è¯¥æ‰“å°çš„èŠ‚ç‚¹æ•°é‡
     int num_of_this_level = 0;
 
-    //¼ÇÂ¼Ä³²ã»¹ÓĞ¶àÉÙ½ÚµãÊıÁ¿Ã»ÓĞ±»´òÓ¡
+    //è®°å½•æŸå±‚è¿˜æœ‰å¤šå°‘èŠ‚ç‚¹æ•°é‡æ²¡æœ‰è¢«æ‰“å°
     int cnt = 1;
 
     nodeQueue.push(pTreeRoot);
@@ -4342,9 +4342,9 @@ void Print_in_zigzag_pattern(BinaryTreeNode* pTreeRoot)
         {
             p_tmpNode = nodeStack.top();
 
-            //***×¢***
-            //¸¨ÖúÕ»ÓÃÀ´µßµ¹ÔªËØË³Ğò
-            //´òÓ¡ÈÔ´òÓ¡µÄÊÇnodeStackÖĞµÄÔªËØ
+            //***æ³¨***
+            //è¾…åŠ©æ ˆç”¨æ¥é¢ å€’å…ƒç´ é¡ºåº
+            //æ‰“å°ä»æ‰“å°çš„æ˜¯nodeStackä¸­çš„å…ƒç´ 
             aux_Stack.push(nodeStack.top());
 
             nodeStack.pop();
@@ -4354,7 +4354,7 @@ void Print_in_zigzag_pattern(BinaryTreeNode* pTreeRoot)
 
         cnt--;
 
-        //¸ù¾İ²ãºÅµÄÆæÅ¼ĞÔÀ´×ö²»Í¬µÄ²Ù×÷
+        //æ ¹æ®å±‚å·çš„å¥‡å¶æ€§æ¥åšä¸åŒçš„æ“ä½œ
         if (odd_even & 0x01)
         {
             if (p_tmpNode->m_pLeft)
@@ -4370,7 +4370,7 @@ void Print_in_zigzag_pattern(BinaryTreeNode* pTreeRoot)
         }
         else
         {
-            if (!cnt)//µ±²ãºÅÎªÅ¼Êı£¬ÇÒ¸Ã²ã½Úµã¶¼±»´òÓ¡ÍêÁË£¬ÄÇ¾Í¿ÉÒÔÏò¶ÓÁĞÑ¹Èë½ÚµãµÄÖµÁË
+            if (!cnt)//å½“å±‚å·ä¸ºå¶æ•°ï¼Œä¸”è¯¥å±‚èŠ‚ç‚¹éƒ½è¢«æ‰“å°å®Œäº†ï¼Œé‚£å°±å¯ä»¥å‘é˜Ÿåˆ—å‹å…¥èŠ‚ç‚¹çš„å€¼äº†
             {
                 while (!aux_Stack.empty())
                 {
@@ -4408,10 +4408,10 @@ void Print_in_zigzag_pattern(BinaryTreeNode* pTreeRoot)
 }
 #endif
 
-//½â·¨¶ş£º
-//¸Ä±ä±éÀúË³Ğò£¬µ±±éÀúÆæÊı²ãÊ±£¬Ñ¹ÈëÕ»µÄË³ĞòÎªÏÈ±éÀú×ó×Ó½ÚµãÔÙ±éÀúÓÒ×Ó½Úµã
-//µ±±éÀúÅ¼Êı²ãÊ±£¬Ñ¹ÈëÕ»µÄË³ĞòÎªÏÈ±éÀúÓÒ×Ó½ÚµãÔÙ±éÀú×ó×Ó½Úµã
-//¶øÇÒ²»ÓÃ¶ÓÁĞ£¬¶øÊÇ×Ü¹²Ê¹ÓÃÁ½¸öÕ»
+//è§£æ³•äºŒï¼š
+//æ”¹å˜éå†é¡ºåºï¼Œå½“éå†å¥‡æ•°å±‚æ—¶ï¼Œå‹å…¥æ ˆçš„é¡ºåºä¸ºå…ˆéå†å·¦å­èŠ‚ç‚¹å†éå†å³å­èŠ‚ç‚¹
+//å½“éå†å¶æ•°å±‚æ—¶ï¼Œå‹å…¥æ ˆçš„é¡ºåºä¸ºå…ˆéå†å³å­èŠ‚ç‚¹å†éå†å·¦å­èŠ‚ç‚¹
+//è€Œä¸”ä¸ç”¨é˜Ÿåˆ—ï¼Œè€Œæ˜¯æ€»å…±ä½¿ç”¨ä¸¤ä¸ªæ ˆ
 #if 0
 void Print_in_zigzag_pattern(BinaryTreeNode* pTreeRoot)
 {
@@ -4420,9 +4420,9 @@ void Print_in_zigzag_pattern(BinaryTreeNode* pTreeRoot)
     
     stack<BinaryTreeNode*> nodeStack[2];
 
-    //±íÊ¾µ±Ç°ËùÊ¹ÓÃµÄÕ»
+    //è¡¨ç¤ºå½“å‰æ‰€ä½¿ç”¨çš„æ ˆ
     int current = 0;
-    //next±äÁ¿ÓÃÓÚÖ¸¶¨½«Ê¹ÓÃÄÄ¸öÕ»À´´æÔªËØ
+    //nextå˜é‡ç”¨äºæŒ‡å®šå°†ä½¿ç”¨å“ªä¸ªæ ˆæ¥å­˜å…ƒç´ 
     int next = 1;
 
     nodeStack[current].push(pTreeRoot);
@@ -4458,7 +4458,7 @@ void Print_in_zigzag_pattern(BinaryTreeNode* pTreeRoot)
             }
         }
 
-        //²»ÔÙÀûÓÃnum_of_this_level±äÁ¿ºÍcnt±äÁ¿À´ÉèÖÃ»»ĞĞ·û
+        //ä¸å†åˆ©ç”¨num_of_this_levelå˜é‡å’Œcntå˜é‡æ¥è®¾ç½®æ¢è¡Œç¬¦
 
         if (nodeStack[current].empty())
         {
@@ -4473,7 +4473,7 @@ void Print_in_zigzag_pattern(BinaryTreeNode* pTreeRoot)
 #endif
 
 
-//ÃæÊÔÌâ33£º¶ş²æËÑË÷Ê÷µÄºóĞò±éÀúĞòÁĞ
+//é¢è¯•é¢˜33ï¼šäºŒå‰æœç´¢æ ‘çš„ååºéå†åºåˆ—
 #if 0
 #include <iostream>
 #include "Tree.h"
@@ -4515,29 +4515,29 @@ int main()
     return 0;
 }
 
-//¶ş²æÊ÷ËÑË÷Ê÷µÄÔªËØÅÅÁĞµÄ¹æ·¶Îª
-//Ä³¸ö½ÚµãµÄ×ó×ÓÊ÷µÄËùÓĞ½ÚµãµÄÖµ±ÈÆäĞ¡£¬ÓÒ×ÓÊ÷µÄËùÓĞ½ÚµãµÄÖµ±ÈÆä´ó¡£
+//äºŒå‰æ ‘æœç´¢æ ‘çš„å…ƒç´ æ’åˆ—çš„è§„èŒƒä¸º
+//æŸä¸ªèŠ‚ç‚¹çš„å·¦å­æ ‘çš„æ‰€æœ‰èŠ‚ç‚¹çš„å€¼æ¯”å…¶å°ï¼Œå³å­æ ‘çš„æ‰€æœ‰èŠ‚ç‚¹çš„å€¼æ¯”å…¶å¤§ã€‚
 
-//¶ş²æÊ÷µÄºóĞò±éÀúµÄÌØµãÊÇ£º
-//ĞòÁĞµÄ×îºóÒ»¸öÔªËØ¾ÍÊÇ¸ù½ÚµãµÄÖµ£¬ĞòÁĞ³ıÄ©Î²µÄÖµ£¬ÆäËûµÄÖµÈôĞ¡ÓÚ¸ù½ÚµãµÄÖµ
-//ÔòÎª¸ù½ÚµãµÄ×ó×ÓÊ÷£¬·´Ö®£¬ÔòÎªÓÒ×ÓÊ÷
-//¶øÇÒÔÚ×ÓÊ÷ÖĞ£¬ÈÔ´æÔÚ´Ë¹æÂÉ
+//äºŒå‰æ ‘çš„ååºéå†çš„ç‰¹ç‚¹æ˜¯ï¼š
+//åºåˆ—çš„æœ€åä¸€ä¸ªå…ƒç´ å°±æ˜¯æ ¹èŠ‚ç‚¹çš„å€¼ï¼Œåºåˆ—é™¤æœ«å°¾çš„å€¼ï¼Œå…¶ä»–çš„å€¼è‹¥å°äºæ ¹èŠ‚ç‚¹çš„å€¼
+//åˆ™ä¸ºæ ¹èŠ‚ç‚¹çš„å·¦å­æ ‘ï¼Œåä¹‹ï¼Œåˆ™ä¸ºå³å­æ ‘
+//è€Œä¸”åœ¨å­æ ‘ä¸­ï¼Œä»å­˜åœ¨æ­¤è§„å¾‹
 
-//×Ô¼ºµÄ½â·¨£º
+//è‡ªå·±çš„è§£æ³•ï¼š
 #if 0
 bool VerifySquenceOfBST(int* sequence, int length)
 {
     if (sequence==nullptr||length<=0)
         return false;
 
-    //´´½¨±äÁ¿´æ´¢µ±Ç°Ê÷µÄ¸ù½ÚµãµÄÖµ
+    //åˆ›å»ºå˜é‡å­˜å‚¨å½“å‰æ ‘çš„æ ¹èŠ‚ç‚¹çš„å€¼
     int root = sequence[length-1];
 
-    //È·¶¨×óÓÒ×ÓÊ÷µÄĞòÁĞµÄÄÚÈİ³¤¶È
+    //ç¡®å®šå·¦å³å­æ ‘çš„åºåˆ—çš„å†…å®¹é•¿åº¦
     int i;
     for (i = 0; ; ++i)
     {
-        if (sequence[i] >= root)//***×¢***   ´Ë´¦ÒªĞ´³É´óÓÚµÈÓÚ£¬·ñÔò»á½øÈëËÀÑ­»·
+        if (sequence[i] >= root)//***æ³¨***   æ­¤å¤„è¦å†™æˆå¤§äºç­‰äºï¼Œå¦åˆ™ä¼šè¿›å…¥æ­»å¾ªç¯
             break;
     }
 
@@ -4549,11 +4549,11 @@ bool VerifySquenceOfBST(int* sequence, int length)
     }
 
     bool flag = true;
-    //ÈôÄ³½Úµã´æÔÚ×ó×ÓÊ÷
+    //è‹¥æŸèŠ‚ç‚¹å­˜åœ¨å·¦å­æ ‘
     if(i>=1&&sequence[i]!=root)
 		flag = VerifySquenceOfBST(sequence, i);
 
-    //ÈôÄ³½Úµã´æÔÚÓÒ×ÓÊ÷
+    //è‹¥æŸèŠ‚ç‚¹å­˜åœ¨å³å­æ ‘
     if (flag&&j != i)
         flag = VerifySquenceOfBST(sequence+i,   j-i);
 
@@ -4561,7 +4561,7 @@ bool VerifySquenceOfBST(int* sequence, int length)
 }
 #endif
 
-//½â·¨¶ş£º
+//è§£æ³•äºŒï¼š
 #if 1
 bool VerifySquenceOfBST(int* sequence, int length)
 {
@@ -4598,16 +4598,16 @@ bool VerifySquenceOfBST(int* sequence, int length)
 #endif
 
 
-//ÃæÊÔÌâ34£º¶ş²æÊ÷ÖĞºÍÎªÄ³Ò»ÖµµÄÂ·¾¶
-//Ë¼Â·£º
-//µ±ÓÃÇ°Ğò±éÀúµÄ·½Ê½·ÃÎÊµ½Ä³Ò»½ÚµãÊ±£¬ÎÒÃÇ°Ñ¸Ã½ÚµãÌí¼Óµ½Â·¾¶ÉÏ£¬
-//²¢ÀÛ¼Ó¸Ã½ÚµãµÄÖµ¡£Èç¹û¸Ã½ÚµãÎªÒ¶½Úµã£¬²¢ÇÒÂ·¾¶ÖĞ½ÚµãÖµµÄºÍ¸ÕºÃµÈÓÚÊäÈëµÄÕûÊı£¬
-//Ôòµ±Ç°Â·¾¶·ûºÏÒªÇó£¬ÎÒÃÇ°ÑËü´òÓ¡³öÀ´¡£Èç¹ûµ±Ç°½Úµã²»ÊÇÒ¶½Úµã£¬Ôò
-//¼ÌĞø·ÃÎÊËüµÄ×Ó½Úµã¡£µ±Ç°½Úµã·ÃÎÊ½áÊøºó£¬µİ¹éº¯Êı½«×Ô¶¯»Øµ½ËüµÄ¸¸
-//½Úµã¡£Òò´Ë£¬ÎÒÃÇÔÚº¯ÊıÍË³öÖ®Ç°ÒªÔÚÂ·¾¶ÉÏÉ¾³ıµ±Ç°½Úµã²¢¼õÈ¥µ±Ç°½Ú
-//µãµÄÖµ£¬ÒÔÈ·±£·µ»Ø¸¸½ÚµãÊ±Â·¾¶¸ÕºÃÊÇ´Ó¸ù½Úµãµ½¸¸½Úµã¡£ÎÒÃÇ²»ÄÑ¿´
-//³ö±£´æÂ·¾¶µÄÊı¾İ½á¹¹Êµ¼ÊÉÏÊÇÒ»¸öÕ»£¬ÒòÎªÂ·¾¶ÒªÓëµİ¹éµ÷ÓÃ×´Ì¬Ò»
-//ÖÂ£¬¶øµİ¹éµ÷ÓÃµÄ±¾ÖÊ¾ÍÊÇÒ»¸öÑ¹Õ»ºÍ³öÕ»µÄ¹ı³Ì¡£
+//é¢è¯•é¢˜34ï¼šäºŒå‰æ ‘ä¸­å’Œä¸ºæŸä¸€å€¼çš„è·¯å¾„
+//æ€è·¯ï¼š
+//å½“ç”¨å‰åºéå†çš„æ–¹å¼è®¿é—®åˆ°æŸä¸€èŠ‚ç‚¹æ—¶ï¼Œæˆ‘ä»¬æŠŠè¯¥èŠ‚ç‚¹æ·»åŠ åˆ°è·¯å¾„ä¸Šï¼Œ
+//å¹¶ç´¯åŠ è¯¥èŠ‚ç‚¹çš„å€¼ã€‚å¦‚æœè¯¥èŠ‚ç‚¹ä¸ºå¶èŠ‚ç‚¹ï¼Œå¹¶ä¸”è·¯å¾„ä¸­èŠ‚ç‚¹å€¼çš„å’Œåˆšå¥½ç­‰äºè¾“å…¥çš„æ•´æ•°ï¼Œ
+//åˆ™å½“å‰è·¯å¾„ç¬¦åˆè¦æ±‚ï¼Œæˆ‘ä»¬æŠŠå®ƒæ‰“å°å‡ºæ¥ã€‚å¦‚æœå½“å‰èŠ‚ç‚¹ä¸æ˜¯å¶èŠ‚ç‚¹ï¼Œåˆ™
+//ç»§ç»­è®¿é—®å®ƒçš„å­èŠ‚ç‚¹ã€‚å½“å‰èŠ‚ç‚¹è®¿é—®ç»“æŸåï¼Œé€’å½’å‡½æ•°å°†è‡ªåŠ¨å›åˆ°å®ƒçš„çˆ¶
+//èŠ‚ç‚¹ã€‚å› æ­¤ï¼Œæˆ‘ä»¬åœ¨å‡½æ•°é€€å‡ºä¹‹å‰è¦åœ¨è·¯å¾„ä¸Šåˆ é™¤å½“å‰èŠ‚ç‚¹å¹¶å‡å»å½“å‰èŠ‚
+//ç‚¹çš„å€¼ï¼Œä»¥ç¡®ä¿è¿”å›çˆ¶èŠ‚ç‚¹æ—¶è·¯å¾„åˆšå¥½æ˜¯ä»æ ¹èŠ‚ç‚¹åˆ°çˆ¶èŠ‚ç‚¹ã€‚æˆ‘ä»¬ä¸éš¾çœ‹
+//å‡ºä¿å­˜è·¯å¾„çš„æ•°æ®ç»“æ„å®é™…ä¸Šæ˜¯ä¸€ä¸ªæ ˆï¼Œå› ä¸ºè·¯å¾„è¦ä¸é€’å½’è°ƒç”¨çŠ¶æ€ä¸€
+//è‡´ï¼Œè€Œé€’å½’è°ƒç”¨çš„æœ¬è´¨å°±æ˜¯ä¸€ä¸ªå‹æ ˆå’Œå‡ºæ ˆçš„è¿‡ç¨‹ã€‚
 #if 0
 #include <iostream>
 #include <vector>
@@ -4666,7 +4666,7 @@ void FindPathCore(BinaryTreeNode* pRoot, int exceptedSum,
     vec.push_back(pRoot->m_dbValue);
     CurrentSum += pRoot->m_dbValue;
 
-    //Èôµ±Ç°×ÜºÍµÈÓÚÆÚÍûµÄ×ÜºÍ£¬ÇÒpRootÖ¸ÏòÁËÊ÷µÄÒ¶×Ó½áµã
+    //è‹¥å½“å‰æ€»å’Œç­‰äºæœŸæœ›çš„æ€»å’Œï¼Œä¸”pRootæŒ‡å‘äº†æ ‘çš„å¶å­ç»“ç‚¹
     if (CurrentSum == exceptedSum&&pRoot->m_pLeft==nullptr
         &&pRoot->m_pRight==nullptr)
     {
@@ -4683,13 +4683,13 @@ void FindPathCore(BinaryTreeNode* pRoot, int exceptedSum,
     if(pRoot->m_pRight)
         FindPathCore(pRoot->m_pRight,exceptedSum,vec,CurrentSum);
 
-    vec.pop_back();//ÓÃvectorÈİÆ÷À´ÊµÏÖÕ»
+    vec.pop_back();//ç”¨vectorå®¹å™¨æ¥å®ç°æ ˆ
 }
 #endif
 
 
-//·ÖÖÎ·¨¡ª¡ª·Ö½âÈÃ¸´ÔÓÎÊÌâ¼òµ¥»¯
-//ÃæÊÔÌâ35£º¸´ÔÓÁ´±íµÄ¸´ÖÆ
+//åˆ†æ²»æ³•â€”â€”åˆ†è§£è®©å¤æ‚é—®é¢˜ç®€å•åŒ–
+//é¢è¯•é¢˜35ï¼šå¤æ‚é“¾è¡¨çš„å¤åˆ¶
 #if 0
 #include <iostream>
 #include <unordered_map>
@@ -4786,41 +4786,41 @@ void PrintList(ComplexListNode* pHead)
     }
 }
 
-//·¨Ò»£º
-//ÓÉÓÚÔ­½ÚµãºÍĞÂµÄ¿½±´µÄ½ÚµãÊÇÒ»Ò»¶ÔÓ¦¹ØÏµ£¬ËùÒÔ¿ÉÒÔÓÃ¹şÏ£±í£¬ÔÚ±éÀú
-//Ô­½ÚµãµÄÍ¬Ê±£¬´´½¨²¢Ïò¹şÏ£±í´æÈëÔ­½ÚµãºÍĞÂ´´½¨µÄ½Úµã
+//æ³•ä¸€ï¼š
+//ç”±äºåŸèŠ‚ç‚¹å’Œæ–°çš„æ‹·è´çš„èŠ‚ç‚¹æ˜¯ä¸€ä¸€å¯¹åº”å…³ç³»ï¼Œæ‰€ä»¥å¯ä»¥ç”¨å“ˆå¸Œè¡¨ï¼Œåœ¨éå†
+//åŸèŠ‚ç‚¹çš„åŒæ—¶ï¼Œåˆ›å»ºå¹¶å‘å“ˆå¸Œè¡¨å­˜å…¥åŸèŠ‚ç‚¹å’Œæ–°åˆ›å»ºçš„èŠ‚ç‚¹
 #if 0
 ComplexListNode* Clone(ComplexListNode* pHead)
 {
     ComplexListNode* cur = pHead;
 
-    //´´½¨¹şÏ£±í
+    //åˆ›å»ºå“ˆå¸Œè¡¨
     unordered_map<ComplexListNode*, ComplexListNode*> hash;
 
-    //±£´æÔ­½ÚµãºÍ¿½±´µÄ½áµã
-    //(Ô­½ÚµãĞòÁĞ×÷Îª¼ü)
+    //ä¿å­˜åŸèŠ‚ç‚¹å’Œæ‹·è´çš„ç»“ç‚¹
+    //(åŸèŠ‚ç‚¹åºåˆ—ä½œä¸ºé”®)
     while (cur)
     {
         ComplexListNode* tmp=new ComplexListNode;
         tmp->m_nValue = cur->m_nValue;
 
-        hash.insert(make_pair(cur,tmp));//make_pair()·µ»Øº¬ÓĞÖ¸¶¨ÖµµÄ std::pair ¶ÔÏó
+        hash.insert(make_pair(cur,tmp));//make_pair()è¿”å›å«æœ‰æŒ‡å®šå€¼çš„ std::pair å¯¹è±¡
 
         cur = cur->m_pNext;
     }
 
     cur = pHead;
-    //ĞŞ¸Ä¿½±´µÄ½ÚµãµÄÖ¸Õë³ÉÔ±Ö¸ÏòµÄÄÚ´æ¿Õ¼ä
+    //ä¿®æ”¹æ‹·è´çš„èŠ‚ç‚¹çš„æŒ‡é’ˆæˆå‘˜æŒ‡å‘çš„å†…å­˜ç©ºé—´
     while (cur)
     {
-        //***×¢***
-        //¿ÉÒÔÓÃÊı×é±íÊ¾·¨(½«¼üÓÃ×÷Ë÷Òı)À´·ÃÎÊ´æ´¢µÄÖµ
-        //·ÃÎÊ¿½±´µÄ½ÚµãµÄm_pNextÖ¸Õë
-        //(¿½±´µÄ½ÚµãµÄm_pNextÖ¸ÕëÔ­À´´æµÄÊÇÔ­Á´±íµÄ±»¿½±´µÄ½ÚµãµÄÏÂÒ»¸ö½ÚµãµÄµØÖ·)
-        //m_pNext´æ¿½±´µÄÏÂÒ»¸ö½ÚµãµÄµØÖ·
+        //***æ³¨***
+        //å¯ä»¥ç”¨æ•°ç»„è¡¨ç¤ºæ³•(å°†é”®ç”¨ä½œç´¢å¼•)æ¥è®¿é—®å­˜å‚¨çš„å€¼
+        //è®¿é—®æ‹·è´çš„èŠ‚ç‚¹çš„m_pNextæŒ‡é’ˆ
+        //(æ‹·è´çš„èŠ‚ç‚¹çš„m_pNextæŒ‡é’ˆåŸæ¥å­˜çš„æ˜¯åŸé“¾è¡¨çš„è¢«æ‹·è´çš„èŠ‚ç‚¹çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„åœ°å€)
+        //m_pNextå­˜æ‹·è´çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„åœ°å€
         hash[cur]->m_pNext = hash[cur->m_pNext];
 
-        //Í¬Àí£¬ĞŞ¸Ä±»¿½±´½ÚµãµÄm_pSiblingÖ¸ÕëÖ¸ÏòµÄÄÚ´æ¿Õ¼ä
+        //åŒç†ï¼Œä¿®æ”¹è¢«æ‹·è´èŠ‚ç‚¹çš„m_pSiblingæŒ‡é’ˆæŒ‡å‘çš„å†…å­˜ç©ºé—´
         hash[cur]->m_pSibling = hash[cur->m_pSibling];
 
         cur = cur->m_pNext;
@@ -4832,8 +4832,8 @@ ComplexListNode* Clone(ComplexListNode* pHead)
 }
 #endif
 
-//·¨¶ş£º
-//²»Ê¹ÓÃ¸¨Öú¿Õ¼äµÄÇé¿öÏÂÊµÏÖO(n)µÄÊ±¼ä¸´ÔÓ¶È
+//æ³•äºŒï¼š
+//ä¸ä½¿ç”¨è¾…åŠ©ç©ºé—´çš„æƒ…å†µä¸‹å®ç°O(n)çš„æ—¶é—´å¤æ‚åº¦
 #if 1
 void CloneNodes(ComplexListNode* pHead)
 {
@@ -4869,13 +4869,13 @@ void ConnectSiblingNodes(ComplexListNode* pHead)
     }
 }
 
-//½«¿½±´µÄ¸÷¸ö½Úµã´ÓÁ´±íÖĞ³éÀë
-//è¦´Ã£ºµ¼ÖÂÔ­Á´±í¶ÏÁÑ
+//å°†æ‹·è´çš„å„ä¸ªèŠ‚ç‚¹ä»é“¾è¡¨ä¸­æŠ½ç¦»
+//ç‘•ç–µï¼šå¯¼è‡´åŸé“¾è¡¨æ–­è£‚
 #if 0
 ComplexListNode* ReconnectNodes(ComplexListNode* pHead)
 {
     /*
-    cout << "²âÊÔ" << endl;
+    cout << "æµ‹è¯•" << endl;
     ComplexListNode* pNode = pHead->m_pNext;
     printf("The value of this node is: %d.\n", pNode->m_nValue);
 
@@ -4900,7 +4900,7 @@ ComplexListNode* ReconnectNodes(ComplexListNode* pHead)
     }
 
     /*
-    cout << "²âÊÔ"<<endl;
+    cout << "æµ‹è¯•"<<endl;
     pNode = pHead->m_pNext;
     printf("The value of this node is: %d.\n", pNode->m_nValue);
 
@@ -4916,25 +4916,25 @@ ComplexListNode* ReconnectNodes(ComplexListNode* pHead)
 }
 #endif
 
-//½«Ò»¸öÁ´±í·ÖÀëÎªÁ½¸öÁ´±í
+//å°†ä¸€ä¸ªé“¾è¡¨åˆ†ç¦»ä¸ºä¸¤ä¸ªé“¾è¡¨
 #if 1
 ComplexListNode* ReconnectNodes(ComplexListNode* pHead)
 {
-    //pNodeÓÃÓÚ±éÀúÔ­Á´±í
+    //pNodeç”¨äºéå†åŸé“¾è¡¨
     ComplexListNode* pNode = pHead;
-    //pClonedHeadÖ¸Ïò¿ËÂ¡Á´±íµÄÍ·²¿
+    //pClonedHeadæŒ‡å‘å…‹éš†é“¾è¡¨çš„å¤´éƒ¨
     ComplexListNode* pClonedHead = nullptr;
-    //pClonedNodeÓÃÓÚ±éÀú¿ËÂ¡Á´±í
+    //pClonedNodeç”¨äºéå†å…‹éš†é“¾è¡¨
     ComplexListNode* pClonedNode = nullptr;
 
     if (pNode != nullptr)
     {
-        //½«pClonedHeadºÍpClonedNode¶¼Ö¸ÏòpNodeµÄÏÂÒ»¸ö½Úµã£¬¼´¿ËÂ¡Á´±íµÄµÚÒ»¸ö½Úµã
-        // £¨ÒòÎª¿ËÂ¡Á´±íµÄµÚÒ»¸ö½ÚµãÊÇÔ­Á´±íµÄµÚ¶ş¸ö½Úµã£©
+        //å°†pClonedHeadå’ŒpClonedNodeéƒ½æŒ‡å‘pNodeçš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹ï¼Œå³å…‹éš†é“¾è¡¨çš„ç¬¬ä¸€ä¸ªèŠ‚ç‚¹
+        // ï¼ˆå› ä¸ºå…‹éš†é“¾è¡¨çš„ç¬¬ä¸€ä¸ªèŠ‚ç‚¹æ˜¯åŸé“¾è¡¨çš„ç¬¬äºŒä¸ªèŠ‚ç‚¹ï¼‰
         pClonedHead = pClonedNode = pNode->m_pNext;
-        //¸üĞÂpNodeµÄm_pNextÖ¸Õë£¬½«ÆäÖ¸ÏòÏÂÒ»¸ö½Úµã£¨Ô­Á´±íÖĞµÄÏÂÏÂ¸ö½Úµã£©
+        //æ›´æ–°pNodeçš„m_pNextæŒ‡é’ˆï¼Œå°†å…¶æŒ‡å‘ä¸‹ä¸€ä¸ªèŠ‚ç‚¹ï¼ˆåŸé“¾è¡¨ä¸­çš„ä¸‹ä¸‹ä¸ªèŠ‚ç‚¹ï¼‰
         pNode->m_pNext = pClonedNode->m_pNext;
-        //pNodeÖ¸ÏòÁ´±íµÄµÚ3¸ö½Úµã
+        //pNodeæŒ‡å‘é“¾è¡¨çš„ç¬¬3ä¸ªèŠ‚ç‚¹
         pNode = pNode->m_pNext;
     }
 
@@ -4944,11 +4944,11 @@ ComplexListNode* ReconnectNodes(ComplexListNode* pHead)
 
     while (pNode != nullptr)
     {
-        //½«pClonedNodeµÄm_pNextÖ¸ÕëÖ¸ÏòpNodeµÄÏÂÒ»¸ö½Úµã£¬
-        //´Ó¶ø½«¿ËÂ¡Á´±íµÄÏÂÒ»¸ö½ÚµãÁ´½Óµ½ÏÂÒ»¸ö±»¿ËÂ¡½Úµã¡£
+        //å°†pClonedNodeçš„m_pNextæŒ‡é’ˆæŒ‡å‘pNodeçš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹ï¼Œ
+        //ä»è€Œå°†å…‹éš†é“¾è¡¨çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹é“¾æ¥åˆ°ä¸‹ä¸€ä¸ªè¢«å…‹éš†èŠ‚ç‚¹ã€‚
         pClonedNode->m_pNext = pNode->m_pNext;
 
-        //¸üĞÂpClonedNodeºÍpNode£¬Ê¹ËüÃÇ·Ö±ğÖ¸Ïò¿ËÂ¡Á´±íºÍÔ­Á´±íÖĞµÄÏÂÒ»¸ö½Úµã¡£
+        //æ›´æ–°pClonedNodeå’ŒpNodeï¼Œä½¿å®ƒä»¬åˆ†åˆ«æŒ‡å‘å…‹éš†é“¾è¡¨å’ŒåŸé“¾è¡¨ä¸­çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹ã€‚
         pClonedNode = pClonedNode->m_pNext;
         pNode->m_pNext = pClonedNode->m_pNext;
 
@@ -4969,7 +4969,7 @@ ComplexListNode* Clone(ComplexListNode* pHead)
 #endif
 
 
-//ÃæÊÔÌâ36£º¶ş²æËÑË÷Ê÷ÓëË«ÏòÁ´±í
+//é¢è¯•é¢˜36ï¼šäºŒå‰æœç´¢æ ‘ä¸åŒå‘é“¾è¡¨
 #if 0
 #include <iostream>
 #include <exception>
@@ -4994,19 +4994,19 @@ int main()
     ConnectTreeNodes(pNodeA2, pNodeA4, pNodeA5);
     ConnectTreeNodes(pNodeA3, pNodeA6, pNodeA7);
 
-    //½«¶ş²æËÑË÷Ê÷×ª»»³ÉË«ÏòÁ´±í£¬
-    //ÄÇÃ´Ê÷µÄÄ³¸ö½ÚµãµÄ×ó×Ó½Úµã½«Î»ÓÚ¸Ã½ÚµãÖ®Ç°£¬¼´
-    //¸Ã½ÚµãµÄÖ¸Ïò×ó×Ó½ÚµãµÄÖ¸Õëµ÷ÕûÎªÖ¸ÏòË«ÏòÁ´±íÇ°Ò»¸ö½ÚµãµÄÖ¸Õë
-    //¸Ã½ÚµãµÄÖ¸ÏòÓÒ½ÚµãµÄÖ¸ÕëÒ²Í¬ÀíĞèÒªµ÷Õû
+    //å°†äºŒå‰æœç´¢æ ‘è½¬æ¢æˆåŒå‘é“¾è¡¨ï¼Œ
+    //é‚£ä¹ˆæ ‘çš„æŸä¸ªèŠ‚ç‚¹çš„å·¦å­èŠ‚ç‚¹å°†ä½äºè¯¥èŠ‚ç‚¹ä¹‹å‰ï¼Œå³
+    //è¯¥èŠ‚ç‚¹çš„æŒ‡å‘å·¦å­èŠ‚ç‚¹çš„æŒ‡é’ˆè°ƒæ•´ä¸ºæŒ‡å‘åŒå‘é“¾è¡¨å‰ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆ
+    //è¯¥èŠ‚ç‚¹çš„æŒ‡å‘å³èŠ‚ç‚¹çš„æŒ‡é’ˆä¹ŸåŒç†éœ€è¦è°ƒæ•´
      
-    //¸ù½ÚµãºÍÒ¶×Ó½áµãµÄÁ½¸öÖ¸Õë¡¾¿ÉÄÜ¡¿ĞèÒªÌØÊâ´¦Àí
+    //æ ¹èŠ‚ç‚¹å’Œå¶å­ç»“ç‚¹çš„ä¸¤ä¸ªæŒ‡é’ˆã€å¯èƒ½ã€‘éœ€è¦ç‰¹æ®Šå¤„ç†
 
     BinaryTreeNode* List=Convert(pNodeA1);
 
-    //***×¢***
-    //²»ÄÜĞ´ÒÔÏÂÓï¾ä£¬ÒòÎª¶ş²æÊ÷½á¹¹±ä³ÉÁËË«ÏòÁ´±í½á¹¹£¬
-    //µ±´ÓÖµÎª10µÄ½Úµã¿ªÊ¼£¬±éÀú²¢ÊÍ·Å½Úµãµ½ÖµÎª4µÄ½Úµãºó£¬
-    //»áÔÙ´Î±éÀúµ½ÖµÎª6µÄ½Úµã£¬²¢ÊÔÍ¼½øĞĞ¶ş´ÎÊÍ·ÅÄÚ´æ¿Õ¼ä£¬Õâ»áµ¼ÖÂ´íÎó¡£
+    //***æ³¨***
+    //ä¸èƒ½å†™ä»¥ä¸‹è¯­å¥ï¼Œå› ä¸ºäºŒå‰æ ‘ç»“æ„å˜æˆäº†åŒå‘é“¾è¡¨ç»“æ„ï¼Œ
+    //å½“ä»å€¼ä¸º10çš„èŠ‚ç‚¹å¼€å§‹ï¼Œéå†å¹¶é‡Šæ”¾èŠ‚ç‚¹åˆ°å€¼ä¸º4çš„èŠ‚ç‚¹åï¼Œ
+    //ä¼šå†æ¬¡éå†åˆ°å€¼ä¸º6çš„èŠ‚ç‚¹ï¼Œå¹¶è¯•å›¾è¿›è¡ŒäºŒæ¬¡é‡Šæ”¾å†…å­˜ç©ºé—´ï¼Œè¿™ä¼šå¯¼è‡´é”™è¯¯ã€‚
     //DestroyTree(pNodeA1);
 
     return 0;
@@ -5020,7 +5020,7 @@ BinaryTreeNode* Convert(BinaryTreeNode* pNode)
     BinaryTreeNode* pLastNodeInList = nullptr;
     ConvertNode(pNode,&pLastNodeInList);
 
-    //´´½¨pHeadNodeInListÖ¸ÕëÖ¸ÏòÁ´±íµÄÊ×¸ö½Úµã
+    //åˆ›å»ºpHeadNodeInListæŒ‡é’ˆæŒ‡å‘é“¾è¡¨çš„é¦–ä¸ªèŠ‚ç‚¹
     BinaryTreeNode* pHeadNodeInList = pLastNodeInList;
     while (pHeadNodeInList != nullptr && pHeadNodeInList->m_pLeft != nullptr)
     {        
@@ -5037,30 +5037,30 @@ void ConvertNode(BinaryTreeNode* pNode, BinaryTreeNode** pLastNodeInList)
 
     BinaryTreeNode* cur = pNode;
 
-    //ÒÔµİ¹éµÄ·½Ê½½øĞĞÖĞĞò±éÀú
+    //ä»¥é€’å½’çš„æ–¹å¼è¿›è¡Œä¸­åºéå†
     if (cur->m_pLeft != nullptr)
         ConvertNode(cur->m_pLeft,pLastNodeInList);
 
-    //***ÄÑµã***
-    //µ½´ïÖĞĞò±éÀúĞòÁĞµÄÊ×ÔªËØÊ±£¬Ó¦¸Ã×÷ºÎ´¦Àí£¿
+    //***éš¾ç‚¹***
+    //åˆ°è¾¾ä¸­åºéå†åºåˆ—çš„é¦–å…ƒç´ æ—¶ï¼Œåº”è¯¥ä½œä½•å¤„ç†ï¼Ÿ
 
-    //Ë«ÏòÁ´±íµÄÊ×½ÚµãµÄÖ¸ÏòÇ°Ò»¸ö½ÚµãµÄÖ¸Õë¸³Îªnullptr
-    //·ÇÊ×½ÚµãµÄÖ¸ÏòÇ°Ò»¸ö½ÚµãµÄÖ¸Õë¸³ÎªÇ°Ò»¸ö½ÚµãµÄµØÖ·
-    //µ«ÊÇÎŞĞè½øĞĞ·ÖÀà´¦Àí£¬ÒÔÏÂÒ»ÌõÓï¾ä¾Í¿ÉÒÔÍê³É
+    //åŒå‘é“¾è¡¨çš„é¦–èŠ‚ç‚¹çš„æŒ‡å‘å‰ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆèµ‹ä¸ºnullptr
+    //éé¦–èŠ‚ç‚¹çš„æŒ‡å‘å‰ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆèµ‹ä¸ºå‰ä¸€ä¸ªèŠ‚ç‚¹çš„åœ°å€
+    //ä½†æ˜¯æ— éœ€è¿›è¡Œåˆ†ç±»å¤„ç†ï¼Œä»¥ä¸‹ä¸€æ¡è¯­å¥å°±å¯ä»¥å®Œæˆ
     cur->m_pLeft = *pLastNodeInList;
 
-    //ÈôpLastNodeInListÖ¸Ïò·ÇÊ×½Úµã£¬ÔòÉèÖÃ¸Ã½ÚµãµÄÖ¸ÏòºóÒ»¸ö½ÚµãµÄÖ¸Õë
-    //Ö¸Ïòµ±Ç°curÖ¸ÏòµÄÎ»ÖÃ
+    //è‹¥pLastNodeInListæŒ‡å‘éé¦–èŠ‚ç‚¹ï¼Œåˆ™è®¾ç½®è¯¥èŠ‚ç‚¹çš„æŒ‡å‘åä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆ
+    //æŒ‡å‘å½“å‰curæŒ‡å‘çš„ä½ç½®
     if (*pLastNodeInList != nullptr)
         (*pLastNodeInList)->m_pRight = cur;
 
-    //*pLastNodeInListÇ°½øÒ»¸ö½ÚµãµÄ¾àÀë
+    //*pLastNodeInListå‰è¿›ä¸€ä¸ªèŠ‚ç‚¹çš„è·ç¦»
     *pLastNodeInList = cur;
 
-    //Ğ¡½á£º
-    //curÖ¸Õë´¦ÀíÖ¸ÏòµÄ½ÚµãµÄÖ¸ÏòÇ°Ò»¸ö½ÚµãµÄÖ¸Õë
-    //*pLastNodeInListÖ¸Õë´¦ÀíÖ¸ÏòµÄ½ÚµãµÄÖ¸ÏòºóÒ»¸ö½ÚµãµÄÖ¸Õë
-    //Á½¸öÖ¸ÕëÒ»Ç°Ò»ºó£¬Öğ½¥ÏòºóÒÆ¶¯
+    //å°ç»“ï¼š
+    //curæŒ‡é’ˆå¤„ç†æŒ‡å‘çš„èŠ‚ç‚¹çš„æŒ‡å‘å‰ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆ
+    //*pLastNodeInListæŒ‡é’ˆå¤„ç†æŒ‡å‘çš„èŠ‚ç‚¹çš„æŒ‡å‘åä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆ
+    //ä¸¤ä¸ªæŒ‡é’ˆä¸€å‰ä¸€åï¼Œé€æ¸å‘åç§»åŠ¨
 
     if (cur->m_pRight != nullptr)
         ConvertNode(cur->m_pRight,pLastNodeInList);
@@ -5068,7 +5068,7 @@ void ConvertNode(BinaryTreeNode* pNode, BinaryTreeNode** pLastNodeInList)
 #endif
 
 
-//ÃæÊÔÌâ37£ºĞòÁĞ»¯¶ş²æÊ÷
+//é¢è¯•é¢˜37ï¼šåºåˆ—åŒ–äºŒå‰æ ‘
 #if 1
 #include <iostream>
 #include <fstream>
@@ -5162,9 +5162,9 @@ void serialize(BinaryTreeNode* pNode, std::ostream& stream)
 }
 #endif
 
-//***×¢***
-//istreamÀàºÍostreamÀàµÄ¸´ÖÆ¹¹Ôìº¯Êı¶¼±»ÉèÖÃÎªprotected£¬
-//ËùÒÔÍâ²¿ÎŞ·¨·ÃÎÊÕâĞ©º¯Êı£¬Ö»ÄÜĞ´³ÉÒıÓÃµÄĞÎÊ½¡£
+//***æ³¨***
+//istreamç±»å’Œostreamç±»çš„å¤åˆ¶æ„é€ å‡½æ•°éƒ½è¢«è®¾ç½®ä¸ºprotectedï¼Œ
+//æ‰€ä»¥å¤–éƒ¨æ— æ³•è®¿é—®è¿™äº›å‡½æ•°ï¼Œåªèƒ½å†™æˆå¼•ç”¨çš„å½¢å¼ã€‚
 void deserialize(BinaryTreeNode** pNode, std::istream& stream)
 {
 	int number;
@@ -5185,7 +5185,7 @@ void deserialize(BinaryTreeNode** pNode, std::istream& stream)
     }
 }
 
-//´ÓÎÄ¼şÊäÈëÁ÷ÖĞ½«×Ö·ûÖğ¸öÌáÈ¡
+//ä»æ–‡ä»¶è¾“å…¥æµä¸­å°†å­—ç¬¦é€ä¸ªæå–
 bool ReadStream(std::istream& stream, int* number)
 {
 	if (stream.eof())
@@ -5193,7 +5193,7 @@ bool ReadStream(std::istream& stream, int* number)
 
     char buffer[32] = {'\0'};
 
-    //´´½¨ch±äÁ¿À´Ôİ´æ×Ö·û
+    //åˆ›å»ºchå˜é‡æ¥æš‚å­˜å­—ç¬¦
 	char ch;
 	stream >> ch;
 	int i = 0;
@@ -5234,9 +5234,9 @@ void PrintFromToptoBottom(BinaryTreeNode* pTreeRoot)
 
     while (!nodeQueue.empty())
     {
-        //ÏÈÄÃÔªËØ
+        //å…ˆæ‹¿å…ƒç´ 
         tempNode = nodeQueue.front();
-        //ºóµ¯³ö
+        //åå¼¹å‡º
         nodeQueue.pop();
 
         if (tempNode->m_dbValue != 1.11111)
@@ -5283,7 +5283,7 @@ void PrintFromToptoBottom(BinaryTreeNode* pTreeRoot)
 #endif
 
 
-//ÃæÊÔÌâ38£º×Ö·û´®µÄÅÅÁĞ
+//é¢è¯•é¢˜38ï¼šå­—ç¬¦ä¸²çš„æ’åˆ—
 #if 0
 #include <iostream>
 #include <algorithm>
@@ -5327,9 +5327,9 @@ void Permutation(char* pStr)
     Permutation(pStr,pStr);
 }
 
-//pStrÊ¼ÖÕÖ¸Ïò×Ö·û´®µÄÊ×ÔªËØ
-//pBeginÖ¸ÏòÕıÔÚ¿¼ÂÇÅÅÁĞµÄ×Ö·û´®ÖĞµÄµ±Ç°Î»ÖÃµÄÖ¸Õë
-//pBeginÖ¸ÏòµÄÔªËØ²»¶ÏµØÓëÆäÖ¸ÏòµÄÔªËØµÄºóÃæµÄÃ¿Ò»¸öÔªËØ½øĞĞ½»»»
+//pStrå§‹ç»ˆæŒ‡å‘å­—ç¬¦ä¸²çš„é¦–å…ƒç´ 
+//pBeginæŒ‡å‘æ­£åœ¨è€ƒè™‘æ’åˆ—çš„å­—ç¬¦ä¸²ä¸­çš„å½“å‰ä½ç½®çš„æŒ‡é’ˆ
+//pBeginæŒ‡å‘çš„å…ƒç´ ä¸æ–­åœ°ä¸å…¶æŒ‡å‘çš„å…ƒç´ çš„åé¢çš„æ¯ä¸€ä¸ªå…ƒç´ è¿›è¡Œäº¤æ¢
 void Permutation(char* pStr, char* pBegin)
 {
     if (*pBegin == '\0')
@@ -5344,15 +5344,15 @@ void Permutation(char* pStr, char* pBegin)
 
             Permutation(pStr,pBegin+1);
 
-            //***×¢1***
-            //½«×Ö·û½»»»»ØÆäÔ­Ê¼Î»ÖÃ£¬ÒÔÈ·±£Ñ­»·µÄÏÂÒ»´Îµü´úÊ¹ÓÃÔ­Ê¼×Ö·û´®
+            //***æ³¨1***
+            //å°†å­—ç¬¦äº¤æ¢å›å…¶åŸå§‹ä½ç½®ï¼Œä»¥ç¡®ä¿å¾ªç¯çš„ä¸‹ä¸€æ¬¡è¿­ä»£ä½¿ç”¨åŸå§‹å­—ç¬¦ä¸²
             tmp = *pCh;
             *pCh = *pBegin;
             *pBegin = tmp;
         }
     }
 }
-//²»Ìí¼Ó×¢1        ºÍ           Ìí¼Ó×¢1Óï¾ä¿éµÄÔËĞĞÇø±ğ        
+//ä¸æ·»åŠ æ³¨1        å’Œ           æ·»åŠ æ³¨1è¯­å¥å—çš„è¿è¡ŒåŒºåˆ«        
 //abc                                         abc                                    abcd
 //acb                                         acb                                    abdc
 //cab                                         bac                                    acbd
@@ -5362,7 +5362,7 @@ void Permutation(char* pStr, char* pBegin)
 #endif
 
 
-//×Ö·û´®µÄËùÓĞ×éºÏ
+//å­—ç¬¦ä¸²çš„æ‰€æœ‰ç»„åˆ
 #if 0
 #include<iostream>  
 #include<vector>  
@@ -5383,14 +5383,14 @@ int main(void)
     return 0;
 }
 
-//ÔÚÇón¸ö×Ö·ûµÄ³¤¶ÈÎªm(1¡Üm¡Ün)µÄ×éºÏµÄÊ±ºò£¬ÎÒÃÇ°ÑÕân¸ö×Ö·û·Ö³ÉÁ½²¿·Ö£º
-//µÚÒ»¸ö×Ö·ûºÍÆäÓàµÄËùÓĞ×Ö·û¡£
-//Èç¹û×éºÏÀï°üº¬µÚÒ»¸ö×Ö·û£¬ÔòÏÂÒ»²½ÔÚÊ£ÓàµÄ×Ö·ûÀïÑ¡È¡m - 1¸ö×Ö·û£»
-//Èç¹û×éºÏÀï²»°üº¬µÚÒ»¸ö×Ö·û£¬ÔòÏÂÒ»²½ÔÚÊ£ÓàµÄn - 1¸ö×Ö·ûÀïÑ¡È¡m¸ö×Ö·û¡£
+//åœ¨æ±‚nä¸ªå­—ç¬¦çš„é•¿åº¦ä¸ºm(1â‰¤mâ‰¤n)çš„ç»„åˆçš„æ—¶å€™ï¼Œæˆ‘ä»¬æŠŠè¿™nä¸ªå­—ç¬¦åˆ†æˆä¸¤éƒ¨åˆ†ï¼š
+//ç¬¬ä¸€ä¸ªå­—ç¬¦å’Œå…¶ä½™çš„æ‰€æœ‰å­—ç¬¦ã€‚
+//å¦‚æœç»„åˆé‡ŒåŒ…å«ç¬¬ä¸€ä¸ªå­—ç¬¦ï¼Œåˆ™ä¸‹ä¸€æ­¥åœ¨å‰©ä½™çš„å­—ç¬¦é‡Œé€‰å–m - 1ä¸ªå­—ç¬¦ï¼›
+//å¦‚æœç»„åˆé‡Œä¸åŒ…å«ç¬¬ä¸€ä¸ªå­—ç¬¦ï¼Œåˆ™ä¸‹ä¸€æ­¥åœ¨å‰©ä½™çš„n - 1ä¸ªå­—ç¬¦é‡Œé€‰å–mä¸ªå­—ç¬¦ã€‚
 
-//¿ÉÒÔ°ÑÇón¸ö×Ö·û×é³É³¤¶ÈÎªmµÄ×éºÏµÄÎÊÌâ·Ö½â³ÉÁ½¸ö×ÓÎÊÌâ£¬
-//·Ö±ğÇón - 1¸ö×Ö·ûÖĞ³¤¶ÈÎªm-1µÄ×éºÏ£¬ÒÔ¼°
-// Çón-1¸ö×Ö·ûÖĞ³¤¶ÈÎªmµÄ×éºÏ¡£ÕâÁ½¸ö×ÓÎÊÌâ¶¼¿ÉÒÔÓÃµİ¹éµÄ·½Ê½½â¾ö¡£
+//å¯ä»¥æŠŠæ±‚nä¸ªå­—ç¬¦ç»„æˆé•¿åº¦ä¸ºmçš„ç»„åˆçš„é—®é¢˜åˆ†è§£æˆä¸¤ä¸ªå­é—®é¢˜ï¼Œ
+//åˆ†åˆ«æ±‚n - 1ä¸ªå­—ç¬¦ä¸­é•¿åº¦ä¸ºm-1çš„ç»„åˆï¼Œä»¥åŠ
+// æ±‚n-1ä¸ªå­—ç¬¦ä¸­é•¿åº¦ä¸ºmçš„ç»„åˆã€‚è¿™ä¸¤ä¸ªå­é—®é¢˜éƒ½å¯ä»¥ç”¨é€’å½’çš„æ–¹å¼è§£å†³ã€‚
 void Combination(char* string)
 {
     assert(string != NULL);
@@ -5399,7 +5399,7 @@ void Combination(char* string)
 
     int m, length = strlen(string);
 
-    //Çó³¤¶ÈÎªlengthµÄ×Ö·ûµÄ³¤¶ÈÎªiµÄ×éºÏ
+    //æ±‚é•¿åº¦ä¸ºlengthçš„å­—ç¬¦çš„é•¿åº¦ä¸ºiçš„ç»„åˆ
     for (m = 1; m <= length; ++m)
         Combination(string, m, result);
 }
@@ -5411,7 +5411,7 @@ void Combination(char* string, int number, vector<char>& result)
     if (number == 0)
     {
         static int num = 1;
-        printf("µÚ%d¸ö×éºÏ\t", num++);
+        printf("ç¬¬%dä¸ªç»„åˆ\t", num++);
 
         vector<char>::iterator iter = result.begin();
         for (; iter != result.end(); ++iter)
@@ -5426,26 +5426,26 @@ void Combination(char* string, int number, vector<char>& result)
 
     result.push_back(*string);
 
-    //Èç¹û°üº¬µÚÒ»¸ö×Ö·û£¬ÔòÏÂÒ»²½ÔÚÊ£ÓàµÄ×Ö·ûÀïÃæÑ¡È¡number-1¸ö×Ö·û
+    //å¦‚æœåŒ…å«ç¬¬ä¸€ä¸ªå­—ç¬¦ï¼Œåˆ™ä¸‹ä¸€æ­¥åœ¨å‰©ä½™çš„å­—ç¬¦é‡Œé¢é€‰å–number-1ä¸ªå­—ç¬¦
     Combination(string + 1, number - 1, result);  
 
-    result.pop_back();  //³öÈ¥µÚÒ»¸ö×Ö·û
+    result.pop_back();  //å‡ºå»ç¬¬ä¸€ä¸ªå­—ç¬¦
 
-    //Èç¹û²»°üº¬µÚÒ»¸ö×Ö·û£¬ÔòÏÂÒ»²½ÔÚÊ£ÓàµÄ×Ö·ûÀïÃæÑ¡È¡number¸ö×Ö·û  
+    //å¦‚æœä¸åŒ…å«ç¬¬ä¸€ä¸ªå­—ç¬¦ï¼Œåˆ™ä¸‹ä¸€æ­¥åœ¨å‰©ä½™çš„å­—ç¬¦é‡Œé¢é€‰å–numberä¸ªå­—ç¬¦  
     Combination(string + 1, number, result); 
 }
 #endif
 
 
-//°Ë»ÊºóÎÊÌâ
+//å…«çš‡åé—®é¢˜
 #if 0
 #include <iostream>
 #include<cmath>
 using namespace std;
 
-//c[x]=y£¬±íÊ¾»Êºó·ÅÔÚµÚxĞĞ£¬µÚyÁĞ
-//ÆåÅÌ8x8£¬nÎª8
-//´´½¨cnt¼ÇÂ¼·ûºÏµÄÇé¿öÊıÁ¿
+//c[x]=yï¼Œè¡¨ç¤ºçš‡åæ”¾åœ¨ç¬¬xè¡Œï¼Œç¬¬yåˆ—
+//æ£‹ç›˜8x8ï¼Œnä¸º8
+//åˆ›å»ºcntè®°å½•ç¬¦åˆçš„æƒ…å†µæ•°é‡
 int c[20], n = 8, cnt = 0;
 
 void search(int r);
@@ -5453,17 +5453,17 @@ void print(void);
 
 int main()
 {
-    //´ÓµÚ1ĞĞ¿ªÊ¼½øĞĞÄ£Äâ
+    //ä»ç¬¬1è¡Œå¼€å§‹è¿›è¡Œæ¨¡æ‹Ÿ
     search(0);
     cout << cnt << endl;
     return 0;
 }
 
-//»ØËİ·¨½âÌâ
-//µİ¹éµ÷ÓÃsearch()
+//å›æº¯æ³•è§£é¢˜
+//é€’å½’è°ƒç”¨search()
 void search(int r) 
 {
-    //ÈôÒÑ¾­Ä£Äâµ½µÚ9ĞĞ(r±ÈĞĞÊıÉÙ1)
+    //è‹¥å·²ç»æ¨¡æ‹Ÿåˆ°ç¬¬9è¡Œ(ræ¯”è¡Œæ•°å°‘1)
     if (r == n) 
     {
         print();
@@ -5473,18 +5473,18 @@ void search(int r)
 
     for (int i = 0; i < n; ++i) 
     {
-        //µÚr+1ĞĞµÚi+1ÁĞ·ÅÖÃ»Êºó
+        //ç¬¬r+1è¡Œç¬¬i+1åˆ—æ”¾ç½®çš‡å
         c[r] = i;
 
         int ok = 1;
 
-        //¶Ôr+1ĞĞÖ®Ç°µÄĞĞ½øĞĞ±éÀú
+        //å¯¹r+1è¡Œä¹‹å‰çš„è¡Œè¿›è¡Œéå†
         for (int row = 0; row < r; ++row)
         {
-            //ÈôÁĞÏàÍ¬»òÁ½Õß»¥Îª¶Ô½ÇÏß
+            //è‹¥åˆ—ç›¸åŒæˆ–ä¸¤è€…äº’ä¸ºå¯¹è§’çº¿
             if (c[r] == c[row] || abs(r - row) == abs(c[r] - c[row]))
             {
-                //¸ÃĞĞ·ÅµÄ²»¶Ô£¬ÒªÖØĞÂ·Å
+                //è¯¥è¡Œæ”¾çš„ä¸å¯¹ï¼Œè¦é‡æ–°æ”¾
                 ok = 0;
                 break;
             }
@@ -5513,14 +5513,14 @@ void print()
 #endif
 
 
-//ÃæÊÔÌâ39£ºÊı×éÖĞ³öÏÖ´ÎÊı³¬¹ıÒ»°ëµÄÊı×Ö
+//é¢è¯•é¢˜39ï¼šæ•°ç»„ä¸­å‡ºç°æ¬¡æ•°è¶…è¿‡ä¸€åŠçš„æ•°å­—
 #if 0
 #include <iostream>
 //#include <vector>
 #include <unordered_map>
 using namespace std;
 
-//×Ô¼ºµÄ½â·¨£ºÓÃ¹şÏ£±í
+//è‡ªå·±çš„è§£æ³•ï¼šç”¨å“ˆå¸Œè¡¨
 void FindNum(int* p_data,int length);
 
 int MoreThanHalfNum(int* number,int length);
@@ -5549,7 +5549,7 @@ void FindNum(int* p_data,int length)
 
     for (int i = 0; i < length; ++i)
     {
-        //¹şÏ£±íµÄ²éÑ¯Ê±¼äÊÇO(1)
+        //å“ˆå¸Œè¡¨çš„æŸ¥è¯¢æ—¶é—´æ˜¯O(1)
         if(hash.find(p_data[i]) == hash.end())
         hash.insert(make_pair(p_data[i], 1));
         else
@@ -5567,18 +5567,18 @@ void FindNum(int* p_data,int length)
 }
 #endif
 
-//½â·¨¶ş£º»ùÓÚPartition()µÄÊ±¼ä¸´ÔÓ¶ÈÎªO(n)µÄËã·¨
+//è§£æ³•äºŒï¼šåŸºäºPartition()çš„æ—¶é—´å¤æ‚åº¦ä¸ºO(n)çš„ç®—æ³•
 #if 0
 int RandomInRange(int a, int b)
 {
     srand((unsigned int)time(0));
-    // Éú³É [0, max]
+    // ç”Ÿæˆ [0, max]
     //int x = rand() % (max + 1);
 
-    // Éú³É [1, max]
+    // ç”Ÿæˆ [1, max]
     //int x = 1 + rand() % (max);
 
-    // Éú³É [min, max] ·¶Î§µÄËæ»úÊı
+    // ç”Ÿæˆ [min, max] èŒƒå›´çš„éšæœºæ•°
     //int x = min + rand() % (max - min + 1);
 
     int x = a + rand() % (b - a + 1);
@@ -5592,7 +5592,7 @@ void Swap(int* a, int* b)
     *b = tmp;
 }
 
-//***beginºÍend¶¼Ö¸µÄÊÇË÷ÒıÖµ***
+//***beginå’Œendéƒ½æŒ‡çš„æ˜¯ç´¢å¼•å€¼***
 int Partition(int data[], int length, int begin, int end)
 {
     if (data == nullptr || length <= 0 || begin < 0 || end >= length)
@@ -5600,36 +5600,36 @@ int Partition(int data[], int length, int begin, int end)
         //throw new exception("Invaild Parameters");
     }
 
-    //Éú³ÉÒ»¸öÔÚÖ¸¶¨·¶Î§ÄÚµÄËæ»úÊı
+    //ç”Ÿæˆä¸€ä¸ªåœ¨æŒ‡å®šèŒƒå›´å†…çš„éšæœºæ•°
     int index = RandomInRange(begin, end);
-    //¸ÃËæ»úÊı×÷ÎªË÷ÒıÖµ¶ÔÓ¦µÄÊı×ÖÓëÊı×éÄ©Î²µÄÊı×Ö½»»»
-    //ÄÇÃ´Êı×éÄ©Î²µÄÊı×Ö¾ÍÊÇËæ»úË÷ÒıÖµ¶ÔÓ¦µÄÊı×Ö
+    //è¯¥éšæœºæ•°ä½œä¸ºç´¢å¼•å€¼å¯¹åº”çš„æ•°å­—ä¸æ•°ç»„æœ«å°¾çš„æ•°å­—äº¤æ¢
+    //é‚£ä¹ˆæ•°ç»„æœ«å°¾çš„æ•°å­—å°±æ˜¯éšæœºç´¢å¼•å€¼å¯¹åº”çš„æ•°å­—
     Swap(&data[index], &data[end]);
 
-    //´´½¨ÊàÖásmall´æ´¢Ë÷ÒıÖµ£¬Æä³õÊ¼Öµ±ÈbeginĞ¡1£¬Èç£ºbeginÎª0£¬ÔòsmallÎª-1
+    //åˆ›å»ºæ¢è½´smallå­˜å‚¨ç´¢å¼•å€¼ï¼Œå…¶åˆå§‹å€¼æ¯”beginå°1ï¼Œå¦‚ï¼šbeginä¸º0ï¼Œåˆ™smallä¸º-1
     int small = begin - 1;
 
-    //Ë÷ÒıÖµ´ÓÍ·¿ªÊ¼£¬Öğ½¥Ôö¼Ó
+    //ç´¢å¼•å€¼ä»å¤´å¼€å§‹ï¼Œé€æ¸å¢åŠ 
     for (index = begin; index < end; ++index)
     {
-        //Èôµ±Ç°Ë÷ÒıÖµÖ¸ÏòµÄÊı×Ö±ÈËæ»úË÷ÒıÖµÖ¸ÏòµÄÊı×ÖĞ¡
-        if (data[index] <= data[end])//×¢ÒâÊÇĞ¡ÓÚµÈÓÚ
+        //è‹¥å½“å‰ç´¢å¼•å€¼æŒ‡å‘çš„æ•°å­—æ¯”éšæœºç´¢å¼•å€¼æŒ‡å‘çš„æ•°å­—å°
+        if (data[index] <= data[end])//æ³¨æ„æ˜¯å°äºç­‰äº
         {
-            //Ôö¼ÓsmallµÄÖµ
+            //å¢åŠ smallçš„å€¼
             ++small;
 
-            //Èôsmall²»Îªµ±Ç°µÄË÷ÒıÖµ
+            //è‹¥smallä¸ä¸ºå½“å‰çš„ç´¢å¼•å€¼
             if (small != index)
-                Swap(&data[index], &data[small]);//»¥»»ÔªËØ£¬Ä¿µÄÊÇ
-            //ÈÃË÷ÒıÖµsmall×ó²àµÄÖµ¶¼Ğ¡ÓÚ¸ÃË÷ÒıÖµËù¶ÔÓ¦µÄÖµ
+                Swap(&data[index], &data[small]);//äº’æ¢å…ƒç´ ï¼Œç›®çš„æ˜¯
+            //è®©ç´¢å¼•å€¼smallå·¦ä¾§çš„å€¼éƒ½å°äºè¯¥ç´¢å¼•å€¼æ‰€å¯¹åº”çš„å€¼
         }
     }
-    //ÈÃsmallÔÙÔö¼Ó1
+    //è®©smallå†å¢åŠ 1
     ++small;
-    //ÈÃËæ»úË÷ÒıÖµÖ¸ÏòµÄÊı×ÖÒÆ¶¯µ½smallÖ¸ÏòµÄÎ»ÖÃÉÏ
+    //è®©éšæœºç´¢å¼•å€¼æŒ‡å‘çš„æ•°å­—ç§»åŠ¨åˆ°smallæŒ‡å‘çš„ä½ç½®ä¸Š
     Swap(&data[small], &data[end]);
 
-    //·µ»ØÊàÖáËùÔÚÎ»ÖÃ
+    //è¿”å›æ¢è½´æ‰€åœ¨ä½ç½®
     return small;
 }
 
@@ -5638,7 +5638,7 @@ int MoreThanHalfNum(int* number, int length)
     if (number == nullptr || length <= 0)
         return 0;
 
-    //´æ´¢ÅÅĞòºÃµÄÊı×éµÄÖĞÎ»Êı×ÖÓ¦ËùÔÚµÄË÷ÒıÖµ
+    //å­˜å‚¨æ’åºå¥½çš„æ•°ç»„çš„ä¸­ä½æ•°å­—åº”æ‰€åœ¨çš„ç´¢å¼•å€¼
     int middle = length / 2;
 
     int start = 0;
@@ -5646,14 +5646,14 @@ int MoreThanHalfNum(int* number, int length)
 
     int index = Partition(number,length,start,end);
 
-    //ÈôÊàÖá²»Îªmiddle
+    //è‹¥æ¢è½´ä¸ä¸ºmiddle
     while (index != middle)
     {
-        //***×¢***£¨Àí½âÓĞÄÑ¶È£©
-        //Èôµ±Ç°Ñ¡ÔñµÄ pivot£¨ÊàÅ¦ÔªËØ£©Î»ÓÚÖĞÎ»ÊıµÄË÷Òı£¨middle£©µÄÓÒ²à
-        //±íÊ¾ÔÚÊı×éµÄ×ó°ë²¿·ÖÖĞ´æÔÚÖĞÎ»ÊıÔªËØµÄºòÑ¡¡£
-        //ÒòÎªÅÅĞòºóµÄÊı×éÖĞ£¬ÖĞÎ»ÊıÔªËØ½«Î»ÓÚÊı×éµÄ×ó°ë²¿·Ö£¨Ë÷ÒıĞ¡ÓÚ middle µÄÎ»ÖÃ£©
-        //ËùÒÔĞèÒªÔÚ×ó°ë²¿·Ö¼ÌĞøËÑË÷¡£
+        //***æ³¨***ï¼ˆç†è§£æœ‰éš¾åº¦ï¼‰
+        //è‹¥å½“å‰é€‰æ‹©çš„ pivotï¼ˆæ¢çº½å…ƒç´ ï¼‰ä½äºä¸­ä½æ•°çš„ç´¢å¼•ï¼ˆmiddleï¼‰çš„å³ä¾§
+        //è¡¨ç¤ºåœ¨æ•°ç»„çš„å·¦åŠéƒ¨åˆ†ä¸­å­˜åœ¨ä¸­ä½æ•°å…ƒç´ çš„å€™é€‰ã€‚
+        //å› ä¸ºæ’åºåçš„æ•°ç»„ä¸­ï¼Œä¸­ä½æ•°å…ƒç´ å°†ä½äºæ•°ç»„çš„å·¦åŠéƒ¨åˆ†ï¼ˆç´¢å¼•å°äº middle çš„ä½ç½®ï¼‰
+        //æ‰€ä»¥éœ€è¦åœ¨å·¦åŠéƒ¨åˆ†ç»§ç»­æœç´¢ã€‚
         
         if (index > middle)
         {
@@ -5673,15 +5673,15 @@ int MoreThanHalfNum(int* number, int length)
 }
 #endif
 
-//½â·¨Èı£º¸ù¾İÊı×éÌØµã£¬ÕÒµ½Ïà¹ØÊı×ÖµÄ¹æÂÉ
-//ÓÉÓÚÊı×éÖĞÓĞÒ»¸öÊı×Ö³öÏÖµÄ´ÎÊı³¬¹ıÊı×é³¤¶ÈµÄÒ»°ë£¬
-//Ò²¾ÍÊÇËµËü³öÏÖµÄ´ÎÊı±ÈÆäËûËùÓĞÊı×Ö³öÏÖ´ÎÊıµÄºÍ»¹Òª¶à
-//ÎÒÃÇ±éÀúµ½ÏÂÒ»¸öÊı×ÖµÄÊ±ºò£¬
-//Èç¹ûÏÂÒ»¸öÊı×ÖºÍÎÒÃÇÖ®Ç°±£´æµÄÊı×ÖÏàÍ¬£¬Ôò´ÎÊı¼Ó1¡£Èç¹ûÏÂÒ»¸öÊı×Ö
-//ºÍÎÒÃÇÖ®Ç°±£´æµÄÊı×Ö²»Í¬£¬Ôò´ÎÊı¼õ1¡£Èç¹û´ÎÊıÎªÁã£¬ÄÇÃ´ÎÒÃÇĞèÒª±£
-//´æÏÂÒ»¸öÊı×Ö£¬²¢°Ñ´ÎÊıÉèÎª1¡£ÓÉÓÚÎÒÃÇÒªÕÒµÄÊı×Ö³öÏÖµÄ´ÎÊı±ÈÆäËûËù
-//ÓĞÊı×Ö³öÏÖµÄ´ÎÊıÖ®ºÍ»¹Òª¶à£¬ÄÇÃ´ÒªÕÒµÄÊı×Ö¿Ï¶¨ÊÇ×îºóÒ»´Î°Ñ´ÎÊıÉè
-//Îª1Ê±¶ÔÓ¦µÄÊı×Ö¡£
+//è§£æ³•ä¸‰ï¼šæ ¹æ®æ•°ç»„ç‰¹ç‚¹ï¼Œæ‰¾åˆ°ç›¸å…³æ•°å­—çš„è§„å¾‹
+//ç”±äºæ•°ç»„ä¸­æœ‰ä¸€ä¸ªæ•°å­—å‡ºç°çš„æ¬¡æ•°è¶…è¿‡æ•°ç»„é•¿åº¦çš„ä¸€åŠï¼Œ
+//ä¹Ÿå°±æ˜¯è¯´å®ƒå‡ºç°çš„æ¬¡æ•°æ¯”å…¶ä»–æ‰€æœ‰æ•°å­—å‡ºç°æ¬¡æ•°çš„å’Œè¿˜è¦å¤š
+//æˆ‘ä»¬éå†åˆ°ä¸‹ä¸€ä¸ªæ•°å­—çš„æ—¶å€™ï¼Œ
+//å¦‚æœä¸‹ä¸€ä¸ªæ•°å­—å’Œæˆ‘ä»¬ä¹‹å‰ä¿å­˜çš„æ•°å­—ç›¸åŒï¼Œåˆ™æ¬¡æ•°åŠ 1ã€‚å¦‚æœä¸‹ä¸€ä¸ªæ•°å­—
+//å’Œæˆ‘ä»¬ä¹‹å‰ä¿å­˜çš„æ•°å­—ä¸åŒï¼Œåˆ™æ¬¡æ•°å‡1ã€‚å¦‚æœæ¬¡æ•°ä¸ºé›¶ï¼Œé‚£ä¹ˆæˆ‘ä»¬éœ€è¦ä¿
+//å­˜ä¸‹ä¸€ä¸ªæ•°å­—ï¼Œå¹¶æŠŠæ¬¡æ•°è®¾ä¸º1ã€‚ç”±äºæˆ‘ä»¬è¦æ‰¾çš„æ•°å­—å‡ºç°çš„æ¬¡æ•°æ¯”å…¶ä»–æ‰€
+//æœ‰æ•°å­—å‡ºç°çš„æ¬¡æ•°ä¹‹å’Œè¿˜è¦å¤šï¼Œé‚£ä¹ˆè¦æ‰¾çš„æ•°å­—è‚¯å®šæ˜¯æœ€åä¸€æ¬¡æŠŠæ¬¡æ•°è®¾
+//ä¸º1æ—¶å¯¹åº”çš„æ•°å­—ã€‚
 int MoreThanHalfNum(int* number, int length)
 {
     if (number == nullptr || length <= 0)
@@ -5708,7 +5708,7 @@ int MoreThanHalfNum(int* number, int length)
 #endif
 
 
-//ÃæÊÔÌâ40£º×îĞ¡µÄk¸öÊı
+//é¢è¯•é¢˜40ï¼šæœ€å°çš„kä¸ªæ•°
 #if 0
 #include <iostream>
 #include <vector>
@@ -5742,7 +5742,7 @@ void Swap(int* a, int* b)
     *b = tmp;
 }
 
-//½â·¨Ò»£ºÊ¹ÓÃPartitionº¯Êı
+//è§£æ³•ä¸€ï¼šä½¿ç”¨Partitionå‡½æ•°
 int Partition(int* number, int length, int begin, int end)
 {
     if (number == nullptr || length <= 0 || begin < 0 || end >= length)
@@ -5750,18 +5750,18 @@ int Partition(int* number, int length, int begin, int end)
         //throw new exception("Invaild Parameters");
     }
 
-    //1.È¡Ò»¸öËæ»úµÄË÷ÒıÖµ
+    //1.å–ä¸€ä¸ªéšæœºçš„ç´¢å¼•å€¼
     srand(time(0));
     int rd_index = begin + rand()%(end - begin + 1);
 
-    //2.½«Ëæ»úË÷ÒıÖµ¶ÔÓ¦µÄÖµÒÆµ½Êı×éÄ©Î²£¬×öÎª±È½Ï±ê³ß
+    //2.å°†éšæœºç´¢å¼•å€¼å¯¹åº”çš„å€¼ç§»åˆ°æ•°ç»„æœ«å°¾ï¼Œåšä¸ºæ¯”è¾ƒæ ‡å°º
     Swap(&number[rd_index], &number[end]);
 
-    //3.´´½¨ÊàÖásmall´æË÷ÒıÖµ
+    //3.åˆ›å»ºæ¢è½´smallå­˜ç´¢å¼•å€¼
     int small = begin - 1;
 
-    //4.±éÀúÊı×é
-    //***×¢***´ÓµÚÒ»¸öÔªËØ±éÀúµ½µ¹ÊıµÚ¶ş¸öÔªËØ
+    //4.éå†æ•°ç»„
+    //***æ³¨***ä»ç¬¬ä¸€ä¸ªå…ƒç´ éå†åˆ°å€’æ•°ç¬¬äºŒä¸ªå…ƒç´ 
     for (int index = begin; index < end; ++index)
     {
         if (number[index] <= number[end])
@@ -5772,13 +5772,13 @@ int Partition(int* number, int length, int begin, int end)
         }
     }
 
-    //5.ÊàÅ¦ÖµÔÙ¼Ó1
+    //5.æ¢çº½å€¼å†åŠ 1
     ++small;
 
-    //6.Ô­À´Ëæ»úµÄË÷ÒıÖµ¶ÔÓ¦µÄÊı×Ö  »Øµ½  ÏÖÔÚÊàÅ¦Öµ´ú±íµÄÎ»ÖÃ
+    //6.åŸæ¥éšæœºçš„ç´¢å¼•å€¼å¯¹åº”çš„æ•°å­—  å›åˆ°  ç°åœ¨æ¢çº½å€¼ä»£è¡¨çš„ä½ç½®
     Swap(&number[small],&number[end]);
 
-    //ÕâÑù¾ÍÈ·±£ÁËÊı×éÖĞË÷ÒıÖµ±ÈÊàÅ¦ÖµĞ¡µÄ¸÷¸öÎ»ÖÃµÄÖµ¶¼±ÈÊàÅ¦Öµ¶ÔÓ¦µÄÖµÒªĞ¡£¨»òµÈÓÚ£©
+    //è¿™æ ·å°±ç¡®ä¿äº†æ•°ç»„ä¸­ç´¢å¼•å€¼æ¯”æ¢çº½å€¼å°çš„å„ä¸ªä½ç½®çš„å€¼éƒ½æ¯”æ¢çº½å€¼å¯¹åº”çš„å€¼è¦å°ï¼ˆæˆ–ç­‰äºï¼‰
     return small;
 }
 
@@ -5796,14 +5796,14 @@ void FindSmallestSixNum(int* number, int length,int k)
     {
         if (index <= k - 1)
         {
-            //***±ØĞ´ÈçÏÂÓï¾ä***
+            //***å¿…å†™å¦‚ä¸‹è¯­å¥***
             start = index + 1;
 
             index=Partition(number,length,start,end);
         }
         else
         {
-            //***±ØĞ´ÈçÏÂÓï¾ä***
+            //***å¿…å†™å¦‚ä¸‹è¯­å¥***
             end = index - 1;
 
             index = Partition(number, length, start, end);
@@ -5814,27 +5814,27 @@ void FindSmallestSixNum(int* number, int length,int k)
         cout << number[i] << " ";
 }
 
-//½â·¨¶ş£ºÎ¬»¤Ò»¸öÈİÆ÷£¬¡¾¸ÃÈİÆ÷ÒªÄÜÔÚO(1)Ê±¼äÄÚ²éÕÒµ½ÈİÆ÷ÖĞµÄ×î´óÖµ¡¿
-//µ«ĞèÒªO(logk)Ê±¼äÍê³ÉÉ¾³ıºÍ²åÈë²Ù×÷¡£
-//´´½¨Ò»¸ö´óĞ¡ÎªkµÄÊı¾İÈİÆ÷À´´æ´¢×îĞ¡µÄk¸öÊı×Ö£¬½ÓÏÂÀ´Ã¿´Î
-//´ÓÊäÈëµÄn¸öÕûÊıÖĞ¶ÁÈëÒ»¸öÊı¡£Èç¹ûÈİÆ÷ÖĞÒÑÓĞµÄÊı×ÖÉÙÓÚk¸ö£¬
-//ÔòÖ±½Ó°ÑÕâ´Î¶ÁÈëµÄÕûÊı·ÅÈëÈİÆ÷Ö®ÖĞ£»Èç¹ûÈİÆ÷ÖĞÒÑÓĞk¸öÊı×ÖÁË£¬
-//Ò²¾ÍÊÇÈİÆ÷ÒÑÂú£¬´ËÊ±ÎÒÃÇ²»ÄÜÔÙ²åÈëĞÂµÄÊı×Ö¶øÖ»ÄÜÌæ»»ÒÑÓĞµÄÊı×Ö¡£
-// ÕÒ³öÕâÒÑÓĞµÄk¸öÊıÖĞµÄ×î´óÖµ£¬È»ºóÄÃÕâ´Î´ı²åÈëµÄÕûÊıºÍ×î´óÖµ½øĞĞ±È
-//½Ï¡£Èç¹û´ı²åÈëµÄÖµ±Èµ±Ç°ÒÑÓĞµÄ×î´óÖµĞ¡£¬ÔòÓÃÕâ¸öÊıÌæ»»µ±Ç°ÒÑÓĞµÄ
-//×î´óÖµ£»Èç¹û´ı²åÈëµÄÖµ±Èµ±Ç°ÒÑÓĞµÄ×î´óÖµ»¹Òª´ó£¬ÄÇÃ´Õâ¸öÊı²»¿ÉÄÜÊÇ
-//×îĞ¡µÄk¸öÕûÊıÖ®Ò»£¬ÓÚÊÇÎÒÃÇ¿ÉÒÔÅ×ÆúÕâ¸öÕûÊı¡£
-//´Ë·½·¨»¹ÊÊÓÃÓÚ´¦Àíº£Á¿Êı¾İ
+//è§£æ³•äºŒï¼šç»´æŠ¤ä¸€ä¸ªå®¹å™¨ï¼Œã€è¯¥å®¹å™¨è¦èƒ½åœ¨O(1)æ—¶é—´å†…æŸ¥æ‰¾åˆ°å®¹å™¨ä¸­çš„æœ€å¤§å€¼ã€‘
+//ä½†éœ€è¦O(logk)æ—¶é—´å®Œæˆåˆ é™¤å’Œæ’å…¥æ“ä½œã€‚
+//åˆ›å»ºä¸€ä¸ªå¤§å°ä¸ºkçš„æ•°æ®å®¹å™¨æ¥å­˜å‚¨æœ€å°çš„kä¸ªæ•°å­—ï¼Œæ¥ä¸‹æ¥æ¯æ¬¡
+//ä»è¾“å…¥çš„nä¸ªæ•´æ•°ä¸­è¯»å…¥ä¸€ä¸ªæ•°ã€‚å¦‚æœå®¹å™¨ä¸­å·²æœ‰çš„æ•°å­—å°‘äºkä¸ªï¼Œ
+//åˆ™ç›´æ¥æŠŠè¿™æ¬¡è¯»å…¥çš„æ•´æ•°æ”¾å…¥å®¹å™¨ä¹‹ä¸­ï¼›å¦‚æœå®¹å™¨ä¸­å·²æœ‰kä¸ªæ•°å­—äº†ï¼Œ
+//ä¹Ÿå°±æ˜¯å®¹å™¨å·²æ»¡ï¼Œæ­¤æ—¶æˆ‘ä»¬ä¸èƒ½å†æ’å…¥æ–°çš„æ•°å­—è€Œåªèƒ½æ›¿æ¢å·²æœ‰çš„æ•°å­—ã€‚
+// æ‰¾å‡ºè¿™å·²æœ‰çš„kä¸ªæ•°ä¸­çš„æœ€å¤§å€¼ï¼Œç„¶åæ‹¿è¿™æ¬¡å¾…æ’å…¥çš„æ•´æ•°å’Œæœ€å¤§å€¼è¿›è¡Œæ¯”
+//è¾ƒã€‚å¦‚æœå¾…æ’å…¥çš„å€¼æ¯”å½“å‰å·²æœ‰çš„æœ€å¤§å€¼å°ï¼Œåˆ™ç”¨è¿™ä¸ªæ•°æ›¿æ¢å½“å‰å·²æœ‰çš„
+//æœ€å¤§å€¼ï¼›å¦‚æœå¾…æ’å…¥çš„å€¼æ¯”å½“å‰å·²æœ‰çš„æœ€å¤§å€¼è¿˜è¦å¤§ï¼Œé‚£ä¹ˆè¿™ä¸ªæ•°ä¸å¯èƒ½æ˜¯
+//æœ€å°çš„kä¸ªæ•´æ•°ä¹‹ä¸€ï¼Œäºæ˜¯æˆ‘ä»¬å¯ä»¥æŠ›å¼ƒè¿™ä¸ªæ•´æ•°ã€‚
+//æ­¤æ–¹æ³•è¿˜é€‚ç”¨äºå¤„ç†æµ·é‡æ•°æ®
 
-//ÓÃ»ùÓÚºìºÚÊ÷µÄmultisetÊµÏÖ
+//ç”¨åŸºäºçº¢é»‘æ ‘çš„multisetå®ç°
 #if 1
 void GetLeastNumbers(const vector<int>& data, int k)
 {
     if (data.empty() || k <= 0)
         return;
 
-    //***×¢***
-    //setÈİÆ÷µÄÔªËØÄ¬ÈÏ´ÓĞ¡µ½´ó´æ·Å£¬ÏÖ¸ÄÎªÓÉ´óµ½Ğ¡´æ·Å
+    //***æ³¨***
+    //setå®¹å™¨çš„å…ƒç´ é»˜è®¤ä»å°åˆ°å¤§å­˜æ”¾ï¼Œç°æ”¹ä¸ºç”±å¤§åˆ°å°å­˜æ”¾
     multiset<int, greater<int>> intSet;
 
     for (auto it = data.begin(); it != data.end(); ++it)
@@ -5855,34 +5855,34 @@ void GetLeastNumbers(const vector<int>& data, int k)
 	{
 		cout << *intSet.rbegin() << " ";
 
-        //Ğ´·¨1£º
+        //å†™æ³•1ï¼š
 		//intSet.erase(--(intSet.rbegin().base()));
-        //Ğ´·¨2£º
+        //å†™æ³•2ï¼š
 		intSet.erase(next(intSet.rbegin()).base());
 	}
 }
-//***×¢***
-//begin()ºÍcbegin()µÄÇø±ğ£º
-//begin ½«·µ»Ø iterator »ò const_iterator £¬¾ßÌåÈ¡¾öÓÚµ÷ÓÃËüµÄ¶ÔÏóµÄ const ÏŞ¶¨¡£
-//cbegin ½«ÎŞÌõ¼ş·µ»Ø const_iterator
+//***æ³¨***
+//begin()å’Œcbegin()çš„åŒºåˆ«ï¼š
+//begin å°†è¿”å› iterator æˆ– const_iterator ï¼Œå…·ä½“å–å†³äºè°ƒç”¨å®ƒçš„å¯¹è±¡çš„ const é™å®šã€‚
+//cbegin å°†æ— æ¡ä»¶è¿”å› const_iterator
 
-//ÈçºÎÔÚerase()·½·¨ÖĞÊ¹ÓÃ·´Ïòµü´úÆ÷À´É¾³ıÔªËØ£¿
-//intSet.erase(intSet.rbegin());   //±¨´í
-//½â¾ö·½·¨£º
-//ĞèÒªÓ¦ÓÃÆ«ÒÆÁ¿base()  »òÕß  next()
+//å¦‚ä½•åœ¨erase()æ–¹æ³•ä¸­ä½¿ç”¨åå‘è¿­ä»£å™¨æ¥åˆ é™¤å…ƒç´ ï¼Ÿ
+//intSet.erase(intSet.rbegin());   //æŠ¥é”™
+//è§£å†³æ–¹æ³•ï¼š
+//éœ€è¦åº”ç”¨åç§»é‡base()  æˆ–è€…  next()
 #endif
 
-//ÓÃ»ùÓÚ¶ş²æ¶ÑµÄÓÅÏÈ¶ÓÁĞÊµÏÖ
+//ç”¨åŸºäºäºŒå‰å †çš„ä¼˜å…ˆé˜Ÿåˆ—å®ç°
 #if 0
 void GetLeastNumbers(const vector<int>& data, int k)
 {
     if (data.empty() || k <= 0)
         return;
 
-    //***×¢***
-    //priority_queueÈİÆ÷µÄÔªËØÄ¬ÈÏ´Ó´óµ½Ğ¡´æ·Å
+    //***æ³¨***
+    //priority_queueå®¹å™¨çš„å…ƒç´ é»˜è®¤ä»å¤§åˆ°å°å­˜æ”¾
 
-    //***ÒÔÏÂÊÇ¸ÄÎªÓÉĞ¡µ½´ó´æ·Å***
+    //***ä»¥ä¸‹æ˜¯æ”¹ä¸ºç”±å°åˆ°å¤§å­˜æ”¾***
     //priority_queue<int, vector<int>, greater<int>> pq;
 
     priority_queue<int> pq;
@@ -5913,15 +5913,15 @@ void GetLeastNumbers(const vector<int>& data, int k)
 #endif
 
 
-//ÃæÊÔÌâ41£ºÊı¾İÁ÷ÖĞµÄÖĞÎ»Êı
-//¿ÉÒÔÓÃÊı×éÅäºÏ¿ìËÙÅÅĞòËã·¨
-//¿ÉÒÔÓÃÅÅĞòµÄÁ´±í
-//¿ÉÒÔÓÃ¶ş²æËÑË÷Ê÷£¬»òÆäÓÅ»¯°æAVLÊ÷£¨·½·¨ÊÇÀûÓÃÖĞĞò±éÀú£¬½«Êı¾İ¶¼´æÈëÊı×éÖĞ£©
-//µ«ÊÇAVLÊ÷ÊµÏÖÄÑ£¬¿¼ÂÇ£º
-//Èç¹ûÄÜ¹»±£Ö¤Êı¾İÈİÆ÷×ó±ßµÄÊı¾İ¶¼Ğ¡ÓÚÓÒ±ßµÄÊı¾İ£¬ÄÇÃ´¼´Ê¹×ó¡¢ÓÒÁ½±ß
-//ÄÚ²¿µÄÊı¾İÃ»ÓĞÅÅĞò£¬Ò²¿ÉÒÔ¸ù¾İ
-//¡¾×ó±ß×î´óµÄÊı¡¿¼°¡¾ÓÒ±ß×îĞ¡µÄÊı¡¿µÃµ½ÖĞÎ»Êı¡£
-//Òò´Ë£¬ÒªÊµÏÖÒ»¸ö×î´ó¶ÑºÍ×îĞ¡¶Ñ
+//é¢è¯•é¢˜41ï¼šæ•°æ®æµä¸­çš„ä¸­ä½æ•°
+//å¯ä»¥ç”¨æ•°ç»„é…åˆå¿«é€Ÿæ’åºç®—æ³•
+//å¯ä»¥ç”¨æ’åºçš„é“¾è¡¨
+//å¯ä»¥ç”¨äºŒå‰æœç´¢æ ‘ï¼Œæˆ–å…¶ä¼˜åŒ–ç‰ˆAVLæ ‘ï¼ˆæ–¹æ³•æ˜¯åˆ©ç”¨ä¸­åºéå†ï¼Œå°†æ•°æ®éƒ½å­˜å…¥æ•°ç»„ä¸­ï¼‰
+//ä½†æ˜¯AVLæ ‘å®ç°éš¾ï¼Œè€ƒè™‘ï¼š
+//å¦‚æœèƒ½å¤Ÿä¿è¯æ•°æ®å®¹å™¨å·¦è¾¹çš„æ•°æ®éƒ½å°äºå³è¾¹çš„æ•°æ®ï¼Œé‚£ä¹ˆå³ä½¿å·¦ã€å³ä¸¤è¾¹
+//å†…éƒ¨çš„æ•°æ®æ²¡æœ‰æ’åºï¼Œä¹Ÿå¯ä»¥æ ¹æ®
+//ã€å·¦è¾¹æœ€å¤§çš„æ•°ã€‘åŠã€å³è¾¹æœ€å°çš„æ•°ã€‘å¾—åˆ°ä¸­ä½æ•°ã€‚
+//å› æ­¤ï¼Œè¦å®ç°ä¸€ä¸ªæœ€å¤§å †å’Œæœ€å°å †
 #if 0
 #include <iostream>
 #include <exception>
@@ -5944,46 +5944,46 @@ public:
 template<typename T>
 void DynamicArray<T>::insert(T num)
 {
-    //Èôµ±Ç°×î´ó¶ÑºÍ×îĞ¡¶ÑµÄÔªËØ¸öÊıÖ®ºÍÎªÅ¼Êı£¨×¢£º0Ò²ÊÇÅ¼Êı£©£¬
-    //Ôò½«ĞÂÊı¾İ²åÈëµ½×îĞ¡¶Ñ
+    //è‹¥å½“å‰æœ€å¤§å †å’Œæœ€å°å †çš„å…ƒç´ ä¸ªæ•°ä¹‹å’Œä¸ºå¶æ•°ï¼ˆæ³¨ï¼š0ä¹Ÿæ˜¯å¶æ•°ï¼‰ï¼Œ
+    //åˆ™å°†æ–°æ•°æ®æ’å…¥åˆ°æœ€å°å †
     if (((max.size() + min.size()) & 0x1) == 0)
     {
-        //ÈôĞÂÊı¾İ±È×î´ó¶ÑÖĞµÄÊı¾İÒªĞ¡
+        //è‹¥æ–°æ•°æ®æ¯”æœ€å¤§å †ä¸­çš„æ•°æ®è¦å°
         if (max.size() > 0 && num < max[0])
         {
-            //¿ÉÒÔÏÈ°ÑÕâ¸öĞÂµÄÊı¾İ²åÈë×î´ó¶Ñ£¬½Ó×Å°Ñ×î´ó¶ÑÖĞ×î´óµÄÊı×ÖÄÃ³öÀ´
-            //²åÈë×îĞ¡¶Ñ¡£ÓÉÓÚ¡¾×îÖÕ²åÈë×îĞ¡¶ÑµÄÊı×ÖÊÇÔ­×î´ó¶ÑÖĞ×î´óµÄÊı×Ö¡¿£¬ÕâÑù
-            //¾Í±£Ö¤ÁË×îĞ¡¶ÑÖĞËùÓĞÊı×Ö¶¼´óÓÚ×î´ó¶ÑÖĞµÄÊı×Ö
+            //å¯ä»¥å…ˆæŠŠè¿™ä¸ªæ–°çš„æ•°æ®æ’å…¥æœ€å¤§å †ï¼Œæ¥ç€æŠŠæœ€å¤§å †ä¸­æœ€å¤§çš„æ•°å­—æ‹¿å‡ºæ¥
+            //æ’å…¥æœ€å°å †ã€‚ç”±äºã€æœ€ç»ˆæ’å…¥æœ€å°å †çš„æ•°å­—æ˜¯åŸæœ€å¤§å †ä¸­æœ€å¤§çš„æ•°å­—ã€‘ï¼Œè¿™æ ·
+            //å°±ä¿è¯äº†æœ€å°å †ä¸­æ‰€æœ‰æ•°å­—éƒ½å¤§äºæœ€å¤§å †ä¸­çš„æ•°å­—
 
             max.push_back(num);
 
-            //º¯Êı¶Ô [first, last) ·¶Î§ÄÚµÄµü´úÆ÷Ö¸¶¨µÄĞòÁĞ½øĞĞÖØĞÂÅÅĞò£¬
-            //ÒÔĞÎ³É°´ operator< ÅÅĞòµÄĞÂ¶Ñ¡£ [first, last - 1) ·¶Î§ÄÚµÄµü´úÆ÷
-            //±ØĞëÖ¸¶¨Ò»¸öÏÖÓĞ¶Ñ£¬Ò²°´ operator< ÅÅĞò¡£
-            //Òò´Ë£¬ first != last ±ØĞëÎª true£¬²¢ÇÒ *(last - 1) ÊÇÒªÌí¼Óµ½£¨ÍÆÈë£©¶ÑµÄÔªËØ¡£
-            //ÈôÓĞµÚÈı¸ö²ÎÊı£¬Ôò½«ÓÃ´Ëº¯Êı½øĞĞ±È½Ï
+            //å‡½æ•°å¯¹ [first, last) èŒƒå›´å†…çš„è¿­ä»£å™¨æŒ‡å®šçš„åºåˆ—è¿›è¡Œé‡æ–°æ’åºï¼Œ
+            //ä»¥å½¢æˆæŒ‰ operator< æ’åºçš„æ–°å †ã€‚ [first, last - 1) èŒƒå›´å†…çš„è¿­ä»£å™¨
+            //å¿…é¡»æŒ‡å®šä¸€ä¸ªç°æœ‰å †ï¼Œä¹ŸæŒ‰ operator< æ’åºã€‚
+            //å› æ­¤ï¼Œ first != last å¿…é¡»ä¸º trueï¼Œå¹¶ä¸” *(last - 1) æ˜¯è¦æ·»åŠ åˆ°ï¼ˆæ¨å…¥ï¼‰å †çš„å…ƒç´ ã€‚
+            //è‹¥æœ‰ç¬¬ä¸‰ä¸ªå‚æ•°ï¼Œåˆ™å°†ç”¨æ­¤å‡½æ•°è¿›è¡Œæ¯”è¾ƒ
             push_heap(max.begin(),max.end(),less<T>());
 
             num = max[0];
 
-            //½»»»ÔÚÎ»ÖÃ first µÄÖµºÍÔÚÎ»ÖÃ last-1 µÄÖµ£¬²¢Áî×Ó·¶Î§ [first, last-1) ±äÎª¶Ñ¡£
-            //ÕâÓµÓĞ´Ó·¶Î§ [first, last) Ëù¶¨ÒåµÄ¶ÑÒÆ³ıÊ×¸öÔªËØµÄĞ§¹û¡£
+            //äº¤æ¢åœ¨ä½ç½® first çš„å€¼å’Œåœ¨ä½ç½® last-1 çš„å€¼ï¼Œå¹¶ä»¤å­èŒƒå›´ [first, last-1) å˜ä¸ºå †ã€‚
+            //è¿™æ‹¥æœ‰ä»èŒƒå›´ [first, last) æ‰€å®šä¹‰çš„å †ç§»é™¤é¦–ä¸ªå…ƒç´ çš„æ•ˆæœã€‚
             pop_heap(max.begin(),max.end(),less<T>());
-            //½«×î´ó¶ÑÖĞµÄ×î´óÖµÉ¾È¥
+            //å°†æœ€å¤§å †ä¸­çš„æœ€å¤§å€¼åˆ å»
             max.pop_back();
         }
 
         min.push_back(num);
         push_heap(min.begin(),min.end(),greater<T>());
     }
-    else//·ñÔò£¬²åÈëµ½×î´ó¶Ñ
+    else//å¦åˆ™ï¼Œæ’å…¥åˆ°æœ€å¤§å †
     {
-        //ÈôĞÂÊı¾İ±È×îĞ¡¶ÑÖĞµÄÊı¾İÒª´ó
+        //è‹¥æ–°æ•°æ®æ¯”æœ€å°å †ä¸­çš„æ•°æ®è¦å¤§
         if (min.size() > 0 && num > min[0])
         {
-            //¿ÉÒÔÏÈ°ÑÕâ¸öĞÂµÄÊı¾İ²åÈë×îĞ¡¶Ñ£¬½Ó×Å°Ñ×îĞ¡¶ÑÖĞ×îĞ¡µÄÊı×ÖÄÃ³öÀ´
-            //²åÈë×î´ó¶Ñ¡£ÓÉÓÚ×îÖÕ²åÈë×î´ó¶ÑµÄÊı×ÖÊÇÔ­×îĞ¡¶ÑÖĞ×îĞ¡µÄÊı×Ö£¬ÕâÑù
-            //¾Í±£Ö¤ÁË×î´ó¶ÑÖĞËùÓĞÊı×Ö¶¼Ğ¡ÓÚ×îĞ¡¶ÑÖĞµÄÊı×Ö
+            //å¯ä»¥å…ˆæŠŠè¿™ä¸ªæ–°çš„æ•°æ®æ’å…¥æœ€å°å †ï¼Œæ¥ç€æŠŠæœ€å°å †ä¸­æœ€å°çš„æ•°å­—æ‹¿å‡ºæ¥
+            //æ’å…¥æœ€å¤§å †ã€‚ç”±äºæœ€ç»ˆæ’å…¥æœ€å¤§å †çš„æ•°å­—æ˜¯åŸæœ€å°å †ä¸­æœ€å°çš„æ•°å­—ï¼Œè¿™æ ·
+            //å°±ä¿è¯äº†æœ€å¤§å †ä¸­æ‰€æœ‰æ•°å­—éƒ½å°äºæœ€å°å †ä¸­çš„æ•°å­—
 
             min.push_back(num);
 
@@ -5991,10 +5991,10 @@ void DynamicArray<T>::insert(T num)
 
             num = min[0];
 
-            //½»»»ÔÚÎ»ÖÃ first µÄÖµºÍÔÚÎ»ÖÃ last-1 µÄÖµ£¬²¢Áî×Ó·¶Î§ [first, last-1) ±äÎª¶Ñ¡£
-            //ÕâÓµÓĞ´Ó·¶Î§ [first, last) Ëù¶¨ÒåµÄ¶ÑÒÆ³ıÊ×¸öÔªËØµÄĞ§¹û¡£
+            //äº¤æ¢åœ¨ä½ç½® first çš„å€¼å’Œåœ¨ä½ç½® last-1 çš„å€¼ï¼Œå¹¶ä»¤å­èŒƒå›´ [first, last-1) å˜ä¸ºå †ã€‚
+            //è¿™æ‹¥æœ‰ä»èŒƒå›´ [first, last) æ‰€å®šä¹‰çš„å †ç§»é™¤é¦–ä¸ªå…ƒç´ çš„æ•ˆæœã€‚
             pop_heap(min.begin(), min.end(), greater<T>());
-            //½«×îĞ¡¶ÑÖĞµÄ×îĞ¡ÖµÉ¾È¥
+            //å°†æœ€å°å †ä¸­çš„æœ€å°å€¼åˆ å»
             min.pop_back();
         }
 
@@ -6014,10 +6014,10 @@ T DynamicArray<T>::GetMedian(void)
     T res;
 
     if ((size & 0x1) == 1)
-        res = min[0];//ÒòÎª×î´ó¶ÑºÍ×îĞ¡¶ÑÔªËØ×ÜºÍÎªÅ¼ÊıÊ±£¬¶¨ÒåĞÂÊı¾İ²åÈëµ½×îĞ¡¶Ñ
-    else                  //ËùÒÔÔªËØ×ÜÊıÎªÆæÊıÊ±£¬ÖĞÎ»ÊıÔÚ×îĞ¡¶ÑµÄÊ×ÔªËØ
-        res = (max[0] + min[0]) / 2;//***×¢***doubleÀàĞÍµÄ»°¾ÍÃ»·¨ÓÃÒÆÎ»²Ù×÷·ûÁË
-                                                    //ËùÒÔ/2¸üÓĞÍ¨ÓÃĞÔ
+        res = min[0];//å› ä¸ºæœ€å¤§å †å’Œæœ€å°å †å…ƒç´ æ€»å’Œä¸ºå¶æ•°æ—¶ï¼Œå®šä¹‰æ–°æ•°æ®æ’å…¥åˆ°æœ€å°å †
+    else                  //æ‰€ä»¥å…ƒç´ æ€»æ•°ä¸ºå¥‡æ•°æ—¶ï¼Œä¸­ä½æ•°åœ¨æœ€å°å †çš„é¦–å…ƒç´ 
+        res = (max[0] + min[0]) / 2;//***æ³¨***doubleç±»å‹çš„è¯å°±æ²¡æ³•ç”¨ç§»ä½æ“ä½œç¬¦äº†
+                                                    //æ‰€ä»¥/2æ›´æœ‰é€šç”¨æ€§
     return res;
 }
 
@@ -6063,7 +6063,7 @@ int main()
 #endif
 
 
-//ÃæÊÔÌâ42£ºÁ¬Ğø×ÓÊı×éµÄ×î´óºÍ
+//é¢è¯•é¢˜42ï¼šè¿ç»­å­æ•°ç»„çš„æœ€å¤§å’Œ
 #if 0
 #include <iostream>
 #include <exception>
@@ -6104,23 +6104,23 @@ int FindGreatestSum(int* pData, int length)
     //        ;
     //}
 
-//ÄÑµã£º²»ÖªµÀÓ¦¸Ã´ÓÊı×éµÄµÚ¼¸¸öÔªËØ¿ªÊ¼½ØÈ¡£¬µ½ÄÄ¸öÔªËØ¾Í½áÊø
-//±éÀúµ½¸ºÊıÊ±Ö»ÊÇÔİÊ±µÄ»áÈÃsumÖµ±äĞ¡£¬µ«¸Ã¸ºÊıºóÃæµÄÔªËØ¿ÉÄÜ»áÈÃsum½øÒ»²½±ä´ó
-//¸ÃÈçºÎÈ¡Éá£¿Ò²²»ÄÜÓÃË«Ö¸ÕëË¼Ïë×ö
+//éš¾ç‚¹ï¼šä¸çŸ¥é“åº”è¯¥ä»æ•°ç»„çš„ç¬¬å‡ ä¸ªå…ƒç´ å¼€å§‹æˆªå–ï¼Œåˆ°å“ªä¸ªå…ƒç´ å°±ç»“æŸ
+//éå†åˆ°è´Ÿæ•°æ—¶åªæ˜¯æš‚æ—¶çš„ä¼šè®©sumå€¼å˜å°ï¼Œä½†è¯¥è´Ÿæ•°åé¢çš„å…ƒç´ å¯èƒ½ä¼šè®©sumè¿›ä¸€æ­¥å˜å¤§
+//è¯¥å¦‚ä½•å–èˆï¼Ÿä¹Ÿä¸èƒ½ç”¨åŒæŒ‡é’ˆæ€æƒ³åš
 
-//¶¯Ì¬¹æ»®Ë¼Ïë£º
-//×´Ì¬·½³Ì£ºmax( dp[ i ] ) = getMax(    max( dp[ i -1 ] ) + arr[ i ] ,    arr[ i ] )
-//ÉÏÃæÊ½×ÓµÄÒâÒåÊÇ£ºÎÒÃÇ´ÓÍ·¿ªÊ¼±éÀúÊı×é£¬±éÀúµ½Êı×éÔªËØ arr[i] Ê±£¬
-//Á¬ĞøµÄ×î´óµÄºÍ¿ÉÄÜÎª max(dp[i - 1]) + arr[i] £¬Ò²¿ÉÄÜÎª arr[i] £¬
-//×ö±È½Ï¼´¿ÉµÃ³öÄÄ¸ö¸ü´ó£¬È¡×î´óÖµ¡£Ê±¼ä¸´ÔÓ¶ÈÎª n¡£
+//åŠ¨æ€è§„åˆ’æ€æƒ³ï¼š
+//çŠ¶æ€æ–¹ç¨‹ï¼šmax( dp[ i ] ) = getMax(    max( dp[ i -1 ] ) + arr[ i ] ,    arr[ i ] )
+//ä¸Šé¢å¼å­çš„æ„ä¹‰æ˜¯ï¼šæˆ‘ä»¬ä»å¤´å¼€å§‹éå†æ•°ç»„ï¼Œéå†åˆ°æ•°ç»„å…ƒç´  arr[i] æ—¶ï¼Œ
+//è¿ç»­çš„æœ€å¤§çš„å’Œå¯èƒ½ä¸º max(dp[i - 1]) + arr[i] ï¼Œä¹Ÿå¯èƒ½ä¸º arr[i] ï¼Œ
+//åšæ¯”è¾ƒå³å¯å¾—å‡ºå“ªä¸ªæ›´å¤§ï¼Œå–æœ€å¤§å€¼ã€‚æ—¶é—´å¤æ‚åº¦ä¸º nã€‚
 
     int sum = pData[0];
     int Max = pData[0];
 
     for (int i = 1; i < length; ++i)
     {
-        //***×¢***
-        //ÒÔÏÂÓï¾äÊ¹sumÄÜÔİ´æÇóµÃµÄºÍµÄÍ¬Ê±È·¶¨ÁË´ÓÊı×éµÄµÚ¼¸¸öÔªËØ¿ªÊ¼ÇóºÍ
+        //***æ³¨***
+        //ä»¥ä¸‹è¯­å¥ä½¿sumèƒ½æš‚å­˜æ±‚å¾—çš„å’Œçš„åŒæ—¶ç¡®å®šäº†ä»æ•°ç»„çš„ç¬¬å‡ ä¸ªå…ƒç´ å¼€å§‹æ±‚å’Œ
         sum = max(sum+pData[i],pData[i]);
 
         Max = (sum >= Max) ? sum : Max;
@@ -6131,7 +6131,7 @@ int FindGreatestSum(int* pData, int length)
 #endif
 
 
-//ÃæÊÔÌâ43£º1~nÕûÊıÖĞ1³öÏÖµÄ´ÎÊı
+//é¢è¯•é¢˜43ï¼š1~næ•´æ•°ä¸­1å‡ºç°çš„æ¬¡æ•°
 #if 0
 #include <iostream>
 #include <exception>
@@ -6169,7 +6169,7 @@ int Numberof1(int n)
     if (n < 1)
         throw "Error1 !\n";
 
-    //ÏÈ½«Êı×ÖÊı¾İ×ª»»³É×Ö·û´æ´¢
+    //å…ˆå°†æ•°å­—æ•°æ®è½¬æ¢æˆå­—ç¬¦å­˜å‚¨
     char strN[50]{'\0'};
     sprintf_s(strN,"%d",n);
 
@@ -6191,16 +6191,16 @@ int Numberof1Core(const char* strN)
     if (strN==nullptr||*strN=='\0')
         return 0;
 
-    //´æ´¢×î¸ßÎ»µÄÊı×ÖÖµ£¬ÓÃÓÚÊı×ÖµÄ·Ö¸î¡£±ÈÈç
-    //Êı×ÖnÎª21345ÄÇÃ´£¬Ó¦·ÖÎª1~1345ºÍ1346~11345ºÍ11346~21345
-    //***×¢***
-    //µÚ¶ş²¿·ÖºÍµÚÈı²¿·Ö£¬1µÄ¼ÆÊı£¬Àí½âÓĞÄÑ¶È£º
-    //ºóÁ½¶ÎÖĞ£¬ºóËÄÎ»³öÏÖ1µÄ´ÎÊıÓ¦¸ÃÎª2*( C4 1 )*10^3=8000
-    //ÒòÎªÕâ¸ö¿ÉÒÔ¿´×÷Ò»¸öÅÅÁĞÎÊÌâ£º
-    //ËÄÎ»Êı×ÖÖĞ³öÏÖ1µÄÅÅÁĞ¡£È»ºó¶ÔÓÚÖØ¸´µÄÊı×Ö£¬±ÈÈç1101£¬
-    //±¾Ó¦¸ÃÈ¥ÖØÖ»¼ÆËã1´Î£¬µ«ÊÇÓÉÓÚÎÒÃÇËãµÄÊÇ³öÏÖ1µÄ´ÎÊı£¬1101³öÏÖ3´Î£¬
-    //¶øÎÒÃÇÔÚÇ§¡¢°Ù¡¢¸öÎ»¸÷¼ÆÒ»´ÎÊÇÕıºÃµÄ¡£ËùÒÔÎÊÌâ×ª»¯Îª£ºËÄÎ»·Ö±ğÊÇ1Ê±£¬
-    //ÆäËûÎ»Ëæ±ãÅÅÁĞ£¬¼ÇÒ»´Î¡£
+    //å­˜å‚¨æœ€é«˜ä½çš„æ•°å­—å€¼ï¼Œç”¨äºæ•°å­—çš„åˆ†å‰²ã€‚æ¯”å¦‚
+    //æ•°å­—nä¸º21345é‚£ä¹ˆï¼Œåº”åˆ†ä¸º1~1345å’Œ1346~11345å’Œ11346~21345
+    //***æ³¨***
+    //ç¬¬äºŒéƒ¨åˆ†å’Œç¬¬ä¸‰éƒ¨åˆ†ï¼Œ1çš„è®¡æ•°ï¼Œç†è§£æœ‰éš¾åº¦ï¼š
+    //åä¸¤æ®µä¸­ï¼Œåå››ä½å‡ºç°1çš„æ¬¡æ•°åº”è¯¥ä¸º2*( C4 1 )*10^3=8000
+    //å› ä¸ºè¿™ä¸ªå¯ä»¥çœ‹ä½œä¸€ä¸ªæ’åˆ—é—®é¢˜ï¼š
+    //å››ä½æ•°å­—ä¸­å‡ºç°1çš„æ’åˆ—ã€‚ç„¶åå¯¹äºé‡å¤çš„æ•°å­—ï¼Œæ¯”å¦‚1101ï¼Œ
+    //æœ¬åº”è¯¥å»é‡åªè®¡ç®—1æ¬¡ï¼Œä½†æ˜¯ç”±äºæˆ‘ä»¬ç®—çš„æ˜¯å‡ºç°1çš„æ¬¡æ•°ï¼Œ1101å‡ºç°3æ¬¡ï¼Œ
+    //è€Œæˆ‘ä»¬åœ¨åƒã€ç™¾ã€ä¸ªä½å„è®¡ä¸€æ¬¡æ˜¯æ­£å¥½çš„ã€‚æ‰€ä»¥é—®é¢˜è½¬åŒ–ä¸ºï¼šå››ä½åˆ†åˆ«æ˜¯1æ—¶ï¼Œ
+    //å…¶ä»–ä½éšä¾¿æ’åˆ—ï¼Œè®°ä¸€æ¬¡ã€‚
 
     int first = *strN - '0';
 
@@ -6212,17 +6212,17 @@ int Numberof1Core(const char* strN)
     if (length == 1 && first > 0)
         return 1;
 
-    // ¼ÙÉèstrNÊÇ"21345"
-    // numFirstDigitÊÇÊı×Ö10000-19999µÄµÚÒ»¸öÎ»ÖĞ1µÄÊıÄ¿
+    // å‡è®¾strNæ˜¯"21345"
+    // numFirstDigitæ˜¯æ•°å­—10000-19999çš„ç¬¬ä¸€ä¸ªä½ä¸­1çš„æ•°ç›®
     int numFirstDigit = 0;
     if (first > 1)
         numFirstDigit = PowerBase10(length - 1);
     else if (first == 1)
         numFirstDigit = atoi(strN + 1) + 1;
 
-    // numOtherDigitsÊÇ01346-21345³ıÁËµÚÒ»Î»Ö®ÍâµÄÊıÎ»ÖĞ1µÄÊıÄ¿
+    // numOtherDigitsæ˜¯01346-21345é™¤äº†ç¬¬ä¸€ä½ä¹‹å¤–çš„æ•°ä½ä¸­1çš„æ•°ç›®
     int numOtherDigits = first * (length - 1) * PowerBase10(length - 2);
-    // numRecursiveÊÇ1-1345ÖĞ1µÄÊıÄ¿
+    // numRecursiveæ˜¯1-1345ä¸­1çš„æ•°ç›®
     int numRecursive = Numberof1Core(strN + 1);
 
     return numFirstDigit + numOtherDigits + numRecursive;
@@ -6230,7 +6230,7 @@ int Numberof1Core(const char* strN)
 #endif
 
 
-//ÃæÊÔÌâ44£ºÊı×ÖĞòÁĞÖĞÄ³Ò»Î»µÄÊı×Ö
+//é¢è¯•é¢˜44ï¼šæ•°å­—åºåˆ—ä¸­æŸä¸€ä½çš„æ•°å­—
 #if 0
 #include <iostream>
 #include <cmath>
@@ -6261,23 +6261,23 @@ char FindNumber(int n)
     if (n < 0)
         throw exception();
 
-    //µÚÒ»²½£º
-    //ÕÒµ½µÚnÎ»Êı×ÖÓ¦¸ÃÔÚ¼¸Î»ÊıÖ®ÄÚ
-    //Í¬Ê±ÕÒµ½ÊÇ¸ÃÎ»Êı³¤¶ÈÊı×ÖĞòÁĞÏÂµÄ¶àÉÙÎ»
+    //ç¬¬ä¸€æ­¥ï¼š
+    //æ‰¾åˆ°ç¬¬nä½æ•°å­—åº”è¯¥åœ¨å‡ ä½æ•°ä¹‹å†…
+    //åŒæ—¶æ‰¾åˆ°æ˜¯è¯¥ä½æ•°é•¿åº¦æ•°å­—åºåˆ—ä¸‹çš„å¤šå°‘ä½
     Data data = FindWeiShu(n);
 
-    //µÚ¶ş²½£º
-    //¼ÆËãÄ³³¤¶ÈÊı×ÖµÄÆğÊ¼Êı×Ö
+    //ç¬¬äºŒæ­¥ï¼š
+    //è®¡ç®—æŸé•¿åº¦æ•°å­—çš„èµ·å§‹æ•°å­—
     int begin;
     if (data.weishu == 1)
         begin = 0;
     else
         begin= pow(10, data.weishu - 1);
 
-    //µÚÈı²½£º
-    //Ä³³¤¶ÈÏÂµÄÊı×ÖµÄµÚx¸öÊı×Ö
+    //ç¬¬ä¸‰æ­¥ï¼š
+    //æŸé•¿åº¦ä¸‹çš„æ•°å­—çš„ç¬¬xä¸ªæ•°å­—
     int x_num = data.yvxia / data.weishu;
-    //µÚx¸öÊı×ÖµÄµÚ¼¸Î»
+    //ç¬¬xä¸ªæ•°å­—çš„ç¬¬å‡ ä½
     int x_weishu_num = data.yvxia % data.weishu;
 
     char ch[50] = {'\0'};
@@ -6292,14 +6292,14 @@ Data FindWeiShu(int n)
     int right = 1;
     int weishu = 1;
 
-    //***×¢***0~9ÓĞ10¸öÊı×Ö
+    //***æ³¨***0~9æœ‰10ä¸ªæ•°å­—
 	n -= weishu * (pow(10, right) - pow(10, left)+1);
 
     while (n>=0)
     {
         ++right, ++left,++weishu;
 
-		//                  Î»Êı*¸ÃÎ»ÊıÏÂÓĞ¼¸¸öÊı×Ö
+		//                  ä½æ•°*è¯¥ä½æ•°ä¸‹æœ‰å‡ ä¸ªæ•°å­—
         int tmp= weishu * (pow(10, right) - pow(10, left));
 
         if (n - tmp >= 0)
@@ -6312,21 +6312,21 @@ Data FindWeiShu(int n)
 
     Data data;
     data.weishu = weishu;
-    data.yvxia = abs(n);//¼ÓabsÊÇÎªÁËµ±nµÈÓÚ5Ê±£¬yvxia³ÉÔ±µÃµ½µÄÖµÎª5¶ø²»ÊÇ-5
+    data.yvxia = abs(n);//åŠ absæ˜¯ä¸ºäº†å½“nç­‰äº5æ—¶ï¼Œyvxiaæˆå‘˜å¾—åˆ°çš„å€¼ä¸º5è€Œä¸æ˜¯-5
 
     return data;
 }
 #endif
 
 
-//ÃæÊÔÌâ45£º°ÑÊı×éÅÅ³É×îĞ¡µÄÊı
-//½â·¨£º
-//ÒªÈ·¶¨Ò»¸ö¹æÔòÅĞ¶ÏmºÍnÄÄ¸öÓ¦¸ÃÅÅÔÚÇ°Ãæ£¬
-//¶ø²»ÊÇ½ö½ö±È½ÏÕâÁ½¸öÊı×ÖµÄÖµÄÄ¸ö¸ü´ó¡£
-//¾ÙÀı£º
-//Á½¸öÊı×ÖmºÍnÄÜÆ´½Ó³ÉÊı×ÖmnºÍnm¡£Èç¹ûmn<nm,
-//ÄÇÃ´ÎÒÃÇÓ¦¸Ã´òÓ¡³ömn, Ò²¾ÍÊÇmÓ¦¸ÃÅÅÔÚnµÄÇ°Ãæ£¬ÎÒÃÇ¶¨Òå´ËÊ±mĞ¡ÓÚn; 
-//·´Ö®£¬Èç¹ûnm < mn, ÔòÎÒÃÇ¶¨ÒånĞ¡ÓÚm; Èç¹ûmn = nm, ÔòmµÈÓÚn
+//é¢è¯•é¢˜45ï¼šæŠŠæ•°ç»„æ’æˆæœ€å°çš„æ•°
+//è§£æ³•ï¼š
+//è¦ç¡®å®šä¸€ä¸ªè§„åˆ™åˆ¤æ–­må’Œnå“ªä¸ªåº”è¯¥æ’åœ¨å‰é¢ï¼Œ
+//è€Œä¸æ˜¯ä»…ä»…æ¯”è¾ƒè¿™ä¸¤ä¸ªæ•°å­—çš„å€¼å“ªä¸ªæ›´å¤§ã€‚
+//ä¸¾ä¾‹ï¼š
+//ä¸¤ä¸ªæ•°å­—må’Œnèƒ½æ‹¼æ¥æˆæ•°å­—mnå’Œnmã€‚å¦‚æœmn<nm,
+//é‚£ä¹ˆæˆ‘ä»¬åº”è¯¥æ‰“å°å‡ºmn, ä¹Ÿå°±æ˜¯måº”è¯¥æ’åœ¨nçš„å‰é¢ï¼Œæˆ‘ä»¬å®šä¹‰æ­¤æ—¶må°äºn; 
+//åä¹‹ï¼Œå¦‚æœnm < mn, åˆ™æˆ‘ä»¬å®šä¹‰nå°äºm; å¦‚æœmn = nm, åˆ™mç­‰äºn
 #if 0
 #define _CRT_SECURE_NO_DEPRECATE
 #include <iostream>
@@ -6351,12 +6351,12 @@ void PrintMinNumber(const int* numbers, int length)
     if (numbers == nullptr || length < 1)
         throw exception();
 
-    //***×¢***
-    //Îª½â¾ö´óÊıÎÊÌâ£¬ĞèÒª½«Ã¿¸öÊı×ÖÒÔ×Ö·ûµÄĞÎÊ½±íÊ¾
-    //´´½¨Ö¸Ïò×Ö·ûÊı×éµÄÖ¸Õë
-    //´íÎóĞ´·¨£º
+    //***æ³¨***
+    //ä¸ºè§£å†³å¤§æ•°é—®é¢˜ï¼Œéœ€è¦å°†æ¯ä¸ªæ•°å­—ä»¥å­—ç¬¦çš„å½¢å¼è¡¨ç¤º
+    //åˆ›å»ºæŒ‡å‘å­—ç¬¦æ•°ç»„çš„æŒ‡é’ˆ
+    //é”™è¯¯å†™æ³•ï¼š
     //char** strNumbers = new char[MaxLengthOfNum][length];
-    //ÕıÈ·Ğ´·¨£º
+    //æ­£ç¡®å†™æ³•ï¼š
     char** strNumbers = new char* [length];
 
     for (int i = 0; i < length; ++i)
@@ -6366,20 +6366,20 @@ void PrintMinNumber(const int* numbers, int length)
         sprintf(strNumbers[i], "%d", numbers[i]);
     }
 
-    //È»ºó£¬Ê¹ÓÃ¶Ô×Ö·ûµÄÅÅĞòº¯Êı£¬¶Ô¸÷×Ö·û½øĞĞÅÅĞò¡£
-    //***×¢***
-    //qsort()º¯Êı£¬ÄÜ¶ÔstrNumbersËùÖ¸ÏòµÄÊı×éÒÔÉıĞòÅÅĞò£¬
-    //»ò°´ÕÕ×Ô¶¨ÒåµÄ±È½Ï·½·¨À´ÅÅĞò
+    //ç„¶åï¼Œä½¿ç”¨å¯¹å­—ç¬¦çš„æ’åºå‡½æ•°ï¼Œå¯¹å„å­—ç¬¦è¿›è¡Œæ’åºã€‚
+    //***æ³¨***
+    //qsort()å‡½æ•°ï¼Œèƒ½å¯¹strNumbersæ‰€æŒ‡å‘çš„æ•°ç»„ä»¥å‡åºæ’åºï¼Œ
+    //æˆ–æŒ‰ç…§è‡ªå®šä¹‰çš„æ¯”è¾ƒæ–¹æ³•æ¥æ’åº
     qsort(strNumbers,length,sizeof(char*),mycompare);
 
     char Print[MaxLengthOfNum];
     strncpy(Print,strNumbers[0],MaxLengthOfNum-1);
     Print[MaxLengthOfNum-1] = '\0';
 
-    //***×¢***
-    //strncatºó¸½À´×Ô src ËùÖ¸ÏòµÄ×Ö·ûÊı×éµÄÖÁ¶à count ¸ö×Ö·û£¬
-    //µ½ dest ËùÖ¸ÏòµÄ¿ÕÖÕÖ¹×Ö½Ú×Ö·û´®µÄÄ©Î²£¬ÈôÕÒµ½¿Õ×Ö·ûÔòÍ£Ö¹
-    //Ê¼ÖÕºó¸½ÖÕÖ¹¿Õ×Ö·ûµ½Ä©Î²£¨¹Êº¯Êı¿ÉĞ´ÈëµÄ×î´ó×Ö½ÚÊıÊÇ count+1 £©¡£
+    //***æ³¨***
+    //strncatåé™„æ¥è‡ª src æ‰€æŒ‡å‘çš„å­—ç¬¦æ•°ç»„çš„è‡³å¤š count ä¸ªå­—ç¬¦ï¼Œ
+    //åˆ° dest æ‰€æŒ‡å‘çš„ç©ºç»ˆæ­¢å­—èŠ‚å­—ç¬¦ä¸²çš„æœ«å°¾ï¼Œè‹¥æ‰¾åˆ°ç©ºå­—ç¬¦åˆ™åœæ­¢
+    //å§‹ç»ˆåé™„ç»ˆæ­¢ç©ºå­—ç¬¦åˆ°æœ«å°¾ï¼ˆæ•…å‡½æ•°å¯å†™å…¥çš„æœ€å¤§å­—èŠ‚æ•°æ˜¯ count+1 ï¼‰ã€‚
     int available = MaxLengthOfNum-strlen(Print)-1;
 
     if(length>1)
@@ -6394,29 +6394,29 @@ void PrintMinNumber(const int* numbers, int length)
 
     cout << Print;
 
-    //***×¢***
-    //×îºó±ğÍüÁËÊÍ·Å¶¯Ì¬·ÖÅäµÄÄÚ´æ
-    //ÊÍ·Å×Ö·ûÊı×é
+    //***æ³¨***
+    //æœ€ååˆ«å¿˜äº†é‡Šæ”¾åŠ¨æ€åˆ†é…çš„å†…å­˜
+    //é‡Šæ”¾å­—ç¬¦æ•°ç»„
     for (int i = 0; i < length; ++i)
     {
         delete [] strNumbers[i];
     }
 
-    //ÊÍ·Å×Ö·ûÊı×éÖ¸Õë×é³ÉµÄÊı×é
+    //é‡Šæ”¾å­—ç¬¦æ•°ç»„æŒ‡é’ˆç»„æˆçš„æ•°ç»„
     delete[] strNumbers;
 }
 
 int mycompare(const void* a, const void* b)
 {
-    //***×¢***
-    //´íÎóĞ´·¨£º
+    //***æ³¨***
+    //é”™è¯¯å†™æ³•ï¼š
     //const char* arg1 = (const char*)a;
     //const char* arg2 = (const char*)b; 
 
-    //***ÕıÈ·Ğ´·¨***
-    //Àí½â£ºqsort()º¯ÊıµÄÊµÏÖĞèÒªÁ½¸öÖ¸Ïò´ıÅÅĞòÊı×éµÄÔªËØµÄÖ¸Õë
-    //Êı×éÖĞµÄÔªËØÒÑ¾­ÊÇÖ¸Õë£¬Òò´ËaºÍb¾ÍÊÇÖ¸ÕëµÄÖ¸Õë
-    const char* arg1 = *(const char**)a;//ÏÈÇ¿ÖÆÀàĞÍ×ª»»ÎªÖ¸ÕëµÄÖ¸Õë£¬ÔÙ×ö½âÒıÓÃĞĞÎª
+    //***æ­£ç¡®å†™æ³•***
+    //ç†è§£ï¼šqsort()å‡½æ•°çš„å®ç°éœ€è¦ä¸¤ä¸ªæŒ‡å‘å¾…æ’åºæ•°ç»„çš„å…ƒç´ çš„æŒ‡é’ˆ
+    //æ•°ç»„ä¸­çš„å…ƒç´ å·²ç»æ˜¯æŒ‡é’ˆï¼Œå› æ­¤aå’Œbå°±æ˜¯æŒ‡é’ˆçš„æŒ‡é’ˆ
+    const char* arg1 = *(const char**)a;//å…ˆå¼ºåˆ¶ç±»å‹è½¬æ¢ä¸ºæŒ‡é’ˆçš„æŒ‡é’ˆï¼Œå†åšè§£å¼•ç”¨è¡Œä¸º
     const char* arg2 = *(const char**)b;
 
     char* tmp1 = new char[MaxLengthOfNum];
@@ -6440,18 +6440,18 @@ int mycompare(const void* a, const void* b)
 
     return 0;
 
-    // return (arg1 > arg2) - (arg1 < arg2); // ¿ÉĞĞµÄ¼òĞ´
-    // return arg1 - arg2; // ´íÎóµÄ¼òĞ´£¨Èô¸ø³ö INT_MIN Ôò»áÊ§°Ü£©
+    // return (arg1 > arg2) - (arg1 < arg2); // å¯è¡Œçš„ç®€å†™
+    // return arg1 - arg2; // é”™è¯¯çš„ç®€å†™ï¼ˆè‹¥ç»™å‡º INT_MIN åˆ™ä¼šå¤±è´¥ï¼‰
 }
 #endif
 
 
-//ÃæÊÔÌâ46£º°ÑÊı×Ö·­Òë³É×Ö·û´®
-//Ë¼Â·£º
-//ºËĞÄ£ºÌõ¼şÅĞ¶Ï°æì³²¨ÄÇÆõÊıÁĞ£¨ÇàÍÜÌøÌ¨ÎÊÌâ£©£¬
-//°Ñ·­Òë1¸öÊı×ÖºÍ·­Òë2¸öÊı×Ö¿´³ÉÌø1½×ºÍÌø2½×£¬
-//Ö»ÓĞµ±Êı×ÖÆ¥Åä >= 10ÇÒ <= 25Ê±ÄÜÌø2½×£¬dp[n] = dp[n - 1] + dp[n - 2] 
-//·ñÔò×îºóÖ»ÄÜÌø1½×£¬Òò´ËÓëÇ°Ò»¸ö½á¹ûÏàÍ¬£¬dp[n] = dp[n - 1]
+//é¢è¯•é¢˜46ï¼šæŠŠæ•°å­—ç¿»è¯‘æˆå­—ç¬¦ä¸²
+//æ€è·¯ï¼š
+//æ ¸å¿ƒï¼šæ¡ä»¶åˆ¤æ–­ç‰ˆæ–æ³¢é‚£å¥‘æ•°åˆ—ï¼ˆé’è›™è·³å°é—®é¢˜ï¼‰ï¼Œ
+//æŠŠç¿»è¯‘1ä¸ªæ•°å­—å’Œç¿»è¯‘2ä¸ªæ•°å­—çœ‹æˆè·³1é˜¶å’Œè·³2é˜¶ï¼Œ
+//åªæœ‰å½“æ•°å­—åŒ¹é… >= 10ä¸” <= 25æ—¶èƒ½è·³2é˜¶ï¼Œdp[n] = dp[n - 1] + dp[n - 2] 
+//å¦åˆ™æœ€ååªèƒ½è·³1é˜¶ï¼Œå› æ­¤ä¸å‰ä¸€ä¸ªç»“æœç›¸åŒï¼Œdp[n] = dp[n - 1]
 #if 0
 #include <iostream>
 #include <string>
@@ -6473,8 +6473,8 @@ int translate(int num)
     if (num < 0)
         return -1;
 
-    //***×¢***
-    //ÓÃto_string()º¯Êı¿ìËÙ½«Êı×ÖÖµ×ª»¯Îª×Ö·û´æ´¢
+    //***æ³¨***
+    //ç”¨to_string()å‡½æ•°å¿«é€Ÿå°†æ•°å­—å€¼è½¬åŒ–ä¸ºå­—ç¬¦å­˜å‚¨
     string str = to_string(num);
       
     int Length = str.size();
@@ -6482,19 +6482,19 @@ int translate(int num)
     //***
     unique_ptr<int[]> dp(new int[Length+1]);
 
-    //±ÈÈçÊı×Ö12ÓĞÁ½ÖÖÌø·¨£¬12ÄÜÆ¥Åä×ÖÄ¸£¬Òò´Ëdp[2]=dp[1]+dp[0]
-    //¶øÒòÎªÊı×ÖÎªÒ»Î»µÄÊ±dp[1]=1£¬Òò´ËÍÆ³ödp[0]=1
+    //æ¯”å¦‚æ•°å­—12æœ‰ä¸¤ç§è·³æ³•ï¼Œ12èƒ½åŒ¹é…å­—æ¯ï¼Œå› æ­¤dp[2]=dp[1]+dp[0]
+    //è€Œå› ä¸ºæ•°å­—ä¸ºä¸€ä½çš„æ—¶dp[1]=1ï¼Œå› æ­¤æ¨å‡ºdp[0]=1
     dp[0] = 1;
     dp[1] = 1;
 
     if (Length == 1)
         return 1;
 
-    //dpµÄË÷ÒıÖµ´ú±íµÚ¼¸¸öÊı×Ö£¬´ÓµÚ¶ş¸öÊı×Ö¿ªÊ¼£¬¼´´Ódp[2]¿ªÊ¼
-    //ÄÇÃ´strÓ¦½ØÈ¡µÚ1¸öµ½µÚ2¸öÊı×Ö
+    //dpçš„ç´¢å¼•å€¼ä»£è¡¨ç¬¬å‡ ä¸ªæ•°å­—ï¼Œä»ç¬¬äºŒä¸ªæ•°å­—å¼€å§‹ï¼Œå³ä»dp[2]å¼€å§‹
+    //é‚£ä¹ˆstråº”æˆªå–ç¬¬1ä¸ªåˆ°ç¬¬2ä¸ªæ•°å­—
     for (int i = 2; i <= Length; ++i)
     {
-        string tmp = str.substr(i-2,2);//***×¢***i-2Ïàµ±ÓÚÊÇµÚi-1¸öÊı×Ö¿ªÊ¼£¬ÏòºóÈ¡Á½Î»
+        string tmp = str.substr(i-2,2);//***æ³¨***i-2ç›¸å½“äºæ˜¯ç¬¬i-1ä¸ªæ•°å­—å¼€å§‹ï¼Œå‘åå–ä¸¤ä½
 
         if (tmp.compare("10") >= 0 && tmp.compare("25") <= 0)
             dp[i] = dp[i - 1] + dp[i - 2];
@@ -6507,9 +6507,9 @@ int translate(int num)
 #endif
 
 
-//ÃæÊÔÌâ47£ºÀñÎïµÄ×î´ó¼ÛÖµ
-//ÏñÊÇ01±³°üÎÊÌâ£¬µ«ÓÖ²»ÊÇ
-//´ËÌâÓÃ¶¯Ì¬¹æ»®À´×ö
+//é¢è¯•é¢˜47ï¼šç¤¼ç‰©çš„æœ€å¤§ä»·å€¼
+//åƒæ˜¯01èƒŒåŒ…é—®é¢˜ï¼Œä½†åˆä¸æ˜¯
+//æ­¤é¢˜ç”¨åŠ¨æ€è§„åˆ’æ¥åš
 //4 4
 //1 10 3 8
 //12 2 9 6
@@ -6540,9 +6540,9 @@ int main()
 
 int GetMaxValue(vector<vector<int>>dp, int rows, int cols)
 {
-    //ÒòÎªÊÇ´Ó×óÉÏ½Çµ½ÓÒÏÂ½Ç£¬·½ÏòÖ»ÄÜÊÇÏòÓÒ»òÕßÏòÏÂ£¬
-    // ËùÒÔ¿ÉÒÔ¶Ô³ıÁË×óÉÏ½ÇµÄÔªËØÖ®ÍâµÄÔªËØ
-    //½øĞĞ¶¯Ì¬¹æ»®
+    //å› ä¸ºæ˜¯ä»å·¦ä¸Šè§’åˆ°å³ä¸‹è§’ï¼Œæ–¹å‘åªèƒ½æ˜¯å‘å³æˆ–è€…å‘ä¸‹ï¼Œ
+    // æ‰€ä»¥å¯ä»¥å¯¹é™¤äº†å·¦ä¸Šè§’çš„å…ƒç´ ä¹‹å¤–çš„å…ƒç´ 
+    //è¿›è¡ŒåŠ¨æ€è§„åˆ’
     for(int row = 0; row<rows; ++row)
         for (int col = 0; col < cols; ++col)
         {
@@ -6576,8 +6576,8 @@ int GetMaxValue(vector<vector<int>>dp, int rows, int cols)
     return dp[rows-1][cols-1];
 }
 
-//½â·¨¶ş£ºÖ»ÓÃÒ»Î¬Êı×é×÷Îª¸¨Öú¿Õ¼ä£¨¿Õ¼äÉÏÓÅ»¯£©
-//ÔÚ²İ¸åÖ½ÉÏĞ´Ğ´»­»­¸üÒ×ÓÚÀí½â
+//è§£æ³•äºŒï¼šåªç”¨ä¸€ç»´æ•°ç»„ä½œä¸ºè¾…åŠ©ç©ºé—´ï¼ˆç©ºé—´ä¸Šä¼˜åŒ–ï¼‰
+//åœ¨è‰ç¨¿çº¸ä¸Šå†™å†™ç”»ç”»æ›´æ˜“äºç†è§£
 #if 0
 int maxValue(vector<vector<int>>& grid) 
 {
@@ -6587,7 +6587,7 @@ int maxValue(vector<vector<int>>& grid)
 
     for (int i = 0; i < m; i++) 
     {
-        //***×¢***dp[0]´æµÄÊÇµ½grid[i][0]´¦ÄÜ»ñµÃµÄ×î´ó¼ÛÖµ
+        //***æ³¨***dp[0]å­˜çš„æ˜¯åˆ°grid[i][0]å¤„èƒ½è·å¾—çš„æœ€å¤§ä»·å€¼
         dp[0] += grid[i][0];
 
         for (int j = 1; j < n; j++) 
@@ -6601,7 +6601,7 @@ int maxValue(vector<vector<int>>& grid)
 #endif
 
 
-//ÃæÊÔÌâ48£º×î³¤²»º¬ÖØ¸´×Ö·ûµÄ×Ó×Ö·û´®
+//é¢è¯•é¢˜48ï¼šæœ€é•¿ä¸å«é‡å¤å­—ç¬¦çš„å­å­—ç¬¦ä¸²
 #if 0
 #include <iostream>
 #include <string>
@@ -6624,42 +6624,42 @@ int LongestSubString(string& str)
     if (str == "")
         return -1;
 
-    //´´½¨curLength±äÁ¿´æµ±Ç°Ä£Äâ½ø³ÌÏÂµÄ·ûºÏÒªÇóµÄ³¤¶È
-    //´´½¨maxLength±äÁ¿´æ×î´ó·ûºÏÒªÇóµÄ³¤¶È
+    //åˆ›å»ºcurLengthå˜é‡å­˜å½“å‰æ¨¡æ‹Ÿè¿›ç¨‹ä¸‹çš„ç¬¦åˆè¦æ±‚çš„é•¿åº¦
+    //åˆ›å»ºmaxLengthå˜é‡å­˜æœ€å¤§ç¬¦åˆè¦æ±‚çš„é•¿åº¦
     int curLength = 0, maxLength=0;
 
-    //´´½¨Êı×é£¬´æÃ¿¸ö×Ö·û³öÏÖµÄÎ»ÖÃ
+    //åˆ›å»ºæ•°ç»„ï¼Œå­˜æ¯ä¸ªå­—ç¬¦å‡ºç°çš„ä½ç½®
     unique_ptr<int[]>position(new int[26]);
 
     fill(position.get(), position.get() + 26, -1);
 
     for (int i = 0; i < str.length(); ++i)
     {
-        //´´½¨PreIndex±íÊ¾Ä³¸ö×ÖÄ¸ÉÏÒ»´Î³öÏÖµÄÎ»ÖÃ
-        //(µÚÒ»´Î³öÏÖÊ±£¬PrevIndexÖµÎª-1)
+        //åˆ›å»ºPreIndexè¡¨ç¤ºæŸä¸ªå­—æ¯ä¸Šä¸€æ¬¡å‡ºç°çš„ä½ç½®
+        //(ç¬¬ä¸€æ¬¡å‡ºç°æ—¶ï¼ŒPrevIndexå€¼ä¸º-1)
         int PrevIndex = position[str[i]-'a'];
 
-        //ÈôÄ³¸ö×ÖÄ¸ÊÇµÚÒ»´Î³öÏÖ»òÕß
-        //¡¾Ä³×ÖÄ¸µÄÎ»ÖÃÓëÄ³×ÖÄ¸ÉÏÒ»´Î³öÏÖµÄÎ»ÖÃµÄ¾àÀë
-        // ´óÓÚµ±Ç°¼ÇÂ¼µÄ×î³¤²»º¬ÖØ¸´×Ö·ûµÄ×Ö·û´®µÄ³¤¶È¡¿
+        //è‹¥æŸä¸ªå­—æ¯æ˜¯ç¬¬ä¸€æ¬¡å‡ºç°æˆ–è€…
+        //ã€æŸå­—æ¯çš„ä½ç½®ä¸æŸå­—æ¯ä¸Šä¸€æ¬¡å‡ºç°çš„ä½ç½®çš„è·ç¦»
+        // å¤§äºå½“å‰è®°å½•çš„æœ€é•¿ä¸å«é‡å¤å­—ç¬¦çš„å­—ç¬¦ä¸²çš„é•¿åº¦ã€‘
         if (PrevIndex<0 || i - PrevIndex>curLength)
             ++curLength;
         else
         {
-            //´æ´¢Ò»ÏÂ·ûºÏÌõ¼şµÄ×î´ó³¤¶È
+            //å­˜å‚¨ä¸€ä¸‹ç¬¦åˆæ¡ä»¶çš„æœ€å¤§é•¿åº¦
             if (curLength > maxLength)
                 maxLength = curLength;
 
-            //***×¢***
-            //½«curLengthµÄÖµ½Ø¶ÌÎªÁ½¸öÏàÍ¬µÄ×Ö·ûµÄ¾àÀëÖ®²î
+            //***æ³¨***
+            //å°†curLengthçš„å€¼æˆªçŸ­ä¸ºä¸¤ä¸ªç›¸åŒçš„å­—ç¬¦çš„è·ç¦»ä¹‹å·®
             curLength = i - PrevIndex;
         }
 
-        //Ä³×Ö·ûÉÏÒ»´Î³öÏÖµÄÎ»ÖÃÓÃµ±Ç°³öÏÖµÄÎ»ÖÃ´úÌæ
+        //æŸå­—ç¬¦ä¸Šä¸€æ¬¡å‡ºç°çš„ä½ç½®ç”¨å½“å‰å‡ºç°çš„ä½ç½®ä»£æ›¿
         position[str[i]-'a'] = i;
     }
 
-	//´æ´¢Ò»ÏÂ·ûºÏÌõ¼şµÄ×î´ó³¤¶È
+	//å­˜å‚¨ä¸€ä¸‹ç¬¦åˆæ¡ä»¶çš„æœ€å¤§é•¿åº¦
     if (curLength > maxLength)
         maxLength = curLength;
 
@@ -6668,7 +6668,7 @@ int LongestSubString(string& str)
 #endif
 
 
-//ÃæÊÔÌâ49£º³óÊı
+//é¢è¯•é¢˜49ï¼šä¸‘æ•°
 #if 0
 #include <iostream>
 #include <vector>
@@ -6692,7 +6692,7 @@ int main()
 
 bool isUgly(int num)
 {
-    //***´íÎóĞ´·¨***
+    //***é”™è¯¯å†™æ³•***
     //if (num % 2 != 0)
     //    return false;
     //if (num % 3 != 0)
@@ -6700,7 +6700,7 @@ bool isUgly(int num)
     //if (num % 5 != 0)
     //    return false;
 
-    //³óÊıÖ»ÄÜ±»2¡¢3»ò5Õû³ı
+    //ä¸‘æ•°åªèƒ½è¢«2ã€3æˆ–5æ•´é™¤
     while (num % 2 == 0)
         num >>=1;
     while (num % 3 == 0)
@@ -6736,8 +6736,8 @@ int PrintTheCorrespondingUglyNumber_improved(int WhichOne)
 
 	//int* pUglyNumbers = new int[WhichOne];
 
-    //***×¢***
-    //¿ÉÒÔÊ¹ÓÃvector»òÖÇÄÜÖ¸ÕëÀ´×Ô¶¯¹ÜÀíÄÚ´æ²¢±ÜÃâÇ±ÔÚµÄÄÚ´æĞ¹Â©
+    //***æ³¨***
+    //å¯ä»¥ä½¿ç”¨vectoræˆ–æ™ºèƒ½æŒ‡é’ˆæ¥è‡ªåŠ¨ç®¡ç†å†…å­˜å¹¶é¿å…æ½œåœ¨çš„å†…å­˜æ³„æ¼
     vector<int> pUglyNumbers(WhichOne);
 
 	pUglyNumbers[0] = 1;
@@ -6747,8 +6747,8 @@ int PrintTheCorrespondingUglyNumber_improved(int WhichOne)
 	//int* pMultiply3 = pUglyNumbers;
 	//int* pMultiply5 = pUglyNumbers;
 
-    //´´½¨Èı¸öÖ¸Õë£¬ÕâĞ©Ö¸ÕëÓÃÓÚ
-    //Í¨¹ı½âÒıÓÃºó½«µ±Ç°³óÊı·Ö±ğ³ËÒÔ 2¡¢3 ºÍ 5 À´¸ú×ÙÏÂÒ»¸öºòÑ¡³óÊı
+    //åˆ›å»ºä¸‰ä¸ªæŒ‡é’ˆï¼Œè¿™äº›æŒ‡é’ˆç”¨äº
+    //é€šè¿‡è§£å¼•ç”¨åå°†å½“å‰ä¸‘æ•°åˆ†åˆ«ä¹˜ä»¥ 2ã€3 å’Œ 5 æ¥è·Ÿè¸ªä¸‹ä¸€ä¸ªå€™é€‰ä¸‘æ•°
     vector<int> ::iterator pMultiply2;
     pMultiply2 = pUglyNumbers.begin();
     auto pMultiply3 = pUglyNumbers.begin();
@@ -6759,21 +6759,21 @@ int PrintTheCorrespondingUglyNumber_improved(int WhichOne)
 		//int min = Min(*pMultiply2 * 2, *pMultiply3 * 3, *pMultiply5 * 5);
 		//pUglyNumbers[nextUglyIndex] = min;
 
-        //***ÄÑµã***
-        //ÒÔÏÂÓï¾äÊÇÎªÁË½«³óÊı°´´ÓĞ¡µ½´óµÄË³ĞòÉú³É²¢´æ´¢
-        //ĞèÒªºÍÏÂÃæÈı¸öwhileÓï¾ä¿éÅäºÏ
+        //***éš¾ç‚¹***
+        //ä»¥ä¸‹è¯­å¥æ˜¯ä¸ºäº†å°†ä¸‘æ•°æŒ‰ä»å°åˆ°å¤§çš„é¡ºåºç”Ÿæˆå¹¶å­˜å‚¨
+        //éœ€è¦å’Œä¸‹é¢ä¸‰ä¸ªwhileè¯­å¥å—é…åˆ
 		int Min = min(min(*pMultiply2 * 2, *pMultiply3 * 3), *pMultiply5 * 5);
 
 		pUglyNumbers[nextUglyIndex] = Min;
 
-        //Í¨¹ı½« *pMultiply2 ËùÖ¸ÏòµÄÊı³ËÒÔ2£¬¼ì²éÊÇ·ñĞ¡ÓÚµÈÓÚ
-        //µ±Ç°ÒÑÉú³ÉµÄ³óÊıĞòÁĞÖĞµÄ×îºóÒ»¸öÊı¡£
-        //Èç¹ûÊÇ£¬±íÊ¾µ±Ç° *pMultiply2 ËùÖ¸ÏòµÄÊı³ËÒÔ2ºó²»´óÓÚµ±Ç°ÒÑÉú³ÉµÄ×î´ó³óÊı£¬
-        //Òò´ËĞèÒª½« *pMultiply2 Ö¸ÕëÏòºóÒÆ¶¯Ò»Î»£¬ÒÔ±ãÏÂÒ»´Î¼ÆËã
+        //é€šè¿‡å°† *pMultiply2 æ‰€æŒ‡å‘çš„æ•°ä¹˜ä»¥2ï¼Œæ£€æŸ¥æ˜¯å¦å°äºç­‰äº
+        //å½“å‰å·²ç”Ÿæˆçš„ä¸‘æ•°åºåˆ—ä¸­çš„æœ€åä¸€ä¸ªæ•°ã€‚
+        //å¦‚æœæ˜¯ï¼Œè¡¨ç¤ºå½“å‰ *pMultiply2 æ‰€æŒ‡å‘çš„æ•°ä¹˜ä»¥2åä¸å¤§äºå½“å‰å·²ç”Ÿæˆçš„æœ€å¤§ä¸‘æ•°ï¼Œ
+        //å› æ­¤éœ€è¦å°† *pMultiply2 æŒ‡é’ˆå‘åç§»åŠ¨ä¸€ä½ï¼Œä»¥ä¾¿ä¸‹ä¸€æ¬¡è®¡ç®—
         
-        //Ä¿µÄÊÇÈ·±£Éú³ÉµÄ³óÊıĞòÁĞÊÇ°´ÕÕÉıĞòÅÅÁĞµÄ¡£
-        //Í¨¹ı²»¶ÏµØ¸üĞÂÕâÈı¸öÖ¸Õë£¬¿ÉÒÔ±£Ö¤¡¾ÏÂÒ»¸ö³óÊıÊÇµ±Ç°ÒÑÉú³É
-        //³óÊıĞòÁĞÖĞµÄÄ³¸öÊı³ËÒÔ2¡¢3»ò5µÃµ½µÄ×îĞ¡Öµ¡¿
+        //ç›®çš„æ˜¯ç¡®ä¿ç”Ÿæˆçš„ä¸‘æ•°åºåˆ—æ˜¯æŒ‰ç…§å‡åºæ’åˆ—çš„ã€‚
+        //é€šè¿‡ä¸æ–­åœ°æ›´æ–°è¿™ä¸‰ä¸ªæŒ‡é’ˆï¼Œå¯ä»¥ä¿è¯ã€ä¸‹ä¸€ä¸ªä¸‘æ•°æ˜¯å½“å‰å·²ç”Ÿæˆ
+        //ä¸‘æ•°åºåˆ—ä¸­çš„æŸä¸ªæ•°ä¹˜ä»¥2ã€3æˆ–5å¾—åˆ°çš„æœ€å°å€¼ã€‘
 		while (*pMultiply2 * 2 <= pUglyNumbers[nextUglyIndex])
 			++pMultiply2;
 		while (*pMultiply3 * 3 <= pUglyNumbers[nextUglyIndex])
@@ -6781,7 +6781,7 @@ int PrintTheCorrespondingUglyNumber_improved(int WhichOne)
 		while (*pMultiply5 * 5 <= pUglyNumbers[nextUglyIndex])
 			++pMultiply5;
 
-        //½«Ö¸ÕëÒÆ¶¯²¢Ö¸ÏòÏÂÒ»¸ö³óÊıÓ¦ÌîÈëµÄÎ»ÖÃ
+        //å°†æŒ‡é’ˆç§»åŠ¨å¹¶æŒ‡å‘ä¸‹ä¸€ä¸ªä¸‘æ•°åº”å¡«å…¥çš„ä½ç½®
 		++nextUglyIndex;
 	}
 
@@ -6792,7 +6792,7 @@ int PrintTheCorrespondingUglyNumber_improved(int WhichOne)
 #endif
 
 
-//ÃæÊÔÌâ50£ºµÚÒ»¸öÖ»³öÏÖÒ»´ÎµÄ×Ö·û
+//é¢è¯•é¢˜50ï¼šç¬¬ä¸€ä¸ªåªå‡ºç°ä¸€æ¬¡çš„å­—ç¬¦
 #if 0
 #include <iostream>
 #include <string>
@@ -6821,7 +6821,7 @@ void AppearOnlyOnce(const string& str)
 
     for (auto i = str.begin(); i != str.end(); ++i)
     {
-        //Ê±¼ä¸´ÔÓ¶È£ºO(1)
+        //æ—¶é—´å¤æ‚åº¦ï¼šO(1)
         if (hash.find(*i) == hash.end())
             hash.insert(make_pair(*i, 1));
         else
@@ -6844,14 +6844,14 @@ void AppearOnlyOnce(const string& str)
 }
 #endif
 
-//·¨¶ş£ºÎ¬»¤Ò»¸ö»ùÓÚÊı×éµÄ¼òÒ×¹şÏ£±í
+//æ³•äºŒï¼šç»´æŠ¤ä¸€ä¸ªåŸºäºæ•°ç»„çš„ç®€æ˜“å“ˆå¸Œè¡¨
 #if 1
 void AppearOnlyOnce(const string& str)
 {
     if (str == "")
         return;
 
-    //´óµ½×ã¹»ÈİÏÂËùÓĞASCII×Ö·û¶ÔÓ¦µÄÖµ
+    //å¤§åˆ°è¶³å¤Ÿå®¹ä¸‹æ‰€æœ‰ASCIIå­—ç¬¦å¯¹åº”çš„å€¼
     const int Size = 256;
     int hashTable[Size] = {0};
 
@@ -6876,7 +6876,7 @@ void AppearOnlyOnce(const string& str)
 #endif
 
 
-//¹é²¢ÅÅĞò
+//å½’å¹¶æ’åº
 #if 0
 #include <iostream>
 #include <vector>
@@ -6898,19 +6898,19 @@ int main()
     return 0;
 }
 
-//                                                      front ,end ¾ùÎªË÷ÒıÖµ
+//                                                      front ,end å‡ä¸ºç´¢å¼•å€¼
 void MergeSort(vector<int>& Array, int front, int end)
 {
-    //µ±Ç°×ÓÊı×éÖĞÓĞÁã¸ö»òÒ»¸öÔªËØ£¬²¢ÇÒËüÒÑ¾­ÅÅĞò
+    //å½“å‰å­æ•°ç»„ä¸­æœ‰é›¶ä¸ªæˆ–ä¸€ä¸ªå…ƒç´ ï¼Œå¹¶ä¸”å®ƒå·²ç»æ’åº
     if (front >= end)
         return;
 
     int mid = front + (end - front) / 2;
 
-    //MergeSort()µİ¹éµØ½«Êı×é»®·ÖÎª¸üĞ¡µÄ×ÓÊı×é£¬Ö±µ½ËüÃÇ±»ÅÅĞò£¬
+    //MergeSort()é€’å½’åœ°å°†æ•°ç»„åˆ’åˆ†ä¸ºæ›´å°çš„å­æ•°ç»„ï¼Œç›´åˆ°å®ƒä»¬è¢«æ’åºï¼Œ
     MergeSort(Array, front, mid);
     MergeSort(Array, mid + 1, end);
-    //È»ºóÊ¹ÓÃ Merge º¯Êı½«ËüÃÇºÏ²¢ÔÚÒ»Æğ
+    //ç„¶åä½¿ç”¨ Merge å‡½æ•°å°†å®ƒä»¬åˆå¹¶åœ¨ä¸€èµ·
     Merge(Array, front, mid, end);
 }
 
@@ -6926,22 +6926,22 @@ void Merge(vector<int>& Array, int front, int mid, int end)
 
 #if 0
 
-    //ÔÚºÏ²¢Ö®Ç°½« numeric_limits<int>::max() ¸½¼Óµ½ Left ºÍ Right ×ÓÊı×éµÄÄ©Î²£¬
-    //numeric_limits<int>::max() ÊÇÕûĞÍÖĞµÄ×î´óÖµ£¬
-    //ÔÚºÏ²¢¹ı³ÌÖĞËü³äµ±ÁËÒ»¸ö±ê¼ÇÀ´±íÊ¾×ÓÊı×éµÄ½áÊø¡£
-    //¿ÉÒÔÈ·±£ÔÚºÏ²¢¹ı³ÌÖĞ£¬µ±ÔªËØ½øĞĞ±È½ÏºÍºÏ²¢Ê±£¬Ëã·¨²»ĞèÒª¼ì²éËüÊÇ·ñ
-    //ÒÑµ½´ïÈÎºÎ×ÓÊı×éµÄÄ©Î²¡£ max() ÉÚ±øÖµ³äµ±ºÏ²¢¹ı³ÌÖĞµÄ×ÔÈ»Í£Ö¹µã£¬
-    //·ÀÖ¹Ë÷ÒıÔ½½ç´íÎó²¢¼ò»¯ºÏ²¢Âß¼­
+    //åœ¨åˆå¹¶ä¹‹å‰å°† numeric_limits<int>::max() é™„åŠ åˆ° Left å’Œ Right å­æ•°ç»„çš„æœ«å°¾ï¼Œ
+    //numeric_limits<int>::max() æ˜¯æ•´å‹ä¸­çš„æœ€å¤§å€¼ï¼Œ
+    //åœ¨åˆå¹¶è¿‡ç¨‹ä¸­å®ƒå……å½“äº†ä¸€ä¸ªæ ‡è®°æ¥è¡¨ç¤ºå­æ•°ç»„çš„ç»“æŸã€‚
+    //å¯ä»¥ç¡®ä¿åœ¨åˆå¹¶è¿‡ç¨‹ä¸­ï¼Œå½“å…ƒç´ è¿›è¡Œæ¯”è¾ƒå’Œåˆå¹¶æ—¶ï¼Œç®—æ³•ä¸éœ€è¦æ£€æŸ¥å®ƒæ˜¯å¦
+    //å·²åˆ°è¾¾ä»»ä½•å­æ•°ç»„çš„æœ«å°¾ã€‚ max() å“¨å…µå€¼å……å½“åˆå¹¶è¿‡ç¨‹ä¸­çš„è‡ªç„¶åœæ­¢ç‚¹ï¼Œ
+    //é˜²æ­¢ç´¢å¼•è¶Šç•Œé”™è¯¯å¹¶ç®€åŒ–åˆå¹¶é€»è¾‘
     LeftSubArray.insert(LeftSubArray.end(), numeric_limits<int>::max());
     RightSubArray.insert(RightSubArray.end(), numeric_limits<int>::max());
 
-    //ÎÒÃÇÕâÀïÒÔµÚÒ»´Î²ğ·ÖµÄÁ½¸ö·Ö×éÎªÀı£¬ÆäÊµÒ²¾ÍÊÇ¹é²¢µÄ×îºóÒ»²½¡£
-    //µÚÒ»´Î²ğ·ÖÖ®ºóµÄÁ½¸öĞòÁĞ¾ÍÊÇ[3 5 1]ºÍ[2 8 5]ÁË£»
-    //µ«ÊÇ´ó¼ÒÒª×¢Òâ£¬ÎÒÃÇÔÚ¶ÔÕâÁ½¸öĞòÁĞ½øĞĞ¹é²¢Ê±£¬ËûÃÇÓ¦¸ÃÊÇÔç¾ÍÅÅºÃĞòÁË£¡
-    //ÒòÎªÊÇµİ¹é²ğ·Ö£¬ÔÚ×îºóÒ»´Î²ğ·ÖµÄÊ±ºòĞòÁĞ¶¼ÊÇµ¥¶ÀµÄÔªËØ£¬ËùÒÔµ½¹é²¢µÄ×îºóÒ»²½Ê±£¬
-    //Ò²¾ÍÊÇ×ó±ßµÄĞòÁĞÓ¦¸ÃÊÇ[1 3 5]£¬ÓÒ±ßµÄĞòÁĞÓ¦¸ÃÊÇ[2 5 8]
+    //æˆ‘ä»¬è¿™é‡Œä»¥ç¬¬ä¸€æ¬¡æ‹†åˆ†çš„ä¸¤ä¸ªåˆ†ç»„ä¸ºä¾‹ï¼Œå…¶å®ä¹Ÿå°±æ˜¯å½’å¹¶çš„æœ€åä¸€æ­¥ã€‚
+    //ç¬¬ä¸€æ¬¡æ‹†åˆ†ä¹‹åçš„ä¸¤ä¸ªåºåˆ—å°±æ˜¯[3 5 1]å’Œ[2 8 5]äº†ï¼›
+    //ä½†æ˜¯å¤§å®¶è¦æ³¨æ„ï¼Œæˆ‘ä»¬åœ¨å¯¹è¿™ä¸¤ä¸ªåºåˆ—è¿›è¡Œå½’å¹¶æ—¶ï¼Œä»–ä»¬åº”è¯¥æ˜¯æ—©å°±æ’å¥½åºäº†ï¼
+    //å› ä¸ºæ˜¯é€’å½’æ‹†åˆ†ï¼Œåœ¨æœ€åä¸€æ¬¡æ‹†åˆ†çš„æ—¶å€™åºåˆ—éƒ½æ˜¯å•ç‹¬çš„å…ƒç´ ï¼Œæ‰€ä»¥åˆ°å½’å¹¶çš„æœ€åä¸€æ­¥æ—¶ï¼Œ
+    //ä¹Ÿå°±æ˜¯å·¦è¾¹çš„åºåˆ—åº”è¯¥æ˜¯[1 3 5]ï¼Œå³è¾¹çš„åºåˆ—åº”è¯¥æ˜¯[2 5 8]
     // Pick min of LeftSubArray[idxLeft] and RightSubArray[idxRight], and put into Array[i]
-    //È¡LeftSubArray[idxLeft]ºÍRightSubArray[idxRight]ÖĞµÄmin£¬¼´½ÏĞ¡Õß£¬·ÅÈëArray[i]ÖĞ
+    //å–LeftSubArray[idxLeft]å’ŒRightSubArray[idxRight]ä¸­çš„minï¼Œå³è¾ƒå°è€…ï¼Œæ”¾å…¥Array[i]ä¸­
     int idxLeft = 0, idxRight = 0;
     for (int i = front; i <= end; i++)
     {
@@ -6955,17 +6955,17 @@ void Merge(vector<int>& Array, int front, int mid, int end)
             Array[i] = RightSubArray[idxRight];
             idxRight++;
         }
-        //***×¢***
-        //ÉÚ±øÖµ£º2147483647³äµ±ºÏ²¢¹ı³ÌÖĞµÄ×ÔÈ»Í£Ö¹µã£¬
-        //·ÀÖ¹vectorµÄË÷ÒıÔ½½ç´íÎó²¢¼ò»¯ºÏ²¢Âß¼­
+        //***æ³¨***
+        //å“¨å…µå€¼ï¼š2147483647å……å½“åˆå¹¶è¿‡ç¨‹ä¸­çš„è‡ªç„¶åœæ­¢ç‚¹ï¼Œ
+        //é˜²æ­¢vectorçš„ç´¢å¼•è¶Šç•Œé”™è¯¯å¹¶ç®€åŒ–åˆå¹¶é€»è¾‘
     }
 
 #endif
 
 #if 1
-    //²»Ê¹ÓÃÉÚ±øÖµµÄºÏ²¢¹ı³Ì
-    int n1 = mid - front + 1;  //n1ÖµÎªÇ°°ë¶ÎµÄÔªËØ¸öÊı
-    int n2 = end - mid;          //n2Îªºó°ë¶ÎµÄÔªËØ¸öÊı
+    //ä¸ä½¿ç”¨å“¨å…µå€¼çš„åˆå¹¶è¿‡ç¨‹
+    int n1 = mid - front + 1;  //n1å€¼ä¸ºå‰åŠæ®µçš„å…ƒç´ ä¸ªæ•°
+    int n2 = end - mid;          //n2ä¸ºååŠæ®µçš„å…ƒç´ ä¸ªæ•°
 
     int i = 0, j = 0, k = front;
 
@@ -6984,7 +6984,7 @@ void Merge(vector<int>& Array, int front, int mid, int end)
         k++;
     }
 
-    // ½«Ê£ÓàÔªËØ¸´ÖÆ»ØÊı×é
+    // å°†å‰©ä½™å…ƒç´ å¤åˆ¶å›æ•°ç»„
     while (i < n1)
     {
         Array[k] = LeftSubArray[i];
@@ -7004,12 +7004,12 @@ void Merge(vector<int>& Array, int front, int mid, int end)
 #endif
 
 
-//ÃæÊÔÌâ51£ºÊı×éÖĞµÄÄæĞò¶Ô
-//½«Ä³¸öÊı×ÖÄÃ³ö²¢ºÍºóÃæµÄÃ¿¸öÊı×ÖÏà±È½Ï£¬Ê±¼ä¸´ÔÓ¶ÈÊÇO(n^2)
-//Ë¼Â·£º
-//µÚÒ»²½£º°ÑÊı×é·Ö¸ô³É×ÓÊı×é£¬Í³¼Æ³ö×ÓÊı×éÄÚ²¿µÄÄæĞòÊı¶ÔÊı
-//µÚ¶ş²½£ºÍ³¼ÆÁ½¸öÏàÁÚ×ÓÊı×éÖ®¼äµÄÄæĞòÊı¶ÔÊı£¬²¢Òª½øĞĞÅÅĞò
-//´ËÅÅĞòÎª¡¾¹é²¢ÅÅĞò¡¿
+//é¢è¯•é¢˜51ï¼šæ•°ç»„ä¸­çš„é€†åºå¯¹
+//å°†æŸä¸ªæ•°å­—æ‹¿å‡ºå¹¶å’Œåé¢çš„æ¯ä¸ªæ•°å­—ç›¸æ¯”è¾ƒï¼Œæ—¶é—´å¤æ‚åº¦æ˜¯O(n^2)
+//æ€è·¯ï¼š
+//ç¬¬ä¸€æ­¥ï¼šæŠŠæ•°ç»„åˆ†éš”æˆå­æ•°ç»„ï¼Œç»Ÿè®¡å‡ºå­æ•°ç»„å†…éƒ¨çš„é€†åºæ•°å¯¹æ•°
+//ç¬¬äºŒæ­¥ï¼šç»Ÿè®¡ä¸¤ä¸ªç›¸é‚»å­æ•°ç»„ä¹‹é—´çš„é€†åºæ•°å¯¹æ•°ï¼Œå¹¶è¦è¿›è¡Œæ’åº
+//æ­¤æ’åºä¸ºã€å½’å¹¶æ’åºã€‘
 #if 0
 #include <iostream>
 
@@ -7031,7 +7031,7 @@ int InversePairs(int* data, int length)
     if (data == nullptr||length<=0)
         return -1;
 
-    //´´½¨ÓÉÖÇÄÜÖ¸Õë¹ÜÀíµÄcopyÊı×é£¬´æÊäÈëÊı×éµÄ±¸·İÄÚÈİ£¨¸±±¾£©
+    //åˆ›å»ºç”±æ™ºèƒ½æŒ‡é’ˆç®¡ç†çš„copyæ•°ç»„ï¼Œå­˜è¾“å…¥æ•°ç»„çš„å¤‡ä»½å†…å®¹ï¼ˆå‰¯æœ¬ï¼‰
     unique_ptr<int[]>copy(new int [length]);
 
     for (int i = 0; i < length; ++i)
@@ -7049,22 +7049,22 @@ int InversePairsCore(int* data, int* copy, int startindex, int endindex)
         return 0;
     }
 
-    //length´æ¼ÆËãµÃµ½µÄÊı×é³¤¶ÈµÄÒ»°ë
+    //lengthå­˜è®¡ç®—å¾—åˆ°çš„æ•°ç»„é•¿åº¦çš„ä¸€åŠ
     int length = (endindex - startindex) / 2;
 
-    //½«Êı×é·Ö¸ô³ÉÁ½¸ö×ÓÊı×é
+    //å°†æ•°ç»„åˆ†éš”æˆä¸¤ä¸ªå­æ•°ç»„
     int left = InversePairsCore(copy,data,startindex,startindex+length);
-    //¶ÔÓÚ×ó×ÓÊı×é£¬ÔËĞĞµ½  int end = ...  Ê±
-    //×îÖÕstartIndexÎª0£¬endIndexÎª1£¬lengthÎª0
-    //¼´ÒÑ¾­·Ö¸ôµ½ÁË½öÎªÁ½¸öÔªËØµÄ×ÓÊı×é
+    //å¯¹äºå·¦å­æ•°ç»„ï¼Œè¿è¡Œåˆ°  int end = ...  æ—¶
+    //æœ€ç»ˆstartIndexä¸º0ï¼ŒendIndexä¸º1ï¼Œlengthä¸º0
+    //å³å·²ç»åˆ†éš”åˆ°äº†ä»…ä¸ºä¸¤ä¸ªå…ƒç´ çš„å­æ•°ç»„
     int right = InversePairsCore(copy,data,startindex+length+1,endindex);
-    //×ÓÊı×é½öº¬Á½¸öÔªËØÊ±£¬Ö´ĞĞÉÏÃæµÄInversePairsCore()ºó£¬»áÌøÈëµÚÒ»¸öif
-    //Óï¾ä¿éÖĞµÄreturn£¬È»ºóÌø»Ø£¬ÉÏÃæµÄInversePairsCore()´¦ÀíÓÒ×ÓÊı×é
-    //ÓÒ×ÓÊı×éÒ²»á·Ö¸ô³É×óÓÒ×ÓÊı×é
+    //å­æ•°ç»„ä»…å«ä¸¤ä¸ªå…ƒç´ æ—¶ï¼Œæ‰§è¡Œä¸Šé¢çš„InversePairsCore()åï¼Œä¼šè·³å…¥ç¬¬ä¸€ä¸ªif
+    //è¯­å¥å—ä¸­çš„returnï¼Œç„¶åè·³å›ï¼Œä¸Šé¢çš„InversePairsCore()å¤„ç†å³å­æ•°ç»„
+    //å³å­æ•°ç»„ä¹Ÿä¼šåˆ†éš”æˆå·¦å³å­æ•°ç»„
 
-    //±äÁ¿i±íÊ¾¡¾Ç°°ë¶Î¡¿×îºóÒ»¸öÔªËØµÄË÷ÒıÎ»ÖÃ
+    //å˜é‡iè¡¨ç¤ºã€å‰åŠæ®µã€‘æœ€åä¸€ä¸ªå…ƒç´ çš„ç´¢å¼•ä½ç½®
     int i = startindex + length;
-    //±äÁ¿j±íÊ¾¡¾ºó°ë¶Î¡¿×îºóÒ»¸öÔªËØµÄË÷ÒıÎ»ÖÃ
+    //å˜é‡jè¡¨ç¤ºã€ååŠæ®µã€‘æœ€åä¸€ä¸ªå…ƒç´ çš„ç´¢å¼•ä½ç½®
     int j = endindex;
 
     int indexCopy = endindex;
@@ -7073,13 +7073,13 @@ int InversePairsCore(int* data, int* copy, int startindex, int endindex)
 
     while (i >= startindex && j >= startindex + length + 1)
     {
-        //ÈôµÚÒ»¸ö×ÓÊı×éÖĞµÄÊı×Ö´óÓÚµÚ¶ş¸ö×ÓÊı×éÖĞµÄÊı×Ö£¬Ôò
-        //¹¹³ÉÄæĞòÊı¶Ô£¬ÄæĞòÊı¶ÔÊıµÈÓÚµÚ¶ş¸ö×ÓÊı×éÖĞÊ£ÓàÊı×ÖµÄ¸öÊı
+        //è‹¥ç¬¬ä¸€ä¸ªå­æ•°ç»„ä¸­çš„æ•°å­—å¤§äºç¬¬äºŒä¸ªå­æ•°ç»„ä¸­çš„æ•°å­—ï¼Œåˆ™
+        //æ„æˆé€†åºæ•°å¯¹ï¼Œé€†åºæ•°å¯¹æ•°ç­‰äºç¬¬äºŒä¸ªå­æ•°ç»„ä¸­å‰©ä½™æ•°å­—çš„ä¸ªæ•°
         if (data[i] > data[j])
         {
             cnt += j - startindex - length;
 
-            //½«½Ï´óµÄÊı×Ö´ÓºóÍùÇ°¸´ÖÆµ½¸¨ÖúÊı×é
+            //å°†è¾ƒå¤§çš„æ•°å­—ä»åå¾€å‰å¤åˆ¶åˆ°è¾…åŠ©æ•°ç»„
             copy[indexCopy] = data[i];
 
             --indexCopy, --i;
@@ -7092,20 +7092,20 @@ int InversePairsCore(int* data, int* copy, int startindex, int endindex)
         }
     }
 
-    // ½«Ê£ÓàÔªËØ¸´ÖÆ»ØÊı×é
+    // å°†å‰©ä½™å…ƒç´ å¤åˆ¶å›æ•°ç»„
     for (;i >= startindex; --i)
         copy[indexCopy--] = data[i];
 
     for (;j >= startindex+length+1; --j)
         copy[indexCopy--] = data[j];
 
-     //ÄæĞòÊı¶ÔÊıµÈÓÚ×ÓÊı×éÄÚ²¿µÄÄæĞòÊı¶ÔÊıºÍÁ½¸öÏàÁÚ×ÓÊı×éÖ®¼äµÄÄæĞòÊı¶ÔÊı
+     //é€†åºæ•°å¯¹æ•°ç­‰äºå­æ•°ç»„å†…éƒ¨çš„é€†åºæ•°å¯¹æ•°å’Œä¸¤ä¸ªç›¸é‚»å­æ•°ç»„ä¹‹é—´çš„é€†åºæ•°å¯¹æ•°
     return cnt+left + right ;
 }
 #endif
 
 
-//ÃæÊÔÌâ52£ºÁ½¸öÁ´±íµÄµÚÒ»¸ö¹«¹²½Úµã
+//é¢è¯•é¢˜52ï¼šä¸¤ä¸ªé“¾è¡¨çš„ç¬¬ä¸€ä¸ªå…¬å…±èŠ‚ç‚¹
 #if 0
 #include <iostream>
 #include "List.h"
@@ -7126,7 +7126,7 @@ int main()
     ListNode* pNode6 = CreateListNode(6);
     ListNode* pNode7 = CreateListNode(7);
 
-// µÚÒ»¸ö¹«¹²½áµãÔÚÁ´±íÖĞ¼ä
+// ç¬¬ä¸€ä¸ªå…¬å…±ç»“ç‚¹åœ¨é“¾è¡¨ä¸­é—´
 // 1 - 2 - 3  \
 //                 6 - 7
 //     4 - 5   /
@@ -7143,16 +7143,16 @@ int main()
     return 0;
 }
 
-//ÆÕÍ¨·½·¨£º
-//µÚÒ»Á´±íÉÏË³Ğò±éÀúÃ¿¸ö½Úµã£¬Ã¿±éÀúµ½Ò»¸ö½Úµã£¬¾ÍÔÚµÚ¶ş¸öÁ´±íÉÏË³Ğò±éÀúÃ¿¸ö½Úµã¡£
-//Èç¹ûÔÚµÚ¶ş¸öÁ´±íÉÏÓĞÒ»¸ö½ÚµãºÍµÚÒ»¸öÁ´±íÉÏµÄ½ÚµãÒ»Ñù£¬
-//ÔòËµÃ÷Á½¸öÁ´±íÔÚÕâ¸ö½ÚµãÉÏÖØºÏ¡£Ê±¼ä¸´ÔÓ¶ÈO(mn)
-//ÓÅ»¯½â·¨£º
-//¹Û²ìºÏ²¢ºóºÍºÏ²¢Ç°Á½¸öÁ´±íµÄ×´Ì¬£¬µÃµ½
-//ºÏ²¢ºóÁ½¸öÁ´±íµÄËùÓĞ½Úµã¶¼ÊÇÖØºÏµÄ£¬ÄÇÃ´Ö»Òª¡¾´ÓÄ©Î²¿ªÊ¼¡¿
-//ÏòÇ°±È½Ï£¬×îºóÒ»¸öÏàÍ¬µÄ½Úµã¾ÍÊÇµÚÒ»¸ö¹«¹²½Úµã
-//ÈçºÎ´ÓÄ©Î²¿ªÊ¼±È½Ï£¿
-//¿¼ÂÇÊı¾İ½á¹¹¡ª¡ª>Õ»        Ê±¼ä¸´ÔÓ¶ÈO(m+n)
+//æ™®é€šæ–¹æ³•ï¼š
+//ç¬¬ä¸€é“¾è¡¨ä¸Šé¡ºåºéå†æ¯ä¸ªèŠ‚ç‚¹ï¼Œæ¯éå†åˆ°ä¸€ä¸ªèŠ‚ç‚¹ï¼Œå°±åœ¨ç¬¬äºŒä¸ªé“¾è¡¨ä¸Šé¡ºåºéå†æ¯ä¸ªèŠ‚ç‚¹ã€‚
+//å¦‚æœåœ¨ç¬¬äºŒä¸ªé“¾è¡¨ä¸Šæœ‰ä¸€ä¸ªèŠ‚ç‚¹å’Œç¬¬ä¸€ä¸ªé“¾è¡¨ä¸Šçš„èŠ‚ç‚¹ä¸€æ ·ï¼Œ
+//åˆ™è¯´æ˜ä¸¤ä¸ªé“¾è¡¨åœ¨è¿™ä¸ªèŠ‚ç‚¹ä¸Šé‡åˆã€‚æ—¶é—´å¤æ‚åº¦O(mn)
+//ä¼˜åŒ–è§£æ³•ï¼š
+//è§‚å¯Ÿåˆå¹¶åå’Œåˆå¹¶å‰ä¸¤ä¸ªé“¾è¡¨çš„çŠ¶æ€ï¼Œå¾—åˆ°
+//åˆå¹¶åä¸¤ä¸ªé“¾è¡¨çš„æ‰€æœ‰èŠ‚ç‚¹éƒ½æ˜¯é‡åˆçš„ï¼Œé‚£ä¹ˆåªè¦ã€ä»æœ«å°¾å¼€å§‹ã€‘
+//å‘å‰æ¯”è¾ƒï¼Œæœ€åä¸€ä¸ªç›¸åŒçš„èŠ‚ç‚¹å°±æ˜¯ç¬¬ä¸€ä¸ªå…¬å…±èŠ‚ç‚¹
+//å¦‚ä½•ä»æœ«å°¾å¼€å§‹æ¯”è¾ƒï¼Ÿ
+//è€ƒè™‘æ•°æ®ç»“æ„â€”â€”>æ ˆ        æ—¶é—´å¤æ‚åº¦O(m+n)
 #if 0
 ListNode* FindFirstCommonNode(const ListNode* pNode1, const ListNode* pNode2)
 {
@@ -7198,11 +7198,11 @@ ListNode* FindFirstCommonNode(const ListNode* pNode1, const ListNode* pNode2)
 }
 #endif
 
-//½â·¨¶ş£º
-//ÔÙ´Î¹Û²ìÁ½¸ö½«ÔÚÄ³Ò»½Úµã¼°ÆäÖ®ºó¿ªÊ¼ºÏ²¢µÄÁ´±í
-//³ıÁË¿ÉÒÔ´ÓºóÏòÇ°±éÀú£¬ÕÒµ½×îºóÒ»¸ö¹«¹²µÄ½Úµã£¬»¹¿ÉÒÔÑ¡Ôñ
-//ÈÔ´ÓÇ°Ïòºó±éÀú£¬ÔÚ½Ï³¤µÄÁ´±íÉÏÏÈ±éÀú¼¸¸ö½Úµã£¬È»ºóÁ½¸ö½ÚµãÒ»Í¬Ïòºó±éÀú
-//ÕÒµ½µÚÒ»¸öÏàÍ¬µÄ½Úµã£¬¸Ã·½·¨ÓëÓÃÕ»µÄ·½·¨Ê±¼ä¸´ÔÓ¶ÈÏàÍ¬
+//è§£æ³•äºŒï¼š
+//å†æ¬¡è§‚å¯Ÿä¸¤ä¸ªå°†åœ¨æŸä¸€èŠ‚ç‚¹åŠå…¶ä¹‹åå¼€å§‹åˆå¹¶çš„é“¾è¡¨
+//é™¤äº†å¯ä»¥ä»åå‘å‰éå†ï¼Œæ‰¾åˆ°æœ€åä¸€ä¸ªå…¬å…±çš„èŠ‚ç‚¹ï¼Œè¿˜å¯ä»¥é€‰æ‹©
+//ä»ä»å‰å‘åéå†ï¼Œåœ¨è¾ƒé•¿çš„é“¾è¡¨ä¸Šå…ˆéå†å‡ ä¸ªèŠ‚ç‚¹ï¼Œç„¶åä¸¤ä¸ªèŠ‚ç‚¹ä¸€åŒå‘åéå†
+//æ‰¾åˆ°ç¬¬ä¸€ä¸ªç›¸åŒçš„èŠ‚ç‚¹ï¼Œè¯¥æ–¹æ³•ä¸ç”¨æ ˆçš„æ–¹æ³•æ—¶é—´å¤æ‚åº¦ç›¸åŒ
 #if 1
 ListNode* FindFirstCommonNode(const ListNode* pNode1, const ListNode* pNode2)
 {
@@ -7270,7 +7270,7 @@ ListNode* FindFirstCommonNode(const ListNode* pNode1, const ListNode* pNode2)
 #endif
 
 
-//ÃæÊÔÌâ53£ºÔÚÅÅĞòÊı×éÖĞ²éÕÒÊı×Ö³öÏÖµÄ´ÎÊı
+//é¢è¯•é¢˜53ï¼šåœ¨æ’åºæ•°ç»„ä¸­æŸ¥æ‰¾æ•°å­—å‡ºç°çš„æ¬¡æ•°
 #if 0
 #include <iostream>
 
@@ -7297,9 +7297,9 @@ int main()
     return 0;
 }
 
-//Ò»°ãµÄ½â·¨£¬Ê±¼ä¸´ÔÓ¶ÈÎªO(n)
-//ÓĞ¸ü¿ìµÄ½â·¨£¬¼´ÓÃ¡¾±äÒìµÄ¶ş·Ö·¨¡¿È·¶¨µÚÒ»¸ökµÄÎ»ÖÃºÍ×îºóÒ»¸ökµÄÎ»ÖÃ
-//ÕâÑù£¬Ê±¼ä¸´ÔÓ¶È¿ÉÒÔ½µµ½O(logn)
+//ä¸€èˆ¬çš„è§£æ³•ï¼Œæ—¶é—´å¤æ‚åº¦ä¸ºO(n)
+//æœ‰æ›´å¿«çš„è§£æ³•ï¼Œå³ç”¨ã€å˜å¼‚çš„äºŒåˆ†æ³•ã€‘ç¡®å®šç¬¬ä¸€ä¸ªkçš„ä½ç½®å’Œæœ€åä¸€ä¸ªkçš„ä½ç½®
+//è¿™æ ·ï¼Œæ—¶é—´å¤æ‚åº¦å¯ä»¥é™åˆ°O(logn)
 int AppearTimes(int* data, int length, int k)
 {
     if (data == nullptr || length <= 0)
@@ -7308,9 +7308,9 @@ int AppearTimes(int* data, int length, int k)
     int First = GetFirstK(data, length, k, 0, length - 1);
     int Last = GetLastK(data, length, k, 0, length - 1);
 
-    //***×¢***
-    //×¢Òâ³ÌĞòµÄ¡¾ÍêÕûĞÔ¡¿
-    //¼´Òª¿¼ÂÇÊı×éÖĞÃ»ÓĞÒª²éÕÒµÄÊı×ÖµÄÇé¿ö
+    //***æ³¨***
+    //æ³¨æ„ç¨‹åºçš„ã€å®Œæ•´æ€§ã€‘
+    //å³è¦è€ƒè™‘æ•°ç»„ä¸­æ²¡æœ‰è¦æŸ¥æ‰¾çš„æ•°å­—çš„æƒ…å†µ
     if (First == -1 || Last == -1)
         throw exception("no matched number!");
 
@@ -7325,16 +7325,16 @@ int GetFirstK(int*data, int length, int k, int begidx, int endidx)
     int middleidx = begidx+(endidx-begidx) / 2;
     int middledata = data[middleidx];
 
-    //***×¢***
-    //Ê¹ÓÃ±äÒìµÄ¶ş·Ö·¨£¬È·¶¨kµÚÒ»´Î³öÏÖµÄË÷ÒıÖµ
+    //***æ³¨***
+    //ä½¿ç”¨å˜å¼‚çš„äºŒåˆ†æ³•ï¼Œç¡®å®škç¬¬ä¸€æ¬¡å‡ºç°çš„ç´¢å¼•å€¼
     
-    //ÈôÖĞ¼äµÄÊı×Ö¾ÍÊÇËùÒª¼ÆËã³öÏÖ´ÎÊıµÄÊı×Ö
-    //Èç¹ûÖĞ¼äÊı×ÖµÈÓÚkÄØ?ÎÒÃÇĞèÒªÅĞ¶ÏÕâ¸ökÊÇ²»ÊÇ×îºóÒ»¸ök, 
-    //Ò²¾ÍÊÇÖĞ¼äÊı×ÖµÄÏÂÒ»¸öÊı×ÖÊÇ²»ÊÇÒ²µÈÓÚk¡£Èç¹ûÏÂÒ»¸öÊı×Ö²»ÊÇk, 
-    //ÔòÖĞ¼äÊı×Ö¾ÍÊÇ×îºóÒ»¸ök£»·ñÔòÏÂÒ»ÂÖÎÒÃÇ»¹ÊÇÒªÔÚÊı×éµÄºó°ë¶ÎÖĞÈ¥²éÕÒ¡£
+    //è‹¥ä¸­é—´çš„æ•°å­—å°±æ˜¯æ‰€è¦è®¡ç®—å‡ºç°æ¬¡æ•°çš„æ•°å­—
+    //å¦‚æœä¸­é—´æ•°å­—ç­‰äºkå‘¢?æˆ‘ä»¬éœ€è¦åˆ¤æ–­è¿™ä¸ªkæ˜¯ä¸æ˜¯æœ€åä¸€ä¸ªk, 
+    //ä¹Ÿå°±æ˜¯ä¸­é—´æ•°å­—çš„ä¸‹ä¸€ä¸ªæ•°å­—æ˜¯ä¸æ˜¯ä¹Ÿç­‰äºkã€‚å¦‚æœä¸‹ä¸€ä¸ªæ•°å­—ä¸æ˜¯k, 
+    //åˆ™ä¸­é—´æ•°å­—å°±æ˜¯æœ€åä¸€ä¸ªkï¼›å¦åˆ™ä¸‹ä¸€è½®æˆ‘ä»¬è¿˜æ˜¯è¦åœ¨æ•°ç»„çš„ååŠæ®µä¸­å»æŸ¥æ‰¾ã€‚
     if (middledata == k)
     {
-        //ÅĞ¶Ï¸ÃÊı×ÖÊÇ²»ÊÇµÚÒ»¸öÊı×Ö£¬ÅĞ¶Ï¸ÃÖĞ¼äÊı×ÖµÄÇ°Ò»¸öÊı×ÖÊÇ²»ÊÇ»¹ÊÇk
+        //åˆ¤æ–­è¯¥æ•°å­—æ˜¯ä¸æ˜¯ç¬¬ä¸€ä¸ªæ•°å­—ï¼Œåˆ¤æ–­è¯¥ä¸­é—´æ•°å­—çš„å‰ä¸€ä¸ªæ•°å­—æ˜¯ä¸æ˜¯è¿˜æ˜¯k
         if (middleidx == 0 || data[middleidx - 1] != k)
             return middleidx;
         else
@@ -7345,11 +7345,11 @@ int GetFirstK(int*data, int length, int k, int begidx, int endidx)
     else
         begidx = middleidx + 1;
 
-    //µİ¹éÑ°ÕÒ
+    //é€’å½’å¯»æ‰¾
     return GetFirstK(data,length,k,begidx,endidx);
 
-    //***×¢***
-    //´ËÓï¾ä¿éÓĞÁ½¸öreturn
+    //***æ³¨***
+    //æ­¤è¯­å¥å—æœ‰ä¸¤ä¸ªreturn
 }
 int GetLastK(int*data, int length, int k, int begidx, int endidx)
 {
@@ -7359,13 +7359,13 @@ int GetLastK(int*data, int length, int k, int begidx, int endidx)
     int middleidx = begidx+(endidx - begidx) / 2;
     int middledata = data[middleidx];
 
-    //***×¢***
-    //Ê¹ÓÃ±äÒìµÄ¶ş·Ö·¨£¬È·¶¨k×îºóÒ»´Î³öÏÖµÄË÷ÒıÖµ
+    //***æ³¨***
+    //ä½¿ç”¨å˜å¼‚çš„äºŒåˆ†æ³•ï¼Œç¡®å®škæœ€åä¸€æ¬¡å‡ºç°çš„ç´¢å¼•å€¼
 
-    //ÈôÖĞ¼äµÄÊı×Ö¾ÍÊÇËùÒª¼ÆËã³öÏÖ´ÎÊıµÄÊı×Ö
+    //è‹¥ä¸­é—´çš„æ•°å­—å°±æ˜¯æ‰€è¦è®¡ç®—å‡ºç°æ¬¡æ•°çš„æ•°å­—
     if (middledata == k)
     {
-        //ÅĞ¶Ï¸ÃÊı×ÖÊÇ²»ÊÇ×îºóÒ»¸öÊı×Ö£¬ÅĞ¶Ï¸ÃÖĞ¼äÊı×ÖµÄºóÒ»¸öÊı×ÖÊÇ²»ÊÇ»¹ÊÇk
+        //åˆ¤æ–­è¯¥æ•°å­—æ˜¯ä¸æ˜¯æœ€åä¸€ä¸ªæ•°å­—ï¼Œåˆ¤æ–­è¯¥ä¸­é—´æ•°å­—çš„åä¸€ä¸ªæ•°å­—æ˜¯ä¸æ˜¯è¿˜æ˜¯k
         if (middleidx == endidx || data[middleidx + 1] != k)
             return middleidx;
         else
@@ -7376,21 +7376,21 @@ int GetLastK(int*data, int length, int k, int begidx, int endidx)
     else
         begidx = middleidx + 1;
 
-    //µİ¹éÑ°ÕÒ
+    //é€’å½’å¯»æ‰¾
     return GetLastK(data, length, k, begidx, endidx);
 }
 #endif
 
 
-//0~n-1ÖĞÈ±Ê§µÄÊı×Ö
-//Ò»¸ö³¤¶ÈÎªn-1µÄµİÔöÅÅĞòÊı×éÖĞµÄËùÓĞÊı×Ö¶¼ÊÇÎ¨Ò»µÄ£¬
-//²¢ÇÒÃ¿¸öÊı×Ö¶¼ÔÚ·¶Î§0¡«n - 1Ö®ÄÚ£¬
-//ÔÚ·¶Î§0¡«n-1ÄÚµÄn¸öÊı×ÖÖĞÓĞÇÒÖ»ÓĞÒ»¸öÊı×Ö²»ÔÚ¸ÃÊı×éÖĞ¡£
-// ½âÊÍ£º
-//¡¾±¾À´¡¿ÔÚ·¶Î§0¡«n-1ÄÚµÄn¸öÊı×Ö£¬
-//¡¾ÏÖÔÚ¡¿ÔÚ·¶Î§0~nÄÚµÄn¸öÊı×Ö£¬¡¾¿ÉÒÔµÃ³ö¡¿ÓĞÇÒÖ»ÓĞÒ»¸öÊı×Ö²»ÔÚ¸ÃÊı×éÖĞ¡£
-//Ïàµ±ÓÚËµÃ¿¸öÊı×ÖÔ­À´Ó¦¸ÃÓëÆäË÷ÒıÖµÊÇÒ»Ò»¶ÔÓ¦µÄ
-//¿ÉÒÔÓÃ¶ş·Ö²éÕÒ·¨£¬ÕÒÓëË÷ÒıÖµ²»¶ÔÓ¦µÄÊı×Ö
+//0~n-1ä¸­ç¼ºå¤±çš„æ•°å­—
+//ä¸€ä¸ªé•¿åº¦ä¸ºn-1çš„é€’å¢æ’åºæ•°ç»„ä¸­çš„æ‰€æœ‰æ•°å­—éƒ½æ˜¯å”¯ä¸€çš„ï¼Œ
+//å¹¶ä¸”æ¯ä¸ªæ•°å­—éƒ½åœ¨èŒƒå›´0ï½n - 1ä¹‹å†…ï¼Œ
+//åœ¨èŒƒå›´0ï½n-1å†…çš„nä¸ªæ•°å­—ä¸­æœ‰ä¸”åªæœ‰ä¸€ä¸ªæ•°å­—ä¸åœ¨è¯¥æ•°ç»„ä¸­ã€‚
+// è§£é‡Šï¼š
+//ã€æœ¬æ¥ã€‘åœ¨èŒƒå›´0ï½n-1å†…çš„nä¸ªæ•°å­—ï¼Œ
+//ã€ç°åœ¨ã€‘åœ¨èŒƒå›´0~nå†…çš„nä¸ªæ•°å­—ï¼Œã€å¯ä»¥å¾—å‡ºã€‘æœ‰ä¸”åªæœ‰ä¸€ä¸ªæ•°å­—ä¸åœ¨è¯¥æ•°ç»„ä¸­ã€‚
+//ç›¸å½“äºè¯´æ¯ä¸ªæ•°å­—åŸæ¥åº”è¯¥ä¸å…¶ç´¢å¼•å€¼æ˜¯ä¸€ä¸€å¯¹åº”çš„
+//å¯ä»¥ç”¨äºŒåˆ†æŸ¥æ‰¾æ³•ï¼Œæ‰¾ä¸ç´¢å¼•å€¼ä¸å¯¹åº”çš„æ•°å­—
 #if 0
 #include <iostream>
 
@@ -7400,8 +7400,8 @@ int FindTheNumber(int* ,int length);
 
 int main()
 {
-    //³¤¶ÈÎªn-1=12   n=13
-    //Ã¿¸öÊı×ÖÔÚ0~12Ö®ÄÚ
+    //é•¿åº¦ä¸ºn-1=12   n=13
+    //æ¯ä¸ªæ•°å­—åœ¨0~12ä¹‹å†…
     int data [12] = {0,1,2,3,5,6,7,8,9,10,11,12};
 
     cout << FindTheNumber(data,sizeof(data)/sizeof(int))<<endl;
@@ -7428,7 +7428,7 @@ int FindTheNumber(int* data, int length)
         {
             endidx = mididx - 1;
         }
-        else//data[mididx]==mididx µÄÇé¿ö
+        else//data[mididx]==mididx çš„æƒ…å†µ
         {
             begidx = mididx + 1;
         }
@@ -7439,11 +7439,11 @@ int FindTheNumber(int* data, int length)
     return -1;
 }
 #endif
-//***×¢***
-//¶ş·Ö·¨¿ÉÒÔÓÉµİ¹é»òÕßÑ­»·À´±íÊ¾
+//***æ³¨***
+//äºŒåˆ†æ³•å¯ä»¥ç”±é€’å½’æˆ–è€…å¾ªç¯æ¥è¡¨ç¤º
 
 
-//Êı×éÖĞÊıÖµºÍÏÂ±êÏàµÈµÄÔªËØ
+//æ•°ç»„ä¸­æ•°å€¼å’Œä¸‹æ ‡ç›¸ç­‰çš„å…ƒç´ 
 #if 0
 #include <iostream>
 
@@ -7493,12 +7493,12 @@ int FindValueEqualIndex(int* data, int length)
     throw exception("No matched data!\n");
 }
 #endif
-//***×¢***
-//×Ü½á£ºµ¥µ÷µİÔö»òµ¥µ÷µİ¼õµÄÊı×é£¬²éÕÒÌØ¶¨Êı¾İ¿ÉÒÔÓÃ¶ş·Ö·¨»ò±äÒì¶ş·Ö·¨£¬¼õĞ¡Ê±¼ä¸´ÔÓ¶È
+//***æ³¨***
+//æ€»ç»“ï¼šå•è°ƒé€’å¢æˆ–å•è°ƒé€’å‡çš„æ•°ç»„ï¼ŒæŸ¥æ‰¾ç‰¹å®šæ•°æ®å¯ä»¥ç”¨äºŒåˆ†æ³•æˆ–å˜å¼‚äºŒåˆ†æ³•ï¼Œå‡å°æ—¶é—´å¤æ‚åº¦
 
 
-//ÃæÊÔÌâ54£º¶ş²æËÑË÷Ê÷µÄµÚk´ó½Úµã£¨***ÌâÄ¿ÒâË¼ÊÇÑ°ÕÒµÚkĞ¡µÄ½Úµã***£©
-//Ë¼Â·£º¿¼²ìµÄÊÇÖĞĞò±éÀú£¨×ó¸ùÓÒ£©
+//é¢è¯•é¢˜54ï¼šäºŒå‰æœç´¢æ ‘çš„ç¬¬kå¤§èŠ‚ç‚¹ï¼ˆ***é¢˜ç›®æ„æ€æ˜¯å¯»æ‰¾ç¬¬kå°çš„èŠ‚ç‚¹***ï¼‰
+//æ€è·¯ï¼šè€ƒå¯Ÿçš„æ˜¯ä¸­åºéå†ï¼ˆå·¦æ ¹å³ï¼‰
 #if 0
 #include <iostream>
 #include "Tree.h"
@@ -7542,22 +7542,22 @@ BinaryTreeNode* FindTheKLargestNode(BinaryTreeNode* pBTNode,int k)
     return FindTheKLargestNodeCore(pBTNode,k);
 }
 
-//***×¢***   Ê¹ÓÃµÄÊÇkµÄÒıÓÃ£¬¾ÍÊÇËµ²Ù×÷µÄÊÇÔ­À´µÄk
+//***æ³¨***   ä½¿ç”¨çš„æ˜¯kçš„å¼•ç”¨ï¼Œå°±æ˜¯è¯´æ“ä½œçš„æ˜¯åŸæ¥çš„k
 BinaryTreeNode* FindTheKLargestNodeCore(BinaryTreeNode* pBTNode, int& k)
 {
-    //×Ô¼ºÏëµÄ½â·¨£º
-    //½«ÅÅĞò¶ş²æÊ÷½øĞĞÖĞĞò±éÀú£¬½«Ö¸Ïò¸÷½ÚµãµÄÖ¸ÕëºÍ¸Ã½ÚµãµÄÖµ´æÈëmapÈİÆ÷
-    //ÔÙ¸ù¾İÒªÇó·µ»ØµÚk´óµÄ½Úµã
+    //è‡ªå·±æƒ³çš„è§£æ³•ï¼š
+    //å°†æ’åºäºŒå‰æ ‘è¿›è¡Œä¸­åºéå†ï¼Œå°†æŒ‡å‘å„èŠ‚ç‚¹çš„æŒ‡é’ˆå’Œè¯¥èŠ‚ç‚¹çš„å€¼å­˜å…¥mapå®¹å™¨
+    //å†æ ¹æ®è¦æ±‚è¿”å›ç¬¬kå¤§çš„èŠ‚ç‚¹
 
-    //ÊéÉÏ½â·¨£º
-    //Ñ°ÕÒµÚkĞ¡µÄ½Úµã£¬
+    //ä¹¦ä¸Šè§£æ³•ï¼š
+    //å¯»æ‰¾ç¬¬kå°çš„èŠ‚ç‚¹ï¼Œ
 
     BinaryTreeNode* target = nullptr;
 
     if (pBTNode->m_pLeft != nullptr)
         target = FindTheKLargestNodeCore(pBTNode->m_pLeft,k);
 
-    //±éÀúµ½¶ş²æÊ÷×î×ó±ßµÄ½ÚµãÊ±
+    //éå†åˆ°äºŒå‰æ ‘æœ€å·¦è¾¹çš„èŠ‚ç‚¹æ—¶
     if (target == nullptr)
     {
         if (k == 1)
@@ -7565,22 +7565,22 @@ BinaryTreeNode* FindTheKLargestNodeCore(BinaryTreeNode* pBTNode, int& k)
 
         --k;
     }
-    //***×¢***
-    //Í¨¹ıµİ¼õkµÄÖµ£¬µÃµ½µÚkĞ¡µÄ½ÚµãµÄÖ¸Õë
+    //***æ³¨***
+    //é€šè¿‡é€’å‡kçš„å€¼ï¼Œå¾—åˆ°ç¬¬kå°çš„èŠ‚ç‚¹çš„æŒ‡é’ˆ
 
-    //Èô»¹Ã»ÕÒµ½£¬¾ÍÍùÓÒ×ÓÊ÷ÕÒ
+    //è‹¥è¿˜æ²¡æ‰¾åˆ°ï¼Œå°±å¾€å³å­æ ‘æ‰¾
     if (target == nullptr && pBTNode->m_pRight != nullptr)
         target = FindTheKLargestNodeCore(pBTNode->m_pRight,k);
 
     return target;
 }
-//***×¢***
-//¸ÃËã·¨Ö»ÄÜµÃµ½µÚkĞ¡£¬²»ÄÜ¸Ä½øÒÔµÃµ½µÚk´óµÄ½Úµã
+//***æ³¨***
+//è¯¥ç®—æ³•åªèƒ½å¾—åˆ°ç¬¬kå°ï¼Œä¸èƒ½æ”¹è¿›ä»¥å¾—åˆ°ç¬¬kå¤§çš„èŠ‚ç‚¹
 #endif
 
 
-//ÃæÊÔÌâ55£º¶ş²æÊ÷µÄÉî¶È
-//deep = log2(num) + 1;//***×¢***n¸ö½ÚµãÇóÉî¶È¹«Ê½ 
+//é¢è¯•é¢˜55ï¼šäºŒå‰æ ‘çš„æ·±åº¦
+//deep = log2(num) + 1;//***æ³¨***nä¸ªèŠ‚ç‚¹æ±‚æ·±åº¦å…¬å¼ 
 #if 0
 #include <iostream>
 #include <cmath>
@@ -7618,8 +7618,8 @@ int main()
     return 0;
 }
 
-//½â·¨Ò»£º
-//¼ÆËã½Úµã¸öÊı£¬ÔÙ¼ÆËãÉî¶È
+//è§£æ³•ä¸€ï¼š
+//è®¡ç®—èŠ‚ç‚¹ä¸ªæ•°ï¼Œå†è®¡ç®—æ·±åº¦
 #if 0
 int CalDepth(BinaryTreeNode* pNode)
 {
@@ -7632,21 +7632,21 @@ int CalDepth(BinaryTreeNode* pNode)
 }
 int CalNodes(BinaryTreeNode* pNode)
 {
-    //***×¢***
-    //Òª¼ÇÒä£º
+    //***æ³¨***
+    //è¦è®°å¿†ï¼š
     if (!pNode)
         return 0;
     return CalNodes(pNode->m_pLeft) + CalNodes(pNode->m_pRight) + 1;
 
-    //¿ÉÒÔ¶ÔÕÕÃæÊÔÌâ13
+    //å¯ä»¥å¯¹ç…§é¢è¯•é¢˜13
 }
 #endif
 
-//½â·¨¶ş£º
-//´ÓÁíÍâÒ»¸ö½Ç¶ÈÀ´Àí½âÊ÷µÄÉî¶È¡£Èç¹ûÒ»¿ÃÊ÷Ö»ÓĞÒ»¸ö½Úµã£¬ÄÇÃ´ËüµÄÉî¶ÈÎª1¡£
-//Èç¹û¸ù½ÚµãÖ»ÓĞ×ó×ÓÊ÷¶øÃ»ÓĞÓÒ×ÓÊ÷£¬ÄÇÃ´Ê÷µÄÉî¶ÈÓ¦¸ÃÊÇÆä×ó×ÓÊ÷µÄÉî¶È¼Ó1; 
-//Í¬Ñù£¬Èç¹û¸ù½ÚµãÖ»ÓĞÓÒ×ÓÊ÷¶øÃ»ÓĞ×ó×ÓÊ÷£¬ÄÇÃ´Ê÷µÄÉî¶ÈÓ¦¸ÃÊÇÆäÓÒ×ÓÊ÷µÄÉî¶È¼Ó1¡£
-//Èç¹û¼ÈÓĞÓÒ×ÓÊ÷ÓÖÓĞ×ó×ÓÊ÷£¬ÄÇÃ´¸ÃÊ÷µÄÉî¶È¾ÍÊÇÆä×ó¡¢ÓÒ×ÓÊ÷Éî¶ÈµÄ½Ï´óÖµÔÙ¼Ó1¡£
+//è§£æ³•äºŒï¼š
+//ä»å¦å¤–ä¸€ä¸ªè§’åº¦æ¥ç†è§£æ ‘çš„æ·±åº¦ã€‚å¦‚æœä¸€æ£µæ ‘åªæœ‰ä¸€ä¸ªèŠ‚ç‚¹ï¼Œé‚£ä¹ˆå®ƒçš„æ·±åº¦ä¸º1ã€‚
+//å¦‚æœæ ¹èŠ‚ç‚¹åªæœ‰å·¦å­æ ‘è€Œæ²¡æœ‰å³å­æ ‘ï¼Œé‚£ä¹ˆæ ‘çš„æ·±åº¦åº”è¯¥æ˜¯å…¶å·¦å­æ ‘çš„æ·±åº¦åŠ 1; 
+//åŒæ ·ï¼Œå¦‚æœæ ¹èŠ‚ç‚¹åªæœ‰å³å­æ ‘è€Œæ²¡æœ‰å·¦å­æ ‘ï¼Œé‚£ä¹ˆæ ‘çš„æ·±åº¦åº”è¯¥æ˜¯å…¶å³å­æ ‘çš„æ·±åº¦åŠ 1ã€‚
+//å¦‚æœæ—¢æœ‰å³å­æ ‘åˆæœ‰å·¦å­æ ‘ï¼Œé‚£ä¹ˆè¯¥æ ‘çš„æ·±åº¦å°±æ˜¯å…¶å·¦ã€å³å­æ ‘æ·±åº¦çš„è¾ƒå¤§å€¼å†åŠ 1ã€‚
 #if 1
 int CalDepth(BinaryTreeNode* pNode)
 {
@@ -7662,8 +7662,8 @@ int CalDepth(BinaryTreeNode* pNode)
 #endif
 
 
-//ÅĞ¶ÏÊÇ·ñÎªÆ½ºâ¶ş²æÊ÷
-//Èç¹ûÄ³¶ş²æÊ÷ÖĞÈÎÒâ½ÚµãµÄ×ó¡¢ÓÒ×ÓÊ÷µÄÉî¶ÈÏà²î²»³¬¹ı1, ÄÇÃ´Ëü¾ÍÊÇÒ»¿ÃÆ½ºâ¶ş²æÊ÷¡£
+//åˆ¤æ–­æ˜¯å¦ä¸ºå¹³è¡¡äºŒå‰æ ‘
+//å¦‚æœæŸäºŒå‰æ ‘ä¸­ä»»æ„èŠ‚ç‚¹çš„å·¦ã€å³å­æ ‘çš„æ·±åº¦ç›¸å·®ä¸è¶…è¿‡1, é‚£ä¹ˆå®ƒå°±æ˜¯ä¸€æ£µå¹³è¡¡äºŒå‰æ ‘ã€‚
 #if 0
 #include <iostream>
 #include "Tree.h"
@@ -7707,7 +7707,7 @@ bool JudgeTheTree(BinaryTreeNode* pNode)
 }
 bool JudgeTheTreeCore(BinaryTreeNode* pNode)
 {
-    //ÒÑ¾­±éÀúµ½Ò¶×Ó½áµã
+    //å·²ç»éå†åˆ°å¶å­ç»“ç‚¹
     if (pNode == nullptr)
         return true;
 
@@ -7731,14 +7731,14 @@ int CalDepth(BinaryTreeNode* pNode)
     return  (nleft > nright) ? (nleft + 1) : (nright + 1);
 }
 #endif
-//ÉÏÊö´úÂëµÄÎÊÌâÊÇ
-//»áµ¼ÖÂÒ»¸ö½Úµã±»±éÀú¶à´Î£¬Ê±¼äĞ§ÂÊ²»¸ß
+//ä¸Šè¿°ä»£ç çš„é—®é¢˜æ˜¯
+//ä¼šå¯¼è‡´ä¸€ä¸ªèŠ‚ç‚¹è¢«éå†å¤šæ¬¡ï¼Œæ—¶é—´æ•ˆç‡ä¸é«˜
 
-//¸üºÃµÄ½â·¨£º
-//Ê¹ÓÃ¡¾ºóĞò±éÀú¡¿
-//ÔÚ±éÀúµ½Ò»¸ö½ÚµãÖ®Ç°ÎÒÃÇ¾ÍÒÑ¾­±éÀúÁËËüµÄ×ó¡¢ÓÒ×ÓÊ÷¡£Ö»ÒªÔÚ±éÀúÃ¿¸ö½ÚµãµÄÊ±ºò
-//¼ÇÂ¼ËüµÄÉî¶È(Ä³Ò»½ÚµãµÄÉî¶ÈµÈÓÚËüµ½Ò¶½ÚµãµÄÂ·¾¶µÄ³¤¶È), ÎÒÃÇ¾Í¿ÉÒÔÒ»±ß±éÀú
-//Ò»±ßÅĞ¶ÏÃ¿¸ö½ÚµãÊÇ²»ÊÇÆ½ºâµÄ¡£
+//æ›´å¥½çš„è§£æ³•ï¼š
+//ä½¿ç”¨ã€ååºéå†ã€‘
+//åœ¨éå†åˆ°ä¸€ä¸ªèŠ‚ç‚¹ä¹‹å‰æˆ‘ä»¬å°±å·²ç»éå†äº†å®ƒçš„å·¦ã€å³å­æ ‘ã€‚åªè¦åœ¨éå†æ¯ä¸ªèŠ‚ç‚¹çš„æ—¶å€™
+//è®°å½•å®ƒçš„æ·±åº¦(æŸä¸€èŠ‚ç‚¹çš„æ·±åº¦ç­‰äºå®ƒåˆ°å¶èŠ‚ç‚¹çš„è·¯å¾„çš„é•¿åº¦), æˆ‘ä»¬å°±å¯ä»¥ä¸€è¾¹éå†
+//ä¸€è¾¹åˆ¤æ–­æ¯ä¸ªèŠ‚ç‚¹æ˜¯ä¸æ˜¯å¹³è¡¡çš„ã€‚
 bool JudgeTheTree(BinaryTreeNode* pNode)
 {
     int depth = 0;
@@ -7755,7 +7755,7 @@ bool JudgeTheTree(BinaryTreeNode* pNode,int* pDeep)
 
     int left, right;
 
-    //ÔÚµİ¹éµØ½øĞĞºóĞò±éÀúÊ±£¬Í¬Ê±µÃµ½Ä³Ò»½ÚµãµÄÉî¶È£¬Ò²¾ÍÅĞ¶ÏÁËÒ»¿ÃÊ÷ÊÇ²»ÊÇÆ½ºâ¶ş²æÊ÷
+    //åœ¨é€’å½’åœ°è¿›è¡Œååºéå†æ—¶ï¼ŒåŒæ—¶å¾—åˆ°æŸä¸€èŠ‚ç‚¹çš„æ·±åº¦ï¼Œä¹Ÿå°±åˆ¤æ–­äº†ä¸€æ£µæ ‘æ˜¯ä¸æ˜¯å¹³è¡¡äºŒå‰æ ‘
     if (JudgeTheTree(pNode->m_pLeft, &left) && JudgeTheTree(pNode->m_pRight, &right))
     {
         if (abs(left - right) <= 1)
@@ -7770,21 +7770,21 @@ bool JudgeTheTree(BinaryTreeNode* pNode,int* pDeep)
 #endif
 
 
-//ÃæÊÔÌâ56£ºÊı×éÖĞÊı×Ö³öÏÖµÄ´ÎÊı
-//Ò»¸öÕûĞÍÊı×éÀï³ıÁ½¸öÊı×ÖÖ®Íâ£¬ÆäËûÊı×Ö¶¼³öÏÖÁËÁ½´Î¡£ÇëĞ´³ÌĞò
-//ÕÒ³öÕâÁ½¸öÖ»³öÏÖÒ»´ÎµÄÊı×Ö¡£ÒªÇóÊ±¼ä¸´ÔÓ¶ÈÊÇO(n), ¿Õ¼ä¸´ÔÓ¶ÈÊÇO(1)¡£
+//é¢è¯•é¢˜56ï¼šæ•°ç»„ä¸­æ•°å­—å‡ºç°çš„æ¬¡æ•°
+//ä¸€ä¸ªæ•´å‹æ•°ç»„é‡Œé™¤ä¸¤ä¸ªæ•°å­—ä¹‹å¤–ï¼Œå…¶ä»–æ•°å­—éƒ½å‡ºç°äº†ä¸¤æ¬¡ã€‚è¯·å†™ç¨‹åº
+//æ‰¾å‡ºè¿™ä¸¤ä¸ªåªå‡ºç°ä¸€æ¬¡çš„æ•°å­—ã€‚è¦æ±‚æ—¶é—´å¤æ‚åº¦æ˜¯O(n), ç©ºé—´å¤æ‚åº¦æ˜¯O(1)ã€‚
 
-//Ë¼Â·£º
-//¿¼ÂÇÄ³¸öÊı×éÖ»ÓĞÒ»¸öÊı×Ö³öÏÖÁËÒ»´Î£¬¶øÆäËûÊı×Ö¶¼³öÏÖÁËÁ½´Î¡£
-//ÄÇÃ´ÕÒ³öÕâ¸öÊı×Ö¿ÉÒÔÓÃÒì»ò×ö¡£
-//ÏÖÔÚµÄÎÊÌâ×ª»¯ÎªÈçºÎ½«¸ø³öµÄÊı×é·Ö³ÉÁ½¸ö×ÓÊı×é£¬
-//¶øÇÒÁ½¸ö×ÓÊı×é¾ùÖ»ÓĞÒ»¸öÊı×Ö³öÏÖÁËÒ»´Î£¬¶øÆäËûÊı×Ö¶¼³öÏÖÁËÁ½´Î¡£
-//¿ÉÒÔÕÕ³£´ÓÍ·µ½Î²¶ÔÃ¿¸öÊı×Ö½øĞĞÒì»òÔËËã£¬×îÖÕµÃµ½µÄ½á¹ûÎª
-//Á½¸ö½ö³öÏÖÒ»´ÎµÄÊı×ÖµÄÒì»òÖµ
-//ÄÇÃ´¿ÉÒÔÑ°ÕÒ¸ÃÖµµÄµÚÒ»¸öÎª1µÄÎ»ÖÃ£¬¶ÔÃ¿¸öÊı×ÖµÄ¸ÃÎ»¶¼½øĞĞÅĞ¶Ï
-//ÒòÎªÁ½¸öÏàÍ¬µÄÊı×ÖµÄÈÎÒâÒ»Î»¶¼ÊÇÏàÍ¬µÄ£¬ÎÒÃÇ²»¿ÉÄÜ°ÑÁ½¸öÏàÍ¬µÄÊı×Ö·ÖÅäµ½Á½¸ö×ÓÊı×éÖĞÈ¥
-//ËùÒÔµÃµ½Á½¸ö×ÓÊı×é
-//Ã¿¸ö×ÓÊı×é½öÓĞÒ»¸öÊı×Ö³öÏÖÒ»´Î£¬¶øÆäËûÊı×Ö¶¼³öÏÖÁËÁ½´Î¡£
+//æ€è·¯ï¼š
+//è€ƒè™‘æŸä¸ªæ•°ç»„åªæœ‰ä¸€ä¸ªæ•°å­—å‡ºç°äº†ä¸€æ¬¡ï¼Œè€Œå…¶ä»–æ•°å­—éƒ½å‡ºç°äº†ä¸¤æ¬¡ã€‚
+//é‚£ä¹ˆæ‰¾å‡ºè¿™ä¸ªæ•°å­—å¯ä»¥ç”¨å¼‚æˆ–åšã€‚
+//ç°åœ¨çš„é—®é¢˜è½¬åŒ–ä¸ºå¦‚ä½•å°†ç»™å‡ºçš„æ•°ç»„åˆ†æˆä¸¤ä¸ªå­æ•°ç»„ï¼Œ
+//è€Œä¸”ä¸¤ä¸ªå­æ•°ç»„å‡åªæœ‰ä¸€ä¸ªæ•°å­—å‡ºç°äº†ä¸€æ¬¡ï¼Œè€Œå…¶ä»–æ•°å­—éƒ½å‡ºç°äº†ä¸¤æ¬¡ã€‚
+//å¯ä»¥ç…§å¸¸ä»å¤´åˆ°å°¾å¯¹æ¯ä¸ªæ•°å­—è¿›è¡Œå¼‚æˆ–è¿ç®—ï¼Œæœ€ç»ˆå¾—åˆ°çš„ç»“æœä¸º
+//ä¸¤ä¸ªä»…å‡ºç°ä¸€æ¬¡çš„æ•°å­—çš„å¼‚æˆ–å€¼
+//é‚£ä¹ˆå¯ä»¥å¯»æ‰¾è¯¥å€¼çš„ç¬¬ä¸€ä¸ªä¸º1çš„ä½ç½®ï¼Œå¯¹æ¯ä¸ªæ•°å­—çš„è¯¥ä½éƒ½è¿›è¡Œåˆ¤æ–­
+//å› ä¸ºä¸¤ä¸ªç›¸åŒçš„æ•°å­—çš„ä»»æ„ä¸€ä½éƒ½æ˜¯ç›¸åŒçš„ï¼Œæˆ‘ä»¬ä¸å¯èƒ½æŠŠä¸¤ä¸ªç›¸åŒçš„æ•°å­—åˆ†é…åˆ°ä¸¤ä¸ªå­æ•°ç»„ä¸­å»
+//æ‰€ä»¥å¾—åˆ°ä¸¤ä¸ªå­æ•°ç»„
+//æ¯ä¸ªå­æ•°ç»„ä»…æœ‰ä¸€ä¸ªæ•°å­—å‡ºç°ä¸€æ¬¡ï¼Œè€Œå…¶ä»–æ•°å­—éƒ½å‡ºç°äº†ä¸¤æ¬¡ã€‚
 #if 0
 #include <iostream>
 
@@ -7818,11 +7818,11 @@ void FindCorrespondingNums(int* data, int length)
 
     int wei = FindTheFirstBitIs1(cal_xor);
 
-    //´íÎóĞ´·¨£º
+    //é”™è¯¯å†™æ³•ï¼š
     //int basis_of_determination = 0x80000000;
     //while (wei--)
     //    basis_of_determination >>= 1;
-    //¸ºÊı½øĞĞ×óÒÆÊ±£¬×î¸ßÎ»»¹ÊÇ1
+    //è´Ÿæ•°è¿›è¡Œå·¦ç§»æ—¶ï¼Œæœ€é«˜ä½è¿˜æ˜¯1
 
     int basis_of_determination = 0x40000000;
     while (wei!=1)
@@ -7831,13 +7831,13 @@ void FindCorrespondingNums(int* data, int length)
         --wei;
     }
 
-    int num1 = 0;//Óë0Òì»òÖµ²»±ä£¬ËùÒÔ³õÖµÉèÖÃÎª0
+    int num1 = 0;//ä¸0å¼‚æˆ–å€¼ä¸å˜ï¼Œæ‰€ä»¥åˆå€¼è®¾ç½®ä¸º0
     int num2 = 0;
     for (int i = 0; i < length; ++i)
     {
-        if (data[i] & basis_of_determination)//***×¢***
-            num1 ^= data[i];                      //Á½¸öÖ»³öÏÖÒ»´ÎµÄÊı×Ö£¬Á½¸öÊı×ÖÒ»¶¨²»ÏàÍ¬
-        else                                               //ËùÒÔÒ»¶¨¿ÉÒÔÂú×ãÒ»¸öÄ³Î»Îª1£¬ÁíÒ»¸öÄ³Î»Îª0
+        if (data[i] & basis_of_determination)//***æ³¨***
+            num1 ^= data[i];                      //ä¸¤ä¸ªåªå‡ºç°ä¸€æ¬¡çš„æ•°å­—ï¼Œä¸¤ä¸ªæ•°å­—ä¸€å®šä¸ç›¸åŒ
+        else                                               //æ‰€ä»¥ä¸€å®šå¯ä»¥æ»¡è¶³ä¸€ä¸ªæŸä½ä¸º1ï¼Œå¦ä¸€ä¸ªæŸä½ä¸º0
             num2 ^= data[i];
     }
 
@@ -7860,11 +7860,11 @@ inline int Cal_XOR(int* data, int length)
 
 inline int FindTheFirstBitIs1(int num)
 {
-    //INT_MAXÎª2147483647£¬¼´01111111111111111111111111111111
+    //INT_MAXä¸º2147483647ï¼Œå³01111111111111111111111111111111
     // 
-    //***×¢***
-    //²Î¿¼ÃæÊÔÌâ15
-    int flag = 0x40000000;      //¼´01000000000000000000000000000000
+    //***æ³¨***
+    //å‚è€ƒé¢è¯•é¢˜15
+    int flag = 0x40000000;      //å³01000000000000000000000000000000
 
     int wei_index = 1;
 
@@ -7879,8 +7879,8 @@ inline int FindTheFirstBitIs1(int num)
 
     return wei_index;
 }
-//***×¢***
-//Ò²¿ÉÒÔ¸ÄÎªÑ°ÕÒ¶ş½øÖÆÊı×Ö×îºóÒ»¸öÎª1µÄÎ»µÄÎ»ÖÃ
+//***æ³¨***
+//ä¹Ÿå¯ä»¥æ”¹ä¸ºå¯»æ‰¾äºŒè¿›åˆ¶æ•°å­—æœ€åä¸€ä¸ªä¸º1çš„ä½çš„ä½ç½®
 #if 0
 unsigned int FindTheFirstBitIs1(int num)
 {
@@ -7897,16 +7897,16 @@ unsigned int FindTheFirstBitIs1(int num)
 #endif
 
 
-//Êı×éÖĞÎ¨Ò»Ö»³öÏÖÒ»´ÎµÄÊı×Ö
-//ÔÚÒ»¸öÊı×éÖĞ³ıÒ»¸öÊı×ÖÖ»³öÏÖÒ»´ÎÖ®Íâ£¬ÆäËûÊı×Ö¶¼³öÏÖÁËÈı´Î¡£
-//ÇëÕÒ³öÄÇ¸öÖ»³öÏÖÒ»´ÎµÄÊı×Ö¡£
+//æ•°ç»„ä¸­å”¯ä¸€åªå‡ºç°ä¸€æ¬¡çš„æ•°å­—
+//åœ¨ä¸€ä¸ªæ•°ç»„ä¸­é™¤ä¸€ä¸ªæ•°å­—åªå‡ºç°ä¸€æ¬¡ä¹‹å¤–ï¼Œå…¶ä»–æ•°å­—éƒ½å‡ºç°äº†ä¸‰æ¬¡ã€‚
+//è¯·æ‰¾å‡ºé‚£ä¸ªåªå‡ºç°ä¸€æ¬¡çš„æ•°å­—ã€‚
 
-//Ë¼Â·£º
-//Î»Òì»ò¿ÉÒÔ´¦Àí³öÏÖÁ½´ÎµÄÊı×Ö£¬µ«²»ÄÜ´¦Àí³öÏÖÈı´ÎµÄÊı×Ö¡£
-//¼ÌĞøÓÃÎ»ÔËËãµÄÏë·¨£º
-//Èç¹ûÒ»¸öÊı×Ö³öÏÖÈı´Î£¬ÄÇÃ´ËüµÄ¶ş½øÖÆ±íÊ¾µÄÃ¿Ò»Î»(0»òÕß1)
-//Ò²³öÏÖÈı´Î¡£Èç¹û°ÑËùÓĞ³öÏÖÈı´ÎµÄÊı×ÖµÄ¶ş½øÖÆ±íÊ¾µÄÃ¿Ò»Î»¶¼·Ö±ğ
-//¼ÓÆğÀ´£¬ÄÇÃ´Ã¿Ò»Î»µÄºÍ¶¼ÄÜ±»3Õû³ı¡£
+//æ€è·¯ï¼š
+//ä½å¼‚æˆ–å¯ä»¥å¤„ç†å‡ºç°ä¸¤æ¬¡çš„æ•°å­—ï¼Œä½†ä¸èƒ½å¤„ç†å‡ºç°ä¸‰æ¬¡çš„æ•°å­—ã€‚
+//ç»§ç»­ç”¨ä½è¿ç®—çš„æƒ³æ³•ï¼š
+//å¦‚æœä¸€ä¸ªæ•°å­—å‡ºç°ä¸‰æ¬¡ï¼Œé‚£ä¹ˆå®ƒçš„äºŒè¿›åˆ¶è¡¨ç¤ºçš„æ¯ä¸€ä½(0æˆ–è€…1)
+//ä¹Ÿå‡ºç°ä¸‰æ¬¡ã€‚å¦‚æœæŠŠæ‰€æœ‰å‡ºç°ä¸‰æ¬¡çš„æ•°å­—çš„äºŒè¿›åˆ¶è¡¨ç¤ºçš„æ¯ä¸€ä½éƒ½åˆ†åˆ«
+//åŠ èµ·æ¥ï¼Œé‚£ä¹ˆæ¯ä¸€ä½çš„å’Œéƒ½èƒ½è¢«3æ•´é™¤ã€‚
 #if 0
 #include <iostream>
 
@@ -7936,7 +7936,7 @@ void FindCorrespondingNums(int* data, int length)
 
     int bitArray[32] = { 0 };
 
-    //±éÀúÊı×éÖĞµÄÊı×Ö£¬½«Êı×ÖµÄ¶ş½øÖÆ±íÊ¾µÄÃ¿Ò»Î»¶¼·Ö±ğ¼ÓÆğÀ´
+    //éå†æ•°ç»„ä¸­çš„æ•°å­—ï¼Œå°†æ•°å­—çš„äºŒè¿›åˆ¶è¡¨ç¤ºçš„æ¯ä¸€ä½éƒ½åˆ†åˆ«åŠ èµ·æ¥
     for (int i = 0; i < length; ++i)
     {
 		int mask = 1;
@@ -7952,16 +7952,16 @@ void FindCorrespondingNums(int* data, int length)
     int res = 0;
     for (int j = 31; j >= 0; --j)
     {
-        if(bitArray[j]%3!=0)//½ö³öÏÖÒ»´ÎµÄÊı×Ö£¬¶Ô3È¡ÓàÒ»¶¨²»Îª0
+        if(bitArray[j]%3!=0)//ä»…å‡ºç°ä¸€æ¬¡çš„æ•°å­—ï¼Œå¯¹3å–ä½™ä¸€å®šä¸ä¸º0
         {
             int tmp = 1;
             tmp <<= 31 - j;
 
-            res |= tmp;//***×¢***Í¨¹ı  »òÔËËã  »òÕß  Òì»òÔËËã  À´µÃµ½·ûºÏµÄÊı×Ö
+            res |= tmp;//***æ³¨***é€šè¿‡  æˆ–è¿ç®—  æˆ–è€…  å¼‚æˆ–è¿ç®—  æ¥å¾—åˆ°ç¬¦åˆçš„æ•°å­—
         }
     }
 
-//µÃµ½·ûºÏÊı×Ö·¨¶ş£º
+//å¾—åˆ°ç¬¦åˆæ•°å­—æ³•äºŒï¼š
 #if 0
     int result = 0;
     for (int i = 0; i < 32; ++i)
@@ -7979,9 +7979,9 @@ void FindCorrespondingNums(int* data, int length)
 #endif
 
 
-//ÃæÊÔÌâ57£ººÍÎªsµÄÊı×Ö
-//ÊäÈëÒ»¸öµİÔöÅÅĞòµÄÊı×éºÍÒ»¸öÊı×Ös£¬ÔÚÊı×éÖĞ²éÕÒÁ½¸öÊı£¬
-//Ê¹µÃËüÃÇµÄºÍÕıºÃÊÇs¡£Èç¹ûÓĞ¶à¶ÔÊı×ÖµÄºÍµÈÓÚs, ÔòÊä³öÈÎÒâÒ»¶Ô¼´¿É¡£
+//é¢è¯•é¢˜57ï¼šå’Œä¸ºsçš„æ•°å­—
+//è¾“å…¥ä¸€ä¸ªé€’å¢æ’åºçš„æ•°ç»„å’Œä¸€ä¸ªæ•°å­—sï¼Œåœ¨æ•°ç»„ä¸­æŸ¥æ‰¾ä¸¤ä¸ªæ•°ï¼Œ
+//ä½¿å¾—å®ƒä»¬çš„å’Œæ­£å¥½æ˜¯sã€‚å¦‚æœæœ‰å¤šå¯¹æ•°å­—çš„å’Œç­‰äºs, åˆ™è¾“å‡ºä»»æ„ä¸€å¯¹å³å¯ã€‚
 #if 0
 #include <iostream>
 
@@ -8010,9 +8010,9 @@ void FindTwoNumbers(int* data, int length,int s)
     if (data == nullptr || length <= 0)
         throw exception("Error!");
 
-    //***Ë¼Â·***
-    //ÀûÓÃÒÑ¾­µİÔöÅÅĞòµÄÊı×éÕâÒ»Ìõ¼ş
-    //ÓÃË«Ö¸ÕëË¼Ïë£¬½áºÏ¶ş·Ö·¨µÄ½ØÈ¡Êı¾İ¶ÎµÄÌõ¼şÅĞ¶ÏÀ´×ö
+    //***æ€è·¯***
+    //åˆ©ç”¨å·²ç»é€’å¢æ’åºçš„æ•°ç»„è¿™ä¸€æ¡ä»¶
+    //ç”¨åŒæŒ‡é’ˆæ€æƒ³ï¼Œç»“åˆäºŒåˆ†æ³•çš„æˆªå–æ•°æ®æ®µçš„æ¡ä»¶åˆ¤æ–­æ¥åš
 
     int begidx, endidx;
     begidx = 0, endidx = length - 1;
@@ -8041,9 +8041,9 @@ void FindTwoNumbers(int* data, int length,int s)
 #endif
 
 
-//ÊäÈëÒ»¸öÕıÊıs£¬´òÓ¡³öËùÓĞºÍÎªsµÄÁ¬ĞøÕıÊıĞòÁĞ(ÖÁÉÙº¬ÓĞÁ½¸öÊı)¡£
-//ÀıÈç£¬ÊäÈë15, ÓÉÓÚ1 + 2 + 3 + 4 + 5 = 4 + 5 + 6 = 7 + 8 = 15, 
-//ËùÒÔ´òÓ¡³ö3¸öÁ¬ĞøĞòÁĞ1¡«5¡¢4~6ºÍ7~8¡£
+//è¾“å…¥ä¸€ä¸ªæ­£æ•°sï¼Œæ‰“å°å‡ºæ‰€æœ‰å’Œä¸ºsçš„è¿ç»­æ­£æ•°åºåˆ—(è‡³å°‘å«æœ‰ä¸¤ä¸ªæ•°)ã€‚
+//ä¾‹å¦‚ï¼Œè¾“å…¥15, ç”±äº1 + 2 + 3 + 4 + 5 = 4 + 5 + 6 = 7 + 8 = 15, 
+//æ‰€ä»¥æ‰“å°å‡º3ä¸ªè¿ç»­åºåˆ—1ï½5ã€4~6å’Œ7~8ã€‚
 #if 0
 #include <iostream>
 
@@ -8072,15 +8072,15 @@ void FindSequenceOfPositiveNumbers(int s)
     if (s <= 0)
         throw exception("Invalid input!");
 
-    //***Ë¼Â·***
-    //ÀûÓÃÁ¬ĞøµİÔöµÄÕıÊıĞòÁĞÕâÒ»Ìõ¼ş
-    //ÓÃË«Ö¸ÕëË¼Ïë£¬½áºÏ¶ş·Ö·¨µÄ½ØÈ¡Êı¾İ¶ÎµÄÌõ¼şÅĞ¶ÏÀ´×ö
+    //***æ€è·¯***
+    //åˆ©ç”¨è¿ç»­é€’å¢çš„æ­£æ•°åºåˆ—è¿™ä¸€æ¡ä»¶
+    //ç”¨åŒæŒ‡é’ˆæ€æƒ³ï¼Œç»“åˆäºŒåˆ†æ³•çš„æˆªå–æ•°æ®æ®µçš„æ¡ä»¶åˆ¤æ–­æ¥åš
 
     int begnum, endnum;
     begnum = 1, endnum = 2;
     int tmp,flag=false;
 
-    while (begnum < endnum)//***×¢***   ²»ÄÜĞ´<=
+    while (begnum < endnum)//***æ³¨***   ä¸èƒ½å†™<=
     {
         tmp=CntBegToEnd(begnum, endnum);
 
@@ -8108,10 +8108,10 @@ inline int CntBegToEnd(int b, int e)
 {
     return ((b + e) * (e - b + 1)) >> 1;
 }
-//***×¢***
-//¿¼ÂÇµ½Ã¿´Î²Ù×÷Ö®ºóµÄĞòÁĞºÍ²Ù×÷Ö®Ç°µÄĞòÁĞÏà±È´ó²¿·ÖÊı×Ö¶¼ÊÇÒ»ÑùµÄ£¬
-//Ö»ÊÇÔö¼Ó»òÕß¼õÉÙÁËÒ»¸öÊı×Ö£¬Òò´ËÎÒÃÇ¿ÉÒÔÔÚÇ°Ò»¸öĞòÁĞµÄºÍµÄ»ù´¡ÉÏ
-//Çó²Ù×÷Ö®ºóµÄĞòÁĞµÄºÍ¡£ÕâÑù¿ÉÒÔ¼õÉÙºÜ¶à²»±ØÒªµÄÔËËã£¬´Ó¶øÌá¸ß´úÂëµÄĞ§ÂÊ¡£
+//***æ³¨***
+//è€ƒè™‘åˆ°æ¯æ¬¡æ“ä½œä¹‹åçš„åºåˆ—å’Œæ“ä½œä¹‹å‰çš„åºåˆ—ç›¸æ¯”å¤§éƒ¨åˆ†æ•°å­—éƒ½æ˜¯ä¸€æ ·çš„ï¼Œ
+//åªæ˜¯å¢åŠ æˆ–è€…å‡å°‘äº†ä¸€ä¸ªæ•°å­—ï¼Œå› æ­¤æˆ‘ä»¬å¯ä»¥åœ¨å‰ä¸€ä¸ªåºåˆ—çš„å’Œçš„åŸºç¡€ä¸Š
+//æ±‚æ“ä½œä¹‹åçš„åºåˆ—çš„å’Œã€‚è¿™æ ·å¯ä»¥å‡å°‘å¾ˆå¤šä¸å¿…è¦çš„è¿ç®—ï¼Œä»è€Œæé«˜ä»£ç çš„æ•ˆç‡ã€‚
 #if 0
 void FindContinuousSequence(int sum)
 {
@@ -8145,11 +8145,11 @@ void FindContinuousSequence(int sum)
 #endif
 
 
-//ÃæÊÔÌâ58£º·­×ª×Ö·û´®
-//·­×ªµ¥´ÊË³Ğò
-//ÊäÈëÒ»¸öÓ¢ÎÄ¾ä×Ó£¬·­×ª¾ä×ÓÖĞµ¥´ÊµÄË³Ğò£¬µ«µ¥´ÊÄÚ×Ö·ûµÄË³Ğò²»±ä¡£
-//Îª¼òµ¥Æğ¼û£¬±êµã·ûºÅºÍÆÕÍ¨×ÖÄ¸Ò»Ñù´¦Àí¡£ÀıÈçÊäÈë×Ö·û´®"I am a
-//student.",ÔòÊä³ö"student.a am I"¡£
+//é¢è¯•é¢˜58ï¼šç¿»è½¬å­—ç¬¦ä¸²
+//ç¿»è½¬å•è¯é¡ºåº
+//è¾“å…¥ä¸€ä¸ªè‹±æ–‡å¥å­ï¼Œç¿»è½¬å¥å­ä¸­å•è¯çš„é¡ºåºï¼Œä½†å•è¯å†…å­—ç¬¦çš„é¡ºåºä¸å˜ã€‚
+//ä¸ºç®€å•èµ·è§ï¼Œæ ‡ç‚¹ç¬¦å·å’Œæ™®é€šå­—æ¯ä¸€æ ·å¤„ç†ã€‚ä¾‹å¦‚è¾“å…¥å­—ç¬¦ä¸²"I am a
+//student.",åˆ™è¾“å‡º"student.a am I"ã€‚
 #if 0
 #include <iostream>
 #include <algorithm>
@@ -8160,11 +8160,11 @@ char* reverse_all(char* begidx,char* endidx);
 
 int main()
 {
-    //***×¢***
-    //Èç¹û´òËãĞŞ¸Ä×Ö·û´®£¬¾Í²»ÒªÓÃÖ¸ÕëÖ¸Ïò×Ö·û´®×ÖÃæÁ¿¡£
+    //***æ³¨***
+    //å¦‚æœæ‰“ç®—ä¿®æ”¹å­—ç¬¦ä¸²ï¼Œå°±ä¸è¦ç”¨æŒ‡é’ˆæŒ‡å‘å­—ç¬¦ä¸²å­—é¢é‡ã€‚
     //const char* data="I am a student.";
 
-    //³õÊ¼»¯×Ö·ûÊı×éÀ´´æ´¢×Ö·û´®
+    //åˆå§‹åŒ–å­—ç¬¦æ•°ç»„æ¥å­˜å‚¨å­—ç¬¦ä¸²
     char data[] = "I am a student.";
 
     cout << reverse_word_order(data);
@@ -8177,11 +8177,11 @@ char* reverse_word_order(char* target)
     if (target == nullptr)
         return const_cast<char*>("Error input!");
 
-    //¼ÆËã×Ö·û´®³¤¶È£¨²»º¬Ä©Î²¿Õ×Ö·û£©
+    //è®¡ç®—å­—ç¬¦ä¸²é•¿åº¦ï¼ˆä¸å«æœ«å°¾ç©ºå­—ç¬¦ï¼‰
     char* tmp = target;
     int length = 0;
 
-    //´íÎóĞ´·¨£º
+    //é”™è¯¯å†™æ³•ï¼š
     //while (tmp)
 
     while(*tmp!='\0')
@@ -8190,25 +8190,25 @@ char* reverse_word_order(char* target)
         ++tmp;
     }
 
-    //ÏÈ·­×ªËùÓĞ×Ö·û
+    //å…ˆç¿»è½¬æ‰€æœ‰å­—ç¬¦
     reverse_all(target,target+length);
 
-    //ÔÙ¶ÔÃ¿Ò»¸öµ¥´ÊµÄ×Ö·û½øĞĞ·­×ª
+    //å†å¯¹æ¯ä¸€ä¸ªå•è¯çš„å­—ç¬¦è¿›è¡Œç¿»è½¬
     char* begidx, *endidx;
     begidx = endidx = target;
 
-    //Ğ´·¨Ò»£º
+    //å†™æ³•ä¸€ï¼š
 #if 0
     while(*endidx!='\0')
     {
-        //***×¢***
-        //ÓÅÏÈÅĞ¶ÏÊÇ·ñµ½×Ö·û´®Ä©Î²£¬ÔÙÅĞ¶ÏÊÇ·ñÎª¿Õ¸ñ×Ö·û
+        //***æ³¨***
+        //ä¼˜å…ˆåˆ¤æ–­æ˜¯å¦åˆ°å­—ç¬¦ä¸²æœ«å°¾ï¼Œå†åˆ¤æ–­æ˜¯å¦ä¸ºç©ºæ ¼å­—ç¬¦
         while (*endidx != '\0' &&*endidx != ' ')
             ++endidx;
 
         reverse_all(begidx,endidx);
 
-        //Ô½¹ı¿Õ¸ñ×Ö·û
+        //è¶Šè¿‡ç©ºæ ¼å­—ç¬¦
         if(*endidx != '\0')
 			++endidx;
 
@@ -8216,25 +8216,25 @@ char* reverse_word_order(char* target)
     }
 #endif
 
-    //Ğ´·¨¶ş£º
+    //å†™æ³•äºŒï¼š
 #if 1
-    // ·­×ª¾ä×ÓÖĞµÄÃ¿¸öµ¥´Ê
+    // ç¿»è½¬å¥å­ä¸­çš„æ¯ä¸ªå•è¯
     char* pBegin, * pEnd;
     pBegin = pEnd = target;
     while (*pBegin != '\0')
     {
-        //ÈôÒ»¸öµ¥´ÊÒÑ¾­Íê³É·­×ª²Ù×÷
+        //è‹¥ä¸€ä¸ªå•è¯å·²ç»å®Œæˆç¿»è½¬æ“ä½œ
         if (*pBegin == ' ')
         {
             pBegin++;
             pEnd++;
-        }//ÈôpEndÖ¸Õë´ïµ½Ò»¸öµ¥´ÊµÄÄ©Î²
+        }//è‹¥pEndæŒ‡é’ˆè¾¾åˆ°ä¸€ä¸ªå•è¯çš„æœ«å°¾
         else if (*pEnd == ' ' || *pEnd == '\0')
         {
             reverse_all(pBegin, pEnd);
             pBegin = pEnd;
         }
-        else//pEndÖ¸ÕëÎ´´ïµ½Ò»¸öµ¥´ÊµÄÄ©Î²
+        else//pEndæŒ‡é’ˆæœªè¾¾åˆ°ä¸€ä¸ªå•è¯çš„æœ«å°¾
             pEnd++;
     }
 #endif
@@ -8244,8 +8244,8 @@ char* reverse_word_order(char* target)
 
 char* reverse_all(char* begidx, char* endidx)
 {
-    //endidxÔ­À´Ö¸ÏòÄ©Î²µÄ¿Õ×Ö·û»òÖ¸Ïò¿Õ¸ñ×Ö·û£¬
-    //Òò´ËÒªÏÈÏòÇ°ÒÆ¶¯Ò»¸ö×Ö·ûµ¥Î»
+    //endidxåŸæ¥æŒ‡å‘æœ«å°¾çš„ç©ºå­—ç¬¦æˆ–æŒ‡å‘ç©ºæ ¼å­—ç¬¦ï¼Œ
+    //å› æ­¤è¦å…ˆå‘å‰ç§»åŠ¨ä¸€ä¸ªå­—ç¬¦å•ä½
     --endidx;
 
     while (begidx<endidx)
@@ -8258,7 +8258,7 @@ char* reverse_all(char* begidx, char* endidx)
         --endidx;
     }
 
-    //´¦ÀíÍêºó±ä³É£º
+    //å¤„ç†å®Œåå˜æˆï¼š
     //.tneduts a ma I
 
     return const_cast<char*>("OK");
@@ -8266,10 +8266,10 @@ char* reverse_all(char* begidx, char* endidx)
 #endif
 
 
-//×óĞı×ª×Ö·û´®¡£
-//×Ö·û´®µÄ×óĞı×ª²Ù×÷ÊÇ°Ñ×Ö·û´®Ç°ÃæµÄÈô¸É¸ö×Ö·û×ªÒÆµ½×Ö·û´®µÄÎ²²¿¡£
-//Çë¶¨ÒåÒ»¸öº¯ÊıÊµÏÖ×Ö·û´®×óĞı×ª²Ù×÷µÄ¹¦ÄÜ¡£±ÈÈç£¬ÊäÈë×Ö·û´®
-//"abcdefg"ºÍÊı×Ö2, ¸Ãº¯Êı½«·µ»Ø×óĞı×ªÁ½Î»µÃµ½µÄ½á¹û"cdefgab"¡£
+//å·¦æ—‹è½¬å­—ç¬¦ä¸²ã€‚
+//å­—ç¬¦ä¸²çš„å·¦æ—‹è½¬æ“ä½œæ˜¯æŠŠå­—ç¬¦ä¸²å‰é¢çš„è‹¥å¹²ä¸ªå­—ç¬¦è½¬ç§»åˆ°å­—ç¬¦ä¸²çš„å°¾éƒ¨ã€‚
+//è¯·å®šä¹‰ä¸€ä¸ªå‡½æ•°å®ç°å­—ç¬¦ä¸²å·¦æ—‹è½¬æ“ä½œçš„åŠŸèƒ½ã€‚æ¯”å¦‚ï¼Œè¾“å…¥å­—ç¬¦ä¸²
+//"abcdefg"å’Œæ•°å­—2, è¯¥å‡½æ•°å°†è¿”å›å·¦æ—‹è½¬ä¸¤ä½å¾—åˆ°çš„ç»“æœ"cdefgab"ã€‚
 #if 0
 #include <iostream>
 #include <deque>
@@ -8289,8 +8289,8 @@ int main()
     return 0;
 }
 
-//×Ô¼ºµÄ½â·¨£º
-//ÒªÒÀ¿¿dequeÈİÆ÷£¬¶øÇÒÒª½øĞĞÁ½´Î¸³Öµ²Ù×÷
+//è‡ªå·±çš„è§£æ³•ï¼š
+//è¦ä¾é dequeå®¹å™¨ï¼Œè€Œä¸”è¦è¿›è¡Œä¸¤æ¬¡èµ‹å€¼æ“ä½œ
 #if 0
 char* AnticlockwiseString(char* source, int n)
 {
@@ -8302,12 +8302,12 @@ char* AnticlockwiseString(char* source, int n)
     while (*tmp != '\0')
     {
         ++length,++tmp;
-    }//£¨¿ÉÒÔÓÃstrlen()º¯Êı£©
+    }//ï¼ˆå¯ä»¥ç”¨strlen()å‡½æ•°ï¼‰
 
     if (n > length)
         return const_cast < char*> ("Error !\n");
 
-    //´´½¨Ò»¸öË«¶Ë¶ÓÁĞ£¬ÓÃÓÚ´æ´¢²»º¬Ä©Î²¿Õ×Ö·ûµÄ×Ö·û´®Êı¾İ
+    //åˆ›å»ºä¸€ä¸ªåŒç«¯é˜Ÿåˆ—ï¼Œç”¨äºå­˜å‚¨ä¸å«æœ«å°¾ç©ºå­—ç¬¦çš„å­—ç¬¦ä¸²æ•°æ®
     deque<char>deq;
 
     tmp = source;
@@ -8331,12 +8331,12 @@ char* AnticlockwiseString(char* source, int n)
 }
 #endif
 
-//ĞèÒªÒ»¶¨¼¼ÇÉµÄ½â·¨£º
-//abcdefg ±ä³É
+//éœ€è¦ä¸€å®šæŠ€å·§çš„è§£æ³•ï¼š
+//abcdefg å˜æˆ
 //cdefgab
-//ÉÏÃæ×Ö·û´®·­×ªµÃµ½bagfedc
-//¹Û²ìµÃµ½£ºÏàµ±ÓÚ¶ÔÔ­×Ö·û´®µÄ ab ºÍ cdefg ·Ö±ğ½øĞĞ·­×ª´¦ÀíºóÔÙÕûÌå½øĞĞ·­×ª´¦Àí
-//Òò´ËÖ»ĞèÒªµ÷ÓÃ3´ÎÇ°ÃæµÄReverseº¯Êı¾Í¿ÉÒÔÊµÏÖ×Ö·û´®µÄ×óĞı×ª¹¦ÄÜ¡£
+//ä¸Šé¢å­—ç¬¦ä¸²ç¿»è½¬å¾—åˆ°bagfedc
+//è§‚å¯Ÿå¾—åˆ°ï¼šç›¸å½“äºå¯¹åŸå­—ç¬¦ä¸²çš„ ab å’Œ cdefg åˆ†åˆ«è¿›è¡Œç¿»è½¬å¤„ç†åå†æ•´ä½“è¿›è¡Œç¿»è½¬å¤„ç†
+//å› æ­¤åªéœ€è¦è°ƒç”¨3æ¬¡å‰é¢çš„Reverseå‡½æ•°å°±å¯ä»¥å®ç°å­—ç¬¦ä¸²çš„å·¦æ—‹è½¬åŠŸèƒ½ã€‚
 #if 1
 char* AnticlockwiseString(char* source, int n)
 {
@@ -8378,11 +8378,11 @@ char* Reverse(char* begidx, char* endidx)
 #endif
 
 
-//ÃæÊÔÌâ59£º¶ÓÁĞµÄ×î´óÖµ
-//»¬¶¯´°¿ÚµÄ×î´óÖµ
-//¸ø¶¨Ò»¸öÊı×éºÍ»¬¶¯´°¿ÚµÄ´óĞ¡£¬ÇëÕÒ³öËùÓĞ»¬¶¯´°¿ÚÀïµÄ×î´óÖµ¡£
-//ÀıÈç£¬Èç¹ûÊäÈëÊı×é{ 2,3,4,2,6,2,5,1 }¼°»¬¶¯´°¿ÚµÄ´óĞ¡3,
-//ÄÇÃ´Ò»¹²´æÔÚ6¸ö»¬¶¯´°¿Ú£¬ËüÃÇµÄ×î´óÖµ·Ö±ğÎª{ 4,4,6,6,6,5 }
+//é¢è¯•é¢˜59ï¼šé˜Ÿåˆ—çš„æœ€å¤§å€¼
+//æ»‘åŠ¨çª—å£çš„æœ€å¤§å€¼
+//ç»™å®šä¸€ä¸ªæ•°ç»„å’Œæ»‘åŠ¨çª—å£çš„å¤§å°ï¼Œè¯·æ‰¾å‡ºæ‰€æœ‰æ»‘åŠ¨çª—å£é‡Œçš„æœ€å¤§å€¼ã€‚
+//ä¾‹å¦‚ï¼Œå¦‚æœè¾“å…¥æ•°ç»„{ 2,3,4,2,6,2,5,1 }åŠæ»‘åŠ¨çª—å£çš„å¤§å°3,
+//é‚£ä¹ˆä¸€å…±å­˜åœ¨6ä¸ªæ»‘åŠ¨çª—å£ï¼Œå®ƒä»¬çš„æœ€å¤§å€¼åˆ†åˆ«ä¸º{ 4,4,6,6,6,5 }
 #if 0
 #include <iostream>
 #include <queue>
@@ -8407,8 +8407,8 @@ int main()
     return 0;
 }
 
-//½â·¨Ò»£º
-//Ê¹ÓÃpriority_queueÈİÆ÷
+//è§£æ³•ä¸€ï¼š
+//ä½¿ç”¨priority_queueå®¹å™¨
 #if 0
 void TheMaxNumInSlidingWindow(int* data, int dataLength, int WindowLength)
 {
@@ -8426,22 +8426,22 @@ void TheMaxNumInSlidingWindow(int* data, int dataLength, int WindowLength)
     /*
     while (i != dataLength)
     {
-        pq.;//ÓÅÏÈ¶ÓÁĞÎŞ·¨½«×îÏÈÍÆÈë¶ÓÁĞµÄÔªËØµ¯³ö£¬
-        //Ò»·½ÃæÊÇÃ»ÓĞ¸Ã¹¦ÄÜµÄ·½·¨£¬ÁíÒ»·½ÃæÊÇÊı¾İÒÑ¾­ÅÅºÃĞòÁË
+        pq.;//ä¼˜å…ˆé˜Ÿåˆ—æ— æ³•å°†æœ€å…ˆæ¨å…¥é˜Ÿåˆ—çš„å…ƒç´ å¼¹å‡ºï¼Œ
+        //ä¸€æ–¹é¢æ˜¯æ²¡æœ‰è¯¥åŠŸèƒ½çš„æ–¹æ³•ï¼Œå¦ä¸€æ–¹é¢æ˜¯æ•°æ®å·²ç»æ’å¥½åºäº†
         pq.push(data[i++]);
 
         cout << pq.top() << ", ";
     }
     */
 
-    //¸ÃÄÑµãµÄ½â¾ö·½·¨£º
-    //×ª»»Ë¼Â·£¬Ã»ÓĞ±ØÒª¶¨Î»»¬¶¯´°¿Ú×î×ó²àµÄÔªËØÎ»ÖÃ²¢½«¸ÃÔªËØ
-    //ÔÚÃ¿´Î´°¿Ú»¬¶¯Ê±É¾È¥¡£
-    //ÕæÕıÓ°ÏìÊä³öµÄÊÇÓÅÏÈ¶ÓÁĞµÄ¶ÓÊ×ÔªËØ£¬µ±·¢Éú´°¿Ú»¬¶¯Ê±£¬
-    //ÒªÅĞ¶Ï¶ÓÊ×ÔªËØµÄÔÚÔ­Êı×éÖĞµÄË÷ÒıÖµÊÇ·ñÔÚ´°¿ÚÍâ£¬Èç¹ûÊÇ£¬
-    //¾ÍÉ¾È¥Õâ¸ö×î´óµÄÔªËØ¼´¿É¡£
-    //Òò´Ë£¬ÓÅÏÈ¶ÓÁĞµÄÃ¿¸öÔªËØÊÇ¸ö½á¹¹Ìå£¨»òpair¶ÔÏó£©£¬
-    //°üº¬ÔªËØÖµºÍ¸ÃÔªËØµÄË÷ÒıÖµ
+    //è¯¥éš¾ç‚¹çš„è§£å†³æ–¹æ³•ï¼š
+    //è½¬æ¢æ€è·¯ï¼Œæ²¡æœ‰å¿…è¦å®šä½æ»‘åŠ¨çª—å£æœ€å·¦ä¾§çš„å…ƒç´ ä½ç½®å¹¶å°†è¯¥å…ƒç´ 
+    //åœ¨æ¯æ¬¡çª—å£æ»‘åŠ¨æ—¶åˆ å»ã€‚
+    //çœŸæ­£å½±å“è¾“å‡ºçš„æ˜¯ä¼˜å…ˆé˜Ÿåˆ—çš„é˜Ÿé¦–å…ƒç´ ï¼Œå½“å‘ç”Ÿçª—å£æ»‘åŠ¨æ—¶ï¼Œ
+    //è¦åˆ¤æ–­é˜Ÿé¦–å…ƒç´ çš„åœ¨åŸæ•°ç»„ä¸­çš„ç´¢å¼•å€¼æ˜¯å¦åœ¨çª—å£å¤–ï¼Œå¦‚æœæ˜¯ï¼Œ
+    //å°±åˆ å»è¿™ä¸ªæœ€å¤§çš„å…ƒç´ å³å¯ã€‚
+    //å› æ­¤ï¼Œä¼˜å…ˆé˜Ÿåˆ—çš„æ¯ä¸ªå…ƒç´ æ˜¯ä¸ªç»“æ„ä½“ï¼ˆæˆ–pairå¯¹è±¡ï¼‰ï¼Œ
+    //åŒ…å«å…ƒç´ å€¼å’Œè¯¥å…ƒç´ çš„ç´¢å¼•å€¼
 
     priority_queue<pair<int,int>> pq;
 
@@ -8449,9 +8449,9 @@ void TheMaxNumInSlidingWindow(int* data, int dataLength, int WindowLength)
     for ( i = 0; i < WindowLength; ++i)
         pq.emplace(data[i],i);
 
-    //***×¢***
-    //push() ½«ÒÑ¹¹Ôì¶ÔÏóµÄ¸±±¾×÷Îª²ÎÊıÌí¼Óµ½¶ÓÁĞÖĞ£¬Ëü²ÉÓÃ¶ÓÁĞÔªËØÀàĞÍµÄ¶ÔÏó¡£
-    //emplace() ÔÚ¶ÓÁĞÄ©Î²¾ÍµØ¹¹ÔìÒ»¸öĞÂ¶ÔÏó¡£Ëü½«¶ÓÁĞµÄÔªËØÀàĞÍ¹¹Ôìº¯ÊıËù²ÉÓÃµÄ²ÎÊı×÷Îª²ÎÊı¡£
+    //***æ³¨***
+    //push() å°†å·²æ„é€ å¯¹è±¡çš„å‰¯æœ¬ä½œä¸ºå‚æ•°æ·»åŠ åˆ°é˜Ÿåˆ—ä¸­ï¼Œå®ƒé‡‡ç”¨é˜Ÿåˆ—å…ƒç´ ç±»å‹çš„å¯¹è±¡ã€‚
+    //emplace() åœ¨é˜Ÿåˆ—æœ«å°¾å°±åœ°æ„é€ ä¸€ä¸ªæ–°å¯¹è±¡ã€‚å®ƒå°†é˜Ÿåˆ—çš„å…ƒç´ ç±»å‹æ„é€ å‡½æ•°æ‰€é‡‡ç”¨çš„å‚æ•°ä½œä¸ºå‚æ•°ã€‚
 
     cout << pq.top().first<<", ";
 
@@ -8459,10 +8459,10 @@ void TheMaxNumInSlidingWindow(int* data, int dataLength, int WindowLength)
     {
         pq.emplace(data[i], i);
 
-        //***×¢***
-        //ÅĞ¶Ïµ±Ç°´°¿ÚÖĞµÄ×î´óÖµ¶ÔÓ¦µÄË÷ÒıÖµÊÇ·ñ
-        //Î»ÓÚ´°¿Ú×î×ó²àµÄ×ó²à
-        //×¢ÒâÓÃµÄÊÇwhileÑ­»·
+        //***æ³¨***
+        //åˆ¤æ–­å½“å‰çª—å£ä¸­çš„æœ€å¤§å€¼å¯¹åº”çš„ç´¢å¼•å€¼æ˜¯å¦
+        //ä½äºçª—å£æœ€å·¦ä¾§çš„å·¦ä¾§
+        //æ³¨æ„ç”¨çš„æ˜¯whileå¾ªç¯
         while (pq.top().second <= i - WindowLength)
         {
             pq.pop();
@@ -8480,17 +8480,17 @@ void TheMaxNumInSlidingWindow(int* data, int dataLength, int WindowLength)
 }
 #endif
 
-//½â·¨¶ş£º
-//Ê¹ÓÃdequeÈİÆ÷
-//Ë³×Å·½·¨Ò»µÄË¼Â·¼ÌĞø½øĞĞÓÅ»¯¡£
-//ÓÉÓÚÎÒÃÇĞèÒªÇó³öµÄÊÇ»¬¶¯´°¿ÚµÄ×î´óÖµ£¬
-// Èç¹ûµ±Ç°µÄ»¬¶¯´°¿ÚÖĞÓĞÁ½¸öÏÂ±ê i ºÍ j£¬ÆäÖĞ i ÔÚ j µÄ×ó²à£¬
-// ²¢ÇÒ i ¶ÔÓ¦µÄÔªËØ²»´óÓÚ j ¶ÔÓ¦µÄÔªËØ£¬ÄÇÃ´»á·¢ÉúÊ²Ã´ÄØ£¿
-//µ±»¬¶¯´°¿ÚÏòÓÒÒÆ¶¯Ê±£¬Ö»Òª nums[i] »¹ÔÚ´°¿ÚÖĞ£¬ÄÇÃ´ nums[j] Ò»¶¨Ò²»¹ÔÚ´°¿ÚÖĞ£¬
-//ÕâÊÇ nums[i] ÔÚ nums[j] µÄ×ó²àËù±£Ö¤µÄ¡£
-//Òò´Ë£¬ÓÉÓÚ nums[j] µÄ´æÔÚ£¬nums[i] Ò»¶¨²»»áÊÇ»¬¶¯´°¿ÚÖĞµÄ×î´óÖµÁË£¬
-//ÎÒÃÇ¿ÉÒÔ½« nums[i] ÓÀ¾ÃµØÒÆ³ı
-//ÕâÑù¾ÍÄÜ±£Ö¤Ë«¶Ë¶ÓÁĞµÄÊ×ÔªËØÒ»Ö±ÊÇµ±Ç°´°¿Ú×´Ì¬ÏÂµÄ×î´óÖµ£¬¾Í²»ĞèÒªÓÅÏÈ¶ÓÁĞÁË
+//è§£æ³•äºŒï¼š
+//ä½¿ç”¨dequeå®¹å™¨
+//é¡ºç€æ–¹æ³•ä¸€çš„æ€è·¯ç»§ç»­è¿›è¡Œä¼˜åŒ–ã€‚
+//ç”±äºæˆ‘ä»¬éœ€è¦æ±‚å‡ºçš„æ˜¯æ»‘åŠ¨çª—å£çš„æœ€å¤§å€¼ï¼Œ
+// å¦‚æœå½“å‰çš„æ»‘åŠ¨çª—å£ä¸­æœ‰ä¸¤ä¸ªä¸‹æ ‡ i å’Œ jï¼Œå…¶ä¸­ i åœ¨ j çš„å·¦ä¾§ï¼Œ
+// å¹¶ä¸” i å¯¹åº”çš„å…ƒç´ ä¸å¤§äº j å¯¹åº”çš„å…ƒç´ ï¼Œé‚£ä¹ˆä¼šå‘ç”Ÿä»€ä¹ˆå‘¢ï¼Ÿ
+//å½“æ»‘åŠ¨çª—å£å‘å³ç§»åŠ¨æ—¶ï¼Œåªè¦ nums[i] è¿˜åœ¨çª—å£ä¸­ï¼Œé‚£ä¹ˆ nums[j] ä¸€å®šä¹Ÿè¿˜åœ¨çª—å£ä¸­ï¼Œ
+//è¿™æ˜¯ nums[i] åœ¨ nums[j] çš„å·¦ä¾§æ‰€ä¿è¯çš„ã€‚
+//å› æ­¤ï¼Œç”±äº nums[j] çš„å­˜åœ¨ï¼Œnums[i] ä¸€å®šä¸ä¼šæ˜¯æ»‘åŠ¨çª—å£ä¸­çš„æœ€å¤§å€¼äº†ï¼Œ
+//æˆ‘ä»¬å¯ä»¥å°† nums[i] æ°¸ä¹…åœ°ç§»é™¤
+//è¿™æ ·å°±èƒ½ä¿è¯åŒç«¯é˜Ÿåˆ—çš„é¦–å…ƒç´ ä¸€ç›´æ˜¯å½“å‰çª—å£çŠ¶æ€ä¸‹çš„æœ€å¤§å€¼ï¼Œå°±ä¸éœ€è¦ä¼˜å…ˆé˜Ÿåˆ—äº†
 void TheMaxNumInSlidingWindow(int* data, int dataLength, int WindowLength)
 {
     if (data == nullptr || WindowLength > dataLength || WindowLength <= 0)
@@ -8500,28 +8500,28 @@ void TheMaxNumInSlidingWindow(int* data, int dataLength, int WindowLength)
 
     for (int i = 0; i < WindowLength; ++i)
     {
-        //ÈôindexÖĞÓĞÊı¾İ£¬ÇÒµ±Ç°ÒªÍÆÈëµÄÔªËØÖµ´óÓÚµÈÓÚÉÏÒ»¸öÔªËØµÄÖµ
+        //è‹¥indexä¸­æœ‰æ•°æ®ï¼Œä¸”å½“å‰è¦æ¨å…¥çš„å…ƒç´ å€¼å¤§äºç­‰äºä¸Šä¸€ä¸ªå…ƒç´ çš„å€¼
         while (!index.empty() && data[i] >= data[index.back()])
-            index.pop_back();//indexÖĞ´æµÄÄ³Î²ÔªËØµ¯³ö£¬¼´´°¿ÚÖĞ×î´óÖµ²»¿ÉÄÜÊÇ¸ÃÖµ
+            index.pop_back();//indexä¸­å­˜çš„æŸå°¾å…ƒç´ å¼¹å‡ºï¼Œå³çª—å£ä¸­æœ€å¤§å€¼ä¸å¯èƒ½æ˜¯è¯¥å€¼
 
         index.push_back(i);
     }
-    //ÔÚ´°¿ÚÉú³Éºó£¬indexÖĞ´æµÄÊÇ¸Ã´°¿Ú·¶Î§ÄÚµÄ×î´óÖµ¶ÔÓ¦µÄË÷ÒıÖµ
+    //åœ¨çª—å£ç”Ÿæˆåï¼Œindexä¸­å­˜çš„æ˜¯è¯¥çª—å£èŒƒå›´å†…çš„æœ€å¤§å€¼å¯¹åº”çš„ç´¢å¼•å€¼
 
-    //´°¿Ú¿ªÊ¼»¬¶¯
+    //çª—å£å¼€å§‹æ»‘åŠ¨
     for (int i = WindowLength; i < dataLength; ++i)
     {
         cout << data[index.front()] << ", ";
 
-        //ÈôindexÖĞÓĞÊı¾İ£¬ÇÒµ±Ç°ÒªÍÆÈëµÄÔªËØÖµ´óÓÚµÈÓÚÉÏÒ»¸öÔªËØµÄÖµ
+        //è‹¥indexä¸­æœ‰æ•°æ®ï¼Œä¸”å½“å‰è¦æ¨å…¥çš„å…ƒç´ å€¼å¤§äºç­‰äºä¸Šä¸€ä¸ªå…ƒç´ çš„å€¼
         while (!index.empty() && data[i] >= data[index.back()])
-            index.pop_back();//indexÖĞ´æµÄÄ³Î²ÔªËØµ¯³ö£¬¼´´°¿ÚÖĞ×î´óÖµ²»¿ÉÄÜÊÇ¸ÃÖµ
+            index.pop_back();//indexä¸­å­˜çš„æŸå°¾å…ƒç´ å¼¹å‡ºï¼Œå³çª—å£ä¸­æœ€å¤§å€¼ä¸å¯èƒ½æ˜¯è¯¥å€¼
                 
-        //ÈôindexÖĞÓĞÊı¾İ£¬ÅĞ¶Ï×î´óÖµ¶ÔÓ¦µÄË÷ÒıÖµÊÇ·ñÔÚ´°¿Ú·¶Î§Íâ
+        //è‹¥indexä¸­æœ‰æ•°æ®ï¼Œåˆ¤æ–­æœ€å¤§å€¼å¯¹åº”çš„ç´¢å¼•å€¼æ˜¯å¦åœ¨çª—å£èŒƒå›´å¤–
         if (!index.empty() && index.front() <= i - WindowLength)
             index.pop_front();
 
-        //ÎŞÂÛindexÖĞÊÇ·ñÓĞÊı¾İ£¬»òµ±Ç°ÒªÍÆÈëµÄÔªËØÖµĞ¡ÓÚÉÏÒ»¸öÔªËØµÄÖµ
+        //æ— è®ºindexä¸­æ˜¯å¦æœ‰æ•°æ®ï¼Œæˆ–å½“å‰è¦æ¨å…¥çš„å…ƒç´ å€¼å°äºä¸Šä¸€ä¸ªå…ƒç´ çš„å€¼
         index.push_back(i);
     }
 
@@ -8532,10 +8532,10 @@ void TheMaxNumInSlidingWindow(int* data, int dataLength, int WindowLength)
 #endif
 
 
-//¶ÓÁĞµÄ×î´óÖµ
-//Çë¶¨ÒåÒ»¸ö¶ÓÁĞ²¢ÊµÏÖº¯ÊımaxµÃµ½¶ÓÁĞÀïµÄ×î´óÖµ£¬ÒªÇóº¯Êımax¡¢
-//push_backºÍpop_frontµÄÊ±¼ä¸´ÔÓ¶È¶¼ÊÇO(1)¡£
-//Ïàµ±ÓÚÒªÓÃdequeÊµÏÖpriority_queue
+//é˜Ÿåˆ—çš„æœ€å¤§å€¼
+//è¯·å®šä¹‰ä¸€ä¸ªé˜Ÿåˆ—å¹¶å®ç°å‡½æ•°maxå¾—åˆ°é˜Ÿåˆ—é‡Œçš„æœ€å¤§å€¼ï¼Œè¦æ±‚å‡½æ•°maxã€
+//push_backå’Œpop_frontçš„æ—¶é—´å¤æ‚åº¦éƒ½æ˜¯O(1)ã€‚
+//ç›¸å½“äºè¦ç”¨dequeå®ç°priority_queue
 #if 0
 #include <iostream>
 #include <deque>
@@ -8550,11 +8550,11 @@ private:
         int index;
     };
 
-    //***×¢1***
-    //ÒÔÏÂÎª´íÎóĞ´·¨
+    //***æ³¨1***
+    //ä»¥ä¸‹ä¸ºé”™è¯¯å†™æ³•
     //using std::deque;
     //using namespace std;
-    //Ò»°ãÀàÄÚÊ¹ÓÃusing¶¼ÊÇÎªÁËÈÃÅÉÉúÀà²»ÕÚÑÚ(²»Òş²Ø)»ùÀàµÄÍ¬Ãû·½·¨
+    //ä¸€èˆ¬ç±»å†…ä½¿ç”¨usingéƒ½æ˜¯ä¸ºäº†è®©æ´¾ç”Ÿç±»ä¸é®æ©(ä¸éšè—)åŸºç±»çš„åŒåæ–¹æ³•
 
     std::deque<DataProperty> data;
     std::deque<DataProperty> MaxIsTheTopElement;
@@ -8575,15 +8575,15 @@ QueueWithMax<T>::QueueWithMax() :CurrentIndex(0)
 template <typename T>
 void QueueWithMax<T>::push_back(T num)
 {
-    //ÈôMaxIsTheTopElementÖĞÓĞÊı¾İ£¬ÇÒµ±Ç°ÒªÍÆÈëµÄÔªËØÖµ´óÓÚµÈÓÚÉÏÒ»¸öÔªËØµÄÖµ
+    //è‹¥MaxIsTheTopElementä¸­æœ‰æ•°æ®ï¼Œä¸”å½“å‰è¦æ¨å…¥çš„å…ƒç´ å€¼å¤§äºç­‰äºä¸Šä¸€ä¸ªå…ƒç´ çš„å€¼
     while (!MaxIsTheTopElement.empty() && num >= MaxIsTheTopElement.back().number )
-        MaxIsTheTopElement.pop_back();//MaxIsTheTopElement´æµÄÄ©Î²ÔªËØµ¯³ö£¬
-    //¼´´°¿ÚÖĞ×î´óÖµ²»¿ÉÄÜÊÇ¸ÃÖµ
+        MaxIsTheTopElement.pop_back();//MaxIsTheTopElementå­˜çš„æœ«å°¾å…ƒç´ å¼¹å‡ºï¼Œ
+    //å³çª—å£ä¸­æœ€å¤§å€¼ä¸å¯èƒ½æ˜¯è¯¥å€¼
 
-    //***×¢2***
-    //´íÎóĞ´·¨
+    //***æ³¨2***
+    //é”™è¯¯å†™æ³•
     //MaxIsTheTopElement.emplace(num,CurrentIndex);
-    //Ô­Òò£ºemplace()·½·¨ĞèÒªÓÃµ½Ä³ÔªËØÀàĞÍµÄ¹¹Ôìº¯Êı£¬¶ø½á¹¹ÌåÃ»ÓĞ¹¹Ôìº¯Êı¿ÉÓÃ
+    //åŸå› ï¼šemplace()æ–¹æ³•éœ€è¦ç”¨åˆ°æŸå…ƒç´ ç±»å‹çš„æ„é€ å‡½æ•°ï¼Œè€Œç»“æ„ä½“æ²¡æœ‰æ„é€ å‡½æ•°å¯ç”¨
 
     DataProperty tmp = {num,CurrentIndex};
 
@@ -8599,18 +8599,18 @@ void QueueWithMax<T>::pop_front()
     if (MaxIsTheTopElement.empty() || data.empty())
         throw std::exception("Empty Container!\n");
 
-    //MaxIsTheTopElementÈİÆ÷µÄÔªËØµ¯³ö£¬¿¼ÂÇÉÏÒ»ÌâµÄºÍ»¬¶¯´°¿ÚµÄ×ó²à±ß½ç±È½Ï
-    //ÔÚ´Ë´¦ÓÉÓÚÓĞÒ»¸ödataÈİÆ÷£¬Òò´ËÖ»ÒªÅĞ¶Ïµ¯³öµÄÊÇ·ñÊÇºÍdataÈİÆ÷µ¯³öµÄÔªËØÏàÍ¬¼´¿É
+    //MaxIsTheTopElementå®¹å™¨çš„å…ƒç´ å¼¹å‡ºï¼Œè€ƒè™‘ä¸Šä¸€é¢˜çš„å’Œæ»‘åŠ¨çª—å£çš„å·¦ä¾§è¾¹ç•Œæ¯”è¾ƒ
+    //åœ¨æ­¤å¤„ç”±äºæœ‰ä¸€ä¸ªdataå®¹å™¨ï¼Œå› æ­¤åªè¦åˆ¤æ–­å¼¹å‡ºçš„æ˜¯å¦æ˜¯å’Œdataå®¹å™¨å¼¹å‡ºçš„å…ƒç´ ç›¸åŒå³å¯
     if (MaxIsTheTopElement.front().index == data.front().index)
         MaxIsTheTopElement.pop_front();
 
     data.pop_front();
 
-    //***×¢3***
-    //´Ë´¦CurrentIndexÖµ²»ÓÃµİ¼õ
-    //ÒòÎª¸Ã±äÁ¿ÊÇÓÃÓÚÅĞ¶ÏdataÈİÆ÷Òªµ¯³öµÄÔªËØºÍMaxIsTheTopElementÈİÆ÷Òªµ¯³öµÄÔªËØ
-    //ÊÇ·ñÓĞÏàÍ¬µÄCurrentIndexÖµ×öÎªÅĞ¶Ïµ¯³öµÄÔªËØÊÇ·ñÏàÍ¬£¬ÈôCurrentIndexµİ¼õÁË
-    //»áÔì³ÉMaxIsTheTopElementÖĞµÄÖµ´íÎóµ¯³öµÄÇé¿ö
+    //***æ³¨3***
+    //æ­¤å¤„CurrentIndexå€¼ä¸ç”¨é€’å‡
+    //å› ä¸ºè¯¥å˜é‡æ˜¯ç”¨äºåˆ¤æ–­dataå®¹å™¨è¦å¼¹å‡ºçš„å…ƒç´ å’ŒMaxIsTheTopElementå®¹å™¨è¦å¼¹å‡ºçš„å…ƒç´ 
+    //æ˜¯å¦æœ‰ç›¸åŒçš„CurrentIndexå€¼åšä¸ºåˆ¤æ–­å¼¹å‡ºçš„å…ƒç´ æ˜¯å¦ç›¸åŒï¼Œè‹¥CurrentIndexé€’å‡äº†
+    //ä¼šé€ æˆMaxIsTheTopElementä¸­çš„å€¼é”™è¯¯å¼¹å‡ºçš„æƒ…å†µ
 }
 
 template <typename T>
@@ -8648,9 +8648,9 @@ int main()
 #endif
 
 
-//ÃæÊÔÌâ60£ºn¸ö÷»×ÓµÄµãÊı
-//°Ñn¸ö÷»×ÓÈÓÔÚµØÉÏ£¬ËùÓĞ÷»×Ó³¯ÉÏÒ»ÃæµÄµãÊıÖ®ºÍÎªs¡£
-//ÊäÈën, ´òÓ¡³ösµÄËùÓĞ¿ÉÄÜµÄÖµ³öÏÖµÄ¸ÅÂÊ¡£
+//é¢è¯•é¢˜60ï¼šnä¸ªéª°å­çš„ç‚¹æ•°
+//æŠŠnä¸ªéª°å­æ‰”åœ¨åœ°ä¸Šï¼Œæ‰€æœ‰éª°å­æœä¸Šä¸€é¢çš„ç‚¹æ•°ä¹‹å’Œä¸ºsã€‚
+//è¾“å…¥n, æ‰“å°å‡ºsçš„æ‰€æœ‰å¯èƒ½çš„å€¼å‡ºç°çš„æ¦‚ç‡ã€‚
 #if 0
 #include <iostream>
 #include <memory>
@@ -8658,7 +8658,7 @@ int main()
 #include <algorithm>
 using namespace std;
 
-//¹æ¶¨Ò»¸ö÷»×ÓÄÜµÃµ½µÄ×î´óÖµ
+//è§„å®šä¸€ä¸ªéª°å­èƒ½å¾—åˆ°çš„æœ€å¤§å€¼
 const int g_maxValue = 6;
 
 void PrintProbability(int number);
@@ -8670,7 +8670,7 @@ void PrintProbability_Solution3(int number);
 
 int main()
 {
-    //n¸ö÷»×Ó£¬ÇóÄÜµÃµ½µÄËùÓĞ¿ÉÄÜµÄÖµµÄ¸ÅÂÊ
+    //nä¸ªéª°å­ï¼Œæ±‚èƒ½å¾—åˆ°çš„æ‰€æœ‰å¯èƒ½çš„å€¼çš„æ¦‚ç‡
     int  n= 3;
 
     PrintProbability(n);
@@ -8686,16 +8686,16 @@ void PrintProbability(int number)
     if (number < 1)
         return;
 
-    //´´½¨maxSum´æÍ¶ÖÀ number ´Î÷»×Ó¿ÉÄÜ»ñµÃµÄ×î´ó×ÜºÍ
+    //åˆ›å»ºmaxSumå­˜æŠ•æ· number æ¬¡éª°å­å¯èƒ½è·å¾—çš„æœ€å¤§æ€»å’Œ
     int maxSum = number * g_maxValue;
 
-    //ÓÃÖÇÄÜÖ¸Õë¹ÜÀí¶¯Ì¬·ÖÅäµÄÄÚ´æ£¬
-    //´æ´¢¿ÉÄÜ³öÏÖµÄ²»Í¬×ÜºÍµÄ¼ÆÊı¡£
+    //ç”¨æ™ºèƒ½æŒ‡é’ˆç®¡ç†åŠ¨æ€åˆ†é…çš„å†…å­˜ï¼Œ
+    //å­˜å‚¨å¯èƒ½å‡ºç°çš„ä¸åŒæ€»å’Œçš„è®¡æ•°ã€‚
     unique_ptr< int[] > pProbabilities(new int [maxSum - number + 1] {0});
-    //¼ÙÉènÎª2£¬ÄÇÃ´ÊıÖµ·¶Î§Îª2~12£¬ĞèÒª11¸ö´æ´¢Î»ÖÃ
+    //å‡è®¾nä¸º2ï¼Œé‚£ä¹ˆæ•°å€¼èŒƒå›´ä¸º2~12ï¼Œéœ€è¦11ä¸ªå­˜å‚¨ä½ç½®
 
-    //***×¢***
-    //Ê¹ÓÃÁËC++11µÄÒ»ÖÂĞÔ³õÊ¼»¯(Uniform Initialization)
+    //***æ³¨***
+    //ä½¿ç”¨äº†C++11çš„ä¸€è‡´æ€§åˆå§‹åŒ–(Uniform Initialization)
 
     Probability(number,pProbabilities);
 
@@ -8713,24 +8713,24 @@ void PrintProbability(int number)
 
 void Probability(int num, unique_ptr< int[] >& pPro)
 {
-    //°Ñn¸ö÷»×Ó·ÖÎªÁ½¶Ñ£¬µÚÒ»¶ÑÖ»ÓĞÒ»¸ö£¬ÁíÒ»¶ÑÓĞn-1¸ö
-    //¶ÔÓÚµÚÒ»¶Ñ£º
-    //±éÀúÃ¿¸ö¿ÉÄÜµÄ÷»×ÓÃæµÄÖµ£¬´Ó 1 µ½ g_maxValue¡£
+    //æŠŠnä¸ªéª°å­åˆ†ä¸ºä¸¤å †ï¼Œç¬¬ä¸€å †åªæœ‰ä¸€ä¸ªï¼Œå¦ä¸€å †æœ‰n-1ä¸ª
+    //å¯¹äºç¬¬ä¸€å †ï¼š
+    //éå†æ¯ä¸ªå¯èƒ½çš„éª°å­é¢çš„å€¼ï¼Œä» 1 åˆ° g_maxValueã€‚
     for (int i = 1; i <= g_maxValue; ++i)
         Probability(num, num, i, pPro);
 }
 
-//¶ÔÓÚÊ£ÏÂµÄÁíÒ»¶Ñ¼´n-1¸ö÷»×Ó
-//ÈÔÈ»·Ö³ÉÁ½¶Ñ£¬µÚÒ»¶ÑÖ»ÓĞÒ»¸ö£»µÚ¶ş¶ÑÓĞn-2¸ö¡£ÎÒÃÇ°ÑÉÏÒ»ÂÖÄÇ¸öµ¥¶À÷»×ÓµÄ
-//µãÊıºÍÕâÒ»ÂÖµ¥¶À÷»×ÓµÄµãÊıÏà¼Ó£¬ÔÙºÍÊ£ÏÂµÄn - 2¸ö÷»×ÓÀ´¼ÆËãµãÊıºÍ¡£
+//å¯¹äºå‰©ä¸‹çš„å¦ä¸€å †å³n-1ä¸ªéª°å­
+//ä»ç„¶åˆ†æˆä¸¤å †ï¼Œç¬¬ä¸€å †åªæœ‰ä¸€ä¸ªï¼›ç¬¬äºŒå †æœ‰n-2ä¸ªã€‚æˆ‘ä»¬æŠŠä¸Šä¸€è½®é‚£ä¸ªå•ç‹¬éª°å­çš„
+//ç‚¹æ•°å’Œè¿™ä¸€è½®å•ç‹¬éª°å­çš„ç‚¹æ•°ç›¸åŠ ï¼Œå†å’Œå‰©ä¸‹çš„n - 2ä¸ªéª°å­æ¥è®¡ç®—ç‚¹æ•°å’Œã€‚
 void Probability(int original, int current, int sum, unique_ptr< int[] >& pProbabilities)
 {
-    //***Àí½â***
-    // original ±íÊ¾×î³õµÄÍ¶ÖÀ´ÎÊı£¬current ±íÊ¾µ±Ç°Ê£ÓàµÄÍ¶ÖÀ´ÎÊı£¬sum ±íÊ¾µ±Ç°ÀÛ»ıµÄ×ÜºÍ¡£
-    // Èç¹ûµ±Ç°Ê£ÓàµÄÍ¶ÖÀ´ÎÊı current µÈÓÚ 1£¬Ôò½«µ±Ç°ÀÛ»ıµÄ×ÜºÍ sum - original ×÷ÎªË÷Òı£¬
-    // ÔÚ pProbabilities Êı×éÖĞÏàÓ¦Î»ÖÃµÄ´ÎÊı¼Ó 1¡£
-	// Èç¹ûµ±Ç°µÄÍ¶ÖÀ´ÎÊı current ´óÓÚ 1£¬ÔòÊ¹ÓÃÑ­»·µİ¹éµ÷ÓÃ×ÔÉí£¬
-    // Ã¿´Îµİ¹é½«µ±Ç°µÄÍ¶ÖÀ´ÎÊı¼õ 1£¬ÀÛ»ıµÄ×ÜºÍÔö¼Óµ±Ç°÷»×ÓÃæµÄÖµ i
+    //***ç†è§£***
+    // original è¡¨ç¤ºæœ€åˆçš„æŠ•æ·æ¬¡æ•°ï¼Œcurrent è¡¨ç¤ºå½“å‰å‰©ä½™çš„æŠ•æ·æ¬¡æ•°ï¼Œsum è¡¨ç¤ºå½“å‰ç´¯ç§¯çš„æ€»å’Œã€‚
+    // å¦‚æœå½“å‰å‰©ä½™çš„æŠ•æ·æ¬¡æ•° current ç­‰äº 1ï¼Œåˆ™å°†å½“å‰ç´¯ç§¯çš„æ€»å’Œ sum - original ä½œä¸ºç´¢å¼•ï¼Œ
+    // åœ¨ pProbabilities æ•°ç»„ä¸­ç›¸åº”ä½ç½®çš„æ¬¡æ•°åŠ  1ã€‚
+	// å¦‚æœå½“å‰çš„æŠ•æ·æ¬¡æ•° current å¤§äº 1ï¼Œåˆ™ä½¿ç”¨å¾ªç¯é€’å½’è°ƒç”¨è‡ªèº«ï¼Œ
+    // æ¯æ¬¡é€’å½’å°†å½“å‰çš„æŠ•æ·æ¬¡æ•°å‡ 1ï¼Œç´¯ç§¯çš„æ€»å’Œå¢åŠ å½“å‰éª°å­é¢çš„å€¼ i
     if (current == 1)
     {
         pProbabilities[sum - original]++;
@@ -8744,17 +8744,17 @@ void Probability(int original, int current, int sum, unique_ptr< int[] >& pProba
     }
 }
 
-//·¨¶ş£º
+//æ³•äºŒï¼š
 #if 1
 void PrintProbability_Solution2(int number)
 {
     if (number < 1)
         return;
 
-    //Ê¹ÓÃÒ»¸ö¶şÎ¬Êı×é pProbabilities ,
-    //ÆäÖĞµÄÒ»Î¬Êı×é´æ´¢÷»×ÓÍ¶ÖÀºóÃ¿¸öºÍÖµ³öÏÖµÄ´ÎÊı
-    //ÁíÒ»¸öÒ»Î¬Êı×éÓÃÓÚ¸¨Öú´æ´¢Öµ
-    //¶øÇÒÁ½¸öÒ»Î¬Êı×é½»Ìæ³ÉÎª¸¨ÖúÊı×é
+    //ä½¿ç”¨ä¸€ä¸ªäºŒç»´æ•°ç»„ pProbabilities ,
+    //å…¶ä¸­çš„ä¸€ç»´æ•°ç»„å­˜å‚¨éª°å­æŠ•æ·åæ¯ä¸ªå’Œå€¼å‡ºç°çš„æ¬¡æ•°
+    //å¦ä¸€ä¸ªä¸€ç»´æ•°ç»„ç”¨äºè¾…åŠ©å­˜å‚¨å€¼
+    //è€Œä¸”ä¸¤ä¸ªä¸€ç»´æ•°ç»„äº¤æ›¿æˆä¸ºè¾…åŠ©æ•°ç»„
     int* pProbabilities[2];
     pProbabilities[0] = new int[g_maxValue * number + 1];
     pProbabilities[1] = new int[g_maxValue * number + 1];
@@ -8765,41 +8765,41 @@ void PrintProbability_Solution2(int number)
         pProbabilities[1][i] = 0;
     }
 
-    //Ê¹ÓÃ flag ±äÁ¿½øĞĞ½»ÌæµÄ±ê¼Ç£¬ÓÃÓÚ±êÊ¶µ±Ç°ÕıÔÚ¸üĞÂµÄÊı×éĞĞ¡£
-    //Ò»¿ªÊ¼ÊÇpProbabilities[0]Êı×éÓÃ×÷¸¨ÖúÊı×é
+    //ä½¿ç”¨ flag å˜é‡è¿›è¡Œäº¤æ›¿çš„æ ‡è®°ï¼Œç”¨äºæ ‡è¯†å½“å‰æ­£åœ¨æ›´æ–°çš„æ•°ç»„è¡Œã€‚
+    //ä¸€å¼€å§‹æ˜¯pProbabilities[0]æ•°ç»„ç”¨ä½œè¾…åŠ©æ•°ç»„
     int flag = 0;
     for (int i = 1; i <= g_maxValue; ++i)
         pProbabilities[flag][i] = 1;
 
-    //Ê¹ÓÃ¶¯Ì¬¹æ»®µÄË¼Ïë£¬Í¨¹ıÑ­»·¼ÆËãÃ¿¸öÍ¶ÖÀ´ÎÊıÏÂ¸÷¸öºÍÖµ³öÏÖµÄ´ÎÊı¡£
-    //Íâ²ãÑ­»· k ±íÊ¾µ±Ç°Í¶ÖÀµÄ´ÎÊı£¬ÄÚ²ãÑ­»·ÓÃÓÚ¼ÆËã³öÏÖµÄ´ÎÊı¡£
+    //ä½¿ç”¨åŠ¨æ€è§„åˆ’çš„æ€æƒ³ï¼Œé€šè¿‡å¾ªç¯è®¡ç®—æ¯ä¸ªæŠ•æ·æ¬¡æ•°ä¸‹å„ä¸ªå’Œå€¼å‡ºç°çš„æ¬¡æ•°ã€‚
+    //å¤–å±‚å¾ªç¯ k è¡¨ç¤ºå½“å‰æŠ•æ·çš„æ¬¡æ•°ï¼Œå†…å±‚å¾ªç¯ç”¨äºè®¡ç®—å‡ºç°çš„æ¬¡æ•°ã€‚
     for (int k = 2; k <= number; ++k)
     {
-        //ÔÚ¼ÆËãµ±Ç°Í¶ÖÀ´ÎÊıÏÂ¸÷¸öºÍÖµ³öÏÖµÄ´ÎÊıÊ±£¬
-        //Ê×ÏÈ½«ĞÂµÄÊı×éĞĞÖĞĞ¡ÓÚ´ÎÊı k µÄÎ»ÖÃµÄ´ÎÊıÖÃÎª 0¡£
-        //ÕâĞ©Î»ÖÃµÄÔªËØÒª½øĞĞ¸üĞÂ
+        //åœ¨è®¡ç®—å½“å‰æŠ•æ·æ¬¡æ•°ä¸‹å„ä¸ªå’Œå€¼å‡ºç°çš„æ¬¡æ•°æ—¶ï¼Œ
+        //é¦–å…ˆå°†æ–°çš„æ•°ç»„è¡Œä¸­å°äºæ¬¡æ•° k çš„ä½ç½®çš„æ¬¡æ•°ç½®ä¸º 0ã€‚
+        //è¿™äº›ä½ç½®çš„å…ƒç´ è¦è¿›è¡Œæ›´æ–°
         for (int i = 0; i < k; ++i)
             pProbabilities[1 - flag][i] = 0;
-        //***×¢***
-        //1-flagÓÃÓÚ½»Ìæ½«Ä³¸öÒ»Î¬Êı×éÄÚÈİÖÃÎª0
+        //***æ³¨***
+        //1-flagç”¨äºäº¤æ›¿å°†æŸä¸ªä¸€ç»´æ•°ç»„å†…å®¹ç½®ä¸º0
 
-        // Ã¿´ÎÍ¶ÖÀµÄ÷»×ÓÃæµÄÖµ¶¼ÔÚ 1 µ½ g_maxValue Ö®¼ä£¬
-        // ËùÒÔ i ±íÊ¾¿ÉÄÜµÄ×ÜºÍÖµµÄ·¶Î§ÊÇ´Ó k£¨×îĞ¡¿ÉÄÜµÄºÍÖµ£¬¼´Ã¿´Î¶¼Í¶ÖÀµ½ 1 µÄÇé¿öÏÂµÄºÍÖµ£©
-        // µ½ g_maxValue * k£¨Ã¿´Î¶¼Í¶ÖÀµ½ g_maxValue µÄÇé¿öÏÂµÄ×î´óºÍÖµ£©¡£
+        // æ¯æ¬¡æŠ•æ·çš„éª°å­é¢çš„å€¼éƒ½åœ¨ 1 åˆ° g_maxValue ä¹‹é—´ï¼Œ
+        // æ‰€ä»¥ i è¡¨ç¤ºå¯èƒ½çš„æ€»å’Œå€¼çš„èŒƒå›´æ˜¯ä» kï¼ˆæœ€å°å¯èƒ½çš„å’Œå€¼ï¼Œå³æ¯æ¬¡éƒ½æŠ•æ·åˆ° 1 çš„æƒ…å†µä¸‹çš„å’Œå€¼ï¼‰
+        // åˆ° g_maxValue * kï¼ˆæ¯æ¬¡éƒ½æŠ•æ·åˆ° g_maxValue çš„æƒ…å†µä¸‹çš„æœ€å¤§å’Œå€¼ï¼‰ã€‚
         
-        // ÔÚ·¶Î§Îª k µ½ g_maxValue * k Ö®¼äµÄÎ»ÖÃÉÏ£¬
-        // ¼ÆËãÃ¿¸öºÍÖµ³öÏÖµÄ´ÎÊı¡£
-        // ÕâÊÇÍ¨¹ı±éÀúÇ°Ò»¸öÊı×éĞĞÖĞµÄºÍÖµ£¬
-        // ÔÚµ±Ç°ºÍÖµµÄÎ»ÖÃÉÏÀÛ¼Ó¿ÉÄÜµÄ÷»×ÓÃæµÄÖµËùµÃµ½µÄ´ÎÊıÀ´ÊµÏÖµÄ
+        // åœ¨èŒƒå›´ä¸º k åˆ° g_maxValue * k ä¹‹é—´çš„ä½ç½®ä¸Šï¼Œ
+        // è®¡ç®—æ¯ä¸ªå’Œå€¼å‡ºç°çš„æ¬¡æ•°ã€‚
+        // è¿™æ˜¯é€šè¿‡éå†å‰ä¸€ä¸ªæ•°ç»„è¡Œä¸­çš„å’Œå€¼ï¼Œ
+        // åœ¨å½“å‰å’Œå€¼çš„ä½ç½®ä¸Šç´¯åŠ å¯èƒ½çš„éª°å­é¢çš„å€¼æ‰€å¾—åˆ°çš„æ¬¡æ•°æ¥å®ç°çš„
         for (int i = k; i <= g_maxValue * k; ++i)
         {
             pProbabilities[1 - flag][i] = 0;
 
-            // ĞÂµÄÊı×éĞĞÖĞ
-            // j ±íÊ¾µ±Ç°Í¶ÖÀµÄ÷»×ÓµÄµãÊı£¬
-            // ´Ó 1 ¿ªÊ¼µİÔö£¬Ö±µ½µ±Ç°ºÍÖµ i »ò÷»×ÓµÄÃæÊı g_maxValue ½ÏĞ¡µÄÄÇ¸öÖµ¡£
-            // ÕâÊÇÒòÎªµ±Í¶ÖÀµÄ÷»×ÓÃæµÄÖµ´óÓÚµ±Ç°µÄºÍÖµ i »òÕß³¬¹ıÁË÷»×ÓµÄÃæÊı g_maxValue Ê±£¬
-            // ¾Í²»ĞèÒª¿¼ÂÇÕâ¸öÖµ£¬ÒòÎªËü²»»á¶Ôµ±Ç°ºÍÖµ²úÉúÓ°Ïì¡£
+            // æ–°çš„æ•°ç»„è¡Œä¸­
+            // j è¡¨ç¤ºå½“å‰æŠ•æ·çš„éª°å­çš„ç‚¹æ•°ï¼Œ
+            // ä» 1 å¼€å§‹é€’å¢ï¼Œç›´åˆ°å½“å‰å’Œå€¼ i æˆ–éª°å­çš„é¢æ•° g_maxValue è¾ƒå°çš„é‚£ä¸ªå€¼ã€‚
+            // è¿™æ˜¯å› ä¸ºå½“æŠ•æ·çš„éª°å­é¢çš„å€¼å¤§äºå½“å‰çš„å’Œå€¼ i æˆ–è€…è¶…è¿‡äº†éª°å­çš„é¢æ•° g_maxValue æ—¶ï¼Œ
+            // å°±ä¸éœ€è¦è€ƒè™‘è¿™ä¸ªå€¼ï¼Œå› ä¸ºå®ƒä¸ä¼šå¯¹å½“å‰å’Œå€¼äº§ç”Ÿå½±å“ã€‚
             for (int j = 1;  j <= i && j <= g_maxValue;  ++j)
                 pProbabilities[1 - flag][i] += pProbabilities[flag][i - j];
         }
@@ -8821,64 +8821,64 @@ void PrintProbability_Solution2(int number)
 }
 #endif
 
-//·¨Èı£º
-//²Î¿¼https://cloud.tencent.com/developer/article/1947235
+//æ³•ä¸‰ï¼š
+//å‚è€ƒhttps://cloud.tencent.com/developer/article/1947235
 void PrintProbability_Solution3(int number)
 {
-    //ÒòÎª×îºóµÄ½á¹ûÖ»ÓëÇ°Ò»¸ö¶¯Ì¬×ªÒÆÊı×éÓĞ¹Ø£¬ËùÒÔÕâÀïÖ»ĞèÒªÉèÖÃÒ»¸öÒ»Î¬µÄ¶¯Ì¬×ªÒÆÊı×é
-    //Ô­±¾dp[i][j]±íÊ¾µÄÊÇÇ°i¸ö÷»×ÓµÄµãÊıÖ®ºÍÎªjµÄ¸ÅÂÊ£¬ÏÖÔÚÖ»ĞèÒª×îºóµÄ×´Ì¬µÄÊı×é£¬
-    //ËùÒÔ¾ÍÖ»ÓÃÒ»¸öÒ»Î¬Êı×édp[j]±íÊ¾n¸ö÷»×ÓÏÂÃ¿¸ö½á¹ûµÄ¸ÅÂÊ¡£
+    //å› ä¸ºæœ€åçš„ç»“æœåªä¸å‰ä¸€ä¸ªåŠ¨æ€è½¬ç§»æ•°ç»„æœ‰å…³ï¼Œæ‰€ä»¥è¿™é‡Œåªéœ€è¦è®¾ç½®ä¸€ä¸ªä¸€ç»´çš„åŠ¨æ€è½¬ç§»æ•°ç»„
+    //åŸæœ¬dp[i][j]è¡¨ç¤ºçš„æ˜¯å‰iä¸ªéª°å­çš„ç‚¹æ•°ä¹‹å’Œä¸ºjçš„æ¦‚ç‡ï¼Œç°åœ¨åªéœ€è¦æœ€åçš„çŠ¶æ€çš„æ•°ç»„ï¼Œ
+    //æ‰€ä»¥å°±åªç”¨ä¸€ä¸ªä¸€ç»´æ•°ç»„dp[j]è¡¨ç¤ºnä¸ªéª°å­ä¸‹æ¯ä¸ªç»“æœçš„æ¦‚ç‡ã€‚
     
-    //³õÊ¼ÊÇ1¸ö÷»×ÓÇé¿öÏÂµÄµãÊıÖ®ºÍÇé¿ö£¬¾ÍÖ»ÓĞ6¸ö½á¹û£¬ËùÒÔÓÃdpµÄ³õÊ¼»¯µÄsizeÊÇ6¸ö
+    //åˆå§‹æ˜¯1ä¸ªéª°å­æƒ…å†µä¸‹çš„ç‚¹æ•°ä¹‹å’Œæƒ…å†µï¼Œå°±åªæœ‰6ä¸ªç»“æœï¼Œæ‰€ä»¥ç”¨dpçš„åˆå§‹åŒ–çš„sizeæ˜¯6ä¸ª
     double* dp = new double[6];
 
-    //Ö»ÓĞÒ»¸öÊı×é
+    //åªæœ‰ä¸€ä¸ªæ•°ç»„
     fill(dp, dp + 6,1/6.0);
 
     int length = 6;
 
-    //´ÓµÚ2¸ö÷»×Ó¿ªÊ¼£¬ÕâÀïnumber±íÊ¾number¸ö÷»×Ó£¬
-    //ÏÈ´ÓµÚ¶ş¸öµÄÇé¿öËãÆğ£¬È»ºóÔÙÖğ²½Çó3¸ö¡¢4¸ö¡¤¡¤¡¤n¸öµÄÇé¿ö
-    // i ±íÊ¾µ±×Ü¹²i¸ö÷»×ÓÊ±µÄ½á¹û
+    //ä»ç¬¬2ä¸ªéª°å­å¼€å§‹ï¼Œè¿™é‡Œnumberè¡¨ç¤ºnumberä¸ªéª°å­ï¼Œ
+    //å…ˆä»ç¬¬äºŒä¸ªçš„æƒ…å†µç®—èµ·ï¼Œç„¶åå†é€æ­¥æ±‚3ä¸ªã€4ä¸ªÂ·Â·Â·nä¸ªçš„æƒ…å†µ
+    // i è¡¨ç¤ºå½“æ€»å…±iä¸ªéª°å­æ—¶çš„ç»“æœ
     for (int i = 2; i <= number; i++) 
     {
-        //Ã¿´ÎµÄµãÊıÖ®ºÍ·¶Î§»áÓĞµã±ä»¯£¬µãÊıÖ®ºÍµÄÖµ×î´óÊÇi*6£¬×îĞ¡ÊÇi*1£¬iÖ®Ç°µÄ½á¹ûÖµÊÇ²»»á³öÏÖµÄ£»
-        //±ÈÈçi=3¸ö÷»×ÓÊ±£¬×îĞ¡¾ÍÊÇ3ÁË£¬²»¿ÉÄÜÊÇ2ºÍ1£¬¶ø×î´óÖµÊÇ18£¬ĞèÒªµÄ´æ´¢¿Õ¼äÊÇ18-3+1=16
-        //ËùÒÔµãÊıÖ®ºÍµÄÖµµÄ¸öÊıÊÇ6*i-(i-1)£¬»¯¼ò£º5*i+1
-        //µ±ÓĞi¸ö÷»×ÓÊ±µÄµãÊıÖ®ºÍµÄÖµÊı×éÏÈ¼Ù¶¨ÊÇtemp
+        //æ¯æ¬¡çš„ç‚¹æ•°ä¹‹å’ŒèŒƒå›´ä¼šæœ‰ç‚¹å˜åŒ–ï¼Œç‚¹æ•°ä¹‹å’Œçš„å€¼æœ€å¤§æ˜¯i*6ï¼Œæœ€å°æ˜¯i*1ï¼Œiä¹‹å‰çš„ç»“æœå€¼æ˜¯ä¸ä¼šå‡ºç°çš„ï¼›
+        //æ¯”å¦‚i=3ä¸ªéª°å­æ—¶ï¼Œæœ€å°å°±æ˜¯3äº†ï¼Œä¸å¯èƒ½æ˜¯2å’Œ1ï¼Œè€Œæœ€å¤§å€¼æ˜¯18ï¼Œéœ€è¦çš„å­˜å‚¨ç©ºé—´æ˜¯18-3+1=16
+        //æ‰€ä»¥ç‚¹æ•°ä¹‹å’Œçš„å€¼çš„ä¸ªæ•°æ˜¯6*i-(i-1)ï¼ŒåŒ–ç®€ï¼š5*i+1
+        //å½“æœ‰iä¸ªéª°å­æ—¶çš„ç‚¹æ•°ä¹‹å’Œçš„å€¼æ•°ç»„å…ˆå‡å®šæ˜¯temp
         double* temp = new double[5 * i + 1] {0};
-        //***×¢***
-        //iÎª2Ê±£¬temp[0]´ú±íºÍÖµÎª2µÄ¸ÅÂÊ£¬iÎª3Ê±£¬temp[0]´ú±íºÍÖµÎª3µÄ¸ÅÂÊ
+        //***æ³¨***
+        //iä¸º2æ—¶ï¼Œtemp[0]ä»£è¡¨å’Œå€¼ä¸º2çš„æ¦‚ç‡ï¼Œiä¸º3æ—¶ï¼Œtemp[0]ä»£è¡¨å’Œå€¼ä¸º3çš„æ¦‚ç‡
 
-        //´Ói-1¸ö÷»×ÓµÄµãÊıÖ®ºÍµÄÖµÊı×éÈëÊÖ£¬¼ÆËãi¸ö÷»×ÓµÄµãÊıÖ®ºÍÊı×éµÄÖµ
-        //***×¢***
-        //i-1¸ö÷»×ÓµÄµãÊıÖ®ºÍµÄ¸÷¸öºÍÖµµÄ¸ÅÂÊ¼´dpÊı×éµÄµÚj¸öÖµ£¬
-        //ËüËùÓ°ÏìµÄÊÇi¸ö÷»×ÓÊ±µÄtemp[j+k]µÄÖµ
+        //ä»i-1ä¸ªéª°å­çš„ç‚¹æ•°ä¹‹å’Œçš„å€¼æ•°ç»„å…¥æ‰‹ï¼Œè®¡ç®—iä¸ªéª°å­çš„ç‚¹æ•°ä¹‹å’Œæ•°ç»„çš„å€¼
+        //***æ³¨***
+        //i-1ä¸ªéª°å­çš„ç‚¹æ•°ä¹‹å’Œçš„å„ä¸ªå’Œå€¼çš„æ¦‚ç‡å³dpæ•°ç»„çš„ç¬¬jä¸ªå€¼ï¼Œ
+        //å®ƒæ‰€å½±å“çš„æ˜¯iä¸ªéª°å­æ—¶çš„temp[j+k]çš„å€¼
 
-        //***×¢***
-        //´íÎóĞ´·¨£º
+        //***æ³¨***
+        //é”™è¯¯å†™æ³•ï¼š
         //for (int j = 0; j < sizeof(dp)/sizeof(dp[0]); j++)
-        //¡¾ÕâÑùÖ»ÄÜÇó¾²Ì¬Êı×éµÄ³¤¶È£¬¶ø²»ÄÜÇó¶¯Ì¬Êı×éµÄ³¤¶È¡¿
+        //ã€è¿™æ ·åªèƒ½æ±‚é™æ€æ•°ç»„çš„é•¿åº¦ï¼Œè€Œä¸èƒ½æ±‚åŠ¨æ€æ•°ç»„çš„é•¿åº¦ã€‘
 
         for (int j = 0; j < length; j++)
         {
-            //±ÈÈçÖ»ÓĞ1¸ö÷»×ÓÊ±£¬dp[1]ÊÇ´ú±íµ±÷»×ÓµãÊıÖ®ºÍÎª2Ê±µÄ¸ÅÂÊ£¬
-            //Ëü»á¶Ôµ±ÓĞ2¸ö÷»×ÓÊ±µÄµãÊıÖ®ºÍÎª3¡¢4¡¢5¡¢6¡¢7¡¢8²úÉúÓ°Ïì£¬
-            //ÒòÎªµ±ÓĞÒ»¸ö÷»×ÓµÄÖµÎª2Ê±£¬ÁíÒ»¸ö÷»×ÓµÄÖµ¿ÉÒÔÎª1~6£¬
-            //²úÉúµÄµãÊıÖ®ºÍÏàÓ¦µÄ¾ÍÊÇ3~8£»
-            //Èçdp[2]´ú±íµãÊıÖ®ºÍÎª3Ê±µÄ¸ÅÂÊ£¬
-            //Ëü»á¶ÔÓĞ2¸ö÷»×ÓÊ±µÄµãÊıÖ®ºÍÎª4¡¢5¡¢6¡¢7¡¢8¡¢9²úÉúÓ°Ïì£»
-            //ËùÒÔkÔÚÕâÀï¾ÍÊÇ¶ÔÓ¦×ÅµÚi¸ö÷»×Ó³öÏÖÊ±¿ÉÄÜ³öÏÖÁùÖÖÇé¿ö     
+            //æ¯”å¦‚åªæœ‰1ä¸ªéª°å­æ—¶ï¼Œdp[1]æ˜¯ä»£è¡¨å½“éª°å­ç‚¹æ•°ä¹‹å’Œä¸º2æ—¶çš„æ¦‚ç‡ï¼Œ
+            //å®ƒä¼šå¯¹å½“æœ‰2ä¸ªéª°å­æ—¶çš„ç‚¹æ•°ä¹‹å’Œä¸º3ã€4ã€5ã€6ã€7ã€8äº§ç”Ÿå½±å“ï¼Œ
+            //å› ä¸ºå½“æœ‰ä¸€ä¸ªéª°å­çš„å€¼ä¸º2æ—¶ï¼Œå¦ä¸€ä¸ªéª°å­çš„å€¼å¯ä»¥ä¸º1~6ï¼Œ
+            //äº§ç”Ÿçš„ç‚¹æ•°ä¹‹å’Œç›¸åº”çš„å°±æ˜¯3~8ï¼›
+            //å¦‚dp[2]ä»£è¡¨ç‚¹æ•°ä¹‹å’Œä¸º3æ—¶çš„æ¦‚ç‡ï¼Œ
+            //å®ƒä¼šå¯¹æœ‰2ä¸ªéª°å­æ—¶çš„ç‚¹æ•°ä¹‹å’Œä¸º4ã€5ã€6ã€7ã€8ã€9äº§ç”Ÿå½±å“ï¼›
+            //æ‰€ä»¥kåœ¨è¿™é‡Œå°±æ˜¯å¯¹åº”ç€ç¬¬iä¸ªéª°å­å‡ºç°æ—¶å¯èƒ½å‡ºç°å…­ç§æƒ…å†µ     
             for (int k = 0; k < 6; k++) 
             {
-                //ÕâÀï¼ÇµÃÊÇ¼ÓÉÏdpÊı×éÖµÓë1/6µÄ³Ë»ı£¬1/6ÊÇµÚi¸ö÷»×ÓÍ¶³öÄ³¸öÖµµÄ¸ÅÂÊ
+                //è¿™é‡Œè®°å¾—æ˜¯åŠ ä¸Šdpæ•°ç»„å€¼ä¸1/6çš„ä¹˜ç§¯ï¼Œ1/6æ˜¯ç¬¬iä¸ªéª°å­æŠ•å‡ºæŸä¸ªå€¼çš„æ¦‚ç‡
                 temp[j + k] += dp[j] * (1.0 / 6.0);
             }
         }
 
-        //i¸ö÷»×ÓµÄµãÊıÖ®ºÍÈ«¶¼Ëã³öÀ´ºó£¬Òª½«tempÊı×éÒÆ½»¸ødpÊı×é£¬
-        // dpÊı×é¾Í»á´ú±íi¸ö÷»×ÓÊ±µÄ¿ÉÄÜ³öÏÖµÄµãÊıÖ®ºÍµÄ¸ÅÂÊ£»
-        // ÓÃÓÚ¼ÆËãi+1¸ö÷»×ÓÊ±µÄµãÊıÖ®ºÍµÄ¸ÅÂÊ
+        //iä¸ªéª°å­çš„ç‚¹æ•°ä¹‹å’Œå…¨éƒ½ç®—å‡ºæ¥åï¼Œè¦å°†tempæ•°ç»„ç§»äº¤ç»™dpæ•°ç»„ï¼Œ
+        // dpæ•°ç»„å°±ä¼šä»£è¡¨iä¸ªéª°å­æ—¶çš„å¯èƒ½å‡ºç°çš„ç‚¹æ•°ä¹‹å’Œçš„æ¦‚ç‡ï¼›
+        // ç”¨äºè®¡ç®—i+1ä¸ªéª°å­æ—¶çš„ç‚¹æ•°ä¹‹å’Œçš„æ¦‚ç‡
 
         delete[]dp;
 
@@ -8894,15 +8894,15 @@ void PrintProbability_Solution3(int number)
 #endif
 
 
-//ÃæÊÔÌâ61£ºÆË¿ËÅÆÖĞµÄË³×Ó
-//½âÌâË¼Â·£º
-//Ê×ÏÈ°ÑÊı×éÅÅĞò£»Æä´ÎÍ³¼ÆÊı×éÖĞ0µÄ¸öÊı(¼´´óĞ¡Íõ¸öÊı)
-//×îºóÍ³¼ÆÅÅĞòÖ®ºóµÄÊı×éÖĞÏàÁÚÊı×ÖÖ®¼äµÄ¿ÕÈ±×ÜÊı¡£Èç¹û¿ÕÈ±µÄ×ÜÊı
-//Ğ¡ÓÚ»òÕßµÈÓÚ0µÄ¸öÊı£¬ÄÇÃ´Õâ¸öÊı×é¾ÍÊÇÁ¬ĞøµÄ£»·´Ö®Ôò²»Á¬Ğø¡£
-//»òÕß
-//Ê×ÏÈ°ÑÊı×éÅÅĞò£»Æä´ÎÍ³¼ÆÊı×éÖĞ0µÄ¸öÊı(¼´´óĞ¡Íõ¸öÊı)
-//È»ºóÓÃÁ½¸öÖ¸ÕëÀ´±È½ÏÏàÁÚÊı×ÖµÄ²îÖµ£¬
-//¶Ô²îÖµµÄÇé¿ö½øĞĞ·ÖÀà´¦Àí
+//é¢è¯•é¢˜61ï¼šæ‰‘å…‹ç‰Œä¸­çš„é¡ºå­
+//è§£é¢˜æ€è·¯ï¼š
+//é¦–å…ˆæŠŠæ•°ç»„æ’åºï¼›å…¶æ¬¡ç»Ÿè®¡æ•°ç»„ä¸­0çš„ä¸ªæ•°(å³å¤§å°ç‹ä¸ªæ•°)
+//æœ€åç»Ÿè®¡æ’åºä¹‹åçš„æ•°ç»„ä¸­ç›¸é‚»æ•°å­—ä¹‹é—´çš„ç©ºç¼ºæ€»æ•°ã€‚å¦‚æœç©ºç¼ºçš„æ€»æ•°
+//å°äºæˆ–è€…ç­‰äº0çš„ä¸ªæ•°ï¼Œé‚£ä¹ˆè¿™ä¸ªæ•°ç»„å°±æ˜¯è¿ç»­çš„ï¼›åä¹‹åˆ™ä¸è¿ç»­ã€‚
+//æˆ–è€…
+//é¦–å…ˆæŠŠæ•°ç»„æ’åºï¼›å…¶æ¬¡ç»Ÿè®¡æ•°ç»„ä¸­0çš„ä¸ªæ•°(å³å¤§å°ç‹ä¸ªæ•°)
+//ç„¶åç”¨ä¸¤ä¸ªæŒ‡é’ˆæ¥æ¯”è¾ƒç›¸é‚»æ•°å­—çš„å·®å€¼ï¼Œ
+//å¯¹å·®å€¼çš„æƒ…å†µè¿›è¡Œåˆ†ç±»å¤„ç†
 #if 0
 #include <iostream>
 #include <algorithm>
@@ -8937,17 +8937,17 @@ bool isContinuous(int* numbers,int length)
     }
 
     //***
-    //ÈÃÁ½¸öÖ¸ÕëÖ±½Ó¶¨Î»ÔÚ·Ç´óĞ¡ÍõµÄ×îĞ¡µÄÁ½¸öÊı×Ö´¦
+    //è®©ä¸¤ä¸ªæŒ‡é’ˆç›´æ¥å®šä½åœ¨éå¤§å°ç‹çš„æœ€å°çš„ä¸¤ä¸ªæ•°å­—å¤„
     int* theBeg = numbers+CntZero;
     int* theEnd = numbers + CntZero + 1;
     int difference_value = *theEnd - *theBeg;
 
 	while (theEnd!=numbers+length)
 	{
-        //Èç¹ûÏà²î0£¬Ö±½ÓÅĞfalse
-        //Èç¹ûÏà²î1£¬¾Í¼ÌĞøÒÆ¶¯Á½¸öÖ¸Õë
-        //Èç¹ûÏà²î2£¬CntZero±ØĞë´óÓÚµÈÓÚ1
-        //Èç¹ûÏà²î3£¬CntZero±ØĞë´óÓÚµÈÓÚ2
+        //å¦‚æœç›¸å·®0ï¼Œç›´æ¥åˆ¤false
+        //å¦‚æœç›¸å·®1ï¼Œå°±ç»§ç»­ç§»åŠ¨ä¸¤ä¸ªæŒ‡é’ˆ
+        //å¦‚æœç›¸å·®2ï¼ŒCntZeroå¿…é¡»å¤§äºç­‰äº1
+        //å¦‚æœç›¸å·®3ï¼ŒCntZeroå¿…é¡»å¤§äºç­‰äº2
         //...
         if (difference_value == 0)
             return false;
@@ -8965,7 +8965,7 @@ bool isContinuous(int* numbers,int length)
         //    else
         //        return false;
         //}
-        //¼ò»¯ÎªÒÔÏÂ´úÂë¿é£¬ÒÔÖ§³Ö¶à¸ö´óĞ¡ÍõµÄÇé¿ö
+        //ç®€åŒ–ä¸ºä»¥ä¸‹ä»£ç å—ï¼Œä»¥æ”¯æŒå¤šä¸ªå¤§å°ç‹çš„æƒ…å†µ
 		else if (difference_value >= 2)
 		{
 			if (CntZero >= difference_value-1)
@@ -8981,13 +8981,13 @@ bool isContinuous(int* numbers,int length)
 
     return true;
 }
-//***×¢***
-//Òª½øÒ»²½ÌáÉıËÙ¶È£¬¿ÉÒÔ²»ÓÃsort()£¬¶ø¸ÄÓÃ³¤¶ÈÎª14µÄ¹şÏ£±í£¬ÕâÑùÔÚO(n)
-//µÄÊ±¼äÄÚ¿ÉÍê³ÉÅÅĞò
+//***æ³¨***
+//è¦è¿›ä¸€æ­¥æå‡é€Ÿåº¦ï¼Œå¯ä»¥ä¸ç”¨sort()ï¼Œè€Œæ”¹ç”¨é•¿åº¦ä¸º14çš„å“ˆå¸Œè¡¨ï¼Œè¿™æ ·åœ¨O(n)
+//çš„æ—¶é—´å†…å¯å®Œæˆæ’åº
 #endif
 
 
-//ÃæÊÔÌâ62£ºÔ²È¦ÖĞ×îºóÊ£ÏÂµÄÊı×Ö
+//é¢è¯•é¢˜62ï¼šåœ†åœˆä¸­æœ€åå‰©ä¸‹çš„æ•°å­—
 #if 0
 #include <iostream>
 #include <list>
@@ -9011,7 +9011,7 @@ int LastRemaining(int n, int m)
     if (n <= 0 || m <= 0)
         return - 1;
 
-    //Ô²È¦ÖĞ½öÒ»¸öÊı×Ö
+    //åœ†åœˆä¸­ä»…ä¸€ä¸ªæ•°å­—
     if (n == 1)
         return 0;
 
@@ -9022,10 +9022,10 @@ int LastRemaining(int n, int m)
         circle.push_back(i);
     }
 
-    //´´½¨gostep´ú±íÖ¸ÕëÒÆ¶¯µÄ´ÎÊı
+    //åˆ›å»ºgostepä»£è¡¨æŒ‡é’ˆç§»åŠ¨çš„æ¬¡æ•°
     int gostep;
-    //´´½¨Ö¸ÕëÖ¸ÏòÒªÉ¾³ıµÄÔªËØËùÔÚµÄÎ»ÖÃ
-    // ***(ÈômÎª1Ôò²»ÒÆ¶¯)***
+    //åˆ›å»ºæŒ‡é’ˆæŒ‡å‘è¦åˆ é™¤çš„å…ƒç´ æ‰€åœ¨çš„ä½ç½®
+    // ***(è‹¥mä¸º1åˆ™ä¸ç§»åŠ¨)***
     auto erase_pos = circle.begin();
     for (gostep = 1; gostep != m; ++gostep)
     {
@@ -9042,11 +9042,11 @@ int LastRemaining(int n, int m)
 
     while (circle.size() != 1)
     {
-		//***´íÎóĞ´·¨***
-		//listµÄµü´úÆ÷²»ÊÇËæ»ú·ÃÎÊµü´úÆ÷
+		//***é”™è¯¯å†™æ³•***
+		//listçš„è¿­ä»£å™¨ä¸æ˜¯éšæœºè®¿é—®è¿­ä»£å™¨
 		//auto next_pos = erase_pos+1;
 
-        //¿ÉÒÔĞ´Îªauto next_pos = ++erase_pos ;    --erase_pos ;     ...     erase_pos=next_pos;
+        //å¯ä»¥å†™ä¸ºauto next_pos = ++erase_pos ;    --erase_pos ;     ...     erase_pos=next_pos;
 
         circle.erase(erase_pos++);
 #ifdef _DEBUG
@@ -9071,8 +9071,8 @@ int LastRemaining(int n, int m)
 #endif
 
 
-//ÃæÊÔÌâ63£º¹ÉÆ±µÄ×î´óÀûÈó
-//Ë¼Â·£ºÔÚÉ¨Ãèµ½µÚi¸öÔªËØÖµÊ±£¬ÄÜ¹»¼Ç×¡Ö®Ç°µÄi-1¸öÊı×ÖÖĞµÄ×îĞ¡Öµ
+//é¢è¯•é¢˜63ï¼šè‚¡ç¥¨çš„æœ€å¤§åˆ©æ¶¦
+//æ€è·¯ï¼šåœ¨æ‰«æåˆ°ç¬¬iä¸ªå…ƒç´ å€¼æ—¶ï¼Œèƒ½å¤Ÿè®°ä½ä¹‹å‰çš„i-1ä¸ªæ•°å­—ä¸­çš„æœ€å°å€¼
 #if 0
 #include <iostream>
 
@@ -9099,7 +9099,7 @@ int MaxProfit(int* stk, int length)
     if (length == 2)
         return TmpMaxValue - TmpMinValue;
 
-    //´ÓµÚÈı¸öÔªËØ¿ªÊ¼±éÀú
+    //ä»ç¬¬ä¸‰ä¸ªå…ƒç´ å¼€å§‹éå†
     for (int i = 2; i < length; ++i)
     {
         TmpMinValue = TmpMinValue < stk[i] ? TmpMinValue : stk[i];
@@ -9111,19 +9111,19 @@ int MaxProfit(int* stk, int length)
 #endif
 
 
-//ÃæÊÔÌâ64£ºÇó1+2+3+...+n
+//é¢è¯•é¢˜64ï¼šæ±‚1+2+3+...+n
 #if 0
 #include <iostream>
 
 using namespace std;
 
-//½â·¨Ò»£ºÀûÓÃ¹¹Ôìº¯ÊıºÍstatic³ÉÔ±±äÁ¿´úÌæÖ±½ÓÊ¹ÓÃÑ­»·
+//è§£æ³•ä¸€ï¼šåˆ©ç”¨æ„é€ å‡½æ•°å’Œstaticæˆå‘˜å˜é‡ä»£æ›¿ç›´æ¥ä½¿ç”¨å¾ªç¯
 class Tmp
 {
 private:
-    //***×¢***
-    //ÀûÓÃÁË¾²Ì¬³ÉÔ±±äÁ¿½öÔÚ³õÊ¼»¯Ê±Ö´ĞĞÒ»´Î³õÊ¼»¯Óï¾ä£¬Ö®ºó²»»áÔÙÖØ¸´Ö´ĞĞ
-    //µÄÌØµã£¬À´¼ÇÂ¼Ã¿´ÎÒªÀÛ¼ÓµÄÖµN£¬ºÍ×ÜºÍSum
+    //***æ³¨***
+    //åˆ©ç”¨äº†é™æ€æˆå‘˜å˜é‡ä»…åœ¨åˆå§‹åŒ–æ—¶æ‰§è¡Œä¸€æ¬¡åˆå§‹åŒ–è¯­å¥ï¼Œä¹‹åä¸ä¼šå†é‡å¤æ‰§è¡Œ
+    //çš„ç‰¹ç‚¹ï¼Œæ¥è®°å½•æ¯æ¬¡è¦ç´¯åŠ çš„å€¼Nï¼Œå’Œæ€»å’ŒSum
     static int N;
     static int Sum;
 
@@ -9148,36 +9148,36 @@ public:
 int Tmp::N = 0;
 int Tmp::Sum = 0;
 
-//***×¢***
-//ÔÚÀàÄÚÉùÃ÷·½·¨ÎªstaticµÄ×÷ÓÃ£º
-//ÎŞĞèÊµÀı»¯¶ÔÏó¾Í¿ÉÒÔµ÷ÓÃ£¬
-//ÆÕÍ¨µÄ³ÉÔ±º¯ÊıĞèÒªÍ¨¹ıÀàµÄÊµÀı»¯¶ÔÏó²ÅÄÜµ÷ÓÃ£¬
-//¶ø¾²Ì¬³ÉÔ±º¯Êı¿ÉÒÔÖ±½ÓÍ¨¹ıÀàÃûÀ´µ÷ÓÃ£¬ÎŞĞè´´½¨ÀàµÄ¶ÔÏóÊµÀı¡£
+//***æ³¨***
+//åœ¨ç±»å†…å£°æ˜æ–¹æ³•ä¸ºstaticçš„ä½œç”¨ï¼š
+//æ— éœ€å®ä¾‹åŒ–å¯¹è±¡å°±å¯ä»¥è°ƒç”¨ï¼Œ
+//æ™®é€šçš„æˆå‘˜å‡½æ•°éœ€è¦é€šè¿‡ç±»çš„å®ä¾‹åŒ–å¯¹è±¡æ‰èƒ½è°ƒç”¨ï¼Œ
+//è€Œé™æ€æˆå‘˜å‡½æ•°å¯ä»¥ç›´æ¥é€šè¿‡ç±»åæ¥è°ƒç”¨ï¼Œæ— éœ€åˆ›å»ºç±»çš„å¯¹è±¡å®ä¾‹ã€‚
 
-//ÔÚÀàÄÚÉùÃ÷±äÁ¿ÎªstaticµÄ×÷ÓÃ£º
-//ÔÚÖ´ĞĞÊ±²»ÒÀÀµÓÚÈÎºÎÌØ¶¨µÄ¶ÔÏó£¬
-//Òò´Ë¶ÔÓÚÈ«¾Ö²Ù×÷·Ç³£ÓĞÓÃ¡£
+//åœ¨ç±»å†…å£°æ˜å˜é‡ä¸ºstaticçš„ä½œç”¨ï¼š
+//åœ¨æ‰§è¡Œæ—¶ä¸ä¾èµ–äºä»»ä½•ç‰¹å®šçš„å¯¹è±¡ï¼Œ
+//å› æ­¤å¯¹äºå…¨å±€æ“ä½œéå¸¸æœ‰ç”¨ã€‚
 
 int Sum_solution_1(int n)
 {
-    //´´½¨Ò»¸öTmpÀàÊı×é£¬°üº¬n¸öTmpÀà¶ÔÏó£¬
-    //ÄÇÃ´ÕâĞ©Àà¶ÔÏó¶¼»áÓÉ¹¹Ôìº¯ÊıÀ´Éú³É
-    //¹¹Ôìº¯Êı»áµ÷ÓÃn´Î
+    //åˆ›å»ºä¸€ä¸ªTmpç±»æ•°ç»„ï¼ŒåŒ…å«nä¸ªTmpç±»å¯¹è±¡ï¼Œ
+    //é‚£ä¹ˆè¿™äº›ç±»å¯¹è±¡éƒ½ä¼šç”±æ„é€ å‡½æ•°æ¥ç”Ÿæˆ
+    //æ„é€ å‡½æ•°ä¼šè°ƒç”¨næ¬¡
     unique_ptr<Tmp[]> t(new Tmp[n]{});
     
-    //***×¢***
-    //´íÎóĞ´·¨£º
+    //***æ³¨***
+    //é”™è¯¯å†™æ³•ï¼š
     //return t->GetSum();
 
-    //Àí½â£º
-    //t ÊÇÒ»¸öÖ¸Ïò Tmp ÀàĞÍÊı×éµÄ unique_ptr ¶ÔÏó£¬Ëü¹ÜÀíÕâ¸öÊı×éµÄÄÚ´æ
-    //µ«¡¾Ëü±¾Éí²¢²»ÊÇ Tmp ÀàµÄ¶ÔÏó¡¿£¬Òò´Ë²»ÄÜÖ±½Ó·ÃÎÊÀàÖĞµÄ·½·¨¡£
-    //Òª·ÃÎÊÀàµÄ·½·¨£¬ÄãĞèÒªÍ¨¹ı unique_ptr ³ÖÓĞµÄÖ¸Õë¼ä½ÓµØ·ÃÎÊÊı×éÔªËØ£¬
-    //²¢ÔÚ¸ÃÔªËØÉÏµ÷ÓÃÏàÓ¦µÄ·½·¨
+    //ç†è§£ï¼š
+    //t æ˜¯ä¸€ä¸ªæŒ‡å‘ Tmp ç±»å‹æ•°ç»„çš„ unique_ptr å¯¹è±¡ï¼Œå®ƒç®¡ç†è¿™ä¸ªæ•°ç»„çš„å†…å­˜
+    //ä½†ã€å®ƒæœ¬èº«å¹¶ä¸æ˜¯ Tmp ç±»çš„å¯¹è±¡ã€‘ï¼Œå› æ­¤ä¸èƒ½ç›´æ¥è®¿é—®ç±»ä¸­çš„æ–¹æ³•ã€‚
+    //è¦è®¿é—®ç±»çš„æ–¹æ³•ï¼Œä½ éœ€è¦é€šè¿‡ unique_ptr æŒæœ‰çš„æŒ‡é’ˆé—´æ¥åœ°è®¿é—®æ•°ç»„å…ƒç´ ï¼Œ
+    //å¹¶åœ¨è¯¥å…ƒç´ ä¸Šè°ƒç”¨ç›¸åº”çš„æ–¹æ³•
     return t[0].GetSum();
 }
 
-//½â·¨¶ş£ºÀûÓÃĞéº¯Êı´úÌæÖ±½ÓÊ¹ÓÃµİ¹é£¨ÆäÖĞµİ¹éÖĞÒ»¶¨»áÓĞÓÃµ½ifµÄµØ·½À´ÅĞ¶ÏºÎÊ±µİ¹éÖÕÖ¹£©
+//è§£æ³•äºŒï¼šåˆ©ç”¨è™šå‡½æ•°ä»£æ›¿ç›´æ¥ä½¿ç”¨é€’å½’ï¼ˆå…¶ä¸­é€’å½’ä¸­ä¸€å®šä¼šæœ‰ç”¨åˆ°ifçš„åœ°æ–¹æ¥åˆ¤æ–­ä½•æ—¶é€’å½’ç»ˆæ­¢ï¼‰
 class A;
 A* Array[2];
 
@@ -9195,9 +9195,9 @@ class B :public A
 public:
     virtual int Sum(int n) override
     {
-        //Á½´ÎÈ¡·´ÔËËã
-        //nÎª100  !nÎª0  !!nÎª1
-        //nÎª0      !nÎª1  !!nÎª0
+        //ä¸¤æ¬¡å–åè¿ç®—
+        //nä¸º100  !nä¸º0  !!nä¸º1
+        //nä¸º0      !nä¸º1  !!nä¸º0
         return Array[!!n]->Sum(n-1) + n;
     }
 };
@@ -9212,7 +9212,7 @@ int Sum_solution_2(int n)
     return Array[1]->Sum(n);
 }
 
-//½â·¨Èı£ºÊ¹ÓÃº¯ÊıÖ¸ÕëÀ´´úÌæÖ±½ÓÊ¹ÓÃµİ¹é
+//è§£æ³•ä¸‰ï¼šä½¿ç”¨å‡½æ•°æŒ‡é’ˆæ¥ä»£æ›¿ç›´æ¥ä½¿ç”¨é€’å½’
 typedef int (*pFun)(int);
 
 int Sum_solution_3_terminate(int n)
@@ -9224,12 +9224,12 @@ int Sum_solution_3(int n)
 {
     pFun funArray[2] = { Sum_solution_3_terminate ,Sum_solution_3 };
 
-    //´íÎóĞ´·¨£º
+    //é”™è¯¯å†™æ³•ï¼š
     //return funArray[!!n](--n) + n;
     return funArray[!!n](n-1) + n;
 }
 
-//½â·¨ËÄ£ºÄ£°åÔª±à³Ì£¬ÔÚ±àÒëÆÚÈ·¶¨Öµ
+//è§£æ³•å››ï¼šæ¨¡æ¿å…ƒç¼–ç¨‹ï¼Œåœ¨ç¼–è¯‘æœŸç¡®å®šå€¼
 template<int n>
 class Sum_solution_4
 {
@@ -9241,7 +9241,7 @@ public:
 
 };
 
-//Ä£°å¾ßÌå»¯
+//æ¨¡æ¿å…·ä½“åŒ–
 template<>class Sum_solution_4<1>
 {
 public:
@@ -9256,8 +9256,8 @@ int main()
     cout<<Sum_solution_2(n)<<endl;
     cout<<Sum_solution_3(n)<<endl;
 
-    //´íÎóĞ´·¨£º
-    //Sum_solution_4<n> s4;    //Ô­Òò£º·ÇÄ£°åÀàĞÍ²ÎÊı±ØĞëÎª³£Á¿Öµ
+    //é”™è¯¯å†™æ³•ï¼š
+    //Sum_solution_4<n> s4;    //åŸå› ï¼šéæ¨¡æ¿ç±»å‹å‚æ•°å¿…é¡»ä¸ºå¸¸é‡å€¼
     Sum_solution_4<100> s4;    
     cout<< s4.N <<endl;
 
@@ -9266,11 +9266,11 @@ int main()
 #endif
 
 
-//ÃæÊÔÌâ65£º²»ÓÃ¼Ó¼õ³Ë³ı×ö¼Ó·¨
-//Ë¼Â·£º¡°Èı²½×ß¡±¶ÔÓÚ¶ş½øÖÆÒ²ÊÊÓÃ
-//µÚÒ»²½£º¸÷Î»Ïà¼Óµ«²»½øĞĞ½øÎ»
-//µÚ¶ş²½£º¼ÇÏÂ½øÎ»Êı
-//µÚÈı²½£º½«Ç°ÃæÁ½¸ö²½ÖèµÄ½á¹ûÏà¼Ó
+//é¢è¯•é¢˜65ï¼šä¸ç”¨åŠ å‡ä¹˜é™¤åšåŠ æ³•
+//æ€è·¯ï¼šâ€œä¸‰æ­¥èµ°â€å¯¹äºäºŒè¿›åˆ¶ä¹Ÿé€‚ç”¨
+//ç¬¬ä¸€æ­¥ï¼šå„ä½ç›¸åŠ ä½†ä¸è¿›è¡Œè¿›ä½
+//ç¬¬äºŒæ­¥ï¼šè®°ä¸‹è¿›ä½æ•°
+//ç¬¬ä¸‰æ­¥ï¼šå°†å‰é¢ä¸¤ä¸ªæ­¥éª¤çš„ç»“æœç›¸åŠ 
 #if 0
 #include <iostream>
 
@@ -9291,10 +9291,10 @@ int main()
 // 0000 0101
 // 0001 0001
 // 0001 0110
-//µÚÒ»´ÎÑ­»·£º
+//ç¬¬ä¸€æ¬¡å¾ªç¯ï¼š
 //XOR_res                  =0001 0100
 //OperationAfterAnd =0000 0010
-//µÚ¶ş´ÎÑ­»·£º
+//ç¬¬äºŒæ¬¡å¾ªç¯ï¼š
 //XOR_res                  =0001 0110
 //OperationAfterAnd =0000 0000
 
@@ -9307,23 +9307,23 @@ int main()
 //1111 1111 1111 1111 1111 1111 1111 1111 
 //0000 0000 0000 0000 0000 0000 0000 0010
 //0000 0000 0000 0000 0000 0000 0000 0001
-//µÚÒ»´ÎÑ­»·£º
+//ç¬¬ä¸€æ¬¡å¾ªç¯ï¼š
 //XOR_res                  =1111 1111 1111 1111 1111 1111 1111 1101 
 //OperationAfterAnd =0000 0000 0000 0000 0000 0000 0000 0100
-//µÚ¶ş´ÎÑ­»·£º
+//ç¬¬äºŒæ¬¡å¾ªç¯ï¼š
 //XOR_res                  =1111 1111 1111 1111 1111 1111 1111 1001 
 //OperationAfterAnd =0000 0000 0000 0000 0000 0000 0000 1000
-//Ö±µ½Ä³´ÎÑ­»·
+//ç›´åˆ°æŸæ¬¡å¾ªç¯
 //XOR_res                  =0000 0000 0000 0000 0000 0000 0000 0001 
 //OperationAfterAnd =0000 0000 0000 0000 0000 0000 0000 0000
 
-//²»¹»ÍêÕûµÄ·½·¨£º(²»ÄÜ½â¾öÏà¼ÓµÄÊı×ÖÓĞ¸ºÊıµÄÇé¿ö)
+//ä¸å¤Ÿå®Œæ•´çš„æ–¹æ³•ï¼š(ä¸èƒ½è§£å†³ç›¸åŠ çš„æ•°å­—æœ‰è´Ÿæ•°çš„æƒ…å†µ)
 #if 0
 int Add(int num1, int num2)
 {
     int XOR_res = num1 ^ num2;
 
-    //¼ÇÏÂ½øÎ»µÄÎ»ÖÃ²¢½øĞĞÒÆÎ»
+    //è®°ä¸‹è¿›ä½çš„ä½ç½®å¹¶è¿›è¡Œç§»ä½
     int OperationAfterAnd = (num1 & num2) << 1;
 
     return XOR_res | OperationAfterAnd;
@@ -9337,11 +9337,11 @@ int Add(int num1, int num2)
 
     while (num2)
     {
-        //µÚÒ»²½Ò²ÊÇµÚÈı²½
-        //´æ´¢·Ç½øÎ»ºÍ
+        //ç¬¬ä¸€æ­¥ä¹Ÿæ˜¯ç¬¬ä¸‰æ­¥
+        //å­˜å‚¨éè¿›ä½å’Œ
         XOR_res = num1 ^ num2;
-        //µÚ¶ş²½
-        //¶ÔÓÚÁ½¸öÊıµÄÄ³Î»Òª½øÎ»µÄ´¦Àí
+        //ç¬¬äºŒæ­¥
+        //å¯¹äºä¸¤ä¸ªæ•°çš„æŸä½è¦è¿›ä½çš„å¤„ç†
         OperationAfterAnd = (num1 & num2) << 1;
 
         num1 = XOR_res;
@@ -9354,16 +9354,16 @@ int Add(int num1, int num2)
 #endif
 
 
-//ÃæÊÔÌâ66£º¹¹½¨³Ë»ıÊı×é
-//¸ø¶¨Ò»¸öÊı×éA[0,1,¡­n-1],Çë¹¹½¨Ò»¸öÊı×éB[0,1,¡­n-1],ÆäÖĞBÖĞµÄÔªËØ
-//B[i] =  A[0]¡ÁA[1]¡Á¡­¡ÁA[ i - 1]¡ÁA[i + 1]¡Á¡­¡ÁA[n - 1]¡£²»ÄÜÊ¹ÓÃ³ı·¨¡£
-//½â·¨£º
-//B[i] = A[0]¡ÁA[1]¡Á¡­¡ÁA[i-1]¡ÁA[i+1]¡Á¡­¡ÁA[n-1]
-//¿´³ÉA[0]¡ÁA[1]¡Á¡­¡ÁA[i - 1] ºÍ A[i + 1]¡Á¡­¡ÁA[n - 2]¡ÁA[n - 1]Á½²¿·ÖµÄ³Ë»ı¡£
-//ÕâÁ½²¿·Ö·Ö±ğÓÃÊı×éCºÍÊı×éD±íÊ¾
-//ÆäÖĞÊı×éC[i]µÄ¼ÆËã×ÔÉÏ¶øÏÂ
-//ÆäÖĞÊı×éD[i]µÄ¼ÆËã×ÔÏÂ¶øÉÏ
-//¡¾Êı×éB¿´³ÉÓÉÒ»¸ö¾ØÕóÀ´´´½¨¡¿
+//é¢è¯•é¢˜66ï¼šæ„å»ºä¹˜ç§¯æ•°ç»„
+//ç»™å®šä¸€ä¸ªæ•°ç»„A[0,1,â€¦n-1],è¯·æ„å»ºä¸€ä¸ªæ•°ç»„B[0,1,â€¦n-1],å…¶ä¸­Bä¸­çš„å…ƒç´ 
+//B[i] =  A[0]Ã—A[1]Ã—â€¦Ã—A[ i - 1]Ã—A[i + 1]Ã—â€¦Ã—A[n - 1]ã€‚ä¸èƒ½ä½¿ç”¨é™¤æ³•ã€‚
+//è§£æ³•ï¼š
+//B[i] = A[0]Ã—A[1]Ã—â€¦Ã—A[i-1]Ã—A[i+1]Ã—â€¦Ã—A[n-1]
+//çœ‹æˆA[0]Ã—A[1]Ã—â€¦Ã—A[i - 1] å’Œ A[i + 1]Ã—â€¦Ã—A[n - 2]Ã—A[n - 1]ä¸¤éƒ¨åˆ†çš„ä¹˜ç§¯ã€‚
+//è¿™ä¸¤éƒ¨åˆ†åˆ†åˆ«ç”¨æ•°ç»„Cå’Œæ•°ç»„Dè¡¨ç¤º
+//å…¶ä¸­æ•°ç»„C[i]çš„è®¡ç®—è‡ªä¸Šè€Œä¸‹
+//å…¶ä¸­æ•°ç»„D[i]çš„è®¡ç®—è‡ªä¸‹è€Œä¸Š
+//ã€æ•°ç»„Bçœ‹æˆç”±ä¸€ä¸ªçŸ©é˜µæ¥åˆ›å»ºã€‘
 #if 0
 #include <iostream>
 #include <vector>
@@ -9424,7 +9424,7 @@ void Multiply(const vector<int>& va, vector<int>& vb)
     {
         tmp *= *i;
 
-        //´íÎóĞ´·¨£º
+        //é”™è¯¯å†™æ³•ï¼š
         //*id-- = tmp;
         //Expression: can't decrement vector iterator before begin
 
@@ -9460,7 +9460,7 @@ void Multiply(const vector<int>& input, vector<int>& output)
 
     if (length1 == length2 && length2 > 1)
     {
-        //½«¾ØÕóC[i]¼ÆËãºÃ£¬²»´´½¨¾ØÕóC£¬¶øÊÇÖ±½ÓÔÚÊä³ö¾ØÕóBÉÏ²Ù×÷
+        //å°†çŸ©é˜µC[i]è®¡ç®—å¥½ï¼Œä¸åˆ›å»ºçŸ©é˜µCï¼Œè€Œæ˜¯ç›´æ¥åœ¨è¾“å‡ºçŸ©é˜µBä¸Šæ“ä½œ
         output[0] = 1;
         for (int i = 1; i < length1; ++i)
         {
@@ -9471,7 +9471,7 @@ void Multiply(const vector<int>& input, vector<int>& output)
             cout << x << " ";
         cout << endl;
 
-        //½«¾ØÕóD[i]¼ÆËãºÃ£¬¶ÔÊä³ö¾ØÕóµÄ²Ù×÷ÊÇ´ÓB[4]¿ªÊ¼£¬µ½B[0]½áÊø
+        //å°†çŸ©é˜µD[i]è®¡ç®—å¥½ï¼Œå¯¹è¾“å‡ºçŸ©é˜µçš„æ“ä½œæ˜¯ä»B[4]å¼€å§‹ï¼Œåˆ°B[0]ç»“æŸ
         double temp = 1;
         for (int i = length1 - 2; i >= 0; --i)
         {
@@ -9488,7 +9488,7 @@ void Multiply(const vector<int>& input, vector<int>& output)
 #endif
 
 
-//ÃæÊÔÌâ67£º×Ô¼ºĞ´Ò»¸öatoi()¹¦ÄÜµÄº¯Êı
+//é¢è¯•é¢˜67ï¼šè‡ªå·±å†™ä¸€ä¸ªatoi()åŠŸèƒ½çš„å‡½æ•°
 #if 0
 #include <iostream>
 
@@ -9518,8 +9518,8 @@ int main()
 }
 int StrToInt(const char* str)
 {
-    //Òª¿¼ÂÇµ½µÄ»ù±¾µÄÊäÈëÓÃÀı£º
-    //nullptr   ¡¢ ""  ¡¢ +  ¡¢ -  ¡¢Òç³ö
+    //è¦è€ƒè™‘åˆ°çš„åŸºæœ¬çš„è¾“å…¥ç”¨ä¾‹ï¼š
+    //nullptr   ã€ ""  ã€ +  ã€ -  ã€æº¢å‡º
     if (str == nullptr||str=="")
     {
         flag = INVALID;
@@ -9541,8 +9541,8 @@ int StrToInt(const char* str)
 
     bool Positive = 1;
     bool RunOnlyOnce = 1;
-    //***×¢***
-    //ÉùÃ÷Îªlong longÀ´ÅĞ¶Ï¶ÔÓÚintÀàĞÍÊÇ·ñÒç³ö
+    //***æ³¨***
+    //å£°æ˜ä¸ºlong longæ¥åˆ¤æ–­å¯¹äºintç±»å‹æ˜¯å¦æº¢å‡º
     long long res = 0;
     while (*traverse != '\0')
     {
@@ -9558,12 +9558,12 @@ int StrToInt(const char* str)
             RunOnlyOnce = 0;
 		}
 
-        //***×¢***
-        //µÚ¶şÖÖ´¦Àí·½·¨£º
-        //¿ÉÒÔ²»ÓÃĞ´RunOnlyOnce£¬¶øÊÇ½«ÉÏÃæµÄ´úÂë¿é´ÓÑ­»·ÖĞÕª³ö£¬È»ºó
-        //Ñ­»·ÒÔ¼°ºóÃæµÄ´úÂë¿éÒÆµ½ int StrToIntCore(const char* str, bool Positive)ÖĞ
+        //***æ³¨***
+        //ç¬¬äºŒç§å¤„ç†æ–¹æ³•ï¼š
+        //å¯ä»¥ä¸ç”¨å†™RunOnlyOnceï¼Œè€Œæ˜¯å°†ä¸Šé¢çš„ä»£ç å—ä»å¾ªç¯ä¸­æ‘˜å‡ºï¼Œç„¶å
+        //å¾ªç¯ä»¥åŠåé¢çš„ä»£ç å—ç§»åˆ° int StrToIntCore(const char* str, bool Positive)ä¸­
 
-        //Îª"-123junk-  123"  ×ö´úÂëÍêÕûĞÔµÄ²¹³ä
+        //ä¸º"-123junk-  123"  åšä»£ç å®Œæ•´æ€§çš„è¡¥å……
         if (!isdigit(*traverse) && !isspace(*traverse))
             break;
 
@@ -9575,8 +9575,8 @@ int StrToInt(const char* str)
         ++traverse;
     }
 
-    //***×¢***
-    //numeric_limits<int>::min()Ê½×Ó±»ÉùÃ÷Îª constexpr £¬±í´ïÊ½ºË¶¨ÓÚ±àÒëÆÚ¡£
+    //***æ³¨***
+    //numeric_limits<int>::min()å¼å­è¢«å£°æ˜ä¸º constexpr ï¼Œè¡¨è¾¾å¼æ ¸å®šäºç¼–è¯‘æœŸã€‚
     if(res<numeric_limits<int>::min()||res>numeric_limits<int>::max())
     {
         flag= USER_OVERFLOW;
@@ -9589,8 +9589,8 @@ int StrToInt(const char* str)
 #endif
 
 
-//ÃæÊÔÌâ68£ºÊ÷ÖĞÁ½¸ö½ÚµãµÄ×îµÍ¹«¹²×æÏÈ
-//×¢Òâ²»ÊÇ¶ş²æÊ÷
+//é¢è¯•é¢˜68ï¼šæ ‘ä¸­ä¸¤ä¸ªèŠ‚ç‚¹çš„æœ€ä½å…¬å…±ç¥–å…ˆ
+//æ³¨æ„ä¸æ˜¯äºŒå‰æ ‘
 #if 0
 #include <iostream>
 #include <list>
@@ -9644,7 +9644,7 @@ int main()
     ConnectTreeNodes(pNode5, pNode9);
     ConnectTreeNodes(pNode5, pNode10);
 
-// ĞÎ×´ÆÕÍ¨µÄÊ÷
+// å½¢çŠ¶æ™®é€šçš„æ ‘
 //              1
 //            /   \
 //           2     3
@@ -9679,7 +9679,7 @@ const TreeNode* GetLastCommonParent(const TreeNode* pRoot,
     return GetLastCommonNode(path1, path2);
 }
 
-//ÓÃµİ¹éÕÒ³öµ½Ä³½ÚµãµÄÎ¨Ò»Â·¾¶
+//ç”¨é€’å½’æ‰¾å‡ºåˆ°æŸèŠ‚ç‚¹çš„å”¯ä¸€è·¯å¾„
 bool GetNodePath(const TreeNode* pRoot, const TreeNode* pNode, 
     list<const TreeNode*>& path)
 {
@@ -9690,7 +9690,7 @@ bool GetNodePath(const TreeNode* pRoot, const TreeNode* pNode,
 
     bool found = false;
 
-    //²»ÊÇ¶ş²æÊ÷µÄ´¦Àí·½·¨
+    //ä¸æ˜¯äºŒå‰æ ‘çš„å¤„ç†æ–¹æ³•
     vector<TreeNode*>::const_iterator i = pRoot->m_vChildren.begin();
     while (!found && i < pRoot->m_vChildren.end())
     {
@@ -9712,10 +9712,10 @@ const TreeNode* GetLastCommonNode(const list<const TreeNode*>& path1,
 
     const TreeNode* pLast = nullptr;
 
-    //***×¢***
-    //Àí½â´ÓÍ·¿ªÊ¼ÕÒµÄÒâÒå
-    //µÚÒ»´Îiterator1ºÍiterator2²»Í¬Ê±£¬ÄÇÉÏÒ»´Î¾ÍÊÇ×îºóÒ»¸ö¹«¹²½Úµã
-    //ÓëÃæÊÔÌâ52¶Ô±È
+    //***æ³¨***
+    //ç†è§£ä»å¤´å¼€å§‹æ‰¾çš„æ„ä¹‰
+    //ç¬¬ä¸€æ¬¡iterator1å’Œiterator2ä¸åŒæ—¶ï¼Œé‚£ä¸Šä¸€æ¬¡å°±æ˜¯æœ€åä¸€ä¸ªå…¬å…±èŠ‚ç‚¹
+    //ä¸é¢è¯•é¢˜52å¯¹æ¯”
     while (iterator1 != path1.end() && iterator2 != path2.end())
     {
         if (*iterator1 == *iterator2)
@@ -9728,7 +9728,7 @@ const TreeNode* GetLastCommonNode(const list<const TreeNode*>& path1,
     return pLast;
 }
 
-// ´´½¨Ê÷½Úµã
+// åˆ›å»ºæ ‘èŠ‚ç‚¹
 TreeNode* CreateTreeNode(int value) 
 {
     TreeNode* pNode = new TreeNode();
@@ -9736,7 +9736,7 @@ TreeNode* CreateTreeNode(int value)
     return pNode;
 }
 
-// Á¬½ÓÊ÷½Úµã£¬½« pChild Ìí¼ÓÎª pParent µÄ×Ó½Úµã
+// è¿æ¥æ ‘èŠ‚ç‚¹ï¼Œå°† pChild æ·»åŠ ä¸º pParent çš„å­èŠ‚ç‚¹
 void ConnectTreeNodes(TreeNode* pParent, TreeNode* pChild) 
 {
     if (pParent != nullptr) 
@@ -9745,7 +9745,7 @@ void ConnectTreeNodes(TreeNode* pParent, TreeNode* pChild)
     }
 }
 
-// ´òÓ¡µ¥¸ö½Úµã
+// æ‰“å°å•ä¸ªèŠ‚ç‚¹
 void PrintTreeNode(const TreeNode* pNode) 
 {
     if (pNode != nullptr) 
@@ -9764,7 +9764,7 @@ void PrintTreeNode(const TreeNode* pNode)
     }
 }
 
-// ´òÓ¡Õû¸öÊ÷
+// æ‰“å°æ•´ä¸ªæ ‘
 void PrintTree(const TreeNode* pRoot) 
 {
     if (pRoot == nullptr) 
@@ -9782,7 +9782,7 @@ void PrintTree(const TreeNode* pRoot)
     }
 }
 
-// Ïú»ÙÕû¸öÊ÷
+// é”€æ¯æ•´ä¸ªæ ‘
 void DestroyTree(TreeNode* pRoot) 
 {
     if (pRoot == nullptr) 
