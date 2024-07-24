@@ -941,7 +941,7 @@ int Partition(int data[], int length,int begin,int end)
 
     //返回枢轴所在位置
     return small;
-}
+} 
 //https://www.youtube.com/watch?v=duln2xAZhBA
 
 void QuickSort(int data[], int length, int begin, int end)
