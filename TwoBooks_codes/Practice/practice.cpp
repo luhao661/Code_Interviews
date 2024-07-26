@@ -75,7 +75,7 @@ int main()
 
     ConnectTreeNodes(pNode1, pNode2, pNode3);
     ConnectTreeNodes(pNode2, pNode4, nullptr);
-
+ 
     breadthFirst(pNode1);
 
     DestroyTree(pNode1);
