@@ -148,7 +148,7 @@ CMyString& CMyString::operator = (const CMyString& str)
 
         delete [] m_pData;
         m_pData = tmp;
-    }
+    } 
 
     return *this;
 }
