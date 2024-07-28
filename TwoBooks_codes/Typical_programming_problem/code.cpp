@@ -4116,7 +4116,7 @@ using namespace std;
 void PrintFromToptoBottom(BinaryTreeNode* pTreeRoot);
 
 int main()
-{
+{ 
     BinaryTreeNode* pNodeA1 = CreateBinaryTreeNode(1);
     BinaryTreeNode* pNodeA2 = CreateBinaryTreeNode(2);
     BinaryTreeNode* pNodeA3 = CreateBinaryTreeNode(3);
