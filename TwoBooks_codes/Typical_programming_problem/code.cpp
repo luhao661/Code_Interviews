@@ -115,7 +115,7 @@ CMyString& CMyString::operator = (const CMyString& str)
 
 //错误方法：
 //***注***
-//静态成员变量必须进行初始化，否则会编译错误
+//静态成员变量必须进行初始化，否则会编译错误 
 #if 0
 class Singleton
 {
