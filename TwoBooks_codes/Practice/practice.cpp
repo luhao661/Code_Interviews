@@ -75,7 +75,7 @@ int main()
 
     ConnectTreeNodes(pNode1, pNode2, pNode3);
     ConnectTreeNodes(pNode2, pNode4, nullptr);
- 
+
     breadthFirst(pNode1);
 
     DestroyTree(pNode1);
@@ -148,7 +148,7 @@ CMyString& CMyString::operator = (const CMyString& str)
 
         delete [] m_pData;
         m_pData = tmp;
-    } 
+    }
 
     return *this;
 }
@@ -452,7 +452,124 @@ int main()
 #endif
 
 
-//
-#if 1
+//打印从1到最大的n位数
+#if 0
+#include <iostream>
+#include <string>
+using namespace std;
 
+bool Increasement(string& str)
+{
+    int length = str.size();
+    int jinwei = 0;
+    bool overflow = false;
+
+    for (int i = length - 1; i >= 0; --i)
+    {
+        int tmp = str[i] - '0' + jinwei;
+
+        if (i == length - 1)
+            tmp++;
+
+        if (tmp >= 10)
+        {
+            if (i == 0)
+                overflow = true;
+            else
+            {
+                tmp -= 10;
+
+                jinwei = 1;
+
+                str[i] = tmp + '0';//
+            }
+        }
+        else
+        {
+            str[i] = tmp + '0';
+            break;
+        }
+    }
+
+    return overflow;
+}
+
+void RealPrint(const string& str)
+{
+    bool flag = false;
+
+    for (auto it = str.begin(); it != str.end(); ++it)
+    {
+        if (*it != '0')
+            flag = true;
+
+        if (flag)
+        {
+            cout << *it;
+        }
+    }
+
+    cout << endl;
+}
+
+bool PrintOneToX(int wei)
+{
+    if (wei < 1)
+        throw exception();
+
+    string str;
+    str.resize(wei);
+    //cout << str.size();
+    fill(str.begin(), str.end(), '0');
+
+    while (!Increasement(str))
+    {
+        RealPrint(str);
+    }
+
+    return true;
+}
+
+int main()
+{
+    int wei = 2;
+    PrintOneToX(wei);
+
+    /* try
+     {
+         PrintOneToX(wei);
+     }
+     catch (exception& e)
+     {
+         cout << "Invalid num!";
+     }*/
+
+    return 0;
+}
+#endif
+
+
+//调整数组顺序使奇数位于偶数前面
+#if 1
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    vector<int> vec_data;
+    int num;
+
+    cin >> num;
+    while (!cin.eof())
+    {
+        vec_data.push_back(num);
+
+        cin >> num;
+    }
+
+    copy(vec_data.begin(),vec_data.end(),ostream_iterator<int>(cout,"\n"));
+
+    return 0;
+}
 #endif
