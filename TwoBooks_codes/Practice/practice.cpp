@@ -233,7 +233,7 @@ int main()
     vector<int> DataInput{2,3,1,0,2,5,3};
 
     cout << IsDuplicated(DataInput);
-
+ 
     return 0;
 }
 #endif
