@@ -13,7 +13,7 @@ struct BinaryTreeNode
 };
 //***注***
 //BinaryTreeNode结构体必须要和Tree.h中声明的一致
-
+ 
 __declspec(dllexport) BinaryTreeNode* CreateBinaryTreeNode(double dbValue);
 __declspec(dllexport) void ConnectTreeNodes(BinaryTreeNode* pParent, BinaryTreeNode* pLeft, BinaryTreeNode* pRight);
 __declspec(dllexport) void DestroyTree(BinaryTreeNode* pRoot);
