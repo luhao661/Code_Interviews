@@ -12,7 +12,7 @@ public:
     CMyString(const CMyString& str);
     ~CMyString(void);
 
-    CMyString& operator = (const CMyString& str);
+    CMyString& operator = (const CMyString& str); 
 
     void Print();
 
