@@ -560,7 +560,7 @@ int main()
     vector<int> vec_data;
     int num;
 
-    cin >> num;
+    cin >> num; 
     while (!cin.eof())
     {
         vec_data.push_back(num);
