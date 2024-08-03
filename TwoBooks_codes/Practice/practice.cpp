@@ -514,7 +514,7 @@ void RealPrint(const string& str)
 
 bool PrintOneToX(int wei)
 {
-    if (wei < 1)
+    if (wei < 1) 
         throw exception();
 
     string str;
