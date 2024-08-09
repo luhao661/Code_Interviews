@@ -1,4 +1,4 @@
-
+﻿
 #pragma once
 
 struct BinaryTreeNode
@@ -8,7 +8,7 @@ struct BinaryTreeNode
     BinaryTreeNode* m_pRight;
 };
 
-BinaryTreeNode* CreateBinaryTreeNode(double dbValue);
-void ConnectTreeNodes(BinaryTreeNode* pParent, BinaryTreeNode* pLeft, BinaryTreeNode* pRight);
-void DestroyTree(BinaryTreeNode* pRoot);
+__declspec(dllexport) BinaryTreeNode* CreateBinaryTreeNode(double dbValue);
+__declspec(dllexport) void ConnectTreeNodes(BinaryTreeNode* pParent, BinaryTreeNode* pLeft, BinaryTreeNode* pRight);
+__declspec(dllexport) void DestroyTree(BinaryTreeNode* pRoot);
 
