@@ -4042,7 +4042,7 @@ bool IsPopOrder(const int* pPush, const int* pPop, int nLength)
 
     bool flag = false;
 
-    int i = 0;
+    int i = 0; 
 
     //或者
     //用索引作为判断循环终止的条件，
