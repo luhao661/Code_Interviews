@@ -6965,7 +6965,7 @@ int PrintTheCorrespondingUglyNumber_improved(int WhichOne)
 	//int* pUglyNumbers = new int[WhichOne];
 
     //***注***
-    //可以使用vector或智能指针来自动管理内存并避免潜在的内存泄漏
+    //可以使用vector或智能指针来自动管理内存并避免潜在的内存泄漏 
     vector<int> pUglyNumbers(WhichOne);
 
 	pUglyNumbers[0] = 1;
