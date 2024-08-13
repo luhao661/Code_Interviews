@@ -6185,7 +6185,7 @@ int main()
 
     numbers.insert(5);
     try
-    {
+    { 
         cout << numbers.GetMedian()<<endl;
     }
     catch (exception&)
