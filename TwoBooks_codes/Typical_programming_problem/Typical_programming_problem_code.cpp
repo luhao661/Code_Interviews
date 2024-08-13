@@ -358,7 +358,7 @@ int main()
 }
 bool replace(string& s)
 {
-    bool flag = false;
+    bool flag = false; 
 
     string seq = "%20";
 
