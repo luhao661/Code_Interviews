@@ -35,7 +35,7 @@ void breadthFirst(BinaryTreeNode* rootNode)
     int cnt = 1;
     int this_level_elements = 0;
 
-    while (!BTN.empty())
+    while (!BTN.empty()) 
     {
         std::cout << BTN.front()->m_dbValue << ' ';
         BinaryTreeNode* tmp = BTN.front();
