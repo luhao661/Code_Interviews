@@ -64,7 +64,7 @@ CMyString& CMyString::operator = (const CMyString& str)
 
         strcpy(m_pData, str.m_pData);
     }
-
+ 
     return *this;
 
 	/* 先用new分配新内容，再用delete释放已有的内容。这样
